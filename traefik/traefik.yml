@@ -7,6 +7,8 @@ api:
 entryPoints:
   websecure:
     address: ":443"
+  web:
+    address: ":80"
 providers:
   docker: {}
   file:
@@ -18,3 +20,6 @@ certificatesResolvers:
       tlschallenge: true
       storage: /letsencrypt/acme.json
       email: ssl-mardi01@ckurs.de
+    httpChallenge:
+        # used during the challenge
+        entryPoint: web
