@@ -1,0 +1,8 @@
+http:
+  routers:
+    home:
+      rule: Host(`whoami.mardi.formulasearchengine.com`)
+      service: whoami-docker@docker
+      entryPoints: [websecure]
+      tls:
+        certResolver: le
