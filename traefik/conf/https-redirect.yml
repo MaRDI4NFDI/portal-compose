@@ -1,0 +1,14 @@
+http:
+  routers:
+    https-redirect:
+      rule: HostRegexp(`{host:.+}`)
+      service: whoami-docker@docker
+      middlewares:
+        - redirect
+      entryPoints:
+        - web
+      priority: 100
+  middlewares:
+    redirect:
+      redirectScheme:
+        scheme: https
