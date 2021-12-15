@@ -1,0 +1,14 @@
+{{$services := dict}}
+{{$_ := set $services "wikibase" "mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org"}}
+
+http:
+  routers:
+{{range $service, $host := $services}}
+    service-{{$service}}:
+      rule: Host(`{{$host}}`)
+      service: {{$service}}-docker@docker
+      entryPoints:
+       - websecure
+      tls:
+        certResolver: le
+{{end}}
