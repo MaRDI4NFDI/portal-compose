@@ -6,7 +6,7 @@ from selenium.common.exceptions import TimeoutException
 
 class MediawikiCoreTest(Base):
     """
-    Test that Mediawiki has started and that passowords have been set.
+    Test for Mediawiki core.
 
     The test class extends Base.py.
     Base.py provides:
@@ -50,3 +50,12 @@ class MediawikiCoreTest(Base):
             # login with default password did not succeed,
             # so test is GOOD
             self.assertTrue(True)
+
+    def test3(self):
+        """Test that anonymous editing is disabled."""
+        edit_url = 'http://mardi-wikibase/wiki/Main_Page?action=edit'
+        self.loadURL(edit_url)
+        page_text = self.getElementById('mw-content-text').text
+        self.assertTrue(
+            'You do not have permission to edit this page' in page_text, 
+            "Anonymous editing has not been disabled")

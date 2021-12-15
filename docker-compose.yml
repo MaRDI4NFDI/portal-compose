@@ -29,9 +29,7 @@ services:
     volumes:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
-
-      ## Uncomment this next line to mount your own LocalSettings.php file
-      #- ./LocalSettings.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
+      - ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
     networks:
       default:
         aliases:
