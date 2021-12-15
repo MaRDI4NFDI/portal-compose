@@ -1,0 +1,28 @@
+version: '3'
+services:
+  reverse-proxy:
+    restart: always
+    image: traefik:v2.4
+    ports:
+      - 443:443 # HTTPS port
+      - 80:80 # HTTPS port
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/conf/:/traefik-conf/:ro
+      - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
+      - traefik-log:/data/log # Persistent file for logging
+    networks:
+     - default
+     - wdqs
+    labels:
+      - traefik.enable=false
+  whoami:
+    image: containous/whoami # A container that exposes an API to show its IP address
+    restart: always
+volumes:
+  traefik-log:
+  traefik-letsencrypt:
+networks:
+  wdqs:
+  
