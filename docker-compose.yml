@@ -25,7 +25,7 @@ services:
       - mysql
     restart: unless-stopped
     ports:
-      - "${WIKIBASE_PORT}:8080"
+      - "${WIKIBASE_PORT}:80"
     volumes:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
