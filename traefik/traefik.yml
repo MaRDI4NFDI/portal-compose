@@ -20,6 +20,6 @@ certificatesResolvers:
       tlschallenge: true
       storage: /letsencrypt/acme.json
       email: ssl-mardi01@ckurs.de
-    httpChallenge:
+      httpChallenge:
         # used during the challenge
         entryPoint: web
