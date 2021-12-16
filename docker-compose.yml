@@ -32,6 +32,7 @@ services:
       - shared:/var/www/html/:rw
       - ./mediawiki/LocalSettings.override.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
       - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
+      - ./mediawiki/images/favicon.png:/var/www/html/images/favicon.png
     networks:
       default:
         aliases:

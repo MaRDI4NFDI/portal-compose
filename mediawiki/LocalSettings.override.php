@@ -34,8 +34,9 @@ $wgGroupPermissions['*']['edit'] = false;
 # Set name of the wiki
 $wgSitename = 'MaRDI portal';
 
-# Set MaRDI Logo
+# Set MaRDI logo and icon
 $wgLogo = $wgScriptPath . '/images/MaRDI_Logo.png';
+$wgFavicon = $wgScriptPath . "/images/favicon.png";
 
 # Footer
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, &$tpl ) {
