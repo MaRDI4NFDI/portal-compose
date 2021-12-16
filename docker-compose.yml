@@ -18,6 +18,7 @@ x-common-variables: &wikibase_variables
 services:
   wikibase:
     image: "${WIKIBASE_BUNDLE_IMAGE_NAME}"
+    #build: ./mediawiki
     container_name: mardi-wikibase
     links:
       - mysql
@@ -29,7 +30,8 @@ services:
     volumes:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
-      - ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
+      - ./mediawiki/LocalSettings.override.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
+      - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
     networks:
       default:
         aliases:
