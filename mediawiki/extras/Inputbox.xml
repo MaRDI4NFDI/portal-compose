@@ -1,0 +1,3832 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>MaRDI portal</sitename>
+    <dbname>my_wiki</dbname>
+    <base>http://localhost:8080/wiki/Main_Page</base>
+    <generator>MediaWiki 1.35.4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Project</namespace>
+      <namespace key="5" case="first-letter">Project talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="120" case="first-letter">Item</namespace>
+      <namespace key="121" case="first-letter">Item talk</namespace>
+      <namespace key="122" case="first-letter">Property</namespace>
+      <namespace key="123" case="first-letter">Property talk</namespace>
+      <namespace key="640" case="first-letter">EntitySchema</namespace>
+      <namespace key="641" case="first-letter">EntitySchema talk</namespace>
+      <namespace key="828" case="first-letter">Module</namespace>
+      <namespace key="829" case="first-letter">Module talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Template:Inputbox</title>
+    <ns>10</ns>
+    <id>4</id>
+    <revision>
+      <id>6</id>
+      <timestamp>2021-12-16T18:21:30Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;noinclude&gt;{{#ifeq:{{SUBPAGENAME}}|sandbox|{{Template sandbox notice}} }}&lt;!--      PLEASE SEE THE RATIONALES FOR EACH CURRENT VALUE (OR LACK THEREOF)     IN THE DOCUMENTATION'..."</comment>
+      <origin>6</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="703" sha1="9odnts2wxqu33tjq3dkiq6mk8uaflqc" xml:space="preserve">&lt;noinclude&gt;{{#ifeq:{{SUBPAGENAME}}|sandbox|{{Template sandbox notice}} }}&lt;!--
+
+    PLEASE SEE THE RATIONALES FOR EACH CURRENT VALUE (OR LACK THEREOF)
+    IN THE DOCUMENTATION'S Technical SECTION BEFORE MODIFYING THE CSS, THANKS.
+
+--&gt;&lt;/noinclude&gt;&lt;!--
+--&gt;&lt;div class="messagebox" style="border:0.15em inset; padding:0.1em; margin:0.1em; white-space:nowrap; {{#if: {{{width|}}}|width:{{{width}}};}} {{#if: {{{overflow|}}}|overflow:{{{overflow}}};}} {{{style|}}}"&gt;{{{1|&lt;noinclude&gt;Demo text on template page only.&lt;/noinclude&gt;&amp;nbsp;&lt;!--PREVENTS FLATTENED BOX--&gt;}}}&lt;/div&gt;&lt;!--
+--&gt;&lt;noinclude&gt;
+{{Documentation}}
+&lt;!-- PLEASE ADD CATEGORIES TO THE /doc SUBPAGE; INTERWIKIS GO TO WIKIDATA, THANK YOU! --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>9odnts2wxqu33tjq3dkiq6mk8uaflqc</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Center</title>
+    <ns>10</ns>
+    <id>27</id>
+    <revision>
+      <id>32</id>
+      <timestamp>2021-12-16T18:41:26Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;includeonly&gt;&lt;div class="center" style="width:auto; margin-left:auto; margin-right:auto;{{#if: {{{style|}}} | {{{style}}};}}"&gt;{{{1|Category:Pages using center with no argume..."</comment>
+      <origin>32</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="323" sha1="38x2xq80xds08acnl4ckgen0glwk14x" xml:space="preserve">&lt;includeonly&gt;&lt;div class="center" style="width:auto; margin-left:auto; margin-right:auto;{{#if: {{{style|}}} | {{{style}}};}}"&gt;{{{1|[[Category:Pages using center with no arguments]]}}}&lt;/div&gt;&lt;/includeonly&gt;&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Add categories to the /doc subpage, interwikis to Wikidata, not here --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>38x2xq80xds08acnl4ckgen0glwk14x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Db-g8</title>
+    <ns>10</ns>
+    <id>9</id>
+    <revision>
+      <id>14</id>
+      <timestamp>2021-12-16T18:27:48Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{SAFESUBST:&lt;noinclude /&gt;#invoke:Unsubst||$B={{Db-meta |bot={{{bot|}}} |raw={{{raw|}}} |rationale={{{rationale|}}} |criterion=G8 |temp={{{temp|}}} |self=yes |1=&amp;#32;as {{#if:{..."</comment>
+      <origin>14</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1567" sha1="5apbrbqhbv2zenbsputdulal7x9j9qc" xml:space="preserve">{{SAFESUBST:&lt;noinclude /&gt;#invoke:Unsubst||$B={{Db-meta
+|bot={{{bot|}}}
+|raw={{{raw|}}}
+|rationale={{{rationale|}}}
+|criterion=G8
+|temp={{{temp|}}}
+|self=yes
+|1=&amp;#32;as {{#if:{{{1|}}}|{{{1}}}|a dependent page of a page}} which has never existed or has been deleted
+|2={{{does_not_include|This does '''not''' include pages which are useful to the project such as user subpages and talk pages, talk page archives, information for a future article, Articles for Creation drafts, redirects that can be retargeted to existing pages, etc}}}
+|notes={{#if:{{{1|}}}|{{{notes|}}}|Please use a more specific template – {{Tl|Db-talk}}, {{Tl|Db-subpage}}, {{Tl|Db-imagepage}}, {{Tl|Db-redirnone}} or {{Tl|Db-templatecat}} – where possible.}}
+|summary={{#if:{{{summary|}}}
+ |{{{summary}}}
+ |{{#switch:{{NAMESPACE}}
+    |Category = Populated by deleted or retargeted template
+    |Template = Component or documentation of a deleted template
+    |#default = Page dependent on a deleted or nonexistent page
+  }}
+ }}
+|help={{{help|}}}
+}}{{#ifeq:{{NAMESPACE}}|{{ns:file_talk}}|{{#ifexist:Media:{{PAGENAME}}
+ |&lt;div class="error" style="font-size: larger;"&gt;''This image talk page is '''not''' orphaned! It is the talk page of an image from Commons.''&lt;/div&gt;
+}}}}&lt;includeonly&gt;{{Category handler
+ | all = [[Category:Candidates for speedy deletion]][[Category:Candidates for speedy deletion as dependent on a non-existent page]]
+ | nocat = {{{nocat|}}}
+ | category2 = {{{category|¬}}}
+ | page  = Foo &lt;!--CIRCUMVENT BLACKLIST--&gt;
+}}&lt;/includeonly&gt;}}&lt;noinclude&gt;
+{{Documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>5apbrbqhbv2zenbsputdulal7x9j9qc</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Db-meta</title>
+    <ns>10</ns>
+    <id>11</id>
+    <revision>
+      <id>16</id>
+      <timestamp>2021-12-16T18:29:59Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#ifeq: {{{raw|}}}  | yes  &lt;!-- If raw=yes, include a short deletion message with no message box --&gt; | &lt;b&gt;{{ucfirst:{{{1}}}}}&lt;!-- --&gt;{{#if: {{{2|}}}    | .&lt;/b&gt;&amp;#32;&lt;i&gt;{{{2}}}..."</comment>
+      <origin>16</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="5964" sha1="4ekbf5swqz51d11zpmfr0o1d06gm54n" xml:space="preserve">{{#ifeq: {{{raw|}}} 
+| yes
+
+&lt;!-- If raw=yes, include a short deletion message with no message box --&gt;
+| &lt;b&gt;{{ucfirst:{{{1}}}}}&lt;!--
+--&gt;{{#if: {{{2|}}}
+   | .&lt;/b&gt;&amp;#32;&lt;i&gt;{{{2}}}&lt;/i&gt;. &lt;b&gt;
+   | .&amp;#32;}}&lt;!--
+--&gt;{{#ifeq:{{{criterion}}}
+   | NA
+   |
+   | See [[Wikipedia:Criteria for speedy deletion#{{uc:{{{criterion}}}}}|CSD {{uc:{{{criterion}}}}}]].
+   }}&lt;/b&gt;&lt;!--
+--&gt;{{#if: {{{rationale|}}}
+   | &amp;#32;&lt;span style="color:red; font-weight:bold;"&gt;{{{rationale}}}&lt;/span&gt;
+   }}
+
+&lt;!-- If raw != yes, then include the full deletion template with message box --&gt;
+|&lt;includeonly&gt;__NOINDEX__&lt;/includeonly&gt;&lt;!--
+--&gt;{{mbox
+   | class = mbox-db
+   | type  = speedy
+   | image = none 
+   | style = font-size:95%;
+   | text  = 
+&lt;b&gt;&lt;i&gt;This {{pagetype|defaultns=all}} {{#if:{{{bot|}}}|was tagged by [[User:{{{bot}}}|{{{bot}}}]], because it}} may meet Wikipedia's [[Wikipedia:Criteria for speedy deletion|criteria for speedy deletion]]&lt;/i&gt;{{{1}}}{{#if:{{{2|}}}|.&lt;/b&gt;&amp;#32;&lt;i&gt;{{{2}}}&lt;/i&gt;. &lt;b&gt;|.&amp;#32;}}{{#ifeq:{{{criterion}}}|NA||See [[Wikipedia:Criteria for speedy deletion#{{uc:{{{criterion}}}}}|CSD {{uc:{{{criterion}}}}}]].}}&lt;/b&gt;&lt;span id="delete-reason" style="display:none"&gt;{{urlencode:{{#ifeq:{{{criterion}}}|NA||[[WP:CSD#{{uc:{{{criterion}}}}}|{{uc:{{{criterion}}}}}]]:}} {{{summary|}}}}}&lt;/span&gt;&lt;span id="delete-criterion" style="display:none"&gt;{{uc:{{{criterion}}}}}&lt;/span&gt;{{#if:{{{rationale|}}}|&amp;#32;&lt;span style="color:red; font-weight:bold;"&gt;{{{rationale}}}&lt;/span&gt;}}
+
+&lt;p class="verbose"&gt;If this {{pagetype|defaultns=all}} does not meet the criteria for speedy deletion, {{#ifeq:{{{self}}}|yes|please remove this notice.&lt;br /&gt;&lt;/p&gt;|or you intend to fix it, please remove this notice, but '''do not remove this notice from {{#ifeq:{{NAMESPACE}}|File|files you have uploaded|pages that you have created yourself}}'''. If you {{#ifeq:{{NAMESPACE}}|File|uploaded this file|created this page}} and you disagree with the given reason for deletion, you can click the button below and leave a message explaining why you believe it should not be deleted. You can {{talk other|check back later to see|also [[{{TALKPAGENAME}}|visit the talk page]] to check}} if you have received a response to your message.
+&lt;/p&gt;
+
+&lt;!-- "Contest this speedy deletion" button --&gt;
+{{#tag: inputbox |
+type=commenttitle
+default=Contested deletion
+preload=Template:Hangon preload {{#switch:{{uc:{{{criterion|NA}}}}}|G3|G10|G11|G12|G14|A1|A2|A3|A7|A9|A10|A11|R3|F1|F2|F3|F4|F5|F6|F7|F8|F9|F10|F11|C1|T3={{uc:{{{criterion}}}}}|#default=generic}}
+hidden=yes
+page={{#titleparts:{{TALKPAGENAME}}|255}}
+buttonlabel=Contest this speedy deletion
+break=no
+editintro=Template:Hangon preload editintro
+}}
+
+&lt;p class="verbose"&gt;Note that this {{pagetype|defaultns=all}} may be deleted at any time if it unquestionably meets the speedy deletion criteria, or if an explanation {{talk other|added below this notice|posted to the talk page}} is found to be insufficient.&lt;/p&gt;&lt;!--
+--&gt;{{#ifeq:{{{help}}}|off||
+&lt;!--
+
+ -- Text for the warning message to substitute on user talk pages --
+
+   --&gt;{{#if: {{{temp|}}}
+      |
+:&lt;small&gt;'''''Nominator''': Please consider placing the [[Help:Template|template]]:''&lt;/small&gt;
+:''&lt;small&gt;&lt;code&gt;&lt;nowiki&gt;{{subst:&lt;/nowiki&gt;[[Template:{{{temp}}}|{{{temp}}}]]&lt;nowiki&gt;|&lt;/nowiki&gt;{{FULLPAGENAME}}&lt;nowiki&gt;|header=1&lt;/nowiki&gt;{{{temp2|}}}&lt;nowiki&gt;}} &lt;/nowiki&gt;{{#ifeq:{{{sig|x}}}|x|&lt;nowiki&gt;~~~~&lt;/nowiki&gt;}}&lt;/code&gt;&lt;/small&gt;''
+:''&lt;small&gt;on the talk page of the author.&lt;/small&gt;''
+&lt;!--
+   --&gt;}}}}&lt;!--
+
+ Add notice about using the talk page, or a notice for administrators if the talk page exists --&gt;
+{{#ifeq:{{NAMESPACE}}|{{TALKSPACE}}||{{#ifexist:{{TALKPAGENAME}}|{{Hang on/notice3}}|&lt;div class="verbose"&gt;{{Hang on/notice2}}&lt;/div&gt;}}}}}}
+
+&lt;!--Space for other notes --&gt;
+{{#if:{{{notes|}}}|{{{notes}}}&lt;br /&gt;}}&lt;!--
+
+ -- Message for admins --
+
+--&gt;&lt;small&gt;&lt;span class="sysop-show"&gt;''Administrators: check [[Special:Whatlinkshere/{{FULLPAGENAME}}|links]], [{{fullurl:{{FULLPAGENAME}}|action=history}} history] ([{{fullurl:{{FULLPAGENAME}}|diff=0}} last]), and [{{fullurl:Special:Log|page={{FULLPAGENAMEE}}}} logs] before [{{fullurl:{{FULLPAGENAME}}|wpReason={{urlencode:{{#ifeq:{{{criterion}}}|NA||[[WP:CSD#{{uc:{{{criterion}}}}}|{{uc:{{{criterion}}}}}]]:}} {{{summary|}}}}}&amp;action=delete}} deletion]{{#if:{{{bot|}}}|, as this page was tagged by a [[Wikipedia:Bot policy|bot]]}}{{#if:{{{anote|}}}|{{{anote}}}|.}} {{#ifeq:{{{self}}}|yes||Consider [[google:{{urlencode:{{PAGENAME}}}}|checking Google]].}}''&lt;br/&gt;&lt;/span&gt;This page was [{{fullurl:{{FULLPAGENAME}}|diff=cur}} last edited] {{#if: {{REVISIONUSER}} | by [[{{ns:2}}:{{REVISIONUSER2}}|{{REVISIONUSER2}}]] &lt;small&gt;{{toolbar|1=[[Special:Contributions/{{REVISIONUSER2}}|contribs]]|2=[[Special:Log/{{REVISIONUSER2}}|logs]]}}&lt;/small&gt; }} at {{#time:H:i, j F Y (e)|{{REVISIONTIMESTAMP}}}} ([{{fullurl:{{FULLPAGENAME}}|action=purge}} {{time ago|{{REVISIONTIMESTAMP}}}}])&lt;/small&gt;
+&lt;!--
+
+ -- Add image to the right of the message box --
+
+   --&gt;{{#if: {{{image|}}}
+      |&lt;/td&gt;&lt;td style="text-align:center;padding:0;font-size:x-small;"&gt;[[{{#if:{{{wiki|}}}|{{{wiki}}}:}}Image:{{{image}}}|150x175px]]&lt;br/&gt;''[[:{{#if:{{{wiki|}}}|{{{wiki}}}:}}Image:{{{image}}}|{{{image}}}]]''
+      }}&lt;!--
+
+--&gt;}}&lt;!-- 
+ -- End main mbox code, start courtesy blanking notices and div blanking tag --
+
+--&gt;{{#if: {{{blanked|}}} | {{mbox|image=none|text= {{{blanked-text|This page has been [[Wikipedia:Deletion policy#Courtesy blanking|blanked as a courtesy]].}}}}} |}}{{#if: {{{pleaseblank|}}} | {{mbox|type=delete|text=&lt;big&gt;{{red|Please [[Wikipedia:Courtesy blanking|blank this page]] so that it only contains the deletion template.}}&lt;/big&gt;}} |}}{{#if: {{{divblank|}}} | &lt;div id="AttackPage" style="display:none"&gt;&lt;!--do not close this div tag; it is there to ensure that any content remaining on the page does not display --&gt; |}}
+
+}}&lt;!-- End if statement for "raw" parameter--&gt;{{NOINDEX}}&lt;noinclude&gt;
+{{documentation}} 
+&lt;!-- Add categories to the /doc subpage; interwikis go to Wikidata, thank you! --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>4ekbf5swqz51d11zpmfr0o1d06gm54n</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Documentation</title>
+    <ns>10</ns>
+    <id>3</id>
+    <revision>
+      <id>4</id>
+      <parentid>3</parentid>
+      <timestamp>2021-12-16T18:20:00Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>4</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="192" sha1="55k2xms1z0l10oe6gzi083woqr69702" xml:space="preserve">&lt;!-- {{#invoke:documentation|main|_content={{ {{#invoke:documentation|contentTitle}}}}}} --&gt;
+&lt;noinclude&gt;
+&lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>55k2xms1z0l10oe6gzi083woqr69702</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Encodefirst</title>
+    <ns>10</ns>
+    <id>42</id>
+    <revision>
+      <id>47</id>
+      <timestamp>2021-12-16T18:50:21Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#invoke:MultiReplace|main|1={{{1}}}|2=^:|3=&amp;#58;|4=^;|5=&amp;#59;|6=^*|7=&amp;#42;|8=^#|9=&amp;#35;}}&lt;noinclude&gt; {{Documentation}} &lt;/noinclude&gt;"</comment>
+      <origin>47</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="133" sha1="fgsuijq1qbeeru97jz4uaebxs5w3y9x" xml:space="preserve">{{#invoke:MultiReplace|main|1={{{1}}}|2=^:|3=&amp;#58;|4=^;|5=&amp;#59;|6=^*|7=&amp;#42;|8=^#|9=&amp;#35;}}&lt;noinclude&gt;
+{{Documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>fgsuijq1qbeeru97jz4uaebxs5w3y9x</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:FULLBASEPAGENAME</title>
+    <ns>10</ns>
+    <id>6</id>
+    <revision>
+      <id>12</id>
+      <parentid>11</parentid>
+      <timestamp>2021-12-16T18:25:37Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <origin>12</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="369" sha1="ixr6ocr5zopgbfiuog5gfof9h5qt70j" xml:space="preserve">{{#if: {{Ns has subpages | {{#if:{{{1|}}}|{{NAMESPACE:{{{1}}}}}|{{NAMESPACE}}}} }} 
+  | {{#if: {{#titleparts:{{#if:{{{1|}}}|{{{1}}}|{{FULLPAGENAME}}}}|-1}}
+    | {{#titleparts:{{#if:{{{1|}}}|{{{1}}}|{{FULLPAGENAME}}}}|-1}}
+    | {{#if:{{{1|}}}|{{{1}}}|{{FULLPAGENAME}}}}
+    }}
+  | {{#if:{{{1|}}}|{{{1}}}|{{FULLPAGENAME}}}}
+}}&lt;noinclude&gt;
+
+{{documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>ixr6ocr5zopgbfiuog5gfof9h5qt70j</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Hang on/notice2</title>
+    <ns>10</ns>
+    <id>26</id>
+    <revision>
+      <id>31</id>
+      <timestamp>2021-12-16T18:41:05Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{Center|1={{Red|1=&lt;span class="plainlinks"&gt;Note to page author: you have not edited the {{#ifeq:{{NAMESPACE}}|{{ns:0}}|article&amp;nbsp;}}{{#ifeq:{{NAMESPACE}}|{{ns:File}}|file&amp;n..."</comment>
+      <origin>31</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="726" sha1="5jdsmlekjtsd0iat79m9y9zb2hr6lcv" xml:space="preserve">{{Center|1={{Red|1=&lt;span class="plainlinks"&gt;Note to page author: you have not edited the {{#ifeq:{{NAMESPACE}}|{{ns:0}}|article&amp;nbsp;}}{{#ifeq:{{NAMESPACE}}|{{ns:File}}|file&amp;nbsp;}}talk page yet. If you wish to contest this speedy deletion, clicking the button above will allow you to [{{fullurl:{{TALKPAGENAME}}|action=edit}} leave a talk page message] explaining why you think this {{pagetype|subjectspace=yes}} should not be deleted.&lt;br /&gt;&lt;small&gt;If you have already posted to the talk page but this message is still showing up, try '''[{{fullurl:{{FULLPAGENAME}}|action=purge}} purging the page cache]'''.&lt;/small&gt;&lt;/span&gt;}}}}&lt;noinclude&gt;
+{{Documentation}}
+
+&lt;!-- Add categories to the /doc subpage, not here! --&gt;
+
+&lt;/noinclude&gt;</text>
+      <sha1>5jdsmlekjtsd0iat79m9y9zb2hr6lcv</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Hang on/notice3</title>
+    <ns>10</ns>
+    <id>28</id>
+    <revision>
+      <id>33</id>
+      <timestamp>2021-12-16T18:42:35Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;span class="plainlinks sysop-show" style="text-align: center;"&gt;Note to administrators: this {{talk other|talk page has content|{{pagetype|subjectspace=yes}} has content on it..."</comment>
+      <origin>33</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="444" sha1="jl6b456xrbwg76jhgcg3s4wc6ak57kb" xml:space="preserve">&lt;span class="plainlinks sysop-show" style="text-align: center;"&gt;Note to administrators: this {{talk other|talk page has content|{{pagetype|subjectspace=yes}} has content on its [[{{TALKPAGENAME}}|talk page]]}} which should be checked before deletion.&lt;/span&gt;
+{{namespace detect
+| main  = [[Category:Speedy deletion candidates with talk pages]]
+}}&lt;noinclude&gt;
+{{Documentation}}
+
+&lt;!-- Add categories to the /doc subpage, not here! --&gt;
+
+&lt;/noinclude&gt;</text>
+      <sha1>jl6b456xrbwg76jhgcg3s4wc6ak57kb</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Mbox</title>
+    <ns>10</ns>
+    <id>12</id>
+    <revision>
+      <id>17</id>
+      <timestamp>2021-12-16T18:30:25Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#invoke:Message box|mbox}}&lt;noinclude&gt; {{documentation}} &lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt; &lt;/noinclude&gt;"</comment>
+      <origin>17</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="145" sha1="mpflpb6s8l8gaoxaeypyuqyu2w7vc7i" xml:space="preserve">{{#invoke:Message box|mbox}}&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>mpflpb6s8l8gaoxaeypyuqyu2w7vc7i</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Namespace detect</title>
+    <ns>10</ns>
+    <id>29</id>
+    <revision>
+      <id>34</id>
+      <timestamp>2021-12-16T18:43:06Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{SAFESUBST:&lt;noinclude /&gt;#invoke:Namespace detect|main}}&lt;noinclude&gt; {{documentation}} &lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt; &lt;/noinclude&gt;"</comment>
+      <origin>34</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="173" sha1="l3ti6zjxip68spdlt018btofjtao8um" xml:space="preserve">{{SAFESUBST:&lt;noinclude /&gt;#invoke:Namespace detect|main}}&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>l3ti6zjxip68spdlt018btofjtao8um</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Ns has subpages</title>
+    <ns>10</ns>
+    <id>7</id>
+    <revision>
+      <id>9</id>
+      <timestamp>2021-12-16T18:23:09Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:Ns has subpages|main}}&lt;noinclude&gt; {{documentation}} &lt;!-- Categories go on the /doc subpage and interwikis go on Wikidata. --&gt; &lt;/..."</comment>
+      <origin>9</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="185" sha1="0pg457y46td6p53rdt8tyc76jeg9pa8" xml:space="preserve">{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:Ns has subpages|main}}&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Categories go on the /doc subpage and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>0pg457y46td6p53rdt8tyc76jeg9pa8</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Pagetype</title>
+    <ns>10</ns>
+    <id>18</id>
+    <revision>
+      <id>23</id>
+      <timestamp>2021-12-16T18:35:20Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:pagetype|main}}&lt;noinclude&gt; &lt;!-- {{documentation}} --&gt; &lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt;..."</comment>
+      <origin>23</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="188" sha1="bbd1se5ncufp3vvyatoum2aax2hsbok" xml:space="preserve">{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:pagetype|main}}&lt;noinclude&gt;
+&lt;!-- {{documentation}} --&gt;
+&lt;!-- Categories go on the /doc subpage, and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>bbd1se5ncufp3vvyatoum2aax2hsbok</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:REVISIONUSER2</title>
+    <ns>10</ns>
+    <id>41</id>
+    <revision>
+      <id>46</id>
+      <timestamp>2021-12-16T18:50:03Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{encodefirst|{{#if:{{{1|}}}|{{REVISIONUSER:{{{1|}}}}}|{{REVISIONUSER}}}}}}&lt;noinclude&gt; {{Documentation}} &lt;/noinclude&gt;"</comment>
+      <origin>46</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="117" sha1="pmhas8mpsvp938mrt3apg2lh1s9b6kk" xml:space="preserve">{{encodefirst|{{#if:{{{1|}}}|{{REVISIONUSER:{{{1|}}}}}|{{REVISIONUSER}}}}}}&lt;noinclude&gt;
+{{Documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>pmhas8mpsvp938mrt3apg2lh1s9b6kk</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Red</title>
+    <ns>10</ns>
+    <id>40</id>
+    <revision>
+      <id>45</id>
+      <timestamp>2021-12-16T18:49:39Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&lt;span style="color: red;"&gt;{{{1}}}&lt;/span&gt;&lt;noinclude&gt; &lt;!-- Add categories and interwikis to the /doc subpage, not here! --&gt; {{Documentation}} &lt;/noinclude&gt;"</comment>
+      <origin>45</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="152" sha1="dp45xewpswcolafvvw98lale3twd1j9" xml:space="preserve">&lt;span style="color: red;"&gt;{{{1}}}&lt;/span&gt;&lt;noinclude&gt;
+&lt;!-- Add categories and interwikis to the /doc subpage, not here! --&gt;
+{{Documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>dp45xewpswcolafvvw98lale3twd1j9</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Talk other</title>
+    <ns>10</ns>
+    <id>25</id>
+    <revision>
+      <id>30</id>
+      <timestamp>2021-12-16T18:40:23Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#switch:   &lt;!--If no or empty "demospace" parameter then detect namespace--&gt;   {{#if:{{{demospace|}}}    | {{lc: {{{demospace}}} }}    &lt;!--Use lower case "demospace"--&gt;   |..."</comment>
+      <origin>30</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="431" sha1="e22qd28qco7teosx5cmjmvg7wpllg97" xml:space="preserve">{{#switch:
+  &lt;!--If no or empty "demospace" parameter then detect namespace--&gt;
+  {{#if:{{{demospace|}}} 
+  | {{lc: {{{demospace}}} }}    &lt;!--Use lower case "demospace"--&gt;
+  | {{#ifeq:{{NAMESPACE}}|{{TALKSPACE}}
+    | talk
+    | other
+    }} 
+  }}
+| talk     = {{{1|}}}
+| other
+| #default = {{{2|}}}
+}}&lt;!--End switch--&gt;&lt;noinclude&gt;
+
+{{documentation}}
+&lt;!-- Add categories and interwikis to the /doc subpage, not here! --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>e22qd28qco7teosx5cmjmvg7wpllg97</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Template sandbox notice</title>
+    <ns>10</ns>
+    <id>5</id>
+    <revision>
+      <id>7</id>
+      <timestamp>2021-12-16T18:22:20Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#ifeq:{{NAMESPACE}}|User||{{#ifexist:{{FULLBASEPAGENAME}}||{{db-g8}}}}}} {{#ifexpr:0&lt;noinclude&gt;1&lt;/noinclude&gt;+{{#ifeq:{{lc:{{SUBPAGENAME}}}}|{{lc:{{{subpage-name|sandbox}}}}}..."</comment>
+      <origin>7</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="1151" sha1="mqvm4odxc6m3xy65sksqgdejetfpr85" xml:space="preserve">{{#ifeq:{{NAMESPACE}}|User||{{#ifexist:{{FULLBASEPAGENAME}}||{{db-g8}}}}}}
+{{#ifexpr:0&lt;noinclude&gt;1&lt;/noinclude&gt;+{{#ifeq:{{lc:{{SUBPAGENAME}}}}|{{lc:{{{subpage-name|sandbox}}}}}
+  |1
+  |0
+ }}
+ |{{ombox
+  |image = [[File:Sandbox.svg|50px|alt=|link=]]
+  |text = This is the [[Wikipedia:Template sandbox and test cases|template sandbox]] page for {{#if:{{{1|}}}|[[{{{1|}}}]]|[[:{{NAMESPACE}}:{{BASEPAGENAME}}]]}}{{#if:{{REVISIONID}}
+   |&amp;#32;([{{fullurl:Special:ComparePages | page1={{#if:{{{1|}}}|{{FULLPAGENAMEE:{{{1|}}}}}|{{NAMESPACEE}}:{{BASEPAGENAMEE}}}}&amp;page2={{FULLPAGENAMEE}}}} diff])
+   |&lt;!-- hide when previewing --&gt;
+  }}.{{#ifexist:{{#rel2abs: ../{{{testcases-name|testcases}}}}}
+   | &lt;br /&gt; See also the companion subpage for [[../{{{testcases-name|testcases}}}|test cases]].
+  }} 
+ }}{{{notice-for-sandbox|}}}{{#ifeq:{{lc:{{SUBPAGENAME}}}}|{{lc:{{{testcases-name|testcases}}}}}
+  | &lt;!-- testcases --&gt;
+  | &lt;!-- not testcases --&gt;{{{category|[[Category:Template sandboxes]]}}}
+ }}
+ | &lt;!-- not sandbox --&gt;{{{notice-not-sandbox|}}}
+}}&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Add categories to the /doc subpage; interwikis go to Wikidata! --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>mqvm4odxc6m3xy65sksqgdejetfpr85</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Time ago</title>
+    <ns>10</ns>
+    <id>46</id>
+    <revision>
+      <id>51</id>
+      <timestamp>2021-12-16T18:52:20Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{#invoke:Time ago|main}}&lt;noinclude&gt; {{documentation}} &lt;!-- Categories go in the /doc subpage and interwikis go in Wikidata. --&gt; &lt;/noinclude&gt;"</comment>
+      <origin>51</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="141" sha1="mzprrwbd409g2cer41ys035v9oay1od" xml:space="preserve">{{#invoke:Time ago|main}}&lt;noinclude&gt;
+{{documentation}}
+&lt;!-- Categories go in the /doc subpage and interwikis go in Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>mzprrwbd409g2cer41ys035v9oay1od</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Tl</title>
+    <ns>10</ns>
+    <id>30</id>
+    <revision>
+      <id>35</id>
+      <timestamp>2021-12-16T18:43:53Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "&amp;#123;&amp;#123;[[Template:{{{1}}}|{{{1}}}]]&amp;#125;&amp;#125;&lt;noinclude&gt;{{documentation}} &lt;!-- Categories go on the /doc subpage and interwikis go on Wikidata. --&gt; &lt;/noinclude&gt;"</comment>
+      <origin>35</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="167" sha1="rf3qx5cilaxlnjqq9fivevkah92ncil" xml:space="preserve">&amp;#123;&amp;#123;[[Template:{{{1}}}|{{{1}}}]]&amp;#125;&amp;#125;&lt;noinclude&gt;{{documentation}}
+&lt;!-- Categories go on the /doc subpage and interwikis go on Wikidata. --&gt;
+&lt;/noinclude&gt;</text>
+      <sha1>rf3qx5cilaxlnjqq9fivevkah92ncil</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Template:Toolbar</title>
+    <ns>10</ns>
+    <id>44</id>
+    <revision>
+      <id>49</id>
+      <timestamp>2021-12-16T18:51:35Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:Toolbar|main}}&lt;noinclude&gt; {{documentation}} &lt;/noinclude&gt;"</comment>
+      <origin>49</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="103" sha1="qclufe7lvdzex2my9nsfp5rgfunfks0" xml:space="preserve">{{&lt;includeonly&gt;safesubst:&lt;/includeonly&gt;#invoke:Toolbar|main}}&lt;noinclude&gt;
+{{documentation}}
+&lt;/noinclude&gt;</text>
+      <sha1>qclufe7lvdzex2my9nsfp5rgfunfks0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Arguments</title>
+    <ns>828</ns>
+    <id>16</id>
+    <revision>
+      <id>21</id>
+      <timestamp>2021-12-16T18:33:32Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- This module provides easy processing of arguments passed to Scribunto from -- #invoke. It is intended for use by other Lua modules, and should not be -- called from #invoke..."</comment>
+      <origin>21</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="10054" sha1="5qx9tzlul9ser30uxj9nbasjt92cevn" xml:space="preserve">-- This module provides easy processing of arguments passed to Scribunto from
+-- #invoke. It is intended for use by other Lua modules, and should not be
+-- called from #invoke directly.
+
+local libraryUtil = require('libraryUtil')
+local checkType = libraryUtil.checkType
+
+local arguments = {}
+
+-- Generate four different tidyVal functions, so that we don't have to check the
+-- options every time we call it.
+
+local function tidyValDefault(key, val)
+	if type(val) == 'string' then
+		val = val:match('^%s*(.-)%s*$')
+		if val == '' then
+			return nil
+		else
+			return val
+		end
+	else
+		return val
+	end
+end
+
+local function tidyValTrimOnly(key, val)
+	if type(val) == 'string' then
+		return val:match('^%s*(.-)%s*$')
+	else
+		return val
+	end
+end
+
+local function tidyValRemoveBlanksOnly(key, val)
+	if type(val) == 'string' then
+		if val:find('%S') then
+			return val
+		else
+			return nil
+		end
+	else
+		return val
+	end
+end
+
+local function tidyValNoChange(key, val)
+	return val
+end
+
+local function matchesTitle(given, title)
+	local tp = type( given )
+	return (tp == 'string' or tp == 'number') and mw.title.new( given ).prefixedText == title
+end
+
+local translate_mt = { __index = function(t, k) return k end }
+
+function arguments.getArgs(frame, options)
+	checkType('getArgs', 1, frame, 'table', true)
+	checkType('getArgs', 2, options, 'table', true)
+	frame = frame or {}
+	options = options or {}
+
+	--[[
+	-- Set up argument translation.
+	--]]
+	options.translate = options.translate or {}
+	if getmetatable(options.translate) == nil then
+		setmetatable(options.translate, translate_mt)
+	end
+	if options.backtranslate == nil then
+		options.backtranslate = {}
+		for k,v in pairs(options.translate) do
+			options.backtranslate[v] = k
+		end
+	end
+	if options.backtranslate and getmetatable(options.backtranslate) == nil then
+		setmetatable(options.backtranslate, {
+			__index = function(t, k)
+				if options.translate[k] ~= k then
+					return nil
+				else
+					return k
+				end
+			end
+		})
+	end
+
+	--[[
+	-- Get the argument tables. If we were passed a valid frame object, get the
+	-- frame arguments (fargs) and the parent frame arguments (pargs), depending
+	-- on the options set and on the parent frame's availability. If we weren't
+	-- passed a valid frame object, we are being called from another Lua module
+	-- or from the debug console, so assume that we were passed a table of args
+	-- directly, and assign it to a new variable (luaArgs).
+	--]]
+	local fargs, pargs, luaArgs
+	if type(frame.args) == 'table' and type(frame.getParent) == 'function' then
+		if options.wrappers then
+			--[[
+			-- The wrappers option makes Module:Arguments look up arguments in
+			-- either the frame argument table or the parent argument table, but
+			-- not both. This means that users can use either the #invoke syntax
+			-- or a wrapper template without the loss of performance associated
+			-- with looking arguments up in both the frame and the parent frame.
+			-- Module:Arguments will look up arguments in the parent frame
+			-- if it finds the parent frame's title in options.wrapper;
+			-- otherwise it will look up arguments in the frame object passed
+			-- to getArgs.
+			--]]
+			local parent = frame:getParent()
+			if not parent then
+				fargs = frame.args
+			else
+				local title = parent:getTitle():gsub('/sandbox$', '')
+				local found = false
+				if matchesTitle(options.wrappers, title) then
+					found = true
+				elseif type(options.wrappers) == 'table' then
+					for _,v in pairs(options.wrappers) do
+						if matchesTitle(v, title) then
+							found = true
+							break
+						end
+					end
+				end
+
+				-- We test for false specifically here so that nil (the default) acts like true.
+				if found or options.frameOnly == false then
+					pargs = parent.args
+				end
+				if not found or options.parentOnly == false then
+					fargs = frame.args
+				end
+			end
+		else
+			-- options.wrapper isn't set, so check the other options.
+			if not options.parentOnly then
+				fargs = frame.args
+			end
+			if not options.frameOnly then
+				local parent = frame:getParent()
+				pargs = parent and parent.args or nil
+			end
+		end
+		if options.parentFirst then
+			fargs, pargs = pargs, fargs
+		end
+	else
+		luaArgs = frame
+	end
+
+	-- Set the order of precedence of the argument tables. If the variables are
+	-- nil, nothing will be added to the table, which is how we avoid clashes
+	-- between the frame/parent args and the Lua args.
+	local argTables = {fargs}
+	argTables[#argTables + 1] = pargs
+	argTables[#argTables + 1] = luaArgs
+
+	--[[
+	-- Generate the tidyVal function. If it has been specified by the user, we
+	-- use that; if not, we choose one of four functions depending on the
+	-- options chosen. This is so that we don't have to call the options table
+	-- every time the function is called.
+	--]]
+	local tidyVal = options.valueFunc
+	if tidyVal then
+		if type(tidyVal) ~= 'function' then
+			error(
+				"bad value assigned to option 'valueFunc'"
+					.. '(function expected, got '
+					.. type(tidyVal)
+					.. ')',
+				2
+			)
+		end
+	elseif options.trim ~= false then
+		if options.removeBlanks ~= false then
+			tidyVal = tidyValDefault
+		else
+			tidyVal = tidyValTrimOnly
+		end
+	else
+		if options.removeBlanks ~= false then
+			tidyVal = tidyValRemoveBlanksOnly
+		else
+			tidyVal = tidyValNoChange
+		end
+	end
+
+	--[[
+	-- Set up the args, metaArgs and nilArgs tables. args will be the one
+	-- accessed from functions, and metaArgs will hold the actual arguments. Nil
+	-- arguments are memoized in nilArgs, and the metatable connects all of them
+	-- together.
+	--]]
+	local args, metaArgs, nilArgs, metatable = {}, {}, {}, {}
+	setmetatable(args, metatable)
+
+	local function mergeArgs(tables)
+		--[[
+		-- Accepts multiple tables as input and merges their keys and values
+		-- into one table. If a value is already present it is not overwritten;
+		-- tables listed earlier have precedence. We are also memoizing nil
+		-- values, which can be overwritten if they are 's' (soft).
+		--]]
+		for _, t in ipairs(tables) do
+			for key, val in pairs(t) do
+				if metaArgs[key] == nil and nilArgs[key] ~= 'h' then
+					local tidiedVal = tidyVal(key, val)
+					if tidiedVal == nil then
+						nilArgs[key] = 's'
+					else
+						metaArgs[key] = tidiedVal
+					end
+				end
+			end
+		end
+	end
+
+	--[[
+	-- Define metatable behaviour. Arguments are memoized in the metaArgs table,
+	-- and are only fetched from the argument tables once. Fetching arguments
+	-- from the argument tables is the most resource-intensive step in this
+	-- module, so we try and avoid it where possible. For this reason, nil
+	-- arguments are also memoized, in the nilArgs table. Also, we keep a record
+	-- in the metatable of when pairs and ipairs have been called, so we do not
+	-- run pairs and ipairs on the argument tables more than once. We also do
+	-- not run ipairs on fargs and pargs if pairs has already been run, as all
+	-- the arguments will already have been copied over.
+	--]]
+
+	metatable.__index = function (t, key)
+		--[[
+		-- Fetches an argument when the args table is indexed. First we check
+		-- to see if the value is memoized, and if not we try and fetch it from
+		-- the argument tables. When we check memoization, we need to check
+		-- metaArgs before nilArgs, as both can be non-nil at the same time.
+		-- If the argument is not present in metaArgs, we also check whether
+		-- pairs has been run yet. If pairs has already been run, we return nil.
+		-- This is because all the arguments will have already been copied into
+		-- metaArgs by the mergeArgs function, meaning that any other arguments
+		-- must be nil.
+		--]]
+		if type(key) == 'string' then
+			key = options.translate[key]
+		end
+		local val = metaArgs[key]
+		if val ~= nil then
+			return val
+		elseif metatable.donePairs or nilArgs[key] then
+			return nil
+		end
+		for _, argTable in ipairs(argTables) do
+			local argTableVal = tidyVal(key, argTable[key])
+			if argTableVal ~= nil then
+				metaArgs[key] = argTableVal
+				return argTableVal
+			end
+		end
+		nilArgs[key] = 'h'
+		return nil
+	end
+
+	metatable.__newindex = function (t, key, val)
+		-- This function is called when a module tries to add a new value to the
+		-- args table, or tries to change an existing value.
+		if type(key) == 'string' then
+			key = options.translate[key]
+		end
+		if options.readOnly then
+			error(
+				'could not write to argument table key "'
+					.. tostring(key)
+					.. '"; the table is read-only',
+				2
+			)
+		elseif options.noOverwrite and args[key] ~= nil then
+			error(
+				'could not write to argument table key "'
+					.. tostring(key)
+					.. '"; overwriting existing arguments is not permitted',
+				2
+			)
+		elseif val == nil then
+			--[[
+			-- If the argument is to be overwritten with nil, we need to erase
+			-- the value in metaArgs, so that __index, __pairs and __ipairs do
+			-- not use a previous existing value, if present; and we also need
+			-- to memoize the nil in nilArgs, so that the value isn't looked
+			-- up in the argument tables if it is accessed again.
+			--]]
+			metaArgs[key] = nil
+			nilArgs[key] = 'h'
+		else
+			metaArgs[key] = val
+		end
+	end
+
+	local function translatenext(invariant)
+		local k, v = next(invariant.t, invariant.k)
+		invariant.k = k
+		if k == nil then
+			return nil
+		elseif type(k) ~= 'string' or not options.backtranslate then
+			return k, v
+		else
+			local backtranslate = options.backtranslate[k]
+			if backtranslate == nil then
+				-- Skip this one. This is a tail call, so this won't cause stack overflow
+				return translatenext(invariant)
+			else
+				return backtranslate, v
+			end
+		end
+	end
+
+	metatable.__pairs = function ()
+		-- Called when pairs is run on the args table.
+		if not metatable.donePairs then
+			mergeArgs(argTables)
+			metatable.donePairs = true
+		end
+		return translatenext, { t = metaArgs }
+	end
+
+	local function inext(t, i)
+		-- This uses our __index metamethod
+		local v = t[i + 1]
+		if v ~= nil then
+			return i + 1, v
+		end
+	end
+
+	metatable.__ipairs = function (t)
+		-- Called when ipairs is run on the args table.
+		return inext, t, 0
+	end
+
+	return args
+end
+
+return arguments</text>
+      <sha1>5qx9tzlul9ser30uxj9nbasjt92cevn</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Message box</title>
+    <ns>828</ns>
+    <id>13</id>
+    <revision>
+      <id>18</id>
+      <timestamp>2021-12-16T18:31:11Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- This is a meta-module for producing message box templates, including -- {{mbox}}, {{ambox}}, {{imbox}}, {{tmbox}}, {{ombox}}, {{cmbox}} and {{fmbox}}.  -- Load necessary mo..."</comment>
+      <origin>18</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="18348" sha1="kshc0gmfnt1xkzycgdb25urt4m770p1" xml:space="preserve">-- This is a meta-module for producing message box templates, including
+-- {{mbox}}, {{ambox}}, {{imbox}}, {{tmbox}}, {{ombox}}, {{cmbox}} and {{fmbox}}.
+
+-- Load necessary modules.
+require('Module:No globals')
+local getArgs
+local yesno = require('Module:Yesno')
+
+-- Get a language object for formatDate and ucfirst.
+local lang = mw.language.getContentLanguage()
+
+-- Define constants
+local CONFIG_MODULE = 'Module:Message box/configuration'
+local DEMOSPACES = {talk = 'tmbox', image = 'imbox', file = 'imbox', category = 'cmbox', article = 'ambox', main = 'ambox'}
+
+--------------------------------------------------------------------------------
+-- Helper functions
+--------------------------------------------------------------------------------
+
+local function getTitleObject(...)
+	-- Get the title object, passing the function through pcall
+	-- in case we are over the expensive function count limit.
+	local success, title = pcall(mw.title.new, ...)
+	if success then
+		return title
+	end
+end
+
+local function union(t1, t2)
+	-- Returns the union of two arrays.
+	local vals = {}
+	for i, v in ipairs(t1) do
+		vals[v] = true
+	end
+	for i, v in ipairs(t2) do
+		vals[v] = true
+	end
+	local ret = {}
+	for k in pairs(vals) do
+		table.insert(ret, k)
+	end
+	table.sort(ret)
+	return ret
+end
+
+local function getArgNums(args, prefix)
+	local nums = {}
+	for k, v in pairs(args) do
+		local num = mw.ustring.match(tostring(k), '^' .. prefix .. '([1-9]%d*)$')
+		if num then
+			table.insert(nums, tonumber(num))
+		end
+	end
+	table.sort(nums)
+	return nums
+end
+
+--------------------------------------------------------------------------------
+-- Box class definition
+--------------------------------------------------------------------------------
+
+local MessageBox = {}
+MessageBox.__index = MessageBox
+
+function MessageBox.new(boxType, args, cfg)
+	args = args or {}
+	local obj = {}
+
+	-- Set the title object and the namespace.
+	obj.title = getTitleObject(args.page) or mw.title.getCurrentTitle()
+
+	-- Set the config for our box type.
+	obj.cfg = cfg[boxType]
+	if not obj.cfg then
+		local ns = obj.title.namespace
+		-- boxType is "mbox" or invalid input
+		if args.demospace and args.demospace ~= '' then
+			-- implement demospace parameter of mbox
+			local demospace = string.lower(args.demospace)
+			if DEMOSPACES[demospace] then
+				-- use template from DEMOSPACES
+				obj.cfg = cfg[DEMOSPACES[demospace]]
+			elseif string.find( demospace, 'talk' ) then
+				-- demo as a talk page
+				obj.cfg = cfg.tmbox
+			else
+				-- default to ombox
+				obj.cfg = cfg.ombox
+			end
+		elseif ns == 0 then
+			obj.cfg = cfg.ambox -- main namespace
+		elseif ns == 6 then
+			obj.cfg = cfg.imbox -- file namespace
+		elseif ns == 14 then
+			obj.cfg = cfg.cmbox -- category namespace
+		else
+			local nsTable = mw.site.namespaces[ns]
+			if nsTable and nsTable.isTalk then
+				obj.cfg = cfg.tmbox -- any talk namespace
+			else
+				obj.cfg = cfg.ombox -- other namespaces or invalid input
+			end
+		end
+	end
+
+	-- Set the arguments, and remove all blank arguments except for the ones
+	-- listed in cfg.allowBlankParams.
+	do
+		local newArgs = {}
+		for k, v in pairs(args) do
+			if v ~= '' then
+				newArgs[k] = v
+			end
+		end
+		for i, param in ipairs(obj.cfg.allowBlankParams or {}) do
+			newArgs[param] = args[param]
+		end
+		obj.args = newArgs
+	end
+
+	-- Define internal data structure.
+	obj.categories = {}
+	obj.classes = {}
+	-- For lazy loading of [[Module:Category handler]].
+	obj.hasCategories = false
+
+	return setmetatable(obj, MessageBox)
+end
+
+function MessageBox:addCat(ns, cat, sort)
+	if not cat then
+		return nil
+	end
+	if sort then
+		cat = string.format('[[Category:%s|%s]]', cat, sort)
+	else
+		cat = string.format('[[Category:%s]]', cat)
+	end
+	self.hasCategories = true
+	self.categories[ns] = self.categories[ns] or {}
+	table.insert(self.categories[ns], cat)
+end
+
+function MessageBox:addClass(class)
+	if not class then
+		return nil
+	end
+	table.insert(self.classes, class)
+end
+
+function MessageBox:setParameters()
+	local args = self.args
+	local cfg = self.cfg
+
+	-- Get type data.
+	self.type = args.type
+	local typeData = cfg.types[self.type]
+	self.invalidTypeError = cfg.showInvalidTypeError
+		and self.type
+		and not typeData
+	typeData = typeData or cfg.types[cfg.default]
+	self.typeClass = typeData.class
+	self.typeImage = typeData.image
+
+	-- Find if the box has been wrongly substituted.
+	self.isSubstituted = cfg.substCheck and args.subst == 'SUBST'
+
+	-- Find whether we are using a small message box.
+	self.isSmall = cfg.allowSmall and (
+		cfg.smallParam and args.small == cfg.smallParam
+		or not cfg.smallParam and yesno(args.small)
+	)
+
+	-- Add attributes, classes and styles.
+	self.id = args.id
+	self.name = args.name
+	if self.name then
+		self:addClass('box-' .. string.gsub(self.name,' ','_'))
+	end
+	if yesno(args.plainlinks) ~= false then
+		self:addClass('plainlinks')
+	end
+	for _, class in ipairs(cfg.classes or {}) do
+		self:addClass(class)
+	end
+	if self.isSmall then
+		self:addClass(cfg.smallClass or 'mbox-small')
+	end
+	self:addClass(self.typeClass)
+	self:addClass(args.class)
+	self.style = args.style
+	self.attrs = args.attrs
+
+	-- Set text style.
+	self.textstyle = args.textstyle
+
+	-- Find if we are on the template page or not. This functionality is only
+	-- used if useCollapsibleTextFields is set, or if both cfg.templateCategory
+	-- and cfg.templateCategoryRequireName are set.
+	self.useCollapsibleTextFields = cfg.useCollapsibleTextFields
+	if self.useCollapsibleTextFields
+		or cfg.templateCategory
+		and cfg.templateCategoryRequireName
+	then
+		if self.name then
+			local templateName = mw.ustring.match(
+				self.name,
+				'^[tT][eE][mM][pP][lL][aA][tT][eE][%s_]*:[%s_]*(.*)$'
+			) or self.name
+			templateName = 'Template:' .. templateName
+			self.templateTitle = getTitleObject(templateName)
+		end
+		self.isTemplatePage = self.templateTitle
+			and mw.title.equals(self.title, self.templateTitle)
+	end
+	
+	-- Process data for collapsible text fields. At the moment these are only
+	-- used in {{ambox}}.
+	if self.useCollapsibleTextFields then
+		-- Get the self.issue value.
+		if self.isSmall and args.smalltext then
+			self.issue = args.smalltext
+		else
+			local sect
+			if args.sect == '' then
+				sect = 'This ' .. (cfg.sectionDefault or 'page')
+			elseif type(args.sect) == 'string' then
+				sect = 'This ' .. args.sect
+			end
+			local issue = args.issue
+			issue = type(issue) == 'string' and issue ~= '' and issue or nil
+			local text = args.text
+			text = type(text) == 'string' and text or nil
+			local issues = {}
+			table.insert(issues, sect)
+			table.insert(issues, issue)
+			table.insert(issues, text)
+			self.issue = table.concat(issues, ' ')
+		end
+
+		-- Get the self.talk value.
+		local talk = args.talk
+		-- Show talk links on the template page or template subpages if the talk
+		-- parameter is blank.
+		if talk == ''
+			and self.templateTitle
+			and (
+				mw.title.equals(self.templateTitle, self.title)
+				or self.title:isSubpageOf(self.templateTitle)
+			)
+		then
+			talk = '#'
+		elseif talk == '' then
+			talk = nil
+		end
+		if talk then
+			-- If the talk value is a talk page, make a link to that page. Else
+			-- assume that it's a section heading, and make a link to the talk
+			-- page of the current page with that section heading.
+			local talkTitle = getTitleObject(talk)
+			local talkArgIsTalkPage = true
+			if not talkTitle or not talkTitle.isTalkPage then
+				talkArgIsTalkPage = false
+				talkTitle = getTitleObject(
+					self.title.text,
+					mw.site.namespaces[self.title.namespace].talk.id
+				)
+			end
+			if talkTitle and talkTitle.exists then
+                local talkText
+                if self.isSmall then
+                    local talkLink = talkArgIsTalkPage and talk or (talkTitle.prefixedText .. '#' .. talk)
+                    talkText = string.format('([[%s|talk]])', talkLink)
+                else
+                    talkText = 'Relevant discussion may be found on'
+                    if talkArgIsTalkPage then
+                        talkText = string.format(
+                            '%s [[%s|%s]].',
+                            talkText,
+                            talk,
+                            talkTitle.prefixedText
+                        )
+                    else
+                        talkText = string.format(
+                            '%s the [[%s#%s|talk page]].',
+                            talkText,
+                            talkTitle.prefixedText,
+                            talk
+                        )
+                    end
+                end
+				self.talk = talkText
+			end
+		end
+
+		-- Get other values.
+		self.fix = args.fix ~= '' and args.fix or nil
+		local date
+		if args.date and args.date ~= '' then
+			date = args.date
+		elseif args.date == '' and self.isTemplatePage then
+			date = lang:formatDate('F Y')
+		end
+		if date then
+			self.date = string.format(" &lt;span class='date-container'&gt;''(&lt;span class='date'&gt;%s&lt;/span&gt;)''&lt;/span&gt;", date)
+		end
+		self.info = args.info
+		if yesno(args.removalnotice) then
+			self.removalNotice = cfg.removalNotice
+		end
+	end
+
+	-- Set the non-collapsible text field. At the moment this is used by all box
+	-- types other than ambox, and also by ambox when small=yes.
+	if self.isSmall then
+		self.text = args.smalltext or args.text
+	else
+		self.text = args.text
+	end
+
+	-- Set the below row.
+	self.below = cfg.below and args.below
+
+	-- General image settings.
+	self.imageCellDiv = not self.isSmall and cfg.imageCellDiv
+	self.imageEmptyCell = cfg.imageEmptyCell
+	if cfg.imageEmptyCellStyle then
+		self.imageEmptyCellStyle = 'border:none;padding:0;width:1px'
+	end
+
+	-- Left image settings.
+	local imageLeft = self.isSmall and args.smallimage or args.image
+	if cfg.imageCheckBlank and imageLeft ~= 'blank' and imageLeft ~= 'none'
+		or not cfg.imageCheckBlank and imageLeft ~= 'none'
+	then
+		self.imageLeft = imageLeft
+		if not imageLeft then
+			local imageSize = self.isSmall
+				and (cfg.imageSmallSize or '30x30px')
+				or '40x40px'
+			self.imageLeft = string.format('[[File:%s|%s|link=|alt=]]', self.typeImage
+				or 'Imbox notice.png', imageSize)
+		end
+	end
+
+	-- Right image settings.
+	local imageRight = self.isSmall and args.smallimageright or args.imageright
+	if not (cfg.imageRightNone and imageRight == 'none') then
+		self.imageRight = imageRight
+	end
+end
+
+function MessageBox:setMainspaceCategories()
+	local args = self.args
+	local cfg = self.cfg
+
+	if not cfg.allowMainspaceCategories then
+		return nil
+	end
+
+	local nums = {}
+	for _, prefix in ipairs{'cat', 'category', 'all'} do
+		args[prefix .. '1'] = args[prefix]
+		nums = union(nums, getArgNums(args, prefix))
+	end
+
+	-- The following is roughly equivalent to the old {{Ambox/category}}.
+	local date = args.date
+	date = type(date) == 'string' and date
+	local preposition = 'from'
+	for _, num in ipairs(nums) do
+		local mainCat = args['cat' .. tostring(num)]
+			or args['category' .. tostring(num)]
+		local allCat = args['all' .. tostring(num)]
+		mainCat = type(mainCat) == 'string' and mainCat
+		allCat = type(allCat) == 'string' and allCat
+		if mainCat and date and date ~= '' then
+			local catTitle = string.format('%s %s %s', mainCat, preposition, date)
+			self:addCat(0, catTitle)
+			catTitle = getTitleObject('Category:' .. catTitle)
+			if not catTitle or not catTitle.exists then
+				self:addCat(0, 'Articles with invalid date parameter in template')
+			end
+		elseif mainCat and (not date or date == '') then
+			self:addCat(0, mainCat)
+		end
+		if allCat then
+			self:addCat(0, allCat)
+		end
+	end
+end
+
+function MessageBox:setTemplateCategories()
+	local args = self.args
+	local cfg = self.cfg
+
+	-- Add template categories.
+	if cfg.templateCategory then
+		if cfg.templateCategoryRequireName then
+			if self.isTemplatePage then
+				self:addCat(10, cfg.templateCategory)
+			end
+		elseif not self.title.isSubpage then
+			self:addCat(10, cfg.templateCategory)
+		end
+	end
+
+	-- Add template error categories.
+	if cfg.templateErrorCategory then
+		local templateErrorCategory = cfg.templateErrorCategory
+		local templateCat, templateSort
+		if not self.name and not self.title.isSubpage then
+			templateCat = templateErrorCategory
+		elseif self.isTemplatePage then
+			local paramsToCheck = cfg.templateErrorParamsToCheck or {}
+			local count = 0
+			for i, param in ipairs(paramsToCheck) do
+				if not args[param] then
+					count = count + 1
+				end
+			end
+			if count &gt; 0 then
+				templateCat = templateErrorCategory
+				templateSort = tostring(count)
+			end
+			if self.categoryNums and #self.categoryNums &gt; 0 then
+				templateCat = templateErrorCategory
+				templateSort = 'C'
+			end
+		end
+		self:addCat(10, templateCat, templateSort)
+	end
+end
+
+function MessageBox:setAllNamespaceCategories()
+	-- Set categories for all namespaces.
+	if self.invalidTypeError then
+		local allSort = (self.title.namespace == 0 and 'Main:' or '') .. self.title.prefixedText
+		self:addCat('all', 'Wikipedia message box parameter needs fixing', allSort)
+	end
+	if self.isSubstituted then
+		self:addCat('all', 'Pages with incorrectly substituted templates')
+	end
+end
+
+function MessageBox:setCategories()
+	if self.title.namespace == 0 then
+		self:setMainspaceCategories()
+	elseif self.title.namespace == 10 then
+		self:setTemplateCategories()
+	end
+	self:setAllNamespaceCategories()
+end
+
+function MessageBox:renderCategories()
+	if not self.hasCategories then
+		-- No categories added, no need to pass them to Category handler so,
+		-- if it was invoked, it would return the empty string.
+		-- So we shortcut and return the empty string.
+		return ""
+	end
+	-- Convert category tables to strings and pass them through
+	-- [[Module:Category handler]].
+	return require('Module:Category handler')._main{
+		main = table.concat(self.categories[0] or {}),
+		template = table.concat(self.categories[10] or {}),
+		all = table.concat(self.categories.all or {}),
+		nocat = self.args.nocat,
+		page = self.args.page
+	}
+end
+
+function MessageBox:export()
+	local root = mw.html.create()
+
+	-- Add the subst check error.
+	if self.isSubstituted and self.name then
+		root:tag('b')
+			:addClass('error')
+			:wikitext(string.format(
+				'Template &lt;code&gt;%s[[Template:%s|%s]]%s&lt;/code&gt; has been incorrectly substituted.',
+				mw.text.nowiki('{{'), self.name, self.name, mw.text.nowiki('}}')
+			))
+	end
+
+	-- Create the box table.
+	local boxTable = root:tag('table')
+	boxTable:attr('id', self.id or nil)
+	for i, class in ipairs(self.classes or {}) do
+		boxTable:addClass(class or nil)
+	end
+	boxTable
+		:cssText(self.style or nil)
+		:attr('role', 'presentation')
+
+	if self.attrs then
+		boxTable:attr(self.attrs)
+	end
+
+	-- Add the left-hand image.
+	local row = boxTable:tag('tr')
+	if self.imageLeft then
+		local imageLeftCell = row:tag('td'):addClass('mbox-image')
+		if self.imageCellDiv then
+			-- If we are using a div, redefine imageLeftCell so that the image
+			-- is inside it. Divs use style="width: 52px;", which limits the
+			-- image width to 52px. If any images in a div are wider than that,
+			-- they may overlap with the text or cause other display problems.
+			imageLeftCell = imageLeftCell:tag('div'):css('width', '52px')
+		end
+		imageLeftCell:wikitext(self.imageLeft or nil)
+	elseif self.imageEmptyCell then
+		-- Some message boxes define an empty cell if no image is specified, and
+		-- some don't. The old template code in templates where empty cells are
+		-- specified gives the following hint: "No image. Cell with some width
+		-- or padding necessary for text cell to have 100% width."
+		row:tag('td')
+			:addClass('mbox-empty-cell')
+			:cssText(self.imageEmptyCellStyle or nil)
+	end
+
+	-- Add the text.
+	local textCell = row:tag('td'):addClass('mbox-text')
+	if self.useCollapsibleTextFields then
+		-- The message box uses advanced text parameters that allow things to be
+		-- collapsible. At the moment, only ambox uses this.
+		textCell:cssText(self.textstyle or nil)
+		local textCellDiv = textCell:tag('div')
+		textCellDiv
+			:addClass('mbox-text-span')
+			:wikitext(self.issue or nil)
+		if (self.talk or self.fix) then
+			textCellDiv:tag('span')
+				:addClass('hide-when-compact')
+				:wikitext(self.talk and (' ' .. self.talk) or nil)
+				:wikitext(self.fix and (' ' .. self.fix) or nil)
+		end
+		textCellDiv:wikitext(self.date and (' ' .. self.date) or nil)
+		if self.info and not self.isSmall then
+			textCellDiv
+				:tag('span')
+				:addClass('hide-when-compact')
+				:wikitext(self.info and (' ' .. self.info) or nil)
+		end
+		if self.removalNotice then
+			textCellDiv:tag('span')
+				:addClass('hide-when-compact')
+				:tag('i')
+					:wikitext(string.format(" (%s)", self.removalNotice))
+		end
+	else
+		-- Default text formatting - anything goes.
+		textCell
+			:cssText(self.textstyle or nil)
+			:wikitext(self.text or nil)
+	end
+
+	-- Add the right-hand image.
+	if self.imageRight then
+		local imageRightCell = row:tag('td'):addClass('mbox-imageright')
+		if self.imageCellDiv then
+			-- If we are using a div, redefine imageRightCell so that the image
+			-- is inside it.
+			imageRightCell = imageRightCell:tag('div'):css('width', '52px')
+		end
+		imageRightCell
+			:wikitext(self.imageRight or nil)
+	end
+
+	-- Add the below row.
+	if self.below then
+		boxTable:tag('tr')
+			:tag('td')
+				:attr('colspan', self.imageRight and '3' or '2')
+				:addClass('mbox-text')
+				:cssText(self.textstyle or nil)
+				:wikitext(self.below or nil)
+	end
+
+	-- Add error message for invalid type parameters.
+	if self.invalidTypeError then
+		root:tag('div')
+			:css('text-align', 'center')
+			:wikitext(string.format(
+				'This message box is using an invalid "type=%s" parameter and needs fixing.',
+				self.type or ''
+			))
+	end
+
+	-- Add categories.
+	root:wikitext(self:renderCategories() or nil)
+
+	return tostring(root)
+end
+
+--------------------------------------------------------------------------------
+-- Exports
+--------------------------------------------------------------------------------
+
+local p, mt = {}, {}
+
+function p._exportClasses()
+	-- For testing.
+	return {
+		MessageBox = MessageBox
+	}
+end
+
+function p.main(boxType, args, cfgTables)
+	local box = MessageBox.new(boxType, args, cfgTables or mw.loadData(CONFIG_MODULE))
+	box:setParameters()
+	box:setCategories()
+	return box:export()
+end
+
+function mt.__index(t, k)
+	return function (frame)
+		if not getArgs then
+			getArgs = require('Module:Arguments').getArgs
+		end
+		return t.main(k, getArgs(frame, {trim = false, removeBlanks = false}))
+	end
+end
+
+return setmetatable(p, mt)</text>
+      <sha1>kshc0gmfnt1xkzycgdb25urt4m770p1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Message box/configuration</title>
+    <ns>828</ns>
+    <id>17</id>
+    <revision>
+      <id>22</id>
+      <timestamp>2021-12-16T18:34:12Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-------------------------------------------------------------------------------- --                          Message box configuration                         -- --..."</comment>
+      <origin>22</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="6141" sha1="rz63o9789otb966y0k5pcntqf0bl6te" xml:space="preserve">--------------------------------------------------------------------------------
+--                          Message box configuration                         --
+--                                                                            --
+-- This module contains configuration data for [[Module:Message box]].        --
+--------------------------------------------------------------------------------
+
+return {
+	ambox = {
+		types = {
+			speedy = {
+				class = 'ambox-speedy',
+				image = 'Ambox warning pn.svg'
+			},
+			delete = {
+				class = 'ambox-delete',
+				image = 'Ambox warning pn.svg'
+			},
+			content = {
+				class = 'ambox-content',
+				image = 'Ambox important.svg'
+			},
+			style = {
+				class = 'ambox-style',
+				image = 'Edit-clear.svg'
+			},
+			move = {
+				class = 'ambox-move',
+				image = 'Merge-split-transwiki default.svg'
+			},
+			protection = {
+				class = 'ambox-protection',
+				image = 'Semi-protection-shackle-keyhole.svg'
+			},
+			notice = {
+				class = 'ambox-notice',
+				image = 'Information icon4.svg'
+			}
+		},
+		default                     = 'notice',
+		allowBlankParams            = {'talk', 'sect', 'date', 'issue', 'fix', 'subst', 'hidden'},
+		allowSmall                  = true,
+		smallParam                  = 'left',
+		smallClass                  = 'mbox-small-left',
+		substCheck                  = true,
+		classes                     = {'metadata', 'ambox'},
+		imageEmptyCell              = true,
+		imageCheckBlank             = true,
+		imageSmallSize              = '20x20px',
+		imageCellDiv                = true,
+		useCollapsibleTextFields    = true,
+		imageRightNone              = true,
+		sectionDefault              = 'article',
+		allowMainspaceCategories    = true,
+		templateCategory            = 'Article message templates',
+	        templateCategoryRequireName = true,
+		templateErrorCategory       = 'Article message templates with missing parameters',
+		templateErrorParamsToCheck  = {'issue', 'fix', 'subst'},
+		removalNotice               = '[[Help:Maintenance template removal|Learn how and when to remove this template message]]'
+	},
+	
+	cmbox = {
+		types = {
+			speedy = {
+				class = 'cmbox-speedy',
+				image = 'Ambox warning pn.svg'
+			},
+			delete = {
+				class = 'cmbox-delete',
+				image = 'Ambox warning pn.svg'
+			},
+			content = {
+				class = 'cmbox-content',
+				image = 'Ambox important.svg'
+			},
+			style = {
+				class = 'cmbox-style',
+				image = 'Edit-clear.svg'
+			},
+			move = {
+				class = 'cmbox-move',
+				image = 'Merge-split-transwiki default.svg'
+			},
+			protection = {
+				class = 'cmbox-protection',
+				image = 'Semi-protection-shackle-keyhole.svg'
+			},
+			notice = {
+				class = 'cmbox-notice',
+				image = 'Information icon4.svg'
+			}
+		},
+		default              = 'notice',
+		showInvalidTypeError = true,
+		classes              = {'cmbox'},
+		imageEmptyCell       = true
+	},
+	
+	fmbox = {
+		types = {
+			warning = {
+				class = 'fmbox-warning',
+				image = 'Ambox warning pn.svg'
+			},
+			editnotice = {
+				class = 'fmbox-editnotice',
+				image = 'Information icon4.svg'
+			},
+			system = {
+				class = 'fmbox-system',
+				image = 'Information icon4.svg'
+			}
+		},
+		default              = 'system',
+		showInvalidTypeError = true,
+		classes              = {'fmbox'},
+		imageEmptyCell       = false,
+		imageRightNone       = false
+	},
+	
+	imbox = {
+		types = {
+			speedy = {
+				class = 'imbox-speedy',
+				image = 'Ambox warning pn.svg'
+			},
+			delete = {
+				class = 'imbox-delete',
+				image = 'Ambox warning pn.svg'
+			},
+			content = {
+				class = 'imbox-content',
+				image = 'Ambox important.svg'
+			},
+			style = {
+				class = 'imbox-style',
+				image = 'Edit-clear.svg'
+			},
+			move = {
+				class = 'imbox-move',
+				image = 'Merge-split-transwiki default.svg'
+			},
+			protection = {
+				class = 'imbox-protection',
+				image = 'Semi-protection-shackle-keyhole.svg'
+			},
+			license = {
+				class = 'imbox-license licensetpl',
+				image = 'Imbox license.png' -- @todo We need an SVG version of this
+			},
+			featured = {
+				class = 'imbox-featured',
+				image = 'Cscr-featured.svg'
+			},
+			notice = {
+				class = 'imbox-notice',
+				image = 'Information icon4.svg'
+			}
+		},
+		default              = 'notice',
+		showInvalidTypeError = true,
+		classes              = {'imbox'},
+		imageEmptyCell       = true,
+		below                = true,
+		templateCategory     = 'File message boxes'
+	},
+	
+	ombox = {
+		types = {
+			speedy = {
+				class = 'ombox-speedy',
+				image = 'Ambox warning pn.svg'
+			},
+			delete = {
+				class = 'ombox-delete',
+				image = 'Ambox warning pn.svg'
+			},
+			content = {
+				class = 'ombox-content',
+				image = 'Ambox important.svg'
+			},
+			style = {
+				class = 'ombox-style',
+				image = 'Edit-clear.svg'
+			},
+			move = {
+				class = 'ombox-move',
+				image = 'Merge-split-transwiki default.svg'
+			},
+			protection = {
+				class = 'ombox-protection',
+				image = 'Semi-protection-shackle-keyhole.svg'
+			},
+			notice = {
+				class = 'ombox-notice',
+				image = 'Information icon4.svg'
+			}
+		},
+		default              = 'notice',
+		showInvalidTypeError = true,
+		classes              = {'ombox'},
+		allowSmall           = true,
+		imageEmptyCell       = true,
+		imageRightNone       = true
+	},
+	
+	tmbox = {
+		types = {
+			speedy = {
+				class = 'tmbox-speedy',
+				image = 'Ambox warning pn.svg'
+			},
+			delete = {
+				class = 'tmbox-delete',
+				image = 'Ambox warning pn.svg'
+			},
+			content = {
+				class = 'tmbox-content',
+				image = 'Ambox important.svg'
+			},
+			style = {
+				class = 'tmbox-style',
+				image = 'Edit-clear.svg'
+			},
+			move = {
+				class = 'tmbox-move',
+				image = 'Merge-split-transwiki default.svg'
+			},
+			protection = {
+				class = 'tmbox-protection',
+				image = 'Semi-protection-shackle-keyhole.svg'
+			},
+			notice = {
+				class = 'tmbox-notice',
+				image = 'Information icon4.svg'
+			}
+		},
+		default              = 'notice',
+		showInvalidTypeError = true,
+		classes              = {'tmbox'},
+		allowSmall           = true,
+		imageRightNone       = true,
+		imageEmptyCell       = true,
+		imageEmptyCellStyle  = true,
+		templateCategory     = 'Talk message boxes'
+	}
+}</text>
+      <sha1>rz63o9789otb966y0k5pcntqf0bl6te</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:MultiReplace</title>
+    <ns>828</ns>
+    <id>43</id>
+    <revision>
+      <id>48</id>
+      <timestamp>2021-12-16T18:51:04Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "p = {}  local function MultiReplace(args) 	local input = args[1] or "{{{1}}}" 	local plain = args.plain == "yes"  	local i = 1 	local changeList = {} 	while args[i * 2] do 		l..."</comment>
+      <origin>48</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="1424" sha1="95xnv3yvolixngufi1jdsiwnf7fdf62" xml:space="preserve">p = {}
+
+local function MultiReplace(args)
+	local input = args[1] or "{{{1}}}"
+	local plain = args.plain == "yes"
+
+	local i = 1
+	local changeList = {}
+	while args[i * 2] do
+		local change = {pattern = args[i * 2], repl = args[i * 2 + 1]}
+		if not change.repl then
+			return require('Module:Error').error{
+				'MultiReplace: Unpaired argument: &lt;code&gt;' .. (i * 2) .. ' = ' .. change.pattern .. '&lt;/code&gt;'
+			}
+		end
+		changeList[i] = change
+		i = i + 1
+	end
+	
+	local matchList = {}
+	local pos = 1
+	local len = mw.ustring.len(input)
+	local result = ""
+	while pos &lt;= len do
+		local bestStart = len + 1
+		local bestStop = len
+		local bestChange
+		for _, change in ipairs(changeList) do
+			local start, stop = mw.ustring.find(input, change.pattern, pos, plain)
+			if start and (start &lt; bestStart) then
+				bestStart = start
+				bestStop = stop
+				bestChange = change
+			end
+		end
+		result = result .. mw.ustring.sub(input, pos, bestStart - 1)
+		if bestChange then
+			local fragment = mw.ustring.sub(input, bestStart, bestStop)
+			result = result .. (plain and bestChange.repl or
+				mw.ustring.gsub(fragment, bestChange.pattern, bestChange.repl, 1))
+		end
+		pos = bestStop + 1
+	end
+	return result
+end
+
+function p.main(frame, ...)
+	local args =
+		type(frame) ~= 'table' and {frame, ...} or
+		type(frame.args) ~= 'table' and frame or
+		frame.args[1] and frame.args or
+		frame:getParent().args
+	return MultiReplace(args)
+end
+
+return p</text>
+      <sha1>95xnv3yvolixngufi1jdsiwnf7fdf62</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Namespace detect</title>
+    <ns>828</ns>
+    <id>22</id>
+    <revision>
+      <id>27</id>
+      <timestamp>2021-12-16T18:38:09Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "--[[ -------------------------------------------------------------------------------- --                                                                            -- --..."</comment>
+      <origin>27</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="5992" sha1="j7kygz1y56jpz4doq0m2c6x1td5d8ar" xml:space="preserve">--[[
+--------------------------------------------------------------------------------
+--                                                                            --
+--                            NAMESPACE DETECT                                --
+--                                                                            --
+-- This module implements the {{namespace detect}} template in Lua, with a    --
+-- few improvements: all namespaces and all namespace aliases are supported,  --
+-- and namespace names are detected automatically for the local wiki. The     --
+-- module can also use the corresponding subject namespace value if it is     --
+-- used on a talk page. Parameter names can be configured for different wikis --
+-- by altering the values in the "cfg" table in                               --
+-- Module:Namespace detect/config.                                            --
+--                                                                            --
+--------------------------------------------------------------------------------
+--]]
+
+local data = mw.loadData('Module:Namespace detect/data')
+local argKeys = data.argKeys
+local cfg = data.cfg
+local mappings = data.mappings
+
+local yesno = require('Module:Yesno')
+local mArguments -- Lazily initialise Module:Arguments
+local mTableTools -- Lazily initilalise Module:TableTools
+local ustringLower = mw.ustring.lower
+
+local p = {}
+
+local function fetchValue(t1, t2)
+	-- Fetches a value from the table t1 for the first key in array t2 where
+	-- a non-nil value of t1 exists.
+	for i, key in ipairs(t2) do
+		local value = t1[key]
+		if value ~= nil then
+			return value
+		end
+	end
+	return nil
+end
+
+local function equalsArrayValue(t, value)
+	-- Returns true if value equals a value in the array t. Otherwise
+	-- returns false.
+	for i, arrayValue in ipairs(t) do
+		if value == arrayValue then
+			return true
+		end
+	end
+	return false
+end
+
+function p.getPageObject(page)
+	-- Get the page object, passing the function through pcall in case of
+	-- errors, e.g. being over the expensive function count limit.
+	if page then
+		local success, pageObject = pcall(mw.title.new, page)
+		if success then
+			return pageObject
+		else
+			return nil
+		end
+	else
+		return mw.title.getCurrentTitle()
+	end
+end
+
+-- Provided for backward compatibility with other modules
+function p.getParamMappings()
+	return mappings
+end
+
+local function getNamespace(args)
+	-- This function gets the namespace name from the page object.
+	local page = fetchValue(args, argKeys.demopage)
+	if page == '' then
+		page = nil
+	end
+	local demospace = fetchValue(args, argKeys.demospace)
+	if demospace == '' then
+		demospace = nil
+	end
+	local subjectns = fetchValue(args, argKeys.subjectns)
+	local ret
+	if demospace then
+		-- Handle "demospace = main" properly.
+		if equalsArrayValue(argKeys.main, ustringLower(demospace)) then
+			ret = mw.site.namespaces[0].name
+		else
+			ret = demospace
+		end
+	else
+		local pageObject = p.getPageObject(page)
+		if pageObject then
+			if pageObject.isTalkPage then
+				-- Get the subject namespace if the option is set,
+				-- otherwise use "talk".
+				if yesno(subjectns) then
+					ret = mw.site.namespaces[pageObject.namespace].subject.name
+				else
+					ret = 'talk'
+				end
+			else
+				ret = pageObject.nsText
+			end
+		else
+			return nil -- return nil if the page object doesn't exist.
+		end
+	end
+	ret = ret:gsub('_', ' ')
+	return ustringLower(ret)
+end
+
+function p._main(args)
+	-- Check the parameters stored in the mappings table for any matches.
+	local namespace = getNamespace(args) or 'other' -- "other" avoids nil table keys
+	local params = mappings[namespace] or {}
+	local ret = fetchValue(args, params)
+	--[[
+	-- If there were no matches, return parameters for other namespaces.
+	-- This happens if there was no text specified for the namespace that
+	-- was detected or if the demospace parameter is not a valid
+	-- namespace. Note that the parameter for the detected namespace must be
+	-- completely absent for this to happen, not merely blank.
+	--]]
+	if ret == nil then
+		ret = fetchValue(args, argKeys.other)
+	end
+	return ret
+end
+
+function p.main(frame)
+	mArguments = require('Module:Arguments')
+	local args = mArguments.getArgs(frame, {removeBlanks = false})
+	local ret = p._main(args)
+	return ret or ''
+end
+
+function p.table(frame)
+	--[[
+	-- Create a wikitable of all subject namespace parameters, for
+	-- documentation purposes. The talk parameter is optional, in case it
+	-- needs to be excluded in the documentation.
+	--]]
+	
+	-- Load modules and initialise variables.
+	mTableTools = require('Module:TableTools')
+	local namespaces = mw.site.namespaces
+	local cfg = data.cfg
+	local useTalk = type(frame) == 'table' 
+		and type(frame.args) == 'table' 
+		and yesno(frame.args.talk) -- Whether to use the talk parameter.
+	
+	-- Get the header names.
+	local function checkValue(value, default)
+		if type(value) == 'string' then
+			return value
+		else
+			return default
+		end
+	end
+	local nsHeader = checkValue(cfg.wikitableNamespaceHeader, 'Namespace')
+	local aliasesHeader = checkValue(cfg.wikitableAliasesHeader, 'Aliases')
+
+	-- Put the namespaces in order.
+	local mappingsOrdered = {}
+	for nsname, params in pairs(mappings) do
+		if useTalk or nsname ~= 'talk' then
+			local nsid = namespaces[nsname].id
+			-- Add 1, as the array must start with 1; nsid 0 would be lost otherwise.
+			nsid = nsid + 1 
+			mappingsOrdered[nsid] = params
+		end
+	end
+	mappingsOrdered = mTableTools.compressSparseArray(mappingsOrdered)
+
+	-- Build the table.
+	local ret = '{| class="wikitable"'
+		.. '\n|-'
+		.. '\n! ' .. nsHeader
+		.. '\n! ' .. aliasesHeader
+	for i, params in ipairs(mappingsOrdered) do
+		for j, param in ipairs(params) do
+			if j == 1 then
+				ret = ret .. '\n|-'
+					.. '\n| &lt;code&gt;' .. param .. '&lt;/code&gt;'
+					.. '\n| '
+			elseif j == 2 then
+				ret = ret .. '&lt;code&gt;' .. param .. '&lt;/code&gt;'
+			else
+				ret = ret .. ', &lt;code&gt;' .. param .. '&lt;/code&gt;'
+			end
+		end
+	end
+	ret = ret .. '\n|-'
+		.. '\n|}'
+	return ret
+end
+
+return p</text>
+      <sha1>j7kygz1y56jpz4doq0m2c6x1td5d8ar</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Namespace detect/config</title>
+    <ns>828</ns>
+    <id>24</id>
+    <revision>
+      <id>29</id>
+      <timestamp>2021-12-16T18:39:27Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-------------------------------------------------------------------------------- --                    Namespace detect configuration data                     -- --..."</comment>
+      <origin>29</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="3545" sha1="1o6ozz56i8q0xgyl6xa41n2v7kelhli" xml:space="preserve">--------------------------------------------------------------------------------
+--                    Namespace detect configuration data                     --
+--                                                                            --
+-- This module stores configuration data for Module:Namespace detect. Here    --
+-- you can localise the module to your wiki's language.                       --
+--                                                                            --
+-- To activate a configuration item, you need to uncomment it. This means     --
+-- that you need to remove the text "-- " at the start of the line.           --
+--------------------------------------------------------------------------------
+
+local cfg = {} -- Don't edit this line.
+
+--------------------------------------------------------------------------------
+--                              Parameter names                               --
+-- These configuration items specify custom parameter names. Values added     --
+-- here will work in addition to the default English parameter names.         --
+-- To add one extra name, you can use this format:                            --
+--                                                                            --
+-- cfg.foo = 'parameter name'                                                 --
+--                                                                            --
+-- To add multiple names, you can use this format:                            --
+--                                                                            --
+-- cfg.foo = {'parameter name 1', 'parameter name 2', 'parameter name 3'}     --
+--------------------------------------------------------------------------------
+
+---- This parameter displays content for the main namespace:
+-- cfg.main = 'main'
+
+---- This parameter displays in talk namespaces:
+-- cfg.talk = 'talk'
+
+---- This parameter displays content for "other" namespaces (namespaces for which
+---- parameters have not been specified):
+-- cfg.other = 'other'
+
+---- This parameter makes talk pages behave as though they are the corresponding
+---- subject namespace. Note that this parameter is used with [[Module:Yesno]].
+---- Edit that module to change the default values of "yes", "no", etc.
+-- cfg.subjectns = 'subjectns'
+
+---- This parameter sets a demonstration namespace:
+-- cfg.demospace = 'demospace'
+
+---- This parameter sets a specific page to compare:
+cfg.demopage = 'page'
+
+--------------------------------------------------------------------------------
+--                           Table configuration                              --
+-- These configuration items allow customisation of the "table" function,     --
+-- used to generate a table of possible parameters in the module              --
+-- documentation.                                                             --
+--------------------------------------------------------------------------------
+
+---- The header for the namespace column in the wikitable containing the list of
+---- possible subject-space parameters.
+-- cfg.wikitableNamespaceHeader = 'Namespace'
+
+---- The header for the wikitable containing the list of possible subject-space
+---- parameters.
+-- cfg.wikitableAliasesHeader = 'Aliases'
+
+--------------------------------------------------------------------------------
+--                        End of configuration data                           --
+--------------------------------------------------------------------------------
+
+return cfg -- Don't edit this line.</text>
+      <sha1>1o6ozz56i8q0xgyl6xa41n2v7kelhli</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Namespace detect/data</title>
+    <ns>828</ns>
+    <id>23</id>
+    <revision>
+      <id>28</id>
+      <timestamp>2021-12-16T18:38:47Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-------------------------------------------------------------------------------- --                          Namespace detect data                             -- -- This modul..."</comment>
+      <origin>28</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="2569" sha1="ojp6d3pc8mql5nufaqdg576c9so3479" xml:space="preserve">--------------------------------------------------------------------------------
+--                          Namespace detect data                             --
+-- This module holds data for [[Module:Namespace detect]] to be loaded per    --
+-- page, rather than per #invoke, for performance reasons.                    --
+--------------------------------------------------------------------------------
+
+local cfg = require('Module:Namespace detect/config')
+
+local function addKey(t, key, defaultKey)
+	if key ~= defaultKey then
+		t[#t + 1] = key
+	end
+end
+
+-- Get a table of parameters to query for each default parameter name.
+-- This allows wikis to customise parameter names in the cfg table while
+-- ensuring that default parameter names will always work. The cfg table
+-- values can be added as a string, or as an array of strings.
+
+local defaultKeys = {
+	'main',
+	'talk',
+	'other',
+	'subjectns',
+	'demospace',
+	'demopage'
+}
+
+local argKeys = {}
+for i, defaultKey in ipairs(defaultKeys) do
+	argKeys[defaultKey] = {defaultKey}
+end
+
+for defaultKey, t in pairs(argKeys) do
+	local cfgValue = cfg[defaultKey]
+	local cfgValueType = type(cfgValue)
+	if cfgValueType == 'string' then
+		addKey(t, cfgValue, defaultKey)
+	elseif cfgValueType == 'table' then
+		for i, key in ipairs(cfgValue) do
+			addKey(t, key, defaultKey)
+		end
+	end
+	cfg[defaultKey] = nil -- Free the cfg value as we don't need it any more.
+end
+
+local function getParamMappings()
+	--[[
+	-- Returns a table of how parameter names map to namespace names. The keys
+	-- are the actual namespace names, in lower case, and the values are the
+	-- possible parameter names for that namespace, also in lower case. The
+	-- table entries are structured like this:
+	-- {
+	--   [''] = {'main'},
+	--   ['wikipedia'] = {'wikipedia', 'project', 'wp'},
+	--   ...
+	-- }
+	--]]
+	local mappings = {}
+	local mainNsName = mw.site.subjectNamespaces[0].name
+	mainNsName = mw.ustring.lower(mainNsName)
+	mappings[mainNsName] = mw.clone(argKeys.main)
+	mappings['talk'] = mw.clone(argKeys.talk)
+	for nsid, ns in pairs(mw.site.subjectNamespaces) do
+		if nsid ~= 0 then -- Exclude main namespace.
+			local nsname = mw.ustring.lower(ns.name)
+			local canonicalName = mw.ustring.lower(ns.canonicalName)
+			mappings[nsname] = {nsname}
+			if canonicalName ~= nsname then
+				table.insert(mappings[nsname], canonicalName)
+			end
+			for _, alias in ipairs(ns.aliases) do
+				table.insert(mappings[nsname], mw.ustring.lower(alias))
+			end
+		end
+	end
+	return mappings
+end
+
+return {
+	argKeys = argKeys,
+	cfg = cfg,
+	mappings = getParamMappings()
+}</text>
+      <sha1>ojp6d3pc8mql5nufaqdg576c9so3479</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:No globals</title>
+    <ns>828</ns>
+    <id>14</id>
+    <revision>
+      <id>19</id>
+      <timestamp>2021-12-16T18:31:54Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "local mt = getmetatable(_G) or {} function mt.__index (t, k) 	if k ~= 'arg' then 		error('Tried to read nil global ' .. tostring(k), 2) 	end 	return nil end function mt.__newi..."</comment>
+      <origin>19</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="307" sha1="gggsv54pq7f94l3up48hr91qtxnskdm" xml:space="preserve">local mt = getmetatable(_G) or {}
+function mt.__index (t, k)
+	if k ~= 'arg' then
+		error('Tried to read nil global ' .. tostring(k), 2)
+	end
+	return nil
+end
+function mt.__newindex(t, k, v)
+	if k ~= 'arg' then
+		error('Tried to write global ' .. tostring(k), 2)
+	end
+	rawset(t, k, v)
+end
+setmetatable(_G, mt)</text>
+      <sha1>gggsv54pq7f94l3up48hr91qtxnskdm</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Ns has subpages</title>
+    <ns>828</ns>
+    <id>8</id>
+    <revision>
+      <id>13</id>
+      <timestamp>2021-12-16T18:26:56Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- This module implements [[Template:Ns has subpages]]. -- While the template is fairly simple, this information is made available to -- Lua directly, so using a module means..."</comment>
+      <origin>13</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="1678" sha1="qb0b1z2vff7kifnw21v205d791esbiz" xml:space="preserve">-- This module implements [[Template:Ns has subpages]].
+-- While the template is fairly simple, this information is made available to
+-- Lua directly, so using a module means that we don't have to update the
+-- template as new namespaces are added.
+
+local p = {}
+
+function p._main(ns, frame)
+	-- Get the current namespace if we were not passed one.
+	if not ns then
+		ns = mw.title.getCurrentTitle().namespace
+	end
+
+	-- Look up the namespace table from mw.site.namespaces. This should work
+	-- for a majority of cases.
+	local nsTable = mw.site.namespaces[ns]
+
+	-- Try using string matching to get the namespace from page names.
+	-- Do a quick and dirty bad title check to try and make sure we do the same
+	-- thing as {{NAMESPACE}} in most cases.
+	if not nsTable and type(ns) == 'string' and not ns:find('[&lt;&gt;|%[%]{}]') then
+		local nsStripped = ns:gsub('^[_%s]*:', '')
+		nsStripped = nsStripped:gsub(':.*$', '')
+		nsTable = mw.site.namespaces[nsStripped]
+	end
+
+	-- If we still have no match then try the {{NAMESPACE}} parser function,
+	-- which should catch the remainder of cases. Don't use a mw.title object,
+	-- as this would increment the expensive function count for each new page
+	-- tested.
+	if not nsTable then
+		frame = frame or mw.getCurrentFrame()
+		local nsProcessed = frame:callParserFunction('NAMESPACE', ns)
+		nsTable = nsProcessed and mw.site.namespaces[nsProcessed]
+	end
+	
+	return nsTable and nsTable.hasSubpages
+end
+
+function p.main(frame)
+	local ns = frame:getParent().args[1]
+	if ns then
+		ns = ns:match('^%s*(.-)%s*$') -- trim whitespace
+		ns = tonumber(ns) or ns
+	end
+	local hasSubpages = p._main(ns, frame)
+	return hasSubpages and 'yes' or ''
+end
+
+return p</text>
+      <sha1>qb0b1z2vff7kifnw21v205d791esbiz</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Pagetype</title>
+    <ns>828</ns>
+    <id>19</id>
+    <revision>
+      <id>24</id>
+      <timestamp>2021-12-16T18:35:49Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-------------------------------------------------------------------------------- --                                                                            -- --..."</comment>
+      <origin>24</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="6765" sha1="3uutklb10j89clizor7gnyrlkhbqg0d" xml:space="preserve">--------------------------------------------------------------------------------
+--                                                                            --
+--                                PAGETYPE                                    --
+--                                                                            --
+--      This is a meta-module intended to replace {{pagetype}} and similar    --
+--      templates. It automatically detects namespaces, and allows for a      --
+--      great deal of customisation. It can easily be ported to other         --
+--      wikis by changing the values in the [[Module:Pagetype/config]].       --
+--                                                                            --
+--------------------------------------------------------------------------------
+
+-- Load config.
+local cfg = mw.loadData('Module:Pagetype/config')
+
+-- Load required modules.
+local getArgs = require('Module:Arguments').getArgs
+local yesno = require('Module:Yesno')
+local nsDetectModule = require('Module:Namespace detect')
+local nsDetect = nsDetectModule._main
+local getParamMappings = nsDetectModule.getParamMappings
+local getPageObject = nsDetectModule.getPageObject
+
+local p = {}
+
+local function shallowCopy(t)
+	-- Makes a shallow copy of a table.
+	local ret = {}
+	for k, v in pairs(t) do
+		ret[k] = v
+	end
+	return ret
+end
+
+local function checkPagetypeInput(namespace, val)
+	-- Checks to see whether we need the default value for the given namespace,
+	-- and if so gets it from the pagetypes table.
+	-- The yesno function returns true/false for "yes", "no", etc., and returns
+	-- val for other input.
+	local ret = yesno(val, val)
+	if ret and type(ret) ~= 'string' then
+		ret = cfg.pagetypes[namespace]
+	end
+	return ret
+end
+
+local function getPagetypeFromClass(class, param, aliasTable, default)
+	-- Gets the pagetype from a class specified from the first positional
+	-- parameter.
+	param = yesno(param, param)
+	if param ~= false then -- No check if specifically disallowed.
+		for _, alias in ipairs(aliasTable) do
+			if class == alias then
+				if type(param) == 'string' then
+					return param
+				else
+					return default
+				end
+			end
+		end
+	end
+end
+
+local function getNsDetectValue(args)
+	-- Builds the arguments to pass to [[Module:Namespace detect]] and returns
+	-- the result.
+
+	-- Get the default values.
+	local ndArgs = {}
+	local defaultns = args[cfg.defaultns]
+	if defaultns == cfg.defaultnsAll then
+		ndArgs = shallowCopy(cfg.pagetypes)
+	else
+		local defaultnsArray
+		if defaultns == cfg.defaultnsExtended then
+			defaultnsArray = cfg.extendedNamespaces
+		elseif defaultns == cfg.defaultnsNone then
+			defaultnsArray = {}
+		else
+			defaultnsArray = cfg.defaultNamespaces
+		end
+		for _, namespace in ipairs(defaultnsArray) do
+			ndArgs[namespace] = cfg.pagetypes[namespace]
+		end
+	end
+
+	--[[
+	-- Add custom values passed in from the arguments. These overwrite the
+	-- defaults. The possible argument names are fetched from
+	-- Module:Namespace detect automatically in case new namespaces are
+	-- added. Although we accept namespace aliases as parameters, we only pass
+	-- the local namespace name as a parameter to Module:Namespace detect.
+	-- This means that the "image" parameter can overwrite defaults for the
+	-- File: namespace, which wouldn't work if we passed the parameters through
+	-- separately.
+	--]]
+	local mappings = getParamMappings()
+	for ns, paramAliases in pairs(mappings) do
+		-- Copy the aliases table, as # doesn't work with tables returned from
+		-- mw.loadData.
+		paramAliases = shallowCopy(paramAliases)
+		local paramName = paramAliases[1]
+		-- Iterate backwards along the array so that any values for the local
+		-- namespace names overwrite those for namespace aliases.
+		for i = #paramAliases, 1, -1 do
+			local paramAlias = paramAliases[i]
+			local ndArg = checkPagetypeInput(paramAlias, args[paramAlias])
+			if ndArg == false then
+				-- If any arguments are false, convert them to nil to protect
+				-- against breakage by future changes to
+				-- [[Module:Namespace detect]].
+				ndArgs[paramName] = nil
+			elseif ndArg then
+				ndArgs[paramName] = ndArg
+			end
+		end
+	end
+	-- Check for disambiguation-class and N/A-class pages in mainspace.
+	if ndArgs.main then
+		local class = args[1]
+		if type(class) == 'string' then
+			-- Put in lower case so e.g. "Dab" and "dab" will both match.
+			class = mw.ustring.lower(class)
+		end
+		local dab = getPagetypeFromClass(
+			class,
+			args[cfg.dab],
+			cfg.dabAliases,
+			cfg.dabDefault
+		)
+		if dab then
+			ndArgs.main = dab
+		else
+			local na = getPagetypeFromClass(
+				class,
+				args[cfg.na],
+				cfg.naAliases,
+				cfg.naDefault
+			)
+			if na then
+				ndArgs.main = na
+			end
+		end
+	end
+	-- If there is no talk value specified, use the corresponding subject 
+	-- namespace for talk pages.
+	if not ndArgs.talk then
+		ndArgs.subjectns = true
+	end
+	-- Add the fallback value. This can also be customised, but it cannot be
+	-- disabled.
+	local other = args[cfg.other]
+	-- We will ignore true/false/nil results from yesno here, but using it
+	-- anyway for consistency.
+	other = yesno(other, other)
+	if type(other) == 'string' then
+		ndArgs.other = other
+	else
+		ndArgs.other = cfg.otherDefault
+	end
+	-- Allow custom page values.
+	ndArgs.page = args.page
+	return nsDetect(ndArgs)
+end
+
+local function detectRedirects(args)
+	local redirect = args[cfg.redirect]
+	-- The yesno function returns true/false for "yes", "no", etc., and returns
+	-- redirect for other input.
+	redirect = yesno(redirect, redirect)
+	if redirect == false then
+		-- Detect redirects unless they have been explicitly disallowed with
+		-- "redirect=no" or similar.
+		return
+	end
+	local pageObject = getPageObject(args.page)
+	-- If we are using subject namespaces elsewhere, do so here as well.
+	if pageObject
+		and not yesno(args.talk, true)
+		and args[cfg.defaultns] ~= cfg.defaultnsAll
+	then
+		pageObject = getPageObject(
+			pageObject.subjectNsText .. ':' .. pageObject.text
+		)
+	end
+	-- Allow custom values for redirects.
+	if pageObject and pageObject.isRedirect then
+		if type(redirect) == 'string' then
+			return redirect
+		else
+			return cfg.redirectDefault
+		end
+	end
+end
+
+function p._main(args)
+	local redirect = detectRedirects(args)
+	local pagetype = ""
+	if redirect then
+		pagetype = redirect
+	else
+		pagetype = getNsDetectValue(args)
+	end
+	if yesno(args.plural, false) then
+		if cfg.irregularPlurals[pagetype] then
+			pagetype = cfg.irregularPlurals[pagetype]
+		else
+			pagetype = pagetype .. cfg.plural -- often 's'
+		end
+	end
+	if yesno(args.caps, false) then
+		pagetype = mw.ustring.upper(mw.ustring.sub(pagetype, 1, 1)) ..
+			mw.ustring.sub(pagetype, 2)
+	end
+	return pagetype
+end
+
+function p.main(frame)
+	local args = getArgs(frame)
+	return p._main(args)
+end
+
+return p</text>
+      <sha1>3uutklb10j89clizor7gnyrlkhbqg0d</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Pagetype/config</title>
+    <ns>828</ns>
+    <id>21</id>
+    <revision>
+      <id>26</id>
+      <timestamp>2021-12-16T18:37:14Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-------------------------------------------------------------------------------- --                  Module:Pagetype configuration data                        -- -- This page..."</comment>
+      <origin>26</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="3847" sha1="qi8m5o0e66j9quw6kiawd2otsulzq9m" xml:space="preserve">--------------------------------------------------------------------------------
+--                  Module:Pagetype configuration data                        --
+-- This page holds localisation and configuration data for Module:Pagetype.   --
+--------------------------------------------------------------------------------
+
+local cfg = {} -- Don't edit this line.
+
+--------------------------------------------------------------------------------
+--                        Start configuration data                            --
+--------------------------------------------------------------------------------
+
+-- This table holds the values to use for "main=true", "user=true", etc. Keys to
+-- this table should be namespace parameters that can be used with
+-- [[Module:Namespace detect]]. 
+cfg.pagetypes = {
+	['main']              = 'article',
+	['user']              = 'user page',
+	['project']           = 'project page',
+	['wikipedia']         = 'project page',
+	['wp']                = 'project page',
+	['file']              = 'file',
+	['image']             = 'file',
+	['mediawiki']         = 'interface page',
+	['template']          = 'template',
+	['help']              = 'help page',
+	['category']          = 'category',
+	['portal']            = 'portal',
+	['draft']             = 'draft',
+	['timedtext']         = 'Timed Text page',
+	['module']            = 'module',
+	['topic']             = 'topic',
+	['gadget']            = 'gadget',
+	['gadget definition'] = 'gadget definition',
+	['talk']              = 'talk page',
+	['special']           = 'special page',
+	['media']             = 'file',
+}
+
+-- This table holds the names of the namespaces to be looked up from
+-- cfg.pagetypes by default.
+cfg.defaultNamespaces = {
+	'main',
+	'file',
+	'template',
+	'category',
+	'module'
+}
+
+-- This table holds the names of the namespaces to be looked up from
+-- cfg.pagetypes if cfg.defaultnsExtended is set.
+cfg.extendedNamespaces = {
+	'main',
+	'user',
+	'project',
+	'file',
+	'mediawiki',
+	'template',
+	'category',
+	'help',
+	'portal',
+	'module',
+	'draft'
+}
+
+-- The parameter name to set which default namespace values to be looked up from
+-- cfg.pagetypes.
+cfg.defaultns = 'defaultns'
+
+-- The value of cfg.defaultns to set all namespaces, including talk.
+cfg.defaultnsAll = 'all'
+
+-- The value of cfg.defaultns to set the namespaces listed in
+-- cfg.extendedNamespaces
+cfg.defaultnsExtended = 'extended'
+
+-- The value of cfg.defaultns to set no default namespaces.
+cfg.defaultnsNone = 'none'
+
+-- The parameter name to use for disambiguation pages page.
+cfg.dab = 'dab'
+
+-- This table holds the different possible aliases for disambiguation-class
+-- pages. These should be lower-case.
+cfg.dabAliases = {
+	'disambiguation',
+	'disambig',
+	'disamb',
+	'dab'
+}
+
+-- The default value for disambiguation pages.
+cfg.dabDefault = 'page'
+
+-- The parameter name to use for N/A-class page.
+cfg.na = 'na'
+
+-- This table holds the different possible aliases for N/A-class pages. These
+-- should be lower-case.
+cfg.naAliases = {'na', 'n/a'}
+
+-- The default value for N/A-class pages.
+cfg.naDefault = 'page'
+
+-- The parameter name to use for redirects.
+cfg.redirect = 'redirect'
+
+-- The default value to use for redirects.
+cfg.redirectDefault = 'redirect'
+
+-- The parameter name for undefined namespaces.
+cfg.other = 'other'
+
+-- The value used if the module detects an undefined namespace.
+cfg.otherDefault = 'page'
+
+-- The usual suffix denoting a plural.
+cfg.plural = 's'
+
+-- This table holds plurals not formed by a simple suffix.
+cfg.irregularPlurals = {
+	["category"] = "categories"
+}
+
+--------------------------------------------------------------------------------
+--                        End configuration data                              --
+--------------------------------------------------------------------------------
+
+return cfg -- Don't edit this line</text>
+      <sha1>qi8m5o0e66j9quw6kiawd2otsulzq9m</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:TableTools</title>
+    <ns>828</ns>
+    <id>48</id>
+    <revision>
+      <id>53</id>
+      <timestamp>2021-12-16T18:54:16Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "------------------------------------------------------------------------------------ --                                   TableTools                                   -- --..."</comment>
+      <origin>53</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="14953" sha1="8dd39dcwkl7evysxliuilyra1x3nban" xml:space="preserve">------------------------------------------------------------------------------------
+--                                   TableTools                                   --
+--                                                                                --
+-- This module includes a number of functions for dealing with Lua tables.        --
+-- It is a meta-module, meant to be called from other Lua modules, and should not --
+-- be called directly from #invoke.                                               --
+------------------------------------------------------------------------------------
+
+local libraryUtil = require('libraryUtil')
+
+local p = {}
+
+-- Define often-used variables and functions.
+local floor = math.floor
+local infinity = math.huge
+local checkType = libraryUtil.checkType
+local checkTypeMulti = libraryUtil.checkTypeMulti
+
+------------------------------------------------------------------------------------
+-- isPositiveInteger
+--
+-- This function returns true if the given value is a positive integer, and false
+-- if not. Although it doesn't operate on tables, it is included here as it is
+-- useful for determining whether a given table key is in the array part or the
+-- hash part of a table.
+------------------------------------------------------------------------------------
+function p.isPositiveInteger(v)
+	return type(v) == 'number' and v &gt;= 1 and floor(v) == v and v &lt; infinity
+end
+
+------------------------------------------------------------------------------------
+-- isNan
+--
+-- This function returns true if the given number is a NaN value, and false if
+-- not. Although it doesn't operate on tables, it is included here as it is useful
+-- for determining whether a value can be a valid table key. Lua will generate an
+-- error if a NaN is used as a table key.
+------------------------------------------------------------------------------------
+function p.isNan(v)
+	return type(v) == 'number' and tostring(v) == '-nan'
+end
+
+------------------------------------------------------------------------------------
+-- shallowClone
+--
+-- This returns a clone of a table. The value returned is a new table, but all
+-- subtables and functions are shared. Metamethods are respected, but the returned
+-- table will have no metatable of its own.
+------------------------------------------------------------------------------------
+function p.shallowClone(t)
+	checkType('shallowClone', 1, t, 'table')
+	local ret = {}
+	for k, v in pairs(t) do
+		ret[k] = v
+	end
+	return ret
+end
+
+------------------------------------------------------------------------------------
+-- removeDuplicates
+--
+-- This removes duplicate values from an array. Non-positive-integer keys are
+-- ignored. The earliest value is kept, and all subsequent duplicate values are
+-- removed, but otherwise the array order is unchanged.
+------------------------------------------------------------------------------------
+function p.removeDuplicates(t)
+	checkType('removeDuplicates', 1, t, 'table')
+	local isNan = p.isNan
+	local ret, exists = {}, {}
+	for _, v in ipairs(t) do
+		if isNan(v) then
+			-- NaNs can't be table keys, and they are also unique, so we don't need to check existence.
+			ret[#ret + 1] = v
+		else
+			if not exists[v] then
+				ret[#ret + 1] = v
+				exists[v] = true
+			end
+		end
+	end
+	return ret
+end
+
+------------------------------------------------------------------------------------
+-- numKeys
+--
+-- This takes a table and returns an array containing the numbers of any numerical
+-- keys that have non-nil values, sorted in numerical order.
+------------------------------------------------------------------------------------
+function p.numKeys(t)
+	checkType('numKeys', 1, t, 'table')
+	local isPositiveInteger = p.isPositiveInteger
+	local nums = {}
+	for k in pairs(t) do
+		if isPositiveInteger(k) then
+			nums[#nums + 1] = k
+		end
+	end
+	table.sort(nums)
+	return nums
+end
+
+------------------------------------------------------------------------------------
+-- affixNums
+--
+-- This takes a table and returns an array containing the numbers of keys with the
+-- specified prefix and suffix. For example, for the table
+-- {a1 = 'foo', a3 = 'bar', a6 = 'baz'} and the prefix "a", affixNums will return
+-- {1, 3, 6}.
+------------------------------------------------------------------------------------
+function p.affixNums(t, prefix, suffix)
+	checkType('affixNums', 1, t, 'table')
+	checkType('affixNums', 2, prefix, 'string', true)
+	checkType('affixNums', 3, suffix, 'string', true)
+
+	local function cleanPattern(s)
+		-- Cleans a pattern so that the magic characters ()%.[]*+-?^$ are interpreted literally.
+		return s:gsub('([%(%)%%%.%[%]%*%+%-%?%^%$])', '%%%1')
+	end
+
+	prefix = prefix or ''
+	suffix = suffix or ''
+	prefix = cleanPattern(prefix)
+	suffix = cleanPattern(suffix)
+	local pattern = '^' .. prefix .. '([1-9]%d*)' .. suffix .. '$'
+
+	local nums = {}
+	for k in pairs(t) do
+		if type(k) == 'string' then
+			local num = mw.ustring.match(k, pattern)
+			if num then
+				nums[#nums + 1] = tonumber(num)
+			end
+		end
+	end
+	table.sort(nums)
+	return nums
+end
+
+------------------------------------------------------------------------------------
+-- numData
+--
+-- Given a table with keys like {"foo1", "bar1", "foo2", "baz2"}, returns a table
+-- of subtables in the format
+-- {[1] = {foo = 'text', bar = 'text'}, [2] = {foo = 'text', baz = 'text'}}.
+-- Keys that don't end with an integer are stored in a subtable named "other". The
+-- compress option compresses the table so that it can be iterated over with
+-- ipairs.
+------------------------------------------------------------------------------------
+function p.numData(t, compress)
+	checkType('numData', 1, t, 'table')
+	checkType('numData', 2, compress, 'boolean', true)
+	local ret = {}
+	for k, v in pairs(t) do
+		local prefix, num = mw.ustring.match(tostring(k), '^([^0-9]*)([1-9][0-9]*)$')
+		if num then
+			num = tonumber(num)
+			local subtable = ret[num] or {}
+			if prefix == '' then
+				-- Positional parameters match the blank string; put them at the start of the subtable instead.
+				prefix = 1
+			end
+			subtable[prefix] = v
+			ret[num] = subtable
+		else
+			local subtable = ret.other or {}
+			subtable[k] = v
+			ret.other = subtable
+		end
+	end
+	if compress then
+		local other = ret.other
+		ret = p.compressSparseArray(ret)
+		ret.other = other
+	end
+	return ret
+end
+
+------------------------------------------------------------------------------------
+-- compressSparseArray
+--
+-- This takes an array with one or more nil values, and removes the nil values
+-- while preserving the order, so that the array can be safely traversed with
+-- ipairs.
+------------------------------------------------------------------------------------
+function p.compressSparseArray(t)
+	checkType('compressSparseArray', 1, t, 'table')
+	local ret = {}
+	local nums = p.numKeys(t)
+	for _, num in ipairs(nums) do
+		ret[#ret + 1] = t[num]
+	end
+	return ret
+end
+
+------------------------------------------------------------------------------------
+-- sparseIpairs
+--
+-- This is an iterator for sparse arrays. It can be used like ipairs, but can
+-- handle nil values.
+------------------------------------------------------------------------------------
+function p.sparseIpairs(t)
+	checkType('sparseIpairs', 1, t, 'table')
+	local nums = p.numKeys(t)
+	local i = 0
+	local lim = #nums
+	return function ()
+		i = i + 1
+		if i &lt;= lim then
+			local key = nums[i]
+			return key, t[key]
+		else
+			return nil, nil
+		end
+	end
+end
+
+------------------------------------------------------------------------------------
+-- size
+--
+-- This returns the size of a key/value pair table. It will also work on arrays,
+-- but for arrays it is more efficient to use the # operator.
+------------------------------------------------------------------------------------
+function p.size(t)
+	checkType('size', 1, t, 'table')
+	local i = 0
+	for _ in pairs(t) do
+		i = i + 1
+	end
+	return i
+end
+
+local function defaultKeySort(item1, item2)
+	-- "number" &lt; "string", so numbers will be sorted before strings.
+	local type1, type2 = type(item1), type(item2)
+	if type1 ~= type2 then
+		return type1 &lt; type2
+	elseif type1 == 'table' or type1 == 'boolean' or type1 == 'function' then
+		return tostring(item1) &lt; tostring(item2)
+	else
+		return item1 &lt; item2
+	end
+end
+------------------------------------------------------------------------------------
+-- keysToList
+--
+-- Returns an array of the keys in a table, sorted using either a default
+-- comparison function or a custom keySort function.
+------------------------------------------------------------------------------------
+function p.keysToList(t, keySort, checked)
+	if not checked then
+		checkType('keysToList', 1, t, 'table')
+		checkTypeMulti('keysToList', 2, keySort, {'function', 'boolean', 'nil'})
+	end
+
+	local arr = {}
+	local index = 1
+	for k in pairs(t) do
+		arr[index] = k
+		index = index + 1
+	end
+
+	if keySort ~= false then
+		keySort = type(keySort) == 'function' and keySort or defaultKeySort
+		table.sort(arr, keySort)
+	end
+
+	return arr
+end
+
+------------------------------------------------------------------------------------
+-- sortedPairs
+--
+-- Iterates through a table, with the keys sorted using the keysToList function.
+-- If there are only numerical keys, sparseIpairs is probably more efficient.
+------------------------------------------------------------------------------------
+function p.sortedPairs(t, keySort)
+	checkType('sortedPairs', 1, t, 'table')
+	checkType('sortedPairs', 2, keySort, 'function', true)
+
+	local arr = p.keysToList(t, keySort, true)
+
+	local i = 0
+	return function ()
+		i = i + 1
+		local key = arr[i]
+		if key ~= nil then
+			return key, t[key]
+		else
+			return nil, nil
+		end
+	end
+end
+
+------------------------------------------------------------------------------------
+-- isArray
+--
+-- Returns true if the given value is a table and all keys are consecutive
+-- integers starting at 1.
+------------------------------------------------------------------------------------
+function p.isArray(v)
+	if type(v) ~= 'table' then
+		return false
+	end
+	local i = 0
+	for _ in pairs(v) do
+		i = i + 1
+		if v[i] == nil then
+			return false
+		end
+	end
+	return true
+end
+
+------------------------------------------------------------------------------------
+-- isArrayLike
+--
+-- Returns true if the given value is iterable and all keys are consecutive
+-- integers starting at 1.
+------------------------------------------------------------------------------------
+function p.isArrayLike(v)
+	if not pcall(pairs, v) then
+		return false
+	end
+	local i = 0
+	for _ in pairs(v) do
+		i = i + 1
+		if v[i] == nil then
+			return false
+		end
+	end
+	return true
+end
+
+------------------------------------------------------------------------------------
+-- invert
+--
+-- Transposes the keys and values in an array. For example, {"a", "b", "c"} -&gt;
+-- {a = 1, b = 2, c = 3}.
+------------------------------------------------------------------------------------
+function p.invert(arr)
+	checkType("invert", 1, arr, "table")
+
+	local map = {}
+	for i, v in ipairs(arr) do
+		map[v] = i
+	end
+
+	return map
+end
+
+------------------------------------------------------------------------------------
+-- listToSet
+--
+-- Creates a set from the array part of the table. Indexing the set by any of the
+-- values of the array returns true. For example, {"a", "b", "c"} -&gt;
+-- {a = true, b = true, c = true}.
+------------------------------------------------------------------------------------
+function p.listToSet(t)
+	checkType("listToSet", 1, t, "table")
+
+	local set = {}
+	for _, item in ipairs(t) do
+		set[item] = true
+	end
+
+	return set
+end
+
+------------------------------------------------------------------------------------
+-- deepCopy
+--
+-- Recursive deep copy function. Preserves identities of subtables.
+------------------------------------------------------------------------------------
+local function _deepCopy(orig, includeMetatable, already_seen)
+	-- Stores copies of tables indexed by the original table.
+	already_seen = already_seen or {}
+
+	local copy = already_seen[orig]
+	if copy ~= nil then
+		return copy
+	end
+
+	if type(orig) == 'table' then
+		copy = {}
+		for orig_key, orig_value in pairs(orig) do
+			copy[_deepCopy(orig_key, includeMetatable, already_seen)] = _deepCopy(orig_value, includeMetatable, already_seen)
+		end
+		already_seen[orig] = copy
+
+		if includeMetatable then
+			local mt = getmetatable(orig)
+			if mt ~= nil then
+				local mt_copy = _deepCopy(mt, includeMetatable, already_seen)
+				setmetatable(copy, mt_copy)
+				already_seen[mt] = mt_copy
+			end
+		end
+	else -- number, string, boolean, etc
+		copy = orig
+	end
+	return copy
+end
+
+function p.deepCopy(orig, noMetatable, already_seen)
+	checkType("deepCopy", 3, already_seen, "table", true)
+	return _deepCopy(orig, not noMetatable, already_seen)
+end
+
+------------------------------------------------------------------------------------
+-- sparseConcat
+--
+-- Concatenates all values in the table that are indexed by a number, in order.
+-- sparseConcat{a, nil, c, d}  =&gt;  "acd"
+-- sparseConcat{nil, b, c, d}  =&gt;  "bcd"
+------------------------------------------------------------------------------------
+function p.sparseConcat(t, sep, i, j)
+	local arr = {}
+
+	local arr_i = 0
+	for _, v in p.sparseIpairs(t) do
+		arr_i = arr_i + 1
+		arr[arr_i] = v
+	end
+
+	return table.concat(arr, sep, i, j)
+end
+
+------------------------------------------------------------------------------------
+-- length
+--
+-- Finds the length of an array, or of a quasi-array with keys such as "data1",
+-- "data2", etc., using an exponential search algorithm. It is similar to the
+-- operator #, but may return a different value when there are gaps in the array
+-- portion of the table. Intended to be used on data loaded with mw.loadData. For
+-- other tables, use #.
+-- Note: #frame.args in frame object always be set to 0, regardless of  the number
+-- of unnamed template parameters, so use this function for frame.args.
+------------------------------------------------------------------------------------
+function p.length(t, prefix)
+	-- requiring module inline so that [[Module:Exponential search]] which is
+	-- only needed by this one function doesn't get millions of transclusions
+	local expSearch = require("Module:Exponential search")
+	checkType('length', 1, t, 'table')
+	checkType('length', 2, prefix, 'string', true)
+	return expSearch(function (i)
+		local key
+		if prefix then
+			key = prefix .. tostring(i)
+		else
+			key = i
+		end
+		return t[key] ~= nil
+	end) or 0
+end
+
+------------------------------------------------------------------------------------
+-- inArray
+--
+-- Returns true if valueToFind is a member of the array, and false otherwise.
+------------------------------------------------------------------------------------
+function p.inArray(arr, valueToFind)
+	checkType("inArray", 1, arr, "table")
+	-- if valueToFind is nil, error?
+
+	for _, v in ipairs(arr) do
+		if v == valueToFind then
+			return true
+		end
+	end
+	return false
+end
+
+return p</text>
+      <sha1>8dd39dcwkl7evysxliuilyra1x3nban</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Time ago</title>
+    <ns>828</ns>
+    <id>47</id>
+    <revision>
+      <id>52</id>
+      <timestamp>2021-12-16T18:52:49Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- Implement [[Template:Time ago]]  local numberSpell, yesno  -- lazy load  function numberSpell(arg) 	numberSpell = require('Module:NumberSpell')._main 	return numberSpell(ar..."</comment>
+      <origin>52</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="5112" sha1="owi7m6sdgrso49bzrq9mha9ire8l3cs" xml:space="preserve">-- Implement [[Template:Time ago]]
+
+local numberSpell, yesno  -- lazy load
+
+function numberSpell(arg)
+	numberSpell = require('Module:NumberSpell')._main
+	return numberSpell(arg)
+end
+
+function yesno(arg)
+	yesno = require('Module:Yesno')
+	return yesno(arg)
+end
+
+local p = {}
+
+-- Table to convert entered text values to numeric values.
+local timeText = {
+	['seconds'] = 1,
+	['minutes'] = 60,
+	['hours'] = 3600,
+	['days'] = 86400,
+	['weeks'] = 604800,
+	['months'] = 2629800,  -- 365.25 * 24 * 60 * 60 / 12
+	['years'] = 31557600
+}
+
+-- Table containing tables of possible units to use in output.
+local timeUnits = {
+	[1] = { 'second', 'seconds', "second's", "seconds'" },
+	[60] = { 'minute', 'minutes', "minutes'", "minutes'" },
+	[3600] = { 'hour', 'hours', "hour's", "hours'" },
+	[86400] = { 'day', 'days', "day's", "days'" },
+	[604800] = { 'week', 'weeks', "week's", "weeks'", unit = 'w' },
+	[2629800] = { 'month', 'months', "month's", "months'", unit = 'm'  },
+	[31557600] = { 'year', 'years', "year's", "years'", unit = 'y'  }
+}
+
+function p._main( args )
+	-- Initialize variables
+	local lang = mw.language.getContentLanguage()
+	local auto_magnitude_num
+	local min_magnitude_num
+	local magnitude = args.magnitude
+	local min_magnitude = args.min_magnitude
+	local purge = args.purge
+
+	-- Add a purge link if something (usually "yes") is entered into the purge parameter
+	if purge then
+		purge = ' &lt;span class="plainlinks"&gt;([' .. mw.title.getCurrentTitle():fullUrl('action=purge') .. ' purge])&lt;/span&gt;'
+	else
+		purge = ''
+	end
+
+	-- Check that the entered timestamp is valid. If it isn't, then give an error message.
+	local success, inputTime = pcall( lang.formatDate, lang, 'xnU', args[1] )
+	if not success then
+		return '&lt;strong class="error"&gt;Error: first parameter cannot be parsed as a date or time.&lt;/strong&gt;'
+	end
+
+	-- Store the difference between the current time and the inputted time, as well as its absolute value.
+	local timeDiff = lang:formatDate( 'xnU' ) - inputTime
+	local absTimeDiff = math.abs( timeDiff )
+
+	if magnitude then
+		auto_magnitude_num = 0
+		min_magnitude_num = timeText[magnitude]
+	else
+		-- Calculate the appropriate unit of time if it was not specified as an argument.
+		local autoMagnitudeData = {
+			{ factor = 2, amn = 31557600 },
+			{ factor = 2, amn = 2629800 },
+			{ factor = 2, amn = 86400 },
+			{ factor = 2, amn = 3600 },
+			{ factor = 2, amn = 60 }
+		}
+		for _, t in ipairs( autoMagnitudeData ) do
+			if absTimeDiff / t.amn &gt;= t.factor then
+				auto_magnitude_num = t.amn
+				break
+			end
+		end
+		auto_magnitude_num = auto_magnitude_num or 1
+		if min_magnitude then
+			min_magnitude_num = timeText[min_magnitude]
+		else
+			min_magnitude_num = -1
+		end
+	end
+
+	if not min_magnitude_num then
+		-- Default to seconds if an invalid magnitude is entered.
+		min_magnitude_num = 1
+	end
+
+	local result_num
+	local magnitude_num = math.max( min_magnitude_num, auto_magnitude_num )
+	local unit = timeUnits[magnitude_num].unit
+	if unit and absTimeDiff &gt;= 864000 then
+		local Date = require('Module:Date')._Date
+		local input = lang:formatDate('Y-m-d H:i:s', args[1])  -- Date needs a clean date
+		input = Date(input)
+		if input then
+			local id
+			if input.hour == 0 and input.minute == 0 then
+				id = 'currentdate'
+			else
+				id = 'currentdatetime'
+			end
+			result_num = (Date(id) - input):age(unit)
+		end
+	end
+	result_num = result_num or math.floor ( absTimeDiff / magnitude_num )
+
+	local punctuation_key, suffix
+	if timeDiff &gt;= 0 then -- Past
+		if result_num == 1 then
+			punctuation_key = 1
+		else
+			punctuation_key = 2
+		end
+		if args.ago == '' then
+			suffix = ''
+		else
+			suffix = ' ' .. (args.ago or 'ago')
+		end
+	else -- Future
+		if args.ago == '' then
+			suffix = ''
+			if result_num == 1 then
+				punctuation_key = 1
+			else
+				punctuation_key = 2
+			end
+		else
+			suffix = ' time'
+			if result_num == 1 then
+				punctuation_key = 3
+			else
+				punctuation_key = 4
+			end
+		end
+	end
+	local result_unit = timeUnits[ magnitude_num ][ punctuation_key ]
+
+	-- Convert numerals to words if appropriate.
+	local spell_out = args.spellout
+	local spell_out_max = tonumber(args.spelloutmax)
+	local result_num_text
+	if spell_out and (
+		( spell_out == 'auto' and 1 &lt;= result_num and result_num &lt;= 9 and result_num &lt;= ( spell_out_max or 9 ) ) or
+		( yesno( spell_out ) and 1 &lt;= result_num and result_num &lt;= 100 and result_num &lt;= ( spell_out_max or 100 ) )
+		)
+	then
+		result_num_text = numberSpell( result_num )
+	else
+		result_num_text = tostring( result_num )
+	end
+	
+	-- numeric or string
+	local numeric_out = args.numeric
+	local result = ""
+	if numeric_out then
+		result = tostring( result_num )
+	else
+		result = result_num_text .. ' ' .. result_unit .. suffix -- Spaces for suffix have been added in earlier.
+	end
+
+	return result .. purge
+end
+
+function p.main( frame )
+	local args = require( 'Module:Arguments' ).getArgs( frame, {
+		valueFunc = function( k, v )
+			if v then
+				v = v:match( '^%s*(.-)%s*$' ) -- Trim whitespace.
+				if k == 'ago' or v ~= '' then
+					return v
+				end
+			end
+			return nil
+		end,
+		wrappers = 'Template:Time ago'
+	})
+	return p._main( args )
+end
+
+return p</text>
+      <sha1>owi7m6sdgrso49bzrq9mha9ire8l3cs</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Toolbar</title>
+    <ns>828</ns>
+    <id>45</id>
+    <revision>
+      <id>50</id>
+      <timestamp>2021-12-16T18:51:59Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- This module implements {{toolbar}}.  local mArguments -- Lazily initialise [[Module:Arguments]] local mTableTools = require('Module:TableTools') local yesno = require('Modu..."</comment>
+      <origin>50</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="1266" sha1="dat0yzyzu635n4je30cyef668afrodq" xml:space="preserve">-- This module implements {{toolbar}}.
+
+local mArguments -- Lazily initialise [[Module:Arguments]]
+local mTableTools = require('Module:TableTools')
+local yesno = require('Module:Yesno')
+
+local p = {}
+
+function p.main(frame)
+	mArguments = require('Module:Arguments')
+	local args = mArguments.getArgs(frame)
+	return p._main(args)
+end
+
+function p._main(args)
+	local toolbarItems = p.makeToolbarItems(args)
+	if not toolbarItems then
+		-- Return the blank string if no arguments were specified, rather than
+		-- returning empty brackets.
+		return ''
+	elseif yesno(args.span) == false then
+		return string.format(
+			'(%s)',
+			toolbarItems
+		)
+	else
+		return string.format(
+			'&lt;span class="plainlinks%s"%s&gt;(%s)&lt;/span&gt;',
+			type(args.class) == 'string' and ' ' .. args.class or '',
+			type(args.style) == 'string' and string.format(' style="%s"', args.style) or '',
+			toolbarItems
+		)
+	end
+end
+
+function p.makeToolbarItems(args)
+	local nums = mTableTools.numKeys(args)
+	local sep = (args.separator or 'pipe') .. '-separator'
+	sep = mw.message.new(sep):plain()
+	local ret = {}
+	for i, v in ipairs(nums) do
+		ret[#ret + 1] = mw.ustring.gsub(args[v], "%[%[::+(.-)%]%]", "[[:%1]]")
+	end
+	if #ret &gt; 0 then
+		return table.concat(ret, sep)
+	else
+		return nil
+	end
+end
+
+return p</text>
+      <sha1>dat0yzyzu635n4je30cyef668afrodq</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Unsubst</title>
+    <ns>828</ns>
+    <id>10</id>
+    <revision>
+      <id>15</id>
+      <timestamp>2021-12-16T18:28:39Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "local checkType = require('libraryUtil').checkType  local p = {}  local BODY_PARAM = '$B'  local specialParams = { 	['$params'] = 'parameter list', 	['$aliases'] = 'parameter..."</comment>
+      <origin>15</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="3948" sha1="eu3d3ip0gtd6n65iz4vmtpogb62rxdi" xml:space="preserve">local checkType = require('libraryUtil').checkType
+
+local p = {}
+
+local BODY_PARAM = '$B'
+
+local specialParams = {
+	['$params'] = 'parameter list',
+	['$aliases'] = 'parameter aliases',
+	['$flags'] = 'flags',
+	['$B'] = 'template content',
+	['$template-name'] = 'template invocation name override',
+}
+
+function p.main(frame, body)
+	-- If we are substing, this function returns a template invocation, and if
+	-- not, it returns the template body. The template body can be specified in
+	-- the body parameter, or in the template parameter defined in the
+	-- BODY_PARAM variable. This function can be called from Lua or from
+	-- #invoke.
+
+	-- Return the template body if we aren't substing.
+	if not mw.isSubsting() then
+		if body ~= nil then
+			return body
+		elseif frame.args[BODY_PARAM] ~= nil then
+			return frame.args[BODY_PARAM]
+		else
+			error(string.format(
+				"no template content specified (use parameter '%s' from #invoke)",
+				BODY_PARAM
+			), 2)
+		end
+	end
+
+	-- Sanity check for the frame object.
+	if type(frame) ~= 'table'
+		or type(frame.getParent) ~= 'function'
+		or not frame:getParent()
+	then
+		error(
+			"argument #1 to 'main' must be a frame object with a parent " ..
+			"frame available",
+			2
+		)
+	end
+
+	-- Find the invocation name.
+	local mTemplateInvocation = require('Module:Template invocation')
+	local name
+
+	if frame.args['$template-name'] and '' ~= frame.args['$template-name'] then
+		name = frame.args['$template-name']										-- override whatever the template name is with this name
+	else
+		name = mTemplateInvocation.name(frame:getParent():getTitle())
+	end
+
+	-- Combine passed args with passed defaults
+	local args = {}
+	if string.find( ','..(frame.args['$flags'] or '')..',', ',%s*override%s*,' ) then
+		for k, v in pairs( frame:getParent().args ) do
+			args[k] = v
+		end
+		for k, v in pairs( frame.args ) do
+			if not specialParams[k] then
+				if v == '__DATE__' then
+					v = mw.getContentLanguage():formatDate( 'F Y' )
+				end
+				args[k] = v
+			end
+		end
+	else
+		for k, v in pairs( frame.args ) do
+			if not specialParams[k] then
+				if v == '__DATE__' then
+					v = mw.getContentLanguage():formatDate( 'F Y' )
+				end
+				args[k] = v
+			end
+		end
+		for k, v in pairs( frame:getParent().args ) do
+			args[k] = v
+		end
+	end
+
+	-- Trim parameters, if not specified otherwise
+	if not string.find( ','..(frame.args['$flags'] or '')..',', ',%s*keep%-whitespace%s*,' ) then
+		for k, v in pairs( args ) do args[k] = mw.ustring.match(v, '^%s*(.*)%s*$') or '' end
+	end
+
+	-- Pull information from parameter aliases
+	local aliases = {}
+	if frame.args['$aliases'] then
+		local list = mw.text.split( frame.args['$aliases'], '%s*,%s*' )
+		for k, v in ipairs( list ) do
+			local tmp = mw.text.split( v, '%s*&gt;%s*' )
+			aliases[tonumber(mw.ustring.match(tmp[1], '^[1-9][0-9]*$')) or tmp[1]] = ((tonumber(mw.ustring.match(tmp[2], '^[1-9][0-9]*$'))) or tmp[2])
+		end
+	end
+	for k, v in pairs( aliases ) do
+		if args[k] and ( not args[v] or args[v] == '' ) then
+			args[v] = args[k]
+		end
+		args[k] = nil
+	end
+
+	-- Remove empty parameters, if specified
+	if string.find( ','..(frame.args['$flags'] or '')..',', ',%s*remove%-empty%s*,' ) then
+		local tmp = 0
+		for k, v in ipairs( args ) do
+			if v ~= '' or ( args[k+1] and args[k+1] ~= '' ) or ( args[k+2] and args[k+2] ~= '' ) then
+				tmp = k
+			else
+				break
+			end
+		end
+		for k, v in pairs( args ) do
+			if v == '' then
+				if not (type(k) == 'number' and k &lt; tmp) then args[k] = nil end
+			end
+		end
+	end
+
+	-- Order parameters
+	if frame.args['$params'] then
+		local params, tmp = mw.text.split( frame.args['$params'], '%s*,%s*' ), {}
+		for k, v in ipairs(params) do
+			v = tonumber(mw.ustring.match(v, '^[1-9][0-9]*$')) or v
+			if args[v] then tmp[v], args[v] = args[v], nil end
+		end
+		for k, v in pairs(args) do tmp[k], args[k] = args[k], nil end
+		args = tmp
+	end
+
+	return mTemplateInvocation.invocation(name, args)
+end
+
+p[''] = p.main -- For backwards compatibility
+
+return p</text>
+      <sha1>eu3d3ip0gtd6n65iz4vmtpogb62rxdi</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Module:Yesno</title>
+    <ns>828</ns>
+    <id>15</id>
+    <revision>
+      <id>20</id>
+      <timestamp>2021-12-16T18:32:49Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with "-- Function allowing for consistent treatment of boolean-like wikitext input. -- It works similarly to the template {{yesno}}.  return function (val, default) 	-- If your wiki..."</comment>
+      <origin>20</origin>
+      <model>Scribunto</model>
+      <format>text/plain</format>
+      <text bytes="745" sha1="swdskn7svew8i9wuydn9uj5l3r2ghcs" xml:space="preserve">-- Function allowing for consistent treatment of boolean-like wikitext input.
+-- It works similarly to the template {{yesno}}.
+
+return function (val, default)
+	-- If your wiki uses non-ascii characters for any of "yes", "no", etc., you
+	-- should replace "val:lower()" with "mw.ustring.lower(val)" in the
+	-- following line.
+	val = type(val) == 'string' and val:lower() or val
+	if val == nil then
+		return nil
+	elseif val == true 
+		or val == 'yes'
+		or val == 'y'
+		or val == 'true'
+		or val == 't'
+		or val == 'on'
+		or tonumber(val) == 1
+	then
+		return true
+	elseif val == false
+		or val == 'no'
+		or val == 'n'
+		or val == 'false'
+		or val == 'f'
+		or val == 'off'
+		or tonumber(val) == 0
+	then
+		return false
+	else
+		return default
+	end
+end</text>
+      <sha1>swdskn7svew8i9wuydn9uj5l3r2ghcs</sha1>
+    </revision>
+  </page>
+</mediawiki>

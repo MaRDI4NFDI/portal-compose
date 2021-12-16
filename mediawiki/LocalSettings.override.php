@@ -57,3 +57,13 @@ $wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$f
     };
     return true;
 };
+
+# Extensions required by templates
+wfLoadExtension( 'TemplateStyles' );
+wfLoadExtension( 'JsonConfig' );
+wfLoadExtension( 'InputBox' );
+wfLoadExtension( 'ParserFunctions' );
+
+
+
+
