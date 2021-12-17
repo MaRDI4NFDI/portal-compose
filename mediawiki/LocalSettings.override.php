@@ -64,6 +64,6 @@ wfLoadExtension( 'JsonConfig' );
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'ParserFunctions' );
 
-
+$wgWBRepoSettings['formatterUrlProperty']='P10';
 
 
