@@ -84,7 +84,7 @@ services:
 
   reverse-proxy:
     restart: always
-    image: traefik:v2.4
+    image: traefik:v2.5
     ports:
       - 443:443 # HTTPS port
       - 80:80 # HTTPS port
