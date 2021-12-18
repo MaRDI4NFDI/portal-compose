@@ -63,6 +63,8 @@ wfLoadExtension( 'TemplateStyles' );
 wfLoadExtension( 'JsonConfig' );
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'ParserFunctions' );
+wfLoadExtension( 'Math' );
+wfLoadExtension( 'MathSearch' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 

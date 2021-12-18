@@ -35,6 +35,8 @@ services:
       - ./mediawiki/images/favicon.png:/var/www/html/images/favicon.png
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
       - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
     networks:
       default:
         aliases:
