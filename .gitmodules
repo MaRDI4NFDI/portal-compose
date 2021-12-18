@@ -1,0 +1,6 @@
+[submodule "mediawiki/extensions/Math"]
+	path = mediawiki/extensions/Math
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Math
+[submodule "mediawiki/extensions/MathSearch"]
+	path = mediawiki/extensions/MathSearch
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/MathSearch
