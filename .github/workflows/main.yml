@@ -12,6 +12,8 @@ jobs:
       - 
         name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
 
       -
         name: Prepare the build
