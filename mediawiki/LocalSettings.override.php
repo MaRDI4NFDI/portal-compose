@@ -67,6 +67,7 @@ wfLoadExtension( 'Math' );
 wfLoadExtension( 'MathSearch' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
-$wgMathLaTeXMLUrl = 'https://drmf-latexml.wmflabs.org/convert/';
+$wgMathDisableTexFilter = 'always';
+
 
 
