@@ -69,5 +69,5 @@ wfLoadExtension( 'MathSearch' );
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 $wgMathDisableTexFilter = 'always';
 
-
-
+# Temporary workaround for missing DLMF macos on wuppertal account
+$wgMathLaTeXMLUrl = 'https://drmf-latexml.wmflabs.org/convert/';
