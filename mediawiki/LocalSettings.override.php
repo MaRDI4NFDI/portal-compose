@@ -71,3 +71,31 @@ $wgMathDisableTexFilter = 'always';
 
 # Temporary workaround for missing DLMF macos on wuppertal account
 $wgMathLaTeXMLUrl = 'https://drmf-latexml.wmflabs.org/convert/';
+#overwrite settings
+$wgMathDefaultLaTeXMLSetting = array(
+        'format' => 'xhtml',
+        'whatsin' => 'math',
+        'whatsout' => 'math',
+        'pmml',
+        'cmml',
+        'mathtex',
+        'nodefaultresources',
+        'preload' => array(
+                'LaTeX.pool',
+                'article.cls',
+                'amsmath.sty',
+                'amsthm.sty',
+                'amstext.sty',
+                'amssymb.sty',
+                'eucal.sty',
+                // '[dvipsnames]xcolor.sty',
+                'url.sty',
+                'hyperref.sty',
+                '[ids]latexml.sty',
+                'DLMFmath.sty',
+                'DRMFfcns.sty',
+                'DLMFsupport.sty.ltxml',
+        ),
+        'linelength' => 90,
+);
+
