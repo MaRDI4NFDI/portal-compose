@@ -1,6 +1,8 @@
 {{$services := dict}}
 {{$_ := set $services "wikibase" "mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org`,`mardi.schubotz.org"}}
 {{$_ := set $services "wdqs-frontend" "query.mardi.schubotz.org"}}
+{{$_ := set $services "quickstatements" "quickstatements.mardi.schubotz.org"}}
+
 
 http:
   routers:
