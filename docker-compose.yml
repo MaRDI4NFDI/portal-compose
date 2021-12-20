@@ -30,7 +30,7 @@ services:
     volumes:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
-      - ./mediawiki/LocalSettings.override.php:/var/www/html/LocalSettings.d/LocalSettings.override.php
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
       - ./mediawiki/images/favicon.png:/var/www/html/images/favicon.png
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
