@@ -28,9 +28,9 @@ jobs:
           MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} DB_PASS=${{ secrets.DB_PASS }} docker-compose up -d
           
       # pauses CI execution and prints a temporary ssh url to the server for debugging
-      #-
-      #  name: Setup tmate session
-      #  uses: mxschmitt/action-tmate@v3 
+      -
+        name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3 
            
       - 
         name: Give docker compose time to start
