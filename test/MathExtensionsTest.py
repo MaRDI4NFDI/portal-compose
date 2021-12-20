@@ -25,7 +25,7 @@ class MathExtensionsTest(MediawikiBase):
         self.getElementById('wpTextbox1').send_keys("{{search box}}")
         self.getElementById('wpTextbox1').submit()
         # wait for page to display
-        WebDriverWait(self.driver, 5).until(EC.url_changes(test_page_url))
+        WebDriverWait(self.driver, 10).until(EC.url_changes(test_page_url))
         # Check that input field is present
         elements = self.driver.find_elements_by_class_name("searchboxInput")
         self.assertTrue(len(elements) == 1, "No math search input field found.")
