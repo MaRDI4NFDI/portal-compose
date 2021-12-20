@@ -83,4 +83,3 @@ class MediawikiCoreTest(MediawikiBase):
         self.assertTrue(
             'You do not have permission to edit this page' in page_text, 
             "Anonymous editing has not been disabled")
-
