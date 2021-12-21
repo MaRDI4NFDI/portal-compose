@@ -2,6 +2,7 @@
 {{$_ := set $services "wikibase" "mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org`,`mardi.schubotz.org"}}
 {{$_ := set $services "wdqs-frontend" "query.mardi.schubotz.org"}}
 {{$_ := set $services "quickstatements" "quickstatements.mardi.schubotz.org"}}
+{{$_ := set $services "portainer" "portainer.mardi.schubotz.org"}}
 
 
 http:
