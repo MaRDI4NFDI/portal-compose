@@ -99,3 +99,5 @@ $wgMathDefaultLaTeXMLSetting = array(
         'linelength' => 90,
 );
 
+
+$wgShowExceptionDetails = true;
