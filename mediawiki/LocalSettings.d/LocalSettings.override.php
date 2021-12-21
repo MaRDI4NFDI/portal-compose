@@ -99,5 +99,5 @@ $wgMathDefaultLaTeXMLSetting = array(
         'linelength' => 90,
 );
 
-
+$wgWBRepoSettings['allowEntityImport'] = true;
 $wgShowExceptionDetails = true;

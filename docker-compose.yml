@@ -193,6 +193,7 @@ services:
 
   quickstatements:
     image: "${QUICKSTATEMENTS_IMAGE_NAME}"
+    build: ./quickstatements-docker
     container_name: mardi-quickstatements
     restart: unless-stopped
     volumes:

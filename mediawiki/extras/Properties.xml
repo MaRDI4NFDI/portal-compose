@@ -1,0 +1,272 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>MaRDI portal</sitename>
+    <dbname>my_wiki</dbname>
+    <base>https://mardi.formulasearchengine.com/wiki/Main_Page</base>
+    <generator>MediaWiki 1.35.4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Project</namespace>
+      <namespace key="5" case="first-letter">Project talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="120" case="first-letter">Item</namespace>
+      <namespace key="121" case="first-letter">Item talk</namespace>
+      <namespace key="122" case="first-letter">Property</namespace>
+      <namespace key="123" case="first-letter">Property talk</namespace>
+      <namespace key="640" case="first-letter">EntitySchema</namespace>
+      <namespace key="641" case="first-letter">EntitySchema talk</namespace>
+      <namespace key="828" case="first-letter">Module</namespace>
+      <namespace key="829" case="first-letter">Module talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Property:P2</title>
+    <ns>122</ns>
+    <id>42</id>
+    <revision>
+      <id>127</id>
+      <parentid>85</parentid>
+      <timestamp>2021-12-19T17:41:24Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetclaim-create:2||1 */ [[Property:P10]]: https://dlmf.nist.gov/$1</comment>
+      <origin>127</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="456" sha1="n2mkd24y1k5r8didspnnfwx8uvxfydw" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P2","labels":{"en":{"language":"en","value":"DLMF id"}},"descriptions":{"en":{"language":"en","value":"Link to the DLMF"}},"aliases":[],"claims":{"P10":[{"mainsnak":{"snaktype":"value","property":"P10","hash":"b31158d91afcf5b7a4a04fe83d0ffd48fc71c212","datavalue":{"value":"https:\/\/dlmf.nist.gov\/$1","type":"string"}},"type":"statement","id":"P2$194f12ec-44aa-431e-1448-9cddc42fff2d","rank":"normal"}]}}</text>
+      <sha1>n2mkd24y1k5r8didspnnfwx8uvxfydw</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P3</title>
+    <ns>122</ns>
+    <id>43</id>
+    <revision>
+      <id>86</id>
+      <timestamp>2021-12-17T20:46:30Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbeditentity-create:2|en */ Symbols defined</comment>
+      <origin>86</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="159" sha1="s04chsmorrfgz9yxu98f6gig5spbid7" xml:space="preserve">{"type":"property","datatype":"wikibase-item","id":"P3","labels":{"en":{"language":"en","value":"Symbols defined"}},"descriptions":[],"aliases":[],"claims":[]}</text>
+      <sha1>s04chsmorrfgz9yxu98f6gig5spbid7</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P4</title>
+    <ns>122</ns>
+    <id>44</id>
+    <revision>
+      <id>87</id>
+      <timestamp>2021-12-17T20:46:44Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbeditentity-create:2|en */ Symbols used</comment>
+      <origin>87</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="156" sha1="d4863xhot6xupp0st9lw79rmso7v6v4" xml:space="preserve">{"type":"property","datatype":"wikibase-item","id":"P4","labels":{"en":{"language":"en","value":"Symbols used"}},"descriptions":[],"aliases":[],"claims":[]}</text>
+      <sha1>d4863xhot6xupp0st9lw79rmso7v6v4</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P5</title>
+    <ns>122</ns>
+    <id>45</id>
+    <revision>
+      <id>88</id>
+      <timestamp>2021-12-17T20:47:07Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbeditentity-create:2|en */ xml-id</comment>
+      <origin>88</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="148" sha1="nfxv6smifvofqv4cvjq3t9g1nfij03g" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P5","labels":{"en":{"language":"en","value":"xml-id"}},"descriptions":[],"aliases":[],"claims":[]}</text>
+      <sha1>nfxv6smifvofqv4cvjq3t9g1nfij03g</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P6</title>
+    <ns>122</ns>
+    <id>46</id>
+    <revision>
+      <id>89</id>
+      <timestamp>2021-12-17T20:47:44Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbeditentity-create:2|en */ equation number</comment>
+      <origin>89</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="157" sha1="8uyqhmxuv84v85omf53wbj0mn1ckd5h" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P6","labels":{"en":{"language":"en","value":"equation number"}},"descriptions":[],"aliases":[],"claims":[]}</text>
+      <sha1>8uyqhmxuv84v85omf53wbj0mn1ckd5h</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P8</title>
+    <ns>122</ns>
+    <id>48</id>
+    <revision>
+      <id>94</id>
+      <parentid>93</parentid>
+      <timestamp>2021-12-17T20:56:04Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetdescription-remove:1|en */ restricts the applicability of a formula</comment>
+      <origin>94</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="144" sha1="b08dxyseq30zzuejinmlun3c9j140w1" xml:space="preserve">{"type":"property","datatype":"string","id":"P8","labels":{"en":{"language":"en","value":"comment"}},"descriptions":[],"aliases":[],"claims":[]}</text>
+      <sha1>b08dxyseq30zzuejinmlun3c9j140w1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P10</title>
+    <ns>122</ns>
+    <id>50</id>
+    <revision>
+      <id>104</id>
+      <parentid>103</parentid>
+      <timestamp>2021-12-17T21:29:33Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetclaim-create:2||1 */ [[Property:P11]]: P1630</comment>
+      <origin>104</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="837" sha1="dfy2yx15ct0nj54vj3s1judr38dsg6m" xml:space="preserve">{"type":"property","datatype":"string","id":"P10","labels":{"en":{"language":"en","value":"formatter URL"}},"descriptions":{"en":{"language":"en","value":"web page URL; URI template from which \"$1\" can be automatically replaced with the effective property value on items. If the site goes offline, set it to deprecated rank. If the formatter url changes, add a new statement with preferred rank."}},"aliases":{"en":[{"language":"en","value":"URL pattern"},{"language":"en","value":"URL template"},{"language":"en","value":"URL Formatter"},{"language":"en","value":"URL Fomat string"}]},"claims":{"P11":[{"mainsnak":{"snaktype":"value","property":"P11","hash":"d031cbe251cc258fedcc5eae45089f6aa4cd3604","datavalue":{"value":"P1630","type":"string"}},"type":"statement","id":"P10$e8faf58a-4a8d-19d5-88d7-ea8efd5885f5","rank":"normal"}]}}</text>
+      <sha1>dfy2yx15ct0nj54vj3s1judr38dsg6m</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P11</title>
+    <ns>122</ns>
+    <id>52</id>
+    <revision>
+      <id>100</id>
+      <parentid>99</parentid>
+      <timestamp>2021-12-17T21:28:06Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetclaim-create:2||1 */ [[Property:P10]]: https://www.wikidata.org/wiki/Property:$1</comment>
+      <origin>100</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="519" sha1="r4daxv8z2fh8bbz8jo65wbm8e58eza1" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P11","labels":{"en":{"language":"en","value":"Wikidata PID"}},"descriptions":{"en":{"language":"en","value":"Identifier in Wikidata of the corresponding properties"}},"aliases":[],"claims":{"P10":[{"mainsnak":{"snaktype":"value","property":"P10","hash":"93fc8c8b73f5b3ab576a5b9dfa025c2433c92516","datavalue":{"value":"https:\/\/www.wikidata.org\/wiki\/Property:$1","type":"string"}},"type":"statement","id":"P11$11ba9798-4d82-f17a-93bb-0dd9b261a333","rank":"normal"}]}}</text>
+      <sha1>r4daxv8z2fh8bbz8jo65wbm8e58eza1</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P12</title>
+    <ns>122</ns>
+    <id>53</id>
+    <revision>
+      <id>106</id>
+      <parentid>105</parentid>
+      <timestamp>2021-12-17T21:32:58Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetclaim-create:2||1 */ [[Property:P10]]: https://www.wikidata.org/wiki/$1</comment>
+      <origin>106</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="485" sha1="2d48ukgequ6lh587w8m8l2jt1bwdm8z" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P12","labels":{"en":{"language":"en","value":"Wikidata QID"}},"descriptions":{"en":{"language":"en","value":"Corresponding QID in Wikidata"}},"aliases":[],"claims":{"P10":[{"mainsnak":{"snaktype":"value","property":"P10","hash":"63130501c9895515a08898e361c606500523465a","datavalue":{"value":"https:\/\/www.wikidata.org\/wiki\/$1","type":"string"}},"type":"statement","id":"P12$6e01ec17-49f8-9988-ff7c-788823276a62","rank":"normal"}]}}</text>
+      <sha1>2d48ukgequ6lh587w8m8l2jt1bwdm8z</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P13</title>
+    <ns>122</ns>
+    <id>54</id>
+    <revision>
+      <id>110</id>
+      <parentid>109</parentid>
+      <timestamp>2021-12-17T22:02:02Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetclaim-create:2||1 */ [[Property:P10]]: https://swmath.org/software/$1</comment>
+      <origin>110</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="753" sha1="2a8ppmje1b4s7lkomlu0aefb49cnw05" xml:space="preserve">{"type":"property","datatype":"external-id","id":"P13","labels":{"en":{"language":"en","value":"swMATH work ID"}},"descriptions":{"en":{"language":"en","value":"identifier of information service for mathematical software"}},"aliases":[],"claims":{"P11":[{"mainsnak":{"snaktype":"value","property":"P11","hash":"066c830dfb6490ac7c5434b21e46b8979af9334c","datavalue":{"value":"P6830","type":"string"}},"type":"statement","id":"P13$34fd048d-485f-e83a-7822-43c98918c48b","rank":"normal"}],"P10":[{"mainsnak":{"snaktype":"value","property":"P10","hash":"ea543612d0b0404868007816ade18fb212b91361","datavalue":{"value":"https:\/\/swmath.org\/software\/$1","type":"string"}},"type":"statement","id":"P13$3f093ecb-44de-be90-65e2-45c367ad97f3","rank":"normal"}]}}</text>
+      <sha1>2a8ppmje1b4s7lkomlu0aefb49cnw05</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P14</title>
+    <ns>122</ns>
+    <id>55</id>
+    <revision>
+      <id>119</id>
+      <parentid>118</parentid>
+      <timestamp>2021-12-19T08:44:23Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbsetdescription-add:1|en */ The formula defining a mathematical concept or identity</comment>
+      <origin>119</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="247" sha1="ipxvdn467ramlcky1uwttxlt06x87y0" xml:space="preserve">{"type":"property","datatype":"contentmath","id":"P14","labels":{"en":{"language":"en","value":"Defining Formula"}},"descriptions":{"en":{"language":"en","value":"The formula defining a mathematical concept or identity"}},"aliases":[],"claims":[]}</text>
+      <sha1>ipxvdn467ramlcky1uwttxlt06x87y0</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Property:P15</title>
+    <ns>122</ns>
+    <id>56</id>
+    <revision>
+      <id>120</id>
+      <timestamp>2021-12-19T08:46:46Z</timestamp>
+      <contributor>
+        <username>Schubotz</username>
+        <id>3</id>
+      </contributor>
+      <comment>/* wbeditentity-create:2|en */ constraint, restricts the applicability of a formula</comment>
+      <origin>120</origin>
+      <model>wikibase-property</model>
+      <format>application/json</format>
+      <text bytes="226" sha1="qbso0mso0vj1t61ztgbw2p3mgjwksbe" xml:space="preserve">{"type":"property","datatype":"contentmath","id":"P15","labels":{"en":{"language":"en","value":"constraint"}},"descriptions":{"en":{"language":"en","value":"restricts the applicability of a formula"}},"aliases":[],"claims":[]}</text>
+      <sha1>qbso0mso0vj1t61ztgbw2p3mgjwksbe</sha1>
+    </revision>
+  </page>
+</mediawiki>
