@@ -217,6 +217,18 @@ services:
       - "WB_ITEM_PREFIX=Item:"
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
+        # Management console for docker
+  # Management console for docker
+  portainer:
+    container_name: mardi-portainer
+    image: portainer/portainer-ce
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
+      - portainer-data:/data # volume to save settings of portainer
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
 
 volumes:
   shared:
@@ -227,6 +239,7 @@ volumes:
   query-service-data:
   elasticsearch-data:
   quickstatements-data:
+  portainer-data: # volume to save settings of portainer
 
 networks:
     wdqs:
