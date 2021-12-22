@@ -39,4 +39,4 @@ jobs:
  
       -
         name: Test using Selenium
-        run: docker exec mardi-selenium bash -c "export MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} && ./start_test_runner.sh test"
+        run: export MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} && bash ./run_tests.sh
