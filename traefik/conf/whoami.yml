@@ -1,7 +1,7 @@
 http:
   routers:
     home:
-      rule: Host(`whoami.mardi.schubotz.org`,`whoami.mardi.formulasearchengine.com`)
+      rule: Host(`whoami.mardi.schubotz.org`,`whoami.mardi.formulasearchengine.com`,`whoami.mardi4nfdi.de`)
       service: whoami-docker@docker
       entryPoints: [websecure]
       tls:
