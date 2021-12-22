@@ -1,7 +1,7 @@
 http:
   routers:
     dashboard:
-      rule: Host(`traefik.mardi.schubotz.org`)
+      rule: Host(`traefik.mardi.schubotz.org`,`traefik.portal.mardi4nfdi.de`)
       service: api@internal
       middlewares:
         - auth

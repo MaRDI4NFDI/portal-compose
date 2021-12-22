@@ -2,3 +2,4 @@
 .spyproject
 *.pyc
 __pycache__
+.idea
