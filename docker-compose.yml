@@ -90,6 +90,22 @@ services:
         aliases:
          - mysql.svc
 
+  backup:
+    image: ${BACKUP_IMAGE_NAME}
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    restart: always
+    volumes:
+      - ${BACKUP_DIR}:/data
+    environment:
+      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE}
+
   reverse-proxy:
     restart: always
     image: traefik:v2.5
