@@ -161,7 +161,8 @@ services:
         aliases:
          - wdqs.svc
     environment:
-      - WIKIBASE_HOST=wikibase.svc
+      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_SCHEME=https
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
     expose:
