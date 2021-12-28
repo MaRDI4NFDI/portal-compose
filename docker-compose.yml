@@ -43,7 +43,6 @@ services:
     networks:
       default:
         aliases:
-         - ${WIKIBASE_HOST}
          - wikibase-docker.svc
          - wikibase.svc
     environment:
@@ -149,7 +148,7 @@ services:
         aliases:
          - ${WDQS_FRONTEND_HOST}
     environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
   wdqs:
     image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
@@ -162,7 +161,7 @@ services:
         aliases:
          - wdqs.svc
     environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
     expose:
@@ -192,7 +191,7 @@ services:
         aliases:
          - wdqs-updater.svc
     environment:
-     - WIKIBASE_HOST=${WIKIBASE_HOST}
+     - WIKIBASE_HOST=wikibase.svc
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
      # CONFIG - WIKIBASE_SCHEME can be set to 'https' if the updater should expect https concept uris
