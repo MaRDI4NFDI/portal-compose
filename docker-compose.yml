@@ -91,20 +91,20 @@ services:
          - mysql.svc
 
   backup:
-    image: ${BACKUP_IMAGE_NAME}
+    image: ${BACKUP_IMAGE_NAME:-ghcr.io/mardi4nfdi/docker-backup:main}
     links:
       - mysql
     depends_on:
       - mysql
     restart: always
     volumes:
-      - ${BACKUP_DIR}:/data
+      - ${BACKUP_DIR:-./backup}:/data
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE}
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-15 5 * * *}
 
   reverse-proxy:
     restart: always
