@@ -2,7 +2,7 @@ name: wb docker-compose-actions-workflow
 on: 
   push:
     branches: 
-      - 'main'
+      - 'dev'
   pull_request:
 jobs:
   build:
