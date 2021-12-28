@@ -35,9 +35,9 @@ DB_PASS=change-this-sqlpassword
 In case of a clean install, cleanup the Docker volumes.
 
 ## Test locally
-Make sure the Wikibase and Quickstatement hosts point to localhost, then start-up the containers:
+Make sure the Wikibase and Quickstatement hosts point to localhost, then start-up the containers from the docker-compose file for development:
 ```
-docker-compose up -d
+docker-compose -f docker-compose-dev.yml up -d
 ```
 
 Run the tests: `bash ./run_tests.sh`
@@ -72,8 +72,8 @@ DB_PASS=change-this-sqlpassword
 ```
 
 ## Deploy on the MaRDI server
-* copy mediawiki/template.env to .env (the defaults should be OK for the MaRDI server)
-* change the passwords and key to real passwords:
+* create a .env file (the defaults should be OK for the MaRDI server)
+* set the passwords and key to real passwords in the .env file:
 ```
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
