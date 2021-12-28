@@ -1,11 +1,11 @@
 # portal-compose
 docker-composer repo for mardi
 
-## Local installation
-``
+## Local installation`
+```
 git clone --recurse-submodules git@github.com:MaRDI4NFDI/portal-compose.git
-copy ./mediawiki/template.env to ./.env
-``
+cp ./mediawiki/template.env to ./.env
+```
 
 Change parameters for your local installation in .env as required, this file will not be committed.
 Set at least:
@@ -35,17 +35,18 @@ DB_PASS=change-this-sqlpassword
 In case of a clean install, cleanup the Docker volumes.
 
 ## Test locally
-Make sure the Wikibase and Quickstatement hosts point to localhost, then start-up the containers
-`docker-compose up -d`
+Make sure the Wikibase and Quickstatement hosts point to localhost, then start-up the containers:
+```
+docker-compose up -d
+```
 
-Run the tests
-`bash ./run_tests.sh`
+Run the tests: `bash ./run_tests.sh`
 
 ## Build on CI 
 To build the containers on GitHub CI: 
 
 * create a [GitHub environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) 
-* call it "staging" (specified in .github/workflowa/main.yml)
+* call it "staging" (specified in .github/workflows/main.yml)
 * set at least:
 ```
 WIKIBASE_HOST=localhost
