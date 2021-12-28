@@ -1,0 +1,7 @@
+version: '3.4'
+services:
+  selenium:
+    image: aot29/selenium
+    container_name: mardi-selenium
+    volumes:
+      - ./test:/test
