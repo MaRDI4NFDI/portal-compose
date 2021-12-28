@@ -119,7 +119,6 @@ services:
       - traefik-log:/data/log # Persistent file for logging
     networks:
      - default
-     - wdqs
     labels:
       - traefik.enable=false
   whoami:
@@ -244,6 +243,3 @@ volumes:
   elasticsearch-data:
   quickstatements-data:
   portainer-data: # volume to save settings of portainer
-
-networks:
-    wdqs:
