@@ -4,3 +4,9 @@
 [submodule "mediawiki/extensions/MathSearch"]
 	path = mediawiki/extensions/MathSearch
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/MathSearch
+[submodule "mediawiki/extensions/JsonConfig"]
+	path = mediawiki/extensions/JsonConfig
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/JsonConfig
+[submodule "mediawiki/extensions/TemplateStyles"]
+	path = mediawiki/extensions/TemplateStyles
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/TemplateStyles
