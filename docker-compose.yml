@@ -3,15 +3,15 @@ version: '3.4'
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
-  MW_ADMIN_NAME: ${MW_ADMIN_NAME}
+  MW_ADMIN_NAME: ${MW_ADMIN_NAME:-admin}
   MW_ADMIN_PASS: ${MW_ADMIN_PASS}
-  MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL}
+  MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
   MW_WG_SECRET_KEY: ${MW_SECRET_KEY}
   # Disable jobs running after requests when wikibase_jobrunner is defined
   MW_WG_JOB_RUN_RATE: 0
-  DB_USER: ${DB_USER}
+  DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
-  DB_NAME: ${DB_NAME}
+  DB_NAME: ${DB_NAME:-my_wiki}
   WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
   QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.de
 x-extra-variables: &wikibase_extra_variables
@@ -146,7 +146,7 @@ services:
     networks:
       default:
         aliases:
-         - ${WDQS_FRONTEND_HOST}
+         - wdqs-frontend.svc
     environment:
       - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
@@ -212,8 +212,8 @@ services:
     environment:
       - QUICKSTATEMENTS_HOST
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}:${WIKIBASE_PORT}
+      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
+      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.de
       - WB_PROPERTY_NAMESPACE=122
       - "WB_PROPERTY_PREFIX=Property:"
       - WB_ITEM_NAMESPACE=120
