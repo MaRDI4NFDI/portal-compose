@@ -2,7 +2,7 @@ name: wb docker-compose-actions-workflow
 on: 
   push:
     branches: 
-      - 'main'
+      - 'dev'
   pull_request:
 jobs:
   build:
@@ -37,7 +37,7 @@ jobs:
         run: >
           MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} 
           DB_PASS=${{ secrets.DB_PASS }} 
-          docker-compose up -d
+          docker-compose -f docker-compose-dev.yml up -d
           
       # pauses CI execution and prints a temporary ssh url to the server for debugging
       #-

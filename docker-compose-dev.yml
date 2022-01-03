@@ -3,29 +3,34 @@ version: '3.4'
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
-  MW_ADMIN_NAME: admin
+  MW_ADMIN_NAME: ${MW_ADMIN_NAME}
   MW_ADMIN_PASS: ${MW_ADMIN_PASS}
-  MW_ADMIN_EMAIL: admin@example.com
+  MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL}
   MW_WG_SECRET_KEY: ${MW_SECRET_KEY}
   # Disable jobs running after requests when wikibase_jobrunner is defined
   MW_WG_JOB_RUN_RATE: 0
-  DB_USER: sqluser
+  DB_USER: ${DB_USER}
   DB_PASS: ${DB_PASS}
-  DB_NAME: my_wiki
-  WIKIBASE_HOST: mardi.formulasearchengine.com
-  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.formulasearchengine.com
+  DB_NAME: ${DB_NAME}
+  WIKIBASE_HOST: ${WIKIBASE_HOST}
+  QS_PUBLIC_SCHEME_HOST_AND_PORT: http://localhost:8840
+
 x-common-variables: &wikibase_extra_variables
-  MW_ELASTIC_HOST: elasticsearch.formulasearchengine.com
+  MW_ELASTIC_HOST: ${MW_ELASTIC_HOST}
+  MW_ELASTIC_PORT: ${MW_ELASTIC_PORT}
 
 services:
   wikibase:
-    image: wikibase/wikibase-bundle:1.35.4-wmde.2
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME}"
+    #build: ./mediawiki
     container_name: mardi-wikibase
     links:
       - mysql
     depends_on:
       - mysql
     restart: unless-stopped
+    ports:
+      - "${WIKIBASE_PORT}:80"
     volumes:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
@@ -49,7 +54,7 @@ services:
       MW_WG_ENABLE_UPLOADS:
 
   wikibase_jobrunner:
-    image: wikibase/wikibase-bundle:1.35.4-wmde.2
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME}"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -70,7 +75,7 @@ services:
       <<: *wikibase_extra_variables
 
   mysql:
-    image: mariadb:10.3
+    image: "${MYSQL_IMAGE_NAME}"
     container_name: mardi-mysql
     restart: unless-stopped
     volumes:
@@ -87,7 +92,7 @@ services:
          - mysql.svc
 
   backup:
-    image: ghcr.io/mardi4nfdi/docker-backup:main
+    image: ${BACKUP_IMAGE_NAME:-ghcr.io/mardi4nfdi/docker-backup:main}
     links:
       - mysql
     depends_on:
@@ -100,7 +105,7 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: 15 5 * * *
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-15 5 * * *}
 
   reverse-proxy:
     restart: always
@@ -123,8 +128,26 @@ services:
     image: containous/whoami # A container that exposes an API to show its IP address
     restart: always
     
+  selenium:
+    image: aot29/selenium
+    container_name: mardi-selenium
+    volumes:
+      - ./test:/test
+
+  openrefine:
+    image: ghcr.io/aot29/docker-openrefine:master
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./data:/data
+    environment:
+      - REFINE_INTERFACE=0.0.0.0
+      - REFINE_PORT=3333
+      - REFINE_MEMORY=1024M
+      - REFINE_DATA_DIR=/data
+
   elasticsearch:
-    image: wikibase/elasticsearch:6.5.4-wmde.2
+    image: "${ELASTICSEARCH_IMAGE_NAME}"
     restart: unless-stopped
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -137,20 +160,22 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
 
   wdqs-frontend:
-    image: wikibase/wdqs-frontend:wmde.2
+    image: "${WDQS_FRONTEND_IMAGE_NAME}"
     container_name: mardi-wdqs-frontend
     restart: unless-stopped
+    ports:
+     - "${WDQS_FRONTEND_PORT}:80"
     depends_on:
       - wdqs-proxy
     networks:
       default:
         aliases:
-         - wdqs.formulasearchengine.com
+         - ${WDQS_FRONTEND_HOST}
     environment:
       - WIKIBASE_HOST=${WIKIBASE_HOST}
       - WDQS_HOST=wdqs-proxy.svc
   wdqs:
-    image: wikibase/wdqs:0.3.40-wmde.2
+    image: "${WDQS_IMAGE_NAME}"
     restart: unless-stopped
     command: /runBlazegraph.sh
     volumes:
@@ -167,7 +192,7 @@ services:
       - 9999
 
   wdqs-proxy:
-    image: wikibase/wdqs-proxy:wmde.2
+    image: "${WDQS_PROXY_IMAGE_NAME}"
     restart: unless-stopped
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
@@ -179,7 +204,7 @@ services:
          - wdqs-proxy.svc
 
   wdqs-updater:
-    image: wikibase/wdqs:0.3.40-wmde.2
+    image: "${WDQS_IMAGE_NAME}"
     restart: unless-stopped
     command: /runUpdate.sh
     depends_on:
@@ -196,22 +221,24 @@ services:
      # CONFIG - WIKIBASE_SCHEME can be set to 'https' if the updater should expect https concept uris
 
   quickstatements:
-    image: ghcr.io/mardi4nfdi/docker-quickstatements:master
+    image: "${QUICKSTATEMENTS_IMAGE_NAME}"
     container_name: mardi-quickstatements
     restart: unless-stopped
     volumes:
       - quickstatements-data:/quickstatements/data
+    ports:
+      - "${QUICKSTATEMENTS_PORT}:80"
     depends_on:
       - wikibase
     networks:
       default:
         aliases:
-         - quickstatements.formulasearchengine.com
+         - ${QUICKSTATEMENTS_HOST}
     environment:
       - QUICKSTATEMENTS_HOST
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://quickstatements.formulasearchengine.com
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}
+      - QS_PUBLIC_SCHEME_HOST_AND_PORT=${QS_PUBLIC_SCHEME_HOST_AND_PORT}
+      - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}:${WIKIBASE_PORT}
       - WB_PROPERTY_NAMESPACE=122
       - "WB_PROPERTY_PREFIX=Property:"
       - WB_ITEM_NAMESPACE=120
