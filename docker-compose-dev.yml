@@ -124,6 +124,7 @@ services:
      - wdqs
     labels:
       - traefik.enable=false
+
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
     restart: always
@@ -174,6 +175,7 @@ services:
     environment:
       - WIKIBASE_HOST=${WIKIBASE_HOST}
       - WDQS_HOST=wdqs-proxy.svc
+
   wdqs:
     image: "${WDQS_IMAGE_NAME}"
     restart: unless-stopped

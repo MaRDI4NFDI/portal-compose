@@ -32,7 +32,7 @@ MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 ```
 
-In case of a clean install, cleanup the Docker volumes.
+In case of a clean install, remove the corresponding Docker volumes.
 
 ## Test locally
 Make sure the Wikibase and Quickstatement hosts point to localhost, then start-up the containers from the docker-compose file for development:
@@ -40,14 +40,23 @@ Make sure the Wikibase and Quickstatement hosts point to localhost, then start-u
 docker-compose -f docker-compose-dev.yml up -d
 ```
 
+Wiki is on http://localhost:8080
+
 Run the tests: `bash ./run_tests.sh`
 
 ## Build on CI 
-To build the containers on GitHub CI: 
+The containers will be built and tested after each push on the main branch: 
 
+Preparations (this has already been done on GitHub):
 * create a [GitHub environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) 
 * call it "staging" (specified in .github/workflows/main.yml)
-* set at least:
+* set (required) these to test passwords:
+```
+MW_SECRET_KEY=some-secret-key
+MW_ADMIN_PASS=change-this-password
+DB_PASS=change-this-sqlpassword
+```
+* also set:
 ```
 WIKIBASE_HOST=localhost
 WIKIBASE_PORT=8080
@@ -64,13 +73,6 @@ QS_PUBLIC_HOST_AND_PORT=localhost:8840
 MW_ELASTIC_HOST=localhost
 MW_ELASTIC_PORT=9200
 ```
-* change (required) these to test passwords:
-```
-MW_SECRET_KEY=some-secret-key
-MW_ADMIN_PASS=change-this-password
-DB_PASS=change-this-sqlpassword
-```
-
 ## Deploy on the MaRDI server
 * create a .env file (the defaults should be OK for the MaRDI server)
 * set the passwords and key to real passwords in the .env file:

@@ -214,7 +214,7 @@ services:
         aliases:
          - quickstatements.formulasearchengine.com
     environment:
-      - QUICKSTATEMENTS_HOST
+      - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}
       - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
