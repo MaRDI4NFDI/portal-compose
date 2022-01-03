@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-
+      -
+        name: Prepare the build
+        run: cp mediawiki/template.env ./.env
       - 
         name: Build the stack
         env:
