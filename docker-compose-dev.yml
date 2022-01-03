@@ -14,6 +14,7 @@ x-common-variables: &wikibase_variables
   DB_NAME: ${DB_NAME}
   WIKIBASE_HOST: ${WIKIBASE_HOST}
   QS_PUBLIC_SCHEME_HOST_AND_PORT: http://localhost:8840
+
 x-common-variables: &wikibase_extra_variables
   MW_ELASTIC_HOST: ${MW_ELASTIC_HOST}
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT}
@@ -236,7 +237,7 @@ services:
     environment:
       - QUICKSTATEMENTS_HOST
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}
+      - QS_PUBLIC_SCHEME_HOST_AND_PORT=${QS_PUBLIC_SCHEME_HOST_AND_PORT}
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}:${WIKIBASE_PORT}
       - WB_PROPERTY_NAMESPACE=122
       - "WB_PROPERTY_PREFIX=Property:"
