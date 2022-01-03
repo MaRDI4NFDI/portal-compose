@@ -1,10 +1,10 @@
 version: '3.4'
 
 x-common-variables: &wikibase_variables
-    WIKIBASE_HOST=localhost
-    WIKIBASE_PORT=8080    
-    WDQS_FRONTEND_HOST=localhost
-    WDQS_FRONTEND_PORT=8834
+    WIKIBASE_HOST: localhost
+    WIKIBASE_PORT: 8080    
+    WDQS_FRONTEND_HOST: localhost
+    WDQS_FRONTEND_PORT: 8834
 
 services:
   wikibase:
