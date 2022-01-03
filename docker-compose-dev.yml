@@ -247,7 +247,7 @@ services:
       - "WB_ITEM_PREFIX=Item:"
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
-        # Management console for docker
+
   # Management console for docker
   portainer:
     container_name: mardi-portainer
