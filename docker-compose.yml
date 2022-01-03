@@ -3,23 +3,26 @@ version: '3.4'
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
-  MW_ADMIN_NAME: admin
+  MW_ADMIN_NAME: ${MW_ADMIN_NAME:-admin}
   MW_ADMIN_PASS: ${MW_ADMIN_PASS}
-  MW_ADMIN_EMAIL: admin@example.com
+  MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
   MW_WG_SECRET_KEY: ${MW_SECRET_KEY}
   # Disable jobs running after requests when wikibase_jobrunner is defined
   MW_WG_JOB_RUN_RATE: 0
-  DB_USER: sqluser
+  DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
-  DB_NAME: my_wiki
-  WIKIBASE_HOST: mardi.formulasearchengine.com
-  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.formulasearchengine.com
-x-common-variables: &wikibase_extra_variables
-  MW_ELASTIC_HOST: elasticsearch.formulasearchengine.com
+  DB_NAME: ${DB_NAME:-my_wiki}
+  WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
+  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.de
+x-extra-variables: &wikibase_extra_variables
+  MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
+  MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
 
 services:
   wikibase:
-    image: wikibase/wikibase-bundle:1.35.4-wmde.2
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
+    #build: ./mediawiki
+
     container_name: mardi-wikibase
     links:
       - mysql
@@ -41,15 +44,15 @@ services:
     networks:
       default:
         aliases:
-         - ${WIKIBASE_HOST}
          - wikibase-docker.svc
+         - wikibase.svc
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
 
   wikibase_jobrunner:
-    image: wikibase/wikibase-bundle:1.35.4-wmde.2
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -70,7 +73,7 @@ services:
       <<: *wikibase_extra_variables
 
   mysql:
-    image: mariadb:10.3
+    image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
     container_name: mardi-mysql
     restart: unless-stopped
     volumes:
@@ -116,15 +119,15 @@ services:
       - traefik-log:/data/log # Persistent file for logging
     networks:
      - default
-     - wdqs
     labels:
       - traefik.enable=false
+
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
     restart: always
-    
+
   elasticsearch:
-    image: wikibase/elasticsearch:6.5.4-wmde.2
+    image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.5.4-wmde.2}"
     restart: unless-stopped
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -137,7 +140,7 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
 
   wdqs-frontend:
-    image: wikibase/wdqs-frontend:wmde.2
+    image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.2}"
     container_name: mardi-wdqs-frontend
     restart: unless-stopped
     depends_on:
@@ -146,11 +149,13 @@ services:
       default:
         aliases:
          - wdqs.formulasearchengine.com
+         - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
+
   wdqs:
-    image: wikibase/wdqs:0.3.40-wmde.2
+    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
     restart: unless-stopped
     command: /runBlazegraph.sh
     volumes:
@@ -160,14 +165,15 @@ services:
         aliases:
          - wdqs.svc
     environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
+      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_SCHEME=https
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
     expose:
       - 9999
 
   wdqs-proxy:
-    image: wikibase/wdqs-proxy:wmde.2
+    image: "${WDQS_PROXY_IMAGE_NAME:-wikibase/wdqs-proxy:wmde.2}"
     restart: unless-stopped
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
@@ -179,7 +185,7 @@ services:
          - wdqs-proxy.svc
 
   wdqs-updater:
-    image: wikibase/wdqs:0.3.40-wmde.2
+    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
     restart: unless-stopped
     command: /runUpdate.sh
     depends_on:
@@ -190,13 +196,13 @@ services:
         aliases:
          - wdqs-updater.svc
     environment:
-     - WIKIBASE_HOST=${WIKIBASE_HOST}
+     - WIKIBASE_HOST=wikibase.svc
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
      # CONFIG - WIKIBASE_SCHEME can be set to 'https' if the updater should expect https concept uris
 
   quickstatements:
-    image: ghcr.io/mardi4nfdi/docker-quickstatements:master
+    image: "${QUICKSTATEMENTS_IMAGE_NAME:-ghcr.io/mardi4nfdi/docker-quickstatements:master}"
     container_name: mardi-quickstatements
     restart: unless-stopped
     volumes:
@@ -210,8 +216,9 @@ services:
     environment:
       - QUICKSTATEMENTS_HOST
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://quickstatements.formulasearchengine.com
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}
+      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
+      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.de
       - WB_PROPERTY_NAMESPACE=122
       - "WB_PROPERTY_PREFIX=Property:"
       - WB_ITEM_NAMESPACE=120
@@ -219,6 +226,7 @@ services:
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
         # Management console for docker
+
   # Management console for docker
   portainer:
     container_name: mardi-portainer
@@ -241,6 +249,3 @@ volumes:
   elasticsearch-data:
   quickstatements-data:
   portainer-data: # volume to save settings of portainer
-
-networks:
-    wdqs:
