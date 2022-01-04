@@ -238,6 +238,10 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
+  latexml:
+    container_name: latexml
+    image: physikerwelt/latexml
+    restart: always
 
 volumes:
   shared:
