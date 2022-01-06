@@ -19,8 +19,10 @@ test_1() {
     # note the spacing after [[ and around ==
     if [[ $(($file_count_before+2)) == $file_count_after ]]; then
         printf ' - Test backup OK: Two backup files where created.\n'
+        exit 0
     else
         printf ' - Test backup FAILED: no backup where files created.\n'
+        exit 1
     fi
 }
 
