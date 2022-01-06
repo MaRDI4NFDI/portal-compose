@@ -31,7 +31,7 @@ services:
     ports:
       - "${WIKIBASE_PORT}:80"
     volumes:
-      ## This shares the configuration with jobrunner
+      ## This shares the configuration with jobrunner and backup
       - shared:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
@@ -95,13 +95,20 @@ services:
     depends_on:
       - mysql
     volumes:
+      # shared from wikibase, to run maintenance/dumpBackup.php
+      - shared:/var/www/html/:ro
+      # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
+      # only for running tests
+      - ./test:/test
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
+      WIKIBASE_HOST: ${WIKIBASE_HOST:-wikibase-docker.svc} # internal docker hostname (alias) of the wikibase service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-15 5 * * *}
+      KEEP_DAYS: ${KEEP_DAYS:-100}
 
   reverse-proxy:
     image: traefik:v2.5
@@ -128,7 +135,7 @@ services:
     container_name: mardi-selenium
     volumes:
       - ./test:/test
-
+      
   openrefine:
     image: ghcr.io/aot29/docker-openrefine:master
     ports:

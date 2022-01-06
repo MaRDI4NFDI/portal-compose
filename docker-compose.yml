@@ -97,6 +97,9 @@ services:
       - mysql
     restart: always
     volumes:
+      # shared from wikibase, to run maintenance/dumpBackup.php
+      - shared:/var/www/html/:ro
+      # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
@@ -104,6 +107,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       BACKUP_SCHEDULE: 15 5 * * *
+      KEEP_DAYS: ${KEEP_DAYS:-100}
 
   reverse-proxy:
     restart: always
@@ -216,7 +220,6 @@ services:
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}
       - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.de
       - WB_PROPERTY_NAMESPACE=122
