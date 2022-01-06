@@ -151,7 +151,7 @@ services:
          - wdqs.formulasearchengine.com
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=wikibase.svc
+      - WIKIBASE_HOST=portal.mardi4nfdi.de
       - WDQS_HOST=wdqs-proxy.svc
 
   wdqs:
@@ -196,10 +196,10 @@ services:
         aliases:
          - wdqs-updater.svc
     environment:
-     - WIKIBASE_HOST=wikibase.svc
+     - WIKIBASE_HOST=portal.mardi4nfdi.de
+     - WIKIBASE_SCHEME=https
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
-     # CONFIG - WIKIBASE_SCHEME can be set to 'https' if the updater should expect https concept uris
 
   quickstatements:
     image: "${QUICKSTATEMENTS_IMAGE_NAME:-ghcr.io/mardi4nfdi/docker-quickstatements:master}"
