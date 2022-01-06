@@ -95,8 +95,13 @@ services:
     depends_on:
       - mysql
     volumes:
-      # shared from wikibase, to run maintenance/dumpBackup.php
+      # shared from wikibase, to run dumpBackup.php and importBackup.php
       - shared:/var/www/html/:ro
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
       # only for running tests
