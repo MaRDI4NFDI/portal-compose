@@ -100,3 +100,6 @@ $wgMathDefaultLaTeXMLSetting = array(
 
 $wgWBRepoSettings['allowEntityImport'] = true;
 $wgShowExceptionDetails = true;
+$wgVisualEditorAvailableNamespaces = [
+    'Project' => true,
+];
