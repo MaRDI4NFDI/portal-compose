@@ -108,7 +108,6 @@ services:
       - ./test:/test
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
-      WIKIBASE_HOST: ${WIKIBASE_HOST:-wikibase-docker.svc} # internal docker hostname (alias) of the wikibase service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
