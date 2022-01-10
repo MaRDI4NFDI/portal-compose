@@ -9,11 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     steps:
-      - 
-        name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          submodules: 'recursive'
+      - name: Checkout submodules
+        run: git submodule update --init --recursive        
       -
         name: Prepare the build
         run: cp mediawiki/template.env ./.env
