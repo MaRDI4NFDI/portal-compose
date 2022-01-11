@@ -3,13 +3,14 @@ version: '3.4'
 x-common-variables: &wikibase_variables
     WIKIBASE_HOST: localhost
     WIKIBASE_PORT: 8080    
-    WDQS_FRONTEND_HOST: localhost
     WDQS_FRONTEND_PORT: 8834
     QUICKSTATEMENTS_HOST: localhost
     QUICKSTATEMENTS_PORT: 8840
-    #WB_PUBLIC_HOST_AND_PORT:localhost:8080
-    #QS_PUBLIC_HOST_AND_PORT:localhost:8840
-
+    # required by quickstatements for creating OAuth consumers,
+    # and by wikibase for redirecting back to quickstatements
+    QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
+    WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
+    
 services:
   wikibase:
     ports:
@@ -34,11 +35,7 @@ services:
       - "${QUICKSTATEMENTS_PORT}:80"
     restart: 'no'
     environment:
-      #- QS_PUBLIC_SCHEME_HOST_AND_PORT=${QS_PUBLIC_SCHEME_HOST_AND_PORT}
-      - QUICKSTATEMENTS_HOST=${QUICKSTATEMENTS_HOST}
-      - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://${WIKIBASE_HOST}:${WIKIBASE_PORT}
+      <<: *wikibase_variables
 
   backup:
     restart: 'no'
@@ -55,9 +52,6 @@ services:
   elasticsearch:
     restart: 'no'
 
-  wdqs-frontend:
-    restart: 'no'
-
   wdqs:
     restart: 'no'
 
@@ -65,9 +59,6 @@ services:
     restart: 'no'
 
   wdqs-updater:
-    restart: 'no'
-
-  quickstatements:
     restart: 'no'
     
   portainer:
