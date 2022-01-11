@@ -26,15 +26,22 @@ The local install also has open ports, so that the services can be accessed with
 * Quickstatements, http://localhost:8840
 * OpenRefine, http://localhost:3333
 
-Note that the containers for local development are set to not restart, so that they do not start automatically when you start your computer.
+Note that the containers for local development are set to not restart, 
+so that they do not start automatically when you start your computer.
 
-## Test locally
+## Start up the containers
 Start-up the containers from the docker-compose file for development:
 ```
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
 ```
-(Tipp: add to your `~/.bash_aliases`)
+Stop the containers:
+```
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
+```
 
+(Tipp: add these two commands to your `~/.bash_aliases`)
+
+## Test locally
 Run the tests: `bash ./run_tests.sh`
 
 ## Build on CI 
