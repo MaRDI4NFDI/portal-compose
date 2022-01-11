@@ -28,3 +28,8 @@ services:
     container_name: mardi-selenium
     volumes:
       - ./test:/test
+
+  backup:
+    volumes:
+      # only for running tests
+      - ./test:/test

@@ -95,15 +95,29 @@ services:
       - mysql
     depends_on:
       - mysql
+      - wikibase
     restart: always
     volumes:
+      # shared from wikibase, to run dumpBackup.php and importBackup.php
+      - shared:/var/www/html/:ro
+      # mount LocalSettings.d and extensions explicitly, as long as these are mounted from the host
+      # (otherwise restore throws error)
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
+      # only for running tests
+      - ./test:/test
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       BACKUP_SCHEDULE: 15 5 * * *
+      KEEP_DAYS: ${KEEP_DAYS:-100}
 
   reverse-proxy:
     restart: always
@@ -216,7 +230,6 @@ services:
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=http://${WIKIBASE_HOST}
       - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.de
       - WB_PROPERTY_NAMESPACE=122
