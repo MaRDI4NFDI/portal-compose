@@ -103,7 +103,3 @@ $wgShowExceptionDetails = true;
 $wgVisualEditorAvailableNamespaces = [
     'Project' => true,
 ];
-# See https://www.mediawiki.org/wiki/Manual:$wgCrossSiteAJAXdomains
-$wgCrossSiteAJAXdomains = [
-    '*'
-];
