@@ -76,7 +76,7 @@ MW_ELASTIC_PORT=9200
 ```
 ## Deploy on the MaRDI server
 * create a .env file (the defaults should be OK for the MaRDI server)
-* set the passwords and key to real passwords in the .env file:
+* set the passwords and keys to real passwords in the .env file:
 ```
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
