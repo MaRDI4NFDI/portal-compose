@@ -25,8 +25,6 @@ services:
     ports:
      - "${WDQS_FRONTEND_PORT}:80"
     restart: ${RESTART}
-    environment:
-      - WIKIBASE_HOST=wikibase.svc # ? see https://github.com/MaRDI4NFDI/portal-compose/issues/35
 
   quickstatements:
     ports:
@@ -84,3 +82,11 @@ services:
       - REFINE_PORT=3333
       - REFINE_MEMORY=1024M
       - REFINE_DATA_DIR=/data
+
+  prometheus:
+    restart: ${RESTART}
+
+  grafana:
+    restart: ${RESTART}
+    ports:
+      - "${GRAFANA_PORT}:3000"

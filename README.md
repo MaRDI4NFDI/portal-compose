@@ -23,21 +23,9 @@ WIKIBASE_PORT=8080
 WDQS_FRONTEND_PORT=8834
 QUICKSTATEMENTS_HOST=localhost
 QUICKSTATEMENTS_PORT=8840
+GRAFANA_PORT=3000
 RESTART='no'
 ```
-
-The local install has 2 additional containers:
-* Selenium for running tests
-* Openrefine for data manipulation
-
-The local install also has open ports, so that the services can be accessed without using the reverse proxy
-* Wikibase, http://localhost:8080
-* WDQS Frontend, http://localhost:8834
-* Quickstatements, http://localhost:8840
-* OpenRefine, http://localhost:3333
-
-Note that the containers for local development are set to not restart, 
-so that they do not start automatically when you start your computer.
 
 ## Start up the containers
 Start-up the containers from the docker-compose file for development:
@@ -51,7 +39,21 @@ docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 
 (Tipp: add these two commands to your `~/.bash_aliases`)
 
-## Test locally
+The local install has 2 additional containers:
+* Selenium for running tests
+* Openrefine for data manipulation
+
+The local install also has open ports, so that the services can be accessed without using the reverse proxy
+* Wikibase, http://localhost:8080
+* WDQS Frontend, http://localhost:8834
+* Quickstatements, http://localhost:8840
+* WB query service frontend, http://localhost:8834
+* OpenRefine, http://localhost:3333
+
+Note that the containers for local development are set to not restart, 
+so that they do not start automatically when you start your computer.
+
+### Test locally
 Run the tests: `bash ./run_tests.sh`
 
 ## Build on CI 
