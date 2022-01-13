@@ -15,6 +15,16 @@ MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 ```
+Add the following lines at the end of your .env file, edit as required
+```
+# Local settings
+WIKIBASE_HOST=localhost
+WIKIBASE_PORT=8080    
+WDQS_FRONTEND_PORT=8834
+QUICKSTATEMENTS_HOST=localhost
+QUICKSTATEMENTS_PORT=8840
+RESTART='no'
+```
 
 The local install has 2 additional containers:
 * Selenium for running tests
