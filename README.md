@@ -1,5 +1,5 @@
 # portal-compose
-docker-composer repo for mardi
+docker-composer repo for MaRDI
 
 ## Local installation
 ```

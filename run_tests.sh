@@ -7,4 +7,5 @@ docker exec mardi-selenium bash ./start_test_runner.sh test/
 printf "\nTest the backup functions"
 printf "\n----------------------------------------\n"
 docker exec portal-compose_backup_1 bash /test/test_backup.sh
+
 printf "\n"
