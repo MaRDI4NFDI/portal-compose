@@ -49,6 +49,7 @@ The local install also has open ports, so that the services can be accessed with
 * Quickstatements, http://localhost:8840
 * WB query service frontend, http://localhost:8834
 * OpenRefine, http://localhost:3333
+* Grafana, http://localhost:3000
 
 Note that the containers for local development are set to not restart, 
 so that they do not start automatically when you start your computer.
