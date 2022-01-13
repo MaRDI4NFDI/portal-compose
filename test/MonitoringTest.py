@@ -1,4 +1,4 @@
-"""Tets that monitoring tools are working"""
+"""Test that monitoring tools are working"""
 from MediawikiTest import MediawikiBase
 
 class GrafanaTest(MediawikiBase):
