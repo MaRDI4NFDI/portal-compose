@@ -43,4 +43,4 @@ services:
 
   grafana:
     ports:
-      - "${GRAFANA_PORT}:3000"
+      - "3000:3000"
