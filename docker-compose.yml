@@ -161,7 +161,7 @@ services:
          - wdqs.formulasearchengine.com
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
 
   wdqs:
