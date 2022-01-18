@@ -65,6 +65,8 @@ wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
 wfLoadExtension( 'MathSearch' );
+wfLoadExtension( 'Lockdown' );
+
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 $wgMathDisableTexFilter = 'always';
