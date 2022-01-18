@@ -105,6 +105,8 @@ services:
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     environment:
