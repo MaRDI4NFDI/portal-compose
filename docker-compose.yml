@@ -39,6 +39,7 @@ services:
       - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
       - quickstatements-data:/quickstatements/data
       - ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
