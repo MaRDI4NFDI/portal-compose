@@ -12,3 +12,6 @@
 	path = mediawiki/extensions/JsonConfig
 	url = git@github.com:wikimedia/mediawiki-extensions-JsonConfig.git
 	branch = REL1_35
+[submodule "mediawiki/extensions/Lockdown"]
+	path = mediawiki/extensions/Lockdown
+	url = git@github.com:wikimedia/mediawiki-extensions-Lockdown.git
