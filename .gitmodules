@@ -15,3 +15,4 @@
 [submodule "mediawiki/extensions/Lockdown"]
 	path = mediawiki/extensions/Lockdown
 	url = git@github.com:wikimedia/mediawiki-extensions-Lockdown.git
+	branch = REL1_37
