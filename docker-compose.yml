@@ -89,6 +89,31 @@ services:
         aliases:
          - mysql.svc
 
+  backup:
+    image: ghcr.io/mardi4nfdi/docker-backup:main
+    links:
+      - mysql
+    depends_on:
+      - mysql
+      - wikibase
+    restart: always
+    volumes:
+      # shared from wikibase, to run dumpBackup.php and importBackup.php
+      - shared:/var/www/html/:ro
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      # dir on host where to store the backups
+      - ${BACKUP_DIR:-./backup}:/data
+    environment:
+      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      BACKUP_SCHEDULE: 15 5 * * *
+      KEEP_DAYS: ${KEEP_DAYS:-100}
 
   reverse-proxy:
     restart: always
