@@ -94,5 +94,3 @@ MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 ```
-## More
-See [Discussion in the project's wiki](https://github.com/MaRDI4NFDI/portal-compose/wiki)
