@@ -84,6 +84,8 @@ services:
       - REFINE_DATA_DIR=/data
 
   prometheus:
+    ports:
+      - "9090:9090"
     restart: ${RESTART}
 
   grafana:
