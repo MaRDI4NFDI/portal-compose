@@ -64,7 +64,7 @@ $wgEnableUploads = true;
 # Explicitly mentioning the file-extensions for image-upload. 
 $wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp' ];
 # Explicitly mentioning the upload-path for image-upload.
-$wgUploadPath = "{$wgScriptPath}/images";
+$wgUploadPath = $wgScriptPath . '/images/';
 
 # Extensions required by templates
 wfLoadExtension( 'TemplateStyles' );
