@@ -155,6 +155,7 @@ services:
     restart: unless-stopped
     depends_on:
       - wdqs-proxy
+      - wikibase
     networks:
       default:
         aliases:
