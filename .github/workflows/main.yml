@@ -46,6 +46,3 @@ jobs:
         name: Give docker compose time to start
         run: sleep 10
         # actually, it would be better to have the selenium container wait for the other containers
- 
-      -
-        name: Test using Selenium
