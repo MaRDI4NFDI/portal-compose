@@ -14,18 +14,28 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: 'recursive'
-
       -
         name: Prepare the build
         run: cp mediawiki/template.env ./.env
-
       - 
         name: Build the stack
         env:
           MW_ADMIN_PASS: ${{ secrets.MW_ADMIN_PASS }}
           DB_PASS: ${{ secrets.DB_PASS }}
-        run: 
-          MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} DB_PASS=${{ secrets.DB_PASS }} docker-compose up -d
+          WIKIBASE_HOST: ${{ secrets.WIKIBASE_HOST}}
+          WIKIBASE_PORT: ${{ secrets.WIKIBASE_PORT}}
+          WDQS_FRONTEND_HOST: ${{ secrets.WDQS_FRONTEND_HOST}}
+          WDQS_FRONTEND_PORT: ${{ secrets.WDQS_FRONTEND_PORT}}
+          QUICKSTATEMENTS_HOST: ${{ secrets.QUICKSTATEMENTS_HOST}}
+          QUICKSTATEMENTS_PORT: ${{ secrets.QUICKSTATEMENTS_PORT}}
+          WB_PUBLIC_HOST_AND_PORT: ${{ secrets.WB_PUBLIC_HOST_AND_PORT}}
+          QS_PUBLIC_HOST_AND_PORT: ${{ secrets.QS_PUBLIC_HOST_AND_PORT}}
+          MW_ELASTIC_HOST: ${{ secrets.MW_ELASTIC_HOST}}
+          MW_ELASTIC_PORT: ${{ secrets.MW_ELASTIC_PORT}}
+        run: >
+          MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} 
+          DB_PASS=${{ secrets.DB_PASS }} 
+          docker-compose -f docker-compose.yml -f docker-compose-ci.yml up -d 
           
       # pauses CI execution and prints a temporary ssh url to the server for debugging
       #-
@@ -39,4 +49,4 @@ jobs:
  
       -
         name: Test using Selenium
-        run: docker exec mardi-selenium bash -c "export MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} && ./start_test_runner.sh test"
+        run: export MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} && bash ./run_tests.sh

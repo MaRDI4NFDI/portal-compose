@@ -16,6 +16,6 @@ scrape_configs:
       - targets: ['localhost:9090']
   - job_name: 'traefik'
     scheme: http
-    static_config:
-      - targets ['reverse-proxy:8082']
+    static_configs:
+      - targets: ['reverse-proxy:8082']
 

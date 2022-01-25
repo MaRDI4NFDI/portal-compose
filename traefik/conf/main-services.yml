@@ -1,8 +1,8 @@
 {{$services := dict}}
-{{$_ := set $services "wikibase" "mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org`,`mardi.schubotz.org"}}
-{{$_ := set $services "wdqs-frontend" "query.mardi.schubotz.org"}}
-{{$_ := set $services "quickstatements" "quickstatements.mardi.schubotz.org"}}
-{{$_ := set $services "portainer" "portainer.mardi.schubotz.org"}}
+{{$_ := set $services "wikibase" "mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org`,`mardi.schubotz.org`,`portal.mardi4nfdi.de"}}
+{{$_ := set $services "wdqs-frontend" "query.mardi.schubotz.org`,`query.portal.mardi4nfdi.de"}}
+{{$_ := set $services "quickstatements" "quickstatements.mardi.schubotz.org`,`quickstatements.portal.mardi4nfdi.de"}}
+{{$_ := set $services "portainer" "portainer.mardi.schubotz.org`,`portainer.portal.mardi4nfdi.de"}}
 
 
 http:
