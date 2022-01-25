@@ -6,3 +6,7 @@ __pycache__
 backup
 data
 docker-compose.override.yml
+images
+!images/favicon.png
+!images/MaRDI_Logo.png
+!images/MaRDI_Logo_S_5_rgba.png
