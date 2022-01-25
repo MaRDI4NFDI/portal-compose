@@ -49,4 +49,3 @@ jobs:
  
       -
         name: Test using Selenium
-        run: docker exec mardi-selenium bash ./start_test_runner.sh test
