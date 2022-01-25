@@ -6,6 +6,9 @@ docker-composer repo for MaRDI
 git clone --recurse-submodules git@github.com:MaRDI4NFDI/portal-compose.git
 cd portal-compose
 cp ./mediawiki/template.env ./.env
+
+# Initializing the submodules when repo already cloned. 
+git submodule update --init --recursive
 ```
 
 Change parameters for your local installation in .env as required, this file will not be committed.

@@ -33,12 +33,12 @@ services:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
-      - ./mediawiki/images/favicon.png:/var/www/html/images/favicon.png
+      - ./mediawiki//:/var/www/html/images/
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
       - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
       - quickstatements-data:/quickstatements/data
       - ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
@@ -105,6 +105,7 @@ services:
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     environment:
@@ -155,6 +156,7 @@ services:
     restart: unless-stopped
     depends_on:
       - wdqs-proxy
+      - wikibase
     networks:
       default:
         aliases:
