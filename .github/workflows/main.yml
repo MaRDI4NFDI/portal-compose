@@ -50,6 +50,3 @@ jobs:
       -
         name: Test using Selenium
         run: docker exec mardi-selenium bash ./start_test_runner.sh test
-      -
-        name: Test backups
-        run: docker exec portal-compose_backup_1 bash /test/test_backup.sh
