@@ -33,7 +33,7 @@ services:
       ## This shares the configuration with jobrunner
       - shared:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki//:/var/www/html/images/
+      - ./mediawiki/images/:/var/www/html/images/
       - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
       - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
