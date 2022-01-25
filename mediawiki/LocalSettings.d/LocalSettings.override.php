@@ -65,6 +65,7 @@ wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
 wfLoadExtension( 'MathSearch' );
+wfLoadExtension( 'Lockdown' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 $wgMathDisableTexFilter = 'always';
@@ -103,3 +104,17 @@ $wgShowExceptionDetails = true;
 $wgVisualEditorAvailableNamespaces = [
     'Project' => true,
 ];
+
+
+# Settings for lockdown extension (private documentation)
+
+## Defining constants for additional namespaces.
+define("NS_PRIVATE", 3000); // This MUST be even.
+
+## Adding additional namespaces.
+$wgExtraNamespaces[NS_PRIVATE] = "Private";
+
+## Adding new user group private which is blocking reading and editing pages in private namespace.
+$wgGroupPermissions['private'] = []; 
+$wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
+$wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
