@@ -45,9 +45,8 @@ The local install has 2 additional containers:
 
 The local install also has open ports, so that the services can be accessed without using the reverse proxy
 * Wikibase, http://localhost:8080
-* WDQS Frontend, http://localhost:8834
 * Quickstatements, http://localhost:8840
-* WB query service frontend, http://localhost:8834
+* WB query service (WDQS) frontend, http://localhost:8834
 * OpenRefine, http://localhost:3333
 * Grafana, http://localhost:3000
 
