@@ -253,7 +253,16 @@ services:
     container_name: latexml
     image: physikerwelt/latexml
     restart: always
-
+    
+  # Watchtower provides automatic updates for all containers
+  # see https://containrrr.github.io/watchtower/arguments/
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --label-enable --include-stopped --revive-stopped
+    restart: always
+    
 volumes:
   shared:
   mediawiki-mysql-data:
