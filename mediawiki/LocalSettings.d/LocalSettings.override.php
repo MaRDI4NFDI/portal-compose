@@ -126,7 +126,7 @@ $wgGroupPermissions['private'] = [];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
-// Enable for the meta namespace, disable for the "File" namespace and enable for the "Extra", the latter being a custom namespace
+// Enable for the Private namespace in addition to default enabled namespaces. 
 $wgVisualEditorAvailableNamespaces = [
     'Private' => true,
 ];
