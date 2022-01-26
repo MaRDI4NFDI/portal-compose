@@ -110,6 +110,7 @@ $wgWBRepoSettings['allowEntityImport'] = true;
 $wgShowExceptionDetails = true;
 $wgVisualEditorAvailableNamespaces = [
     'Project' => true,
+    'Private' => true,
 ];
 
 
@@ -125,9 +126,3 @@ $wgExtraNamespaces[NS_PRIVATE] = "Private";
 $wgGroupPermissions['private'] = []; 
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
-
-// Enable visual editor for the Private namespace in addition to default enabled namespaces. 
-$wgVisualEditorAvailableNamespaces = [
-    'Private' => true,
-];
-
