@@ -110,6 +110,7 @@ $wgWBRepoSettings['allowEntityImport'] = true;
 $wgShowExceptionDetails = true;
 $wgVisualEditorAvailableNamespaces = [
     'Project' => true,
+    'Private' => true,
 ];
 
 
