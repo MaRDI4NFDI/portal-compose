@@ -134,6 +134,7 @@ services:
      - default
     labels:
       - traefik.enable=false
+      - com.centurylinklabs.watchtower.enable=true
 
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
