@@ -125,3 +125,6 @@ $wgExtraNamespaces[NS_PRIVATE] = "Private";
 $wgGroupPermissions['private'] = []; 
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
+
+# Settings for imports from wikidata
+$wgMemoryLimit = '1G';
