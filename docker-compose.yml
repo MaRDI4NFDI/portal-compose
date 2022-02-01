@@ -108,6 +108,8 @@ services:
       - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
       DB_NAME: ${DB_NAME}
@@ -132,6 +134,7 @@ services:
      - default
     labels:
       - traefik.enable=false
+      - com.centurylinklabs.watchtower.enable=true
 
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
@@ -225,6 +228,8 @@ services:
       default:
         aliases:
          - quickstatements.formulasearchengine.com
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
