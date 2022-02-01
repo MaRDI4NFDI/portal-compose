@@ -39,6 +39,7 @@ services:
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
       - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+      - ./mediawiki/extensions/Nuke:/var/www/html/extensions/Nuke
       - quickstatements-data:/quickstatements/data
       - ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
@@ -106,6 +107,7 @@ services:
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
       - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+      - ./mediawiki/extensions/Nuke:/var/www/html/extensions/Nuke
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
