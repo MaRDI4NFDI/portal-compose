@@ -128,4 +128,6 @@ $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
 # Settings for imports from wikidata
-$wgMemoryLimit = '2G';
+if($_SERVER['REQUEST_URI'] == '/w/index.php?title=Special:Import&action=submit') {
+    $wgMemoryLimit = '2G';
+}
