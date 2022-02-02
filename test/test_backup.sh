@@ -23,6 +23,7 @@ _break_wiki() {
     mysql -u${DB_USER} -p${DB_PASS} -h${DB_HOST} --database ${DB_NAME} -Bse 'TRUNCATE TABLE page'
 }
 
+
 test_1() {
     printf "Test that backups are stored in the backup dir\n"
     # Run backup script, count backup files before and after
@@ -30,15 +31,16 @@ test_1() {
     /app/backup.sh
     file_count_after=$(_count_backup_files)
     
-    # Check that 2 backup files have been created (SQL and XML backups)
+    # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
-    if [[ $(($file_count_before+2)) == $file_count_after ]]; then
-        printf ' - Test backup OK: Two backup files where created.\n'
+    if [[ $(($file_count_before+3)) == $file_count_after ]]; then
+        printf ' - Test backup OK: Three backup files where created.\n'
     else
         printf ' - Test backup FAILED: no backup where files created.\n'
         exit 1
     fi
 }
+
 
 test_2() {
     printf "Test that the database can be restored from SQL backup\n"
