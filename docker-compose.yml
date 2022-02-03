@@ -107,6 +107,7 @@ services:
       - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
       - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
       - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+      - ./mediawiki/extensions/TwitterWidget:/var/www/html/extensions/TwitterWidget
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
