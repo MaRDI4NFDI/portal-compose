@@ -73,6 +73,7 @@ wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
 wfLoadExtension( 'MathSearch' );
 wfLoadExtension( 'Lockdown' );
+wfLoadExtension( 'TwitterWidget' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 $wgMathDisableTexFilter = 'always';
