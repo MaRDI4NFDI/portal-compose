@@ -16,3 +16,6 @@
 	path = mediawiki/extensions/Lockdown
 	url = git@github.com:wikimedia/mediawiki-extensions-Lockdown.git
 	branch = REL1_37
+[submodule "mediawiki/extensions/TwitterWidget"]
+	path = mediawiki/extensions/TwitterWidget
+	url = git@github.com:ciencia/mediawiki-extensions-TwitterWidget.git
