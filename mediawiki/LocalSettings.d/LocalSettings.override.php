@@ -127,3 +127,10 @@ $wgExtraNamespaces[NS_PRIVATE] = "Private";
 $wgGroupPermissions['private'] = []; 
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
+
+# MathSearch initializatino
+#require_once "$IP/extensions/MathSearch/MathSearch.php";
+# The link to your (local) MathWeb Search installation e.g. default 8080
+$wgMWSUrl = "http://localhost:8080";
+# The link to your (local) BaseX installation e.g. ntcir-11 set starting port 1984
+$wgMathSearchBaseX = "http://localhost:1984";
