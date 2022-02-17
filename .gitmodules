@@ -1,0 +1,21 @@
+[submodule "mediawiki/extensions/Math"]
+	path = mediawiki/extensions/Math
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Math
+[submodule "mediawiki/extensions/MathSearch"]
+	path = mediawiki/extensions/MathSearch
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/MathSearch
+[submodule "mediawiki/extensions/TemplateStyles"]
+	path = mediawiki/extensions/TemplateStyles
+	url = git@github.com:wikimedia/mediawiki-extensions-TemplateStyles.git
+	branch = REL1_35
+[submodule "mediawiki/extensions/JsonConfig"]
+	path = mediawiki/extensions/JsonConfig
+	url = git@github.com:wikimedia/mediawiki-extensions-JsonConfig.git
+	branch = REL1_35
+[submodule "mediawiki/extensions/Lockdown"]
+	path = mediawiki/extensions/Lockdown
+	url = git@github.com:wikimedia/mediawiki-extensions-Lockdown.git
+	branch = REL1_37
+[submodule "mediawiki/extensions/TwitterWidget"]
+	path = mediawiki/extensions/TwitterWidget
+	url = git@github.com:ciencia/mediawiki-extensions-TwitterWidget.git

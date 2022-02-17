@@ -20,7 +20,8 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
+    #build: ./mediawiki
 
     container_name: mardi-wikibase
     links:
@@ -30,11 +31,17 @@ services:
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
-      - shared_mardi_wikibase:/var/www/html/:rw
+      - shared:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
+      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
+      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+      - ./mediawiki/extensions/TwitterWidget:/var/www/html/extensions/TwitterWidget
       - quickstatements-data:/quickstatements/data
-      #- ./mediawiki/extra-install.sh:/extra-install.sh
+      - ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
       default:
         aliases:
@@ -46,7 +53,7 @@ services:
       MW_WG_ENABLE_UPLOADS:
 
   wikibase_jobrunner:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -55,7 +62,7 @@ services:
       - mysql
     restart: always
     volumes:
-      - shared_mardi_wikibase:/shared/:ro
+      - shared:/shared/:ro
       - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
     networks:
       default:
@@ -93,8 +100,14 @@ services:
     restart: always
     volumes:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
-      - shared_mardi_wikibase:/var/www/html/:ro
+      - shared:/var/www/html/:ro
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
+      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
+      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
+      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/extensions/Lockdown:/var/www/html/extensions/Lockdown
+      - ./mediawiki/extensions/TwitterWidget:/var/www/html/extensions/TwitterWidget
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
@@ -258,7 +271,7 @@ services:
     restart: always
     
 volumes:
-  shared_mardi_wikibase:
+  shared:
   mediawiki-mysql-data:
   traefik-log:
   traefik-letsencrypt:
