@@ -26,7 +26,7 @@ WIKIBASE_PORT=8080
 WDQS_FRONTEND_PORT=8834
 QUICKSTATEMENTS_HOST=localhost
 QUICKSTATEMENTS_PORT=8840
-RESTART='no'
+RESTART=no
 ```
 
 The local install has 2 additional containers:
