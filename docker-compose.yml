@@ -105,7 +105,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       BACKUP_SCHEDULE: 15 5 * * *
-      KEEP_DAYS: ${KEEP_DAYS:-100}
+      KEEP_DAYS: ${KEEP_DAYS:-30}
 
   reverse-proxy:
     restart: always
