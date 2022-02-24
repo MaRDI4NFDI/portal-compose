@@ -1,5 +1,7 @@
 <?php
 
+error_reporting( -1 );
+ini_set( 'display_errors', 1 );
 /*******************************/
 /* Enable Federated properties */
 /*******************************/
@@ -76,9 +78,9 @@ wfLoadExtension( 'Lockdown' );
 wfLoadExtension( 'TwitterWidget' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
-$wgMathDisableTexFilter = 'always';
+# $wgMathDisableTexFilter = 'always';
 
-$wgMathLaTeXMLUrl = 'http://latexml:8080/convert/';
+# $wgMathLaTeXMLUrl = 'http://latexml:8080/convert/';
 #overwrite settings
 $wgMathDefaultLaTeXMLSetting = array(
         'format' => 'xhtml',
@@ -127,3 +129,16 @@ $wgExtraNamespaces[NS_PRIVATE] = "Private";
 $wgGroupPermissions['private'] = []; 
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
+
+# MathSearch initializatino
+require_once "$IP/extensions/MathSearch/MathSearch.php";
+$wgUpgradeKey = 'd3cd6417a7703d25';
+
+# $wgDefaultUserOptions['math'] = 'mathml';
+$wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
+$wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
+
+
+$wgDebugToolbar=true;
+$wgShowDebug=true;
+$wgDevelopmentWarnings=true;

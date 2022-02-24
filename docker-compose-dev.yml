@@ -6,14 +6,19 @@ x-common-variables: &wikibase_variables
     QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
     WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
     RESTART: 'no'
-    
+    network_mode: host
+
 services:
   wikibase:
     ports:
       - "${WIKIBASE_PORT}:80"
+      #- "10043:10043"
+      #- "1984:1984"
     restart: ${RESTART}
     environment:
       <<: *wikibase_variables
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   wikibase_jobrunner:
     restart: ${RESTART}
@@ -34,15 +39,6 @@ services:
     restart: ${RESTART}
     environment:
       <<: *wikibase_variables
-
-  backup:
-    restart: ${RESTART}
-    volumes:
-      # only for running tests
-      - ./test:/test
-
-  reverse-proxy:
-    restart: ${RESTART}
 
   whoami:
     restart: ${RESTART}
@@ -87,3 +83,4 @@ services:
 
   watchtower:
     restart: ${RESTART}
+

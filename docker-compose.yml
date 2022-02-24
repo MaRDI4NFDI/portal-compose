@@ -42,6 +42,8 @@ services:
       - ./mediawiki/extensions/TwitterWidget:/var/www/html/extensions/TwitterWidget
       - quickstatements-data:/quickstatements/data
       - ./mediawiki/extra-install.sh:/extra-install.sh
+      - ./my_harvests_wikibase/:/var/www/html/my_harvests_wikibase/
+      - ./my_harvests_basex/:/var/html/my_harvests_basex/
     networks:
       default:
         aliases:
@@ -51,6 +53,19 @@ services:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
+
+  math_web_search:
+    image: "${MWS_IMAGE_NAME:-mathwebsearch/mathwebsearch}"
+    # command:   docker run -v /path/to/harvests:/data/ -p 8080:8080 mathwebsearch/mathwebsearch
+    ports:
+      - 8080:8080 # just for testing
+    volumes:
+      - ./my_harvests_wikibase/:/data/
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - mws.svc
 
   wikibase_jobrunner:
     image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
