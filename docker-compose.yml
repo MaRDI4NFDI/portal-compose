@@ -34,7 +34,6 @@ services:
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
-      #- ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
       default:
         aliases:
@@ -44,6 +43,7 @@ services:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
+      <<: *wikibase_extra_variables
 
   wikibase_jobrunner:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
@@ -230,7 +230,6 @@ services:
       - "WB_ITEM_PREFIX=Item:"
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
-        # Management console for docker
 
   # Management console for docker
   portainer:
