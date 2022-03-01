@@ -57,6 +57,24 @@ docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 ## Test locally
 Run the tests: `bash ./run_tests.sh`
 
+## Develop locally
+
+Create a docker-compose.override.yml like this
+```docker-compse
+version: '3.4'
+
+services:
+  wikibase:
+    volumes:
+     - ~/git/mediawiki/MathSearch:/var/www/html/extensions/MathSearch
+```
+Here `~/git/mediawiki/MathSearch` is the path of your local development checkout of the extension, you modify.
+
+Eventually, add the docker-compose.override.yml file to your startup command:
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose.override.yml up -d
+```
 ## Build on CI 
 The containers will be built and tested after each push on the main branch: 
 
