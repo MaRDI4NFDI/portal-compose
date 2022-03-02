@@ -52,4 +52,4 @@ jobs:
         run: docker exec mardi-selenium bash ./start_test_runner.sh test
       -
         name: Test backups
-        run: docker exec portal-compose_backup_1 bash /test/test_backup.sh
+        run: docker exec mardi-backup bash /test/test_backup.sh
