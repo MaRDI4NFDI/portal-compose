@@ -85,6 +85,7 @@ services:
 
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
+    container_name: mardi-backup
     links:
       - mysql
     depends_on:
