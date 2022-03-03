@@ -30,8 +30,8 @@ services:
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
-      - shared_mardi_wikibase:/var/www/html/:rw
-      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - shared_mardi_wikibase:/shared/:rw
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
     networks:
@@ -56,6 +56,7 @@ services:
     restart: always
     volumes:
       - shared_mardi_wikibase:/shared/:ro
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
       - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
     networks:
       default:
@@ -94,8 +95,8 @@ services:
     restart: always
     volumes:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
-      - shared_mardi_wikibase:/var/www/html/:ro
-      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - shared_mardi_wikibase:/shared/:ro
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
