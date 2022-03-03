@@ -30,8 +30,6 @@ jobs:
           QUICKSTATEMENTS_PORT: ${{ secrets.QUICKSTATEMENTS_PORT}}
           WB_PUBLIC_HOST_AND_PORT: ${{ secrets.WB_PUBLIC_HOST_AND_PORT}}
           QS_PUBLIC_HOST_AND_PORT: ${{ secrets.QS_PUBLIC_HOST_AND_PORT}}
-          MW_ELASTIC_HOST: ${{ secrets.MW_ELASTIC_HOST}}
-          MW_ELASTIC_PORT: ${{ secrets.MW_ELASTIC_PORT}}
         run: >
           MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} 
           DB_PASS=${{ secrets.DB_PASS }} 
