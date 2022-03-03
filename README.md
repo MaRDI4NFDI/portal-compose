@@ -67,7 +67,7 @@ services:
   wikibase:
       image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
     environment:
-      XDEBUG_CONFIG: "xdebug.remote_host=host.docker.internal"
+      XDEBUG_CONFIG: "remote_host=host.docker.internal"
     volumes:
      - ~/git/mediawiki/MathSearch:/var/www/html/extensions/MathSearch
 ```
