@@ -18,13 +18,21 @@ entryPoints:
         entryPoint:
           to: websecure
           scheme: https
+  collab:
+    address: ":8081"
+    # redirect to https
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
   metrics:
     address: :8082
 
 metrics:
   prometheus:
     entryPoint: metrics
-    
+
 providers:
   docker: {}
 

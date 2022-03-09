@@ -26,8 +26,10 @@ services:
     container_name: mardi-wikibase
     links:
       - mysql
+      - mongo
     depends_on:
       - mysql
+      - mongo
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
@@ -57,8 +59,10 @@ services:
     command:  /jobrunner-entrypoint.sh
     links:
       - mysql
+      - mongo
     depends_on:
       - mysql
+      - mongo
     restart: always
     volumes:
       - shared_mardi_wikibase:/shared/
@@ -89,6 +93,21 @@ services:
       default:
         aliases:
          - mysql.svc
+
+  mongo:
+    image: mongo
+    container_name: mardi-mongo
+  #  ports:
+  #    - 8081:8081 # HTTPS port
+    restart: unless-stopped
+    volumes:
+      - mediawiki-mongo-data:/data/db
+    networks:
+      default:
+        aliases:
+          - mongodb
+
+
 
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
@@ -327,7 +346,7 @@ services:
     volumes:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
-    
+
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
   watchtower:
@@ -336,10 +355,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --label-enable --include-stopped --revive-stopped
     restart: always
-    
+
 volumes:
   shared_mardi_wikibase:
   mediawiki-mysql-data:
+  mediawiki-mongo-data:
   traefik-log:
   traefik-letsencrypt:
   LocalSettings:

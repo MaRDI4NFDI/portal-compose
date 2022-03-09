@@ -6,11 +6,12 @@ x-common-variables: &wikibase_variables
     QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
     WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
     RESTART: 'no'
-    
+
 services:
   wikibase:
     ports:
       - "${WIKIBASE_PORT}:80"
+      - "${MONGO_DB_PORT}:8081"
     restart: ${RESTART}
     environment:
       <<: *wikibase_variables
@@ -55,13 +56,13 @@ services:
 
   wdqs-updater:
     restart: ${RESTART}
-    
+
   portainer:
     restart: ${RESTART}
 
   latexml:
     restart: ${RESTART}
-    
+
   selenium:
     image: aot29/selenium
     restart: ${RESTART}
