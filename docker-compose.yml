@@ -56,7 +56,7 @@ services:
       - mysql
     restart: always
     volumes:
-      - shared_mardi_wikibase:/shared/:ro
+      - shared_mardi_wikibase:/shared/
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
       - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
     networks:
