@@ -32,6 +32,7 @@ services:
       ## This shares the configuration with jobrunner
       - shared_mardi_wikibase:/shared/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
     networks:
