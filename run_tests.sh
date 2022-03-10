@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 printf "\nTests that hit the GUI using Selenium"
 printf "\n----------------------------------------\n"
