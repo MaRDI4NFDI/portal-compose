@@ -30,11 +30,11 @@ services:
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
-      - shared_mardi_wikibase:/var/www/html/:rw
+      - shared_mardi_wikibase:/shared/:rw
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
-      #- ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
       default:
         aliases:
@@ -44,6 +44,7 @@ services:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
+      <<: *wikibase_extra_variables
 
   wikibase_jobrunner:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
@@ -55,7 +56,8 @@ services:
       - mysql
     restart: always
     volumes:
-      - shared_mardi_wikibase:/shared/:ro
+      - shared_mardi_wikibase:/shared/
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
       - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
     networks:
       default:
@@ -85,6 +87,7 @@ services:
 
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
+    container_name: mardi-backup
     links:
       - mysql
     depends_on:
@@ -93,8 +96,8 @@ services:
     restart: always
     volumes:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
-      - shared_mardi_wikibase:/var/www/html/:ro
-      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
+      - shared_mardi_wikibase:/shared/:ro
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
@@ -104,8 +107,9 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: 15 5 * * *
+      BACKUP_SCHEDULE: '15 4 * * *'
       KEEP_DAYS: ${KEEP_DAYS:-30}
+    entrypoint: "/app/start.sh"
 
   reverse-proxy:
     restart: always
@@ -230,7 +234,6 @@ services:
       - "WB_ITEM_PREFIX=Item:"
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
-        # Management console for docker
 
   # Management console for docker
   portainer:

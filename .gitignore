@@ -5,6 +5,7 @@ __pycache__
 .idea
 backup
 data
+extensions-dev 
 docker-compose.override.yml
 images
 !images/favicon.png
