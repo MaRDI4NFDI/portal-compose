@@ -12,12 +12,12 @@ entryPoints:
     address: ":443"
   web:
     address: ":80"
-      # redirect to https
-      http:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
+    # redirect to https
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
 
 providers:
   docker: {}

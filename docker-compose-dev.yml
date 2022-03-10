@@ -44,9 +44,6 @@ services:
   reverse-proxy:
     restart: ${RESTART}
 
-  whoami:
-    restart: ${RESTART}
-
   elasticsearch:
     restart: ${RESTART}
 
