@@ -129,10 +129,6 @@ services:
       - traefik.enable=false
       - com.centurylinklabs.watchtower.enable=true
 
-  # whoami:
-  #   image: containous/whoami # A container that exposes an API to show its IP address
-  #   restart: always
-
   elasticsearch:
     image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.5.4-wmde.2}"
     restart: unless-stopped
