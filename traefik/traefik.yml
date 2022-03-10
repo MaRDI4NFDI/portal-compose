@@ -21,9 +21,6 @@ entryPoints:
 
 providers:
   docker: {}
-  file:
-    directory: "/traefik-conf"
-    watch: true
 
 certificatesResolvers:
   le:
