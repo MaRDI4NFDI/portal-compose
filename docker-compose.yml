@@ -46,7 +46,7 @@ services:
       MW_WG_ENABLE_UPLOADS:
       <<: *wikibase_extra_variables
     labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`mardi.formulasearchengine.com`,`wikibase.mardi.schubotz.org`,`mardi.schubotz.org`,`portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
@@ -130,7 +130,7 @@ services:
     networks:
      - default
     labels:
-      - traefik.http.routers.dashboard.rule=Host(`traefik.mardi.schubotz.org`,`traefik.portal.mardi4nfdi.de`)
+      - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.de`)
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.routers.dashboard.tls.certResolver=le
       - traefik.http.routers.dashboard.service=api@internal
@@ -167,7 +167,7 @@ services:
       - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
     labels:
-      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.mardi.schubotz.org`,`query.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
       - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
@@ -231,7 +231,7 @@ services:
         aliases:
          - quickstatements.formulasearchengine.com
     labels:
-      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.mardi.schubotz.org`,`quickstatements.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-quickstatements.entrypoints=websecure
       - traefik.http.routers.service-quickstatements.tls.certResolver=le
       - com.centurylinklabs.watchtower.enable=true
@@ -257,7 +257,7 @@ services:
       - portainer-data:/data # volume to save settings of portainer
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - traefik.http.routers.service-portainer.rule=Host(`portainer.mardi.schubotz.org`,`portainer.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-portainer.rule=Host(`portainer.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-portainer.entrypoints=websecure
       - traefik.http.routers.service-portainer.tls.certResolver=le
       - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
