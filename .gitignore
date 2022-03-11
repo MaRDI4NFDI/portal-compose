@@ -5,4 +5,9 @@ __pycache__
 .idea
 backup
 data
+extensions-dev 
 docker-compose.override.yml
+images
+!images/favicon.png
+!images/MaRDI_Logo.png
+!images/MaRDI_Logo_S_5_rgba.png

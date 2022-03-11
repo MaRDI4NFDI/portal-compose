@@ -30,8 +30,6 @@ jobs:
           QUICKSTATEMENTS_PORT: ${{ secrets.QUICKSTATEMENTS_PORT}}
           WB_PUBLIC_HOST_AND_PORT: ${{ secrets.WB_PUBLIC_HOST_AND_PORT}}
           QS_PUBLIC_HOST_AND_PORT: ${{ secrets.QS_PUBLIC_HOST_AND_PORT}}
-          MW_ELASTIC_HOST: ${{ secrets.MW_ELASTIC_HOST}}
-          MW_ELASTIC_PORT: ${{ secrets.MW_ELASTIC_PORT}}
         run: >
           MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} 
           DB_PASS=${{ secrets.DB_PASS }} 
@@ -44,9 +42,12 @@ jobs:
            
       - 
         name: Give docker compose time to start
-        run: sleep 10
+        run: sleep 120
         # actually, it would be better to have the selenium container wait for the other containers
  
       -
         name: Test using Selenium
-        run: export MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} && bash ./run_tests.sh
+        run: docker exec mardi-selenium bash ./start_test_runner.sh test
+      -
+        name: Test backups
+        run: docker exec mardi-backup bash /test/test_backup.sh

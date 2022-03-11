@@ -6,6 +6,9 @@ docker-composer repo for MaRDI
 git clone --recurse-submodules git@github.com:MaRDI4NFDI/portal-compose.git
 cd portal-compose
 cp ./mediawiki/template.env ./.env
+
+# Initializing the submodules when repo already cloned. 
+git submodule update --init --recursive
 ```
 
 Change parameters for your local installation in .env as required, this file will not be committed.
@@ -24,7 +27,7 @@ WDQS_FRONTEND_PORT=8834
 QUICKSTATEMENTS_HOST=localhost
 QUICKSTATEMENTS_PORT=8840
 GRAFANA_PORT=3000
-RESTART='no'
+RESTART=no
 ```
 
 ## Start up the containers
@@ -56,6 +59,28 @@ so that they do not start automatically when you start your computer.
 ### Test locally
 Run the tests: `bash ./run_tests.sh`
 
+## Develop locally
+
+Create a docker-compose.override.yml like this
+```docker-compse
+version: '3.4'
+
+services:
+  wikibase:
+      image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal"
+    volumes:
+     - ~/git/mediawiki/MathSearch:/var/www/html/extensions/MathSearch
+```
+Here `~/git/mediawiki/MathSearch` is the path of your local development checkout of the extension, you modify.
+
+Eventually, add the docker-compose.override.yml file to your startup command:
+
+Adjust host.docker.internal on linux as [described.](https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html#configure-xdebug-wsl)
+```bash
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose.override.yml up -d
+```
 ## Build on CI 
 The containers will be built and tested after each push on the main branch: 
 
@@ -96,5 +121,3 @@ MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 ```
-## More
-See [Discussion in the project's wiki](https://github.com/MaRDI4NFDI/portal-compose/wiki)

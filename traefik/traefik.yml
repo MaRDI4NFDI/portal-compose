@@ -1,19 +1,30 @@
 log:
   level: DEBUG
+
 accessLog:
   filePath: "/data/log/access.log"
+
 api:
   dashboard: true
+
 entryPoints:
   websecure:
     address: ":443"
   web:
     address: ":80"
+    # redirect to https
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
 providers:
   docker: {}
   file:
     directory: "/traefik-conf"
     watch: true
+
 certificatesResolvers:
   le:
     acme:

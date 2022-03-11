@@ -20,8 +20,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
-    #build: ./mediawiki
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
 
     container_name: mardi-wikibase
     links:
@@ -31,16 +30,11 @@ services:
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
-      - shared:/var/www/html/:rw
+      - shared_mardi_wikibase:/shared/:rw
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images/MaRDI_Logo.png
-      - ./mediawiki/images/favicon.png:/var/www/html/images/favicon.png
-      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
-      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
-      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
-      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
-      - ./mediawiki/extra-install.sh:/extra-install.sh
     networks:
       default:
         aliases:
@@ -50,9 +44,10 @@ services:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
+      <<: *wikibase_extra_variables
 
   wikibase_jobrunner:
-    image: "${WIKIBASE_BUNDLE_IMAGE_NAME:-wikibase/wikibase-bundle:1.35.4-wmde.2}"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -61,7 +56,8 @@ services:
       - mysql
     restart: always
     volumes:
-      - shared:/shared/:ro
+      - shared_mardi_wikibase:/shared/
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
       - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
     networks:
       default:
@@ -91,6 +87,7 @@ services:
 
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
+    container_name: mardi-backup
     links:
       - mysql
     depends_on:
@@ -99,21 +96,20 @@ services:
     restart: always
     volumes:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
-      - shared:/var/www/html/:ro
-      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki/extensions/TemplateStyles:/var/www/html/extensions/TemplateStyles
-      - ./mediawiki/extensions/JsonConfig:/var/www/html/extensions/JsonConfig
-      - ./mediawiki/extensions/Math:/var/www/html/extensions/Math
-      - ./mediawiki/extensions/MathSearch:/var/www/html/extensions/MathSearch
+      - shared_mardi_wikibase:/shared/:ro
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: 15 5 * * *
-      KEEP_DAYS: ${KEEP_DAYS:-100}
+      BACKUP_SCHEDULE: '15 4 * * *'
+      KEEP_DAYS: ${KEEP_DAYS:-30}
+    entrypoint: "/app/start.sh"
 
   reverse-proxy:
     restart: always
@@ -131,10 +127,7 @@ services:
      - default
     labels:
       - traefik.enable=false
-
-  whoami:
-    image: containous/whoami # A container that exposes an API to show its IP address
-    restart: always
+      - com.centurylinklabs.watchtower.enable=true
 
   elasticsearch:
     image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.5.4-wmde.2}"
@@ -155,13 +148,14 @@ services:
     restart: unless-stopped
     depends_on:
       - wdqs-proxy
+      - wikibase
     networks:
       default:
         aliases:
          - wdqs.formulasearchengine.com
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
 
   wdqs:
@@ -223,6 +217,8 @@ services:
       default:
         aliases:
          - quickstatements.formulasearchengine.com
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
@@ -234,7 +230,6 @@ services:
       - "WB_ITEM_PREFIX=Item:"
       - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
       - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
-        # Management console for docker
 
   # Management console for docker
   portainer:
@@ -270,9 +265,18 @@ services:
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
-
+    
+  # Watchtower provides automatic updates for all containers
+  # see https://containrrr.github.io/watchtower/arguments/
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --label-enable --include-stopped --revive-stopped
+    restart: always
+    
 volumes:
-  shared:
+  shared_mardi_wikibase:
   mediawiki-mysql-data:
   traefik-log:
   traefik-letsencrypt:

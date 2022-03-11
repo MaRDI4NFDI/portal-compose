@@ -42,9 +42,6 @@ services:
   reverse-proxy:
     restart: ${RESTART}
 
-  whoami:
-    restart: ${RESTART}
-
   elasticsearch:
     restart: ${RESTART}
 
@@ -92,3 +89,6 @@ services:
     restart: ${RESTART}
     ports:
       - "${GRAFANA_PORT}:3000"
+
+  watchtower:
+    restart: ${RESTART}
