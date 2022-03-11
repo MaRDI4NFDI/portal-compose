@@ -161,6 +161,7 @@ services:
     networks:
       default:
         aliases:
+         - query.portal.mardi4nfdi.de
          - wdqs-frontend.svc
     environment:
       - WIKIBASE_HOST=wikibase.svc
