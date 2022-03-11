@@ -161,7 +161,6 @@ services:
     networks:
       default:
         aliases:
-         - wdqs.formulasearchengine.com
          - wdqs-frontend.svc
     environment:
       - WIKIBASE_HOST=wikibase.svc
@@ -229,7 +228,7 @@ services:
     networks:
       default:
         aliases:
-         - quickstatements.formulasearchengine.com
+         - quickstatements.portal.mardi4nfdi.de
     labels:
       - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-quickstatements.entrypoints=websecure
