@@ -45,6 +45,10 @@ services:
       WIKIBASE_PINGBACK:
       MW_WG_ENABLE_UPLOADS:
       <<: *wikibase_extra_variables
+    labels:
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wikibase.entrypoints=websecure
+      - traefik.http.routers.service-wikibase.tls.certResolver=le
 
   wikibase_jobrunner:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
@@ -126,7 +130,12 @@ services:
     networks:
      - default
     labels:
-      - traefik.enable=false
+      - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.de`)
+      - traefik.http.routers.dashboard.entrypoints=websecure
+      - traefik.http.routers.dashboard.tls.certResolver=le
+      - traefik.http.routers.dashboard.service=api@internal
+      - traefik.http.routers.dashboard.middlewares=auth
+      - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
       - com.centurylinklabs.watchtower.enable=true
 
   elasticsearch:
@@ -152,11 +161,15 @@ services:
     networks:
       default:
         aliases:
-         - wdqs.formulasearchengine.com
+         - query.portal.mardi4nfdi.de
          - wdqs-frontend.svc
     environment:
       - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
+    labels:
+      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
+      - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
   wdqs:
     image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
@@ -216,8 +229,11 @@ services:
     networks:
       default:
         aliases:
-         - quickstatements.formulasearchengine.com
+         - quickstatements.portal.mardi4nfdi.de
     labels:
+      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-quickstatements.entrypoints=websecure
+      - traefik.http.routers.service-quickstatements.tls.certResolver=le
       - com.centurylinklabs.watchtower.enable=true
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
@@ -241,7 +257,11 @@ services:
       - portainer-data:/data # volume to save settings of portainer
     labels:
       - com.centurylinklabs.watchtower.enable=true
+      - traefik.http.routers.service-portainer.rule=Host(`portainer.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-portainer.entrypoints=websecure
+      - traefik.http.routers.service-portainer.tls.certResolver=le
       - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
+
   latexml:
     container_name: latexml
     image: physikerwelt/latexml
