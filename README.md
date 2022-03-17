@@ -6,9 +6,6 @@ docker-compose repository for MaRDI
 git clone --recurse-submodules git@github.com:MaRDI4NFDI/portal-compose.git
 cd portal-compose
 cp ./mediawiki/template.env ./.env
-
-# Initializing the submodules when repo already cloned. 
-git submodule update --init --recursive
 ```
 
 Change parameters for your local installation in .env as required, this file will not be committed.
@@ -30,6 +27,26 @@ GRAFANA_PORT=3000
 RESTART=no
 ```
 
+The local install has 2 additional containers:
+* Selenium for running tests
+* Openrefine for data manipulation
+
+The local install also has open ports, so that the services can be accessed without using the reverse proxy
+* Wikibase, http://localhost:8080
+* WDQS Frontend, http://localhost:8834
+* Quickstatements, http://localhost:8840
+* OpenRefine, http://localhost:3333
+* Grafana, http://localhost:3000
+* Reverse proxy (traefik) dashboard: https://localhost/
+
+Note that the containers for local development are set to not restart, 
+so that they do not start automatically when you start your computer.
+
+Some containers are pulled from special MaRDI images:
+* wikibase and wikibase_jobrunner are pulled from https://github.com/MaRDI4NFDI/docker-wikibase 
+* backup is pulled from https://github.com/MaRDI4NFDI/docker-backup
+* quickstatements is pulled from https://github.com/MaRDI4NFDI/docker-quickstatements
+
 ## Start up the containers
 Start-up the containers from the docker-compose file for development:
 ```
@@ -42,29 +59,14 @@ docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 
 (Tipp: add these two commands to your `~/.bash_aliases`)
 
-The local install has 2 additional containers:
-* Selenium for running tests
-* Openrefine for data manipulation
-
-The local install also has open ports, so that the services can be accessed without using the reverse proxy
-* Wikibase, http://localhost:8080
-* Quickstatements, http://localhost:8840
-* WB query service (WDQS) frontend, http://localhost:8834
-* OpenRefine, http://localhost:3333
-* Grafana, http://localhost:3000
-
-The dashboard of the reverse proxy can be reached via https://localhost.
-
-Note that the containers for local development are set to not restart, 
-so that they do not start automatically when you start your computer.
-
-### Test locally
-Run the tests: `bash ./run_tests.sh`
+## Test locally
+1. Start up the containers locally as explained above
+2. Run the tests: `bash ./run_tests.sh`
 
 ## Develop locally
 
 Create a docker-compose.override.yml like this
-```docker-compse
+```docker-compose
 version: '3.4'
 
 services:
@@ -84,7 +86,7 @@ Adjust host.docker.internal on linux as [described.](https://www.jetbrains.com/h
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml -f docker-compose.override.yml up -d
 ```
 ## Build on CI 
-The containers will be built and tested after each push on the main branch: 
+The containers will be built and tested automatically by GitHub after each commit on the main branch. The CI steps are defined in `.github/workflows/main.yml`.
 
 Preparations **this has already been done on GitHub**:
 * create a [GitHub environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) 
@@ -122,4 +124,5 @@ cp ./mediawiki/template.env ./.env
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
+TRAEFIK_PW=password-for-user-<mardi>
 ```
