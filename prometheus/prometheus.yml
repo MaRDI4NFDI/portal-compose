@@ -13,9 +13,27 @@ scrape_configs:
   - job_name: prometheus
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:9090']
-  - job_name: 'traefik'
+      - targets: ['prometheus:9090']
+  - job_name: traefik
     scheme: http
+    metrics_path: /metrics
     static_configs:
       - targets: ['reverse-proxy:8082']
+    basic_auth:
+      username: mardi
+      password_file: /etc/prometheus/traefik-pass
 
+  # - job_name: node
+  #   # Override the global default and scrape targets from this job every 5 seconds.
+  #   scrape_interval: 5s
+  #   static_configs:
+  #       - targets: ['localhost:9100']
+
+    # static_configs:
+    #   - targets: ['localhost:8090', 'localhost:8091']
+    #     labels:
+    #       group: 'production'
+
+    #   - targets: ['localhost:8092']
+    #     labels:
+    #       group: 'canary'

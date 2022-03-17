@@ -53,6 +53,8 @@ The local install also has open ports, so that the services can be accessed with
 * OpenRefine, http://localhost:3333
 * Grafana, http://localhost:3000
 
+The dashboard of the reverse proxy can be reached via https://localhost.
+
 Note that the containers for local development are set to not restart, 
 so that they do not start automatically when you start your computer.
 

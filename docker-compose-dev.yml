@@ -80,6 +80,14 @@ services:
       - REFINE_MEMORY=1024M
       - REFINE_DATA_DIR=/data
 
+  reverse-proxy:
+    restart: ${RESTART}
+    labels:
+      - traefik.http.routers.dashboard-local.rule=Host(`localhost`)
+      - traefik.http.routers.dashboard-local.entrypoints=websecure
+      - traefik.http.routers.dashboard-local.tls.certResolver=le
+      - traefik.http.routers.dashboard-local.service=api@internal
+
   prometheus:
     ports:
       - "9090:9090"
