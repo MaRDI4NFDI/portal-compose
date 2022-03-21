@@ -44,6 +44,14 @@ Some containers are pulled from special MaRDI images:
 * backup is pulled from https://github.com/MaRDI4NFDI/docker-backup
 * quickstatements is pulled from https://github.com/MaRDI4NFDI/docker-quickstatements
 
+### Notes on the traefik reverse proxy
+[traefik](https://doc.traefik.io/traefik/) is an edge router (or reverse
+proxies), the purpose of which is to route incoming requests to the
+corresponding services. E.g., requests to https://portal.mardi4nfdi.de are
+forwarded to the wikibase service. Services are detected and monitored automatically.
+
+To test traefik locally and access  ... continue HERE!
+
 ## Start up the containers
 Start-up the containers from the docker-compose file for development:
 ```
