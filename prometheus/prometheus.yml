@@ -22,18 +22,3 @@ scrape_configs:
     basic_auth:
       username: mardi
       password_file: /etc/prometheus/traefik-pass
-
-  # - job_name: node
-  #   # Override the global default and scrape targets from this job every 5 seconds.
-  #   scrape_interval: 5s
-  #   static_configs:
-  #       - targets: ['localhost:9100']
-
-    # static_configs:
-    #   - targets: ['localhost:8090', 'localhost:8091']
-    #     labels:
-    #       group: 'production'
-
-    #   - targets: ['localhost:8092']
-    #     labels:
-    #       group: 'canary'

@@ -327,6 +327,3 @@ volumes:
   portainer-data: # volume to save settings of portainer
   prometheus_data:
   grafana_data:
-
-networks:
-    wdqs:
