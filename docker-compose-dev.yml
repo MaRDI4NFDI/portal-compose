@@ -91,9 +91,9 @@ services:
       - traefik.http.routers.dashboard-local.service=api@internal
 
   prometheus:
-    ports:
-      - "9090:9090"
     restart: ${RESTART}
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
 
   grafana:
     restart: ${RESTART}

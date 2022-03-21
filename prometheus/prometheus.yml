@@ -1,3 +1,4 @@
+# prometheus configuration file
 global:
   scrape_interval:     5s
   evaluation_interval: 5s
