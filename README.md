@@ -88,7 +88,7 @@ services:
 3. The traefik dashboard is protected by a password. To disable basic auth,
    comment the label defining the authentication middleware, `-
    traefik.http.routers.dashboard.middlewares=auth`. Alternatively, to test the
-   authentication, a local password hash can be generated with  `htpasswd USER
+   authentication, a local password hash can be generated with  `htpasswd -nb USER
    PASSWORD`. Write the hash in the label `-
    traefik.http.middlewares.auth.basicauth.users=USER:PASSWORD_HASH`, replacing
    all `$` by `$$`. 
