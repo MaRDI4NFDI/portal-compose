@@ -36,7 +36,7 @@ The local install also has open ports, so that the services can be accessed with
 * Quickstatements, http://localhost:8840
 * OpenRefine, http://localhost:3333
 
-Note that the containers for local development are set to not restart, 
+Note that the containers for local development are set to not restart
 so that they do not start automatically when you start your computer.
 
 Some containers are pulled from special MaRDI images:
@@ -46,11 +46,58 @@ Some containers are pulled from special MaRDI images:
 
 ### Notes on the traefik reverse proxy
 [traefik](https://doc.traefik.io/traefik/) is an edge router (or reverse
-proxies), the purpose of which is to route incoming requests to the
+proxy), with the purpose of routing incoming requests to the
 corresponding services. E.g., requests to https://portal.mardi4nfdi.de are
-forwarded to the wikibase service. Services are detected and monitored automatically.
+forwarded to the wikibase service. Services are discovered and monitored automatically, but
+rules to make services accessible on a domain, authentication, redirections,
+etc, must be defined in the docker-compose files via docker labels for the
+services' containers. See the [docs](https://doc.traefik.io/traefik/).
 
-To test traefik locally and access  ... continue HERE!
+### Optionally configure traefik locally
+Say we want to access quickstatements, wikibase and the traefik dashboard on our
+local installation, via the local domains `quickstatements.local`, `portal.local`
+and `traefik.local`. We need to tell traefik to route these addresses to the
+services.
+
+1. Add the domains to `/etc/hosts` on Linux systems:
+
+    `127.0.0.1 	portal.local quickstatements.local traefik.local`
+
+2. In `docker-compose.yml`, modify the traefik labels of the quickstatements,
+   wikibase and traefik containers to match the local host rules, i.e.,
+
+```yaml
+services:
+  # ...
+  wikibase:
+    # ...
+    labels:
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.local`)
+      # ...
+  reverse-proxy:
+    # ...
+    labels:
+      - traefik.http.routers.dashboard.rule=Host(`traefik.local`)
+      # ...
+  quickstatements:
+    # ...
+    labels:
+      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.local`)
+      # ...
+```
+3. The traefik dashboard is protected by a password. To disable basic auth,
+   comment the label defining the authentication middleware, `-
+   traefik.http.routers.dashboard.middlewares=auth`. Alternatively, to test the
+   authentication, a local password hash can be generated with  `htpasswd USER
+   PASSWORD`. Write the hash in the label `-
+   traefik.http.middlewares.auth.basicauth.users=USER:PASSWORD_HASH`, replacing
+   all `$` by `$$`. 
+
+4. After starting the containers (see below), the wiki should be accessible on
+   https://portal.local, quickstatements on https://quickstatements.local, and
+   you can login to the traefik dashboard to check for routing errors at
+   https://traefik.local
+
 
 ## Start up the containers
 Start-up the containers from the docker-compose file for development:
