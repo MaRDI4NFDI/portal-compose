@@ -23,6 +23,8 @@ WIKIBASE_PORT=8080
 WDQS_FRONTEND_PORT=8834
 QUICKSTATEMENTS_HOST=localhost
 QUICKSTATEMENTS_PORT=8840
+GRAFANA_PORT=3000
+PROMETHEUS_PORT=9090
 RESTART=no
 ```
 
@@ -35,6 +37,8 @@ The local install also has open ports, so that the services can be accessed with
 * WDQS Frontend, http://localhost:8834
 * Quickstatements, http://localhost:8840
 * OpenRefine, http://localhost:3333
+* Grafana, http://localhost:3000
+* Reverse proxy (traefik) dashboard: https://localhost/
 
 Note that the containers for local development are set to not restart, 
 so that they do not start automatically when you start your computer.
@@ -63,7 +67,7 @@ docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 ## Develop locally
 
 Create a docker-compose.override.yml like this
-```docker-compse
+```docker-compose
 version: '3.4'
 
 services:
@@ -121,4 +125,5 @@ cp ./mediawiki/template.env ./.env
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
+TRAEFIK_PW=password-for-user-<mardi>
 ```

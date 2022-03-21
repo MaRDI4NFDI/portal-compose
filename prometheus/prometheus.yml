@@ -1,0 +1,25 @@
+# prometheus configuration file
+global:
+  scrape_interval:     5s
+  evaluation_interval: 5s
+
+  external_labels:
+    monitor: 'mardi-monitor'
+
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+scrape_configs:
+  - job_name: prometheus
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['prometheus:9090']
+  - job_name: traefik
+    scheme: http
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['reverse-proxy:8082']
+    basic_auth:
+      username: mardi
+      password_file: /etc/prometheus/traefik-pass
