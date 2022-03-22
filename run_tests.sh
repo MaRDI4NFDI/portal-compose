@@ -8,4 +8,8 @@ printf "\nTest the backup functions"
 printf "\n----------------------------------------\n"
 docker exec mardi-backup bash /test/test_backup.sh
 
+printf "\nTest the metrics exporters"
+printf "\n----------------------------------------\n"
+. test/test_metrics.sh
+
 printf "\n"
