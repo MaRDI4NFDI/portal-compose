@@ -322,7 +322,7 @@ services:
     restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
-      - '${BACKUP_DIR:-./backup}:/backup_data/'
+      - '${BACKUP_DIR:-./backup}:/backup_data:ro'
     
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
