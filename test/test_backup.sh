@@ -4,6 +4,7 @@
 
 # internal Docker URL directly to main page (as set in docker-compose), avoid redirects
 WIKI_URL='wikibase-docker.svc/wiki/Main_Page' 
+TIME_START=$(date +%s)
 
 # count *.gz files in /data dir
 _count_backup_files() {
@@ -34,9 +35,9 @@ test_1() {
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
     if [[ $(($file_count_before+3)) == $file_count_after ]]; then
-        printf ' - Test backup OK: Three backup files where created.\n'
+        printf " - Test backup OK: $((file_count_after - file_count_before))/3 backup files where created.\n"
     else
-        printf ' - Test backup FAILED: no backup where files created.\n'
+        printf " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup where files created.\n"
         exit 1
     fi
 }
@@ -108,9 +109,34 @@ test_3() {
         printf " - Test restore XML FAILED: Could not restore wiki at ${WIKI_MAIN_URL}.\n"
         exit 1
     fi    
-    printf ' - Test restore XML OK: Wiki was restored from XML dump.\n'
+    printf " - Test restore XML OK: Wiki was restored from XML dump.\n"
+}
+
+test_4() {
+    metrics_file="/data/backup_full.prom"
+    printf "Test that a metrics file ${metrics_file} was written\n"
+
+    TIME_MOD=$(stat --printf=%Y $metrics_file)
+
+    if [ -s $metrics_file ]; then
+        # file exists. check that file was modified after calling this script
+        if [ $TIME_MOD -ge $TIME_START ]; then
+            printf " - Test metrics file OK: ${metrics_file} exists, is non-empty and recent\n"
+        else
+            printf " - Test metrics file FAILED: ${metrics_file} exists, is non-empty but old\n"
+            exit 1
+        fi
+
+    elif [ -f $metrics_file ]; then
+        printf " - Test metrics file FAILED: ${metrics_file} exists and but is empty\n"
+        exit 1
+    else
+        printf " - Test metrics file FAILED: ${metrics_file} does not exist\n"
+        exit 1
+    fi
 }
 
 test_1
 test_2
 test_3
+test_4
