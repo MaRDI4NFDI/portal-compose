@@ -316,11 +316,13 @@ services:
     container_name: node_exporter
     command:
       - '--path.rootfs=/host'
+      - '--collector.textfile.directory=/backup_data'
     network_mode: host
     pid: host
     restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
+      - '${BACKUP_DIR:-./backup}:/backup_data/'
     
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
