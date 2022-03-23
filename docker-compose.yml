@@ -327,6 +327,7 @@ services:
     command:
       - '--path.rootfs=/host'
       - '--collector.textfile.directory=/backup_data'
+      - '--web.listen-address=:9101'
     network_mode: host
     pid: host
     restart: unless-stopped
