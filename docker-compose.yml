@@ -275,7 +275,7 @@ services:
     # command: sh /etc/prometheus/setup_prometheus.sh $TRAEFIK_PW $HOST_NETWORK_IP
     command: >
       sh -c "echo $TRAEFIK_PW > /etc/prometheus/traefik-pass
-      && sed -i \"s/HOST_NETWORK_IP/$HOST_NETWORK_IP/\" /etc/prometheus/prometheus.yml"
+      && sed \"s/%SUBSTITUTE_HOST_NETWORK_IP%/$HOST_NETWORK_IP/\" /etc/prometheus/prometheus.example.yml > /etc/prometheus/prometheus.yml"
 
   prometheus:
     image: prom/prometheus
