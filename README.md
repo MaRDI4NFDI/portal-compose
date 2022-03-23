@@ -113,7 +113,11 @@ Stop the containers:
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml down
 ```
 
-(Tipp: add these two commands to your `~/.bash_aliases`)
+Hint: make a local copy `cp docker-compose-dev.yml docker-compose.override.yml`, where local changes can be made if necessary. The override file is read automatically by docker compose when calling
+```
+docker-compose up -d | down | logs
+```
+See [here](https://docs.docker.com/compose/extends/) and [here](https://docs.docker.com/compose/extends/#adding-and-overriding-configuration) for further info.
 
 ## Test locally
 1. Start up the containers locally as explained above
