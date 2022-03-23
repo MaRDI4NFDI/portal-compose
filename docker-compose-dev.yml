@@ -68,6 +68,8 @@ services:
     container_name: mardi-selenium
     volumes:
       - ./test:/test
+    labels:
+      - traefik.enable=false
 
   openrefine:
     image: ghcr.io/aot29/docker-openrefine:master
