@@ -186,3 +186,35 @@ MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 TRAEFIK_PW=password-for-user-<mardi>
 ```
+
+## Troubleshooting
+
+### No internet in docker container on OpenStack VM
+
+If the internet docker is unreachable on OpenStack VMs, causing commands like apt-get or curl to fail (`connection timeout`; in cases of "host not reachble" errors this is probably a DNS problem), this may be due to [wrong network settings](https://mlohr.com/docker-mtu/).
+Check the MTU settings with `ip link`, e.g.,
+```
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether fa:16:3e:20:67:be brd ff:ff:ff:ff:ff:ff
+    altname enp0s3
+    altname ens3
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN mode DEFAULT group default 
+    link/ether 02:42:ae:d6:94:20 brd ff:ff:ff:ff:ff:ff
+```
+The docker MTU needs to be **less or equal** to the physical network setting (here `eth0`).
+This can be fixed for docker containers by setting by setting in `/etc/docker/daemon.json`:
+```json
+{
+    "mtu": 1450
+}
+```
+and for `docker-compose` by adding the following to `docker-compose-dev.yml` (or `*.override.yml`):
+```yaml
+networks:                                
+  default:                               
+    driver: bridge                       
+    driver_opts:                         
+      com.docker.network.driver.mtu: 1450
+```
