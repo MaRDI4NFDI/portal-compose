@@ -131,13 +131,19 @@ version: '3.4'
 
 services:
   wikibase:
-      image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal"
+    expose:
+      - 9000
+
     volumes:
-     - ~/git/mediawiki/MathSearch:/var/www/html/extensions/MathSearch
+      - ./extensions-dev/<extension_to_debug>:/var/www/html/extensions/<extension_to_debug>
+      - ./debugging/php.ini:/usr/local/etc/php/php.ini
 ```
-Here `~/git/mediawiki/MathSearch` is the path of your local development checkout of the extension, you modify.
+Here `~/git/mediawiki/<extension_to_debug>` is the path of your local development checkout of the extension, you modify.
+
+For extended documentation on debuging with xdebug, [see](https://portal.mardi4nfdi.de/wiki/Project:DebuggingPHPinMediawiki). 
 
 Eventually, add the docker-compose.override.yml file to your startup command:
 
