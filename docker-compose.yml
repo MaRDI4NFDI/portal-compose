@@ -277,7 +277,7 @@ services:
       - ./prometheus/:/etc/prometheus/:rw
     command: >
       sh -c "echo $TRAEFIK_PW > /etc/prometheus/traefik-pass
-      && sed \"s/$${?HOST_NETWORK_IP}?/$HOST_NETWORK_IP/\" /etc/prometheus/prometheus.example.yml > /etc/prometheus/prometheus.yml"
+      && sed \"s/\\$${\\?HOST_NETWORK_IP}\\?/$HOST_NETWORK_IP/\" /etc/prometheus/prometheus.example.yml > /etc/prometheus/prometheus.yml"
 
   prometheus:
     image: prom/prometheus
@@ -303,7 +303,7 @@ services:
     image: alpine:latest
     volumes:
       - ./grafana/:/etc/grafana/:rw
-    command: sh -c "sed -e \"s/^\(host =\) $$GF_MAIL_HOST/\1 $GF_MAIL_HOST/\" -e \"s/^\(user =\) $$GF_MAIL_USER/\1 $GF_MAIL_USER/\" -e \"s/^\(password =\) $$GF_MAIL_PW/\1 $GF_MAIL_PW/\" -e \"s/^\(from_address =\) $$GF_MAIL_FROMADDRESS/\1 $GF_MAIL_FROMADDRESS/\" -e \"s/^\(from_name =\) $$GF_MAIL_FROMNAME/\1 $GF_MAIL_FROMNAME/\" /etc/grafana/grafana.example.ini > /etc/grafana/grafana.ini"
+    command: sh -c "sed -e \"s/^\\(host =\\) \\$${\\?GF_MAIL_HOST}\\?/\\1 $GF_MAIL_HOST/\" -e \"s/^\\(user =\\) \\$${\\?GF_MAIL_USER}\\?/\\1 $GF_MAIL_USER/\" -e \"s/^\\(password =\\) \\$${\\?GF_MAIL_PW}\\?/\\1 $GF_MAIL_PW/\" -e \"s/^\\(from_address =\\) \\$${\\?GF_MAIL_FROMADDRESS}\\?/\\1 $GF_MAIL_FROMADDRESS/\" -e \"s/^\\(from_name =\\) \\$${\\?GF_MAIL_FROMNAME}\\?/\\1 \\\"$GF_MAIL_FROMNAME\\\"/\" /etc/grafana/grafana.example.ini > /etc/grafana/grafana.ini"
 
   grafana:
     image: grafana/grafana
