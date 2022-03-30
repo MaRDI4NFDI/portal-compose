@@ -140,7 +140,7 @@ services:
       - ./extensions-dev/<extension_to_debug>:/var/www/html/extensions/<extension_to_debug>
       - ./debugging/php.ini:/usr/local/etc/php/php.ini
 ```
-Here `~/git/mediawiki/<extension_to_debug>` is the path of your local development checkout of the extension, you modify.
+Here `./extensions-dev/<extension_to_debug>` is the path of your local development checkout of the extension, you modify.
 
 For extended documentation on debugging with xdebug, [see](https://portal.mardi4nfdi.de/wiki/Project:DebuggingPHPinMediawiki). 
 
