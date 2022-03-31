@@ -27,4 +27,5 @@ scrape_configs:
     scrape_interval: 30s
     static_configs:
       # note: localhost because node_exporter service uses network_mode=host
-      - targets: ['%SUBSTITUTE_HOST_NETWORK_IP%:9101']
+      # env var needs to be replaced with envsubst or sed by setup script
+      - targets: ['$HOST_NETWORK_IP:9101']
