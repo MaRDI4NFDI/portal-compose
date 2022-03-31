@@ -128,3 +128,9 @@ $wgExtraNamespaces[NS_PRIVATE] = "Private";
 $wgGroupPermissions['private'] = []; 
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
+
+# Settings for MathSearch extension.
+$wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
+
+$wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
+$wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
