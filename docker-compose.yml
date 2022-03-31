@@ -157,7 +157,7 @@ services:
   formulasearch:
     image: ghcr.io/mardi4nfdi/formulasearch:main
     container_name: formulasearch
-    restart: always
+    restart: unless-stopped
     environment:
       HARVESTS_PATH: '/my_harvests'
       # Port config 1985 is internal port and should not be changed currently.
