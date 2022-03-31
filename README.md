@@ -156,7 +156,7 @@ The containers will be built and tested automatically by GitHub after each commi
 Preparations **this has already been done on GitHub**:
 * create a [GitHub environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) 
 * call it "staging" (specified in .github/workflows/main.yml)
-* set (required) these to test passwords:
+* set (required) these to test passwords, change the default values:
 ```
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
