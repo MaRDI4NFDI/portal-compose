@@ -25,7 +25,6 @@ services:
     container_name: mardi-wikibase
     links:
       - mysql
-      - formulasearch
     depends_on:
       - mysql
     restart: unless-stopped
@@ -153,23 +152,6 @@ services:
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
-
-  formulasearch:
-    image: ghcr.io/mardi4nfdi/formulasearch:main
-    container_name: formulasearch
-    restart: unless-stopped
-    environment:
-      HARVESTS_PATH: '/my_harvests'
-      # Port config 1985 is internal port and should not be changed currently.
-      FS_SERVER_PORT: 1985
-      ENABLE_REST_INSERTIONS: 'false'
-    ports:
-      - 1985:1985
-    volumes:
-      - formulasearch_harvests:/my_harvests/:ro
-      - ${BACKUP_DIR:-./backup}:/data
-    labels:
-      - com.centurylinklabs.watchtower.enable=true
 
   wdqs-frontend:
     image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.2}"
