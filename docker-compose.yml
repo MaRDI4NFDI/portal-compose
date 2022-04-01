@@ -290,13 +290,12 @@ services:
     restart: always
 
   setup_prometheus:
-    image: "docker-alpine-ext:main"
+    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
     volumes:
       - ./prometheus/:/etc/prometheus/:rw
-    command: >
-      sh -c "envsubst < /etc/prometheus/traefik-pass.template > /etc/prometheus/traefik-pass
-      && envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
+    command: sh -c "envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
     environment:
+      TRAEFIK_USER: ${TRAEFIK_USER}
       TRAEFIK_PW: ${TRAEFIK_PW}
       HOST_NETWORK_IP: ${HOST_NETWORK_IP}
 
@@ -321,8 +320,7 @@ services:
       - traefik.http.routers.prometheus.middlewares=auth
 
   setup_grafana:
-    # image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
-    image: "docker-alpine-ext:main"
+    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
     volumes:
       - ./grafana/:/etc/grafana/:rw
     command: sh -c "envsubst < /etc/grafana/grafana.template.ini > /etc/grafana/grafana.ini"
