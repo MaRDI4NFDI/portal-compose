@@ -21,8 +21,8 @@ scrape_configs:
     static_configs:
       - targets: ['reverse-proxy:8082']
     basic_auth:
-      username: mardi
-      password_file: /etc/prometheus/traefik-pass
+      username: $TRAEFIK_USER
+      password: $TRAEFIK_PW
   - job_name: node
     scrape_interval: 30s
     static_configs:
