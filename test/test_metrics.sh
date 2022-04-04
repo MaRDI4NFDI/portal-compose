@@ -10,7 +10,7 @@ set +e
 # executes the corresponding tests that require the docker environment.
 
 # test if node_exporter metrics can be accessed on
-# ${HOST_NETWORK_IP}:9100/metrics --- i.e., on the host network, due to
+# ${HOST_NETWORK_IP}:9101/metrics --- i.e., on the host network, due to
 # the docker setting network_mode=host.
 # THIS MUST BE EXECUTED ON THE HOST, OUTSIDE OF THE DOCKER COMPOSE ECOSYSTEM
 # Execute in the base path of portal-compose, where the .env file is located
@@ -20,14 +20,14 @@ test_node_exporter() {
 
     if [[ -n "$HOST_NETWORK_IP" ]]; then
         printf '    OK: Found $HOST_NETWORK_IP=%s\n' "${HOST_NETWORK_IP}"
-        metrics=$(curl --silent --show-error "${HOST_NETWORK_IP}:9100/metrics")
+        metrics=$(curl --silent --show-error "${HOST_NETWORK_IP}:9101/metrics")
         # printf "curl status ($?)\n"
         # printf "\nmetrics=$metrics\n"
         if [[ -z "$metrics" ]]; then
-            printf '    ERROR: No metrics found at %s:9100/metrics\n' "${HOST_NETWORK_IP}"
+            printf '    ERROR: No metrics found at %s:9101/metrics\n' "${HOST_NETWORK_IP}"
             return 1
         else
-            printf '    OK: Found metrics at %s:9100/metrics\n' "${HOST_NETWORK_IP}"
+            printf '    OK: Found metrics at %s:9101/metrics\n' "${HOST_NETWORK_IP}"
         fi
     else
         printf "    ERROR: Environment variable \$HOST_NETWORK_IP was not set\n"
@@ -64,5 +64,3 @@ elif [[ "$1" == docker ]]; then
 else
     printf 'ERROR: unknown command line argument "%s". Must be empty or "docker"\n' "$1"
 fi
-
-
