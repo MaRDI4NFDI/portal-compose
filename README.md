@@ -194,13 +194,13 @@ TRAEFIK_PW=password-for-user-<mardi>
 
 ## Configure Grafana
 
-Grafana is a tool to visualize metrics collected by Prometheus. Here, Prometheus
-is set up to scrape metrics provided by traefik, the [backup script](https://github.com/mardi4nfdi/docker-backup), and system metrics of the host
-system via node-exporter. The Grafana UI can be accessed via https://grafana.portal.mardi4nfdi.de or https://localhost:3000, locally. The dashboards need to be added manually after initializing the Grafana container in the UI via `Create->Import`:
+[Grafana](https://grafana.com/) is a tool to visualize metrics collected by [Prometheus](https://prometheus.io/). Here, Prometheus
+is set up to scrape metrics provided by the edge router [traefik](traefik.io), the [backup script](https://github.com/mardi4nfdi/docker-backup), and system metrics of the host
+system via [node-exporter](https://github.com/prometheus/node_exporter). The Grafana UI can be accessed via https://grafana.portal.mardi4nfdi.de or https://localhost:3000, locally. The dashboards need to be added manually after initializing the Grafana container in the UI via `Create->Import`:
 
 - backup monitor: import the file [grafana/backup_monitor.json](grafana/backup_monitor.json)
-- node-exporter: import e.g. the dashboard id 1860
-- traefik: import e.g. the dashboard id 4475
+- node-exporter: import e.g. the dashboard id [1860](https://grafana.com/grafana/dashboards/1860)
+- traefik: import e.g. the dashboard id [4475](https://grafana.com/grafana/dashboards/4475)
 
 Currently, Grafana does not offer import/export of alerting rules. These have to
 be created manually, e.g., for the disk usage of the backup drive and failure of
