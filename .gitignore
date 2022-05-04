@@ -7,6 +7,8 @@ backup
 data
 extensions-dev 
 docker-compose.override.yml
+grafana/grafana.ini
+prometheus/prometheus.yml
 images
 !images/favicon.png
 !images/MaRDI_Logo.png

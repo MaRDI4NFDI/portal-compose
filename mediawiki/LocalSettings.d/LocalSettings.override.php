@@ -130,3 +130,8 @@ $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
 $wgVisualEditorRebaserURL = 'http://localhost:8081';
+# Settings for MathSearch extension.
+$wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
+
+$wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
+$wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';

@@ -131,13 +131,18 @@ version: '3.4'
 
 services:
   wikibase:
-      image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:dev"
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal"
+    expose:
+      - 9000
     volumes:
-     - ~/git/mediawiki/MathSearch:/var/www/html/extensions/MathSearch
+      - ./extensions-dev/<extension_to_debug>:/var/www/html/extensions/<extension_to_debug>
+      - ./debugging/php.ini:/usr/local/etc/php/php.ini
 ```
-Here `~/git/mediawiki/MathSearch` is the path of your local development checkout of the extension, you modify.
+Here `./extensions-dev/<extension_to_debug>` is the path of your local development checkout of the extension, you modify.
+
+For extended documentation on debugging with xdebug, [see](https://portal.mardi4nfdi.de/wiki/Project:DebuggingPHPinMediawiki). 
 
 Eventually, add the docker-compose.override.yml file to your startup command:
 
@@ -151,7 +156,7 @@ The containers will be built and tested automatically by GitHub after each commi
 Preparations **this has already been done on GitHub**:
 * create a [GitHub environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) 
 * call it "staging" (specified in .github/workflows/main.yml)
-* set (required) these to test passwords:
+* set (required) these to test passwords, change the default values:
 ```
 MW_SECRET_KEY=some-secret-key
 MW_ADMIN_PASS=change-this-password
@@ -186,3 +191,17 @@ MW_ADMIN_PASS=change-this-password
 DB_PASS=change-this-sqlpassword
 TRAEFIK_PW=password-for-user-<mardi>
 ```
+
+## Configure Grafana
+
+[Grafana](https://grafana.com/) is a tool to visualize metrics collected by [Prometheus](https://prometheus.io/). Here, Prometheus
+is set up to scrape metrics provided by the edge router [traefik](traefik.io), the [backup script](https://github.com/mardi4nfdi/docker-backup), and system metrics of the host
+system via [node-exporter](https://github.com/prometheus/node_exporter). The Grafana UI can be accessed via https://grafana.portal.mardi4nfdi.de or https://localhost:3000, locally. The dashboards need to be added manually after initializing the Grafana container in the UI via `Create->Import`:
+
+- backup monitor: import the file [grafana/backup_monitor.json](grafana/backup_monitor.json)
+- node-exporter: import e.g. the dashboard id [1860](https://grafana.com/grafana/dashboards/1860)
+- traefik: import e.g. the dashboard id [4475](https://grafana.com/grafana/dashboards/4475)
+
+Currently, Grafana does not offer import/export of alerting rules. These have to
+be created manually, e.g., for the disk usage of the backup drive and failure of
+the backups.

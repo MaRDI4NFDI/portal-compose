@@ -22,11 +22,11 @@ x-extra-variables: &wikibase_extra_variables
 services:
   wikibase:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
-
     container_name: mardi-wikibase
     links:
       - mysql
       - mongo
+      - formulasearch
     depends_on:
       - mysql
       - mongo
@@ -38,6 +38,7 @@ services:
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - ./mediawiki/images/:/var/www/html/images/
       - quickstatements-data:/quickstatements/data
+      - formulasearch_harvests:/var/www/html/my_harvests/
     networks:
       default:
         aliases:
@@ -46,7 +47,7 @@ services:
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
-      MW_WG_ENABLE_UPLOADS:
+      MW_WG___UPLOADS:
       <<: *wikibase_extra_variables
     labels:
       - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`)
@@ -170,6 +171,23 @@ services:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
 
+  formulasearch:
+    image: ghcr.io/mardi4nfdi/formulasearch:main
+    container_name: formulasearch
+    restart: "no"
+    environment:
+      HARVESTS_PATH: '/my_harvests'
+      # Port config 1985 is internal port and should not be changed currently.
+      FS_SERVER_PORT: 1985
+      ENABLE_REST_INSERTIONS: 'false'
+    ports:
+      - 1985:1985
+    volumes:
+      - formulasearch_harvests:/my_harvests/:ro
+      - ${BACKUP_DIR:-./backup}:/data
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+
   wdqs-frontend:
     image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.2}"
     container_name: mardi-wdqs-frontend
@@ -289,13 +307,14 @@ services:
     restart: always
 
   setup_prometheus:
-    image: alpine:latest
+    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
     volumes:
       - ./prometheus/:/etc/prometheus/:rw
-    # command: sh /etc/prometheus/setup_prometheus.sh $TRAEFIK_PW $HOST_NETWORK_IP
-    command: >
-      sh -c "echo $TRAEFIK_PW > /etc/prometheus/traefik-pass
-      && sed \"s/%SUBSTITUTE_HOST_NETWORK_IP%/$HOST_NETWORK_IP/\" /etc/prometheus/prometheus.example.yml > /etc/prometheus/prometheus.yml"
+    command: sh -c "envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
+    environment:
+      TRAEFIK_USER: ${TRAEFIK_USER}
+      TRAEFIK_PW: ${TRAEFIK_PW}
+      HOST_NETWORK_IP: ${HOST_NETWORK_IP}
 
   prometheus:
     image: prom/prometheus
@@ -317,12 +336,26 @@ services:
       - traefik.http.routers.prometheus.tls.certResolver=le
       - traefik.http.routers.prometheus.middlewares=auth
 
+  setup_grafana:
+    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
+    volumes:
+      - ./grafana/:/etc/grafana/:rw
+    command: sh -c "envsubst < /etc/grafana/grafana.template.ini > /etc/grafana/grafana.ini"
+    environment:
+      GF_MAIL_HOST: ${GF_MAIL_HOST}
+      GF_MAIL_USER: ${GF_MAIL_USER}
+      GF_MAIL_PW: ${GF_MAIL_PW}
+      GF_MAIL_FROMADDRESS: ${GF_MAIL_FROMADDRESS}
+      GF_MAIL_FROMNAME: ${GF_MAIL_FROMNAME}
+
   grafana:
     image: grafana/grafana
     depends_on:
+      - setup_grafana
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana/:/etc/grafana/
     labels:
       - traefik.http.routers.grafana.rule=Host(`grafana.portal.mardi4nfdi.de`)
       - traefik.http.routers.grafana.entrypoints=websecure
@@ -367,3 +400,4 @@ volumes:
   portainer-data: # volume to save settings of portainer
   prometheus_data:
   grafana_data:
+  formulasearch_harvests:
