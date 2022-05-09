@@ -116,6 +116,7 @@ services:
       DB_PASS: ${DB_PASS}
       BACKUP_SCHEDULE: '15 4 * * *'
       KEEP_DAYS: ${KEEP_DAYS:-30}
+      BACKUP_CRON_ENABLE: ${BACKUP_CRON_ENABLE:-true}
     entrypoint: "/app/start.sh"
 
   reverse-proxy:
