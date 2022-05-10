@@ -1,10 +1,10 @@
-"""Test EmbedVideo extension installation."""
+"""Test YouTube extension installation."""
 from MediawikiTest import MediawikiBase
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class YouTubeTest(MediawikiBase):
-    """Test that Embed Video extension is properly installed."""
+    """Test that YouTube extension is properly installed."""
 
     def test_extension_listed(self):
         """Check that extensions are listed in Version page"""
