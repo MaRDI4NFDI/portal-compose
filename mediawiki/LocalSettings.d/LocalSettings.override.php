@@ -75,6 +75,7 @@ wfLoadExtension( 'MathSearch' );
 wfLoadExtension( 'Lockdown' );
 wfLoadExtension( 'TwitterWidget' );
 wfLoadExtension( 'SyntaxHighlight_GeSHi' );
+wfLoadExtension( 'ExternalContent' );
 
 $wgWBRepoSettings['formatterUrlProperty']='P10';
 $wgMathDisableTexFilter = 'always';
@@ -134,3 +135,5 @@ $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
+
+# debugging
