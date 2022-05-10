@@ -107,7 +107,6 @@ services:
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
-      - com.centurylinklabs.watchtower.enable=true
       - traefik.enable=false
     environment:
       DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
@@ -139,7 +138,6 @@ services:
       - traefik.http.routers.dashboard.service=api@internal
       - traefik.http.routers.dashboard.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
-      - com.centurylinklabs.watchtower.enable=true
 
   elasticsearch:
     image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.5.4-wmde.2}"
@@ -168,8 +166,6 @@ services:
     volumes:
       - formulasearch_harvests:/my_harvests/:ro
       - ${BACKUP_DIR:-./backup}:/data
-    labels:
-      - com.centurylinklabs.watchtower.enable=true
 
   wdqs-frontend:
     image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.2}"
@@ -256,7 +252,6 @@ services:
       - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-quickstatements.entrypoints=websecure
       - traefik.http.routers.service-quickstatements.tls.certResolver=le
-      - com.centurylinklabs.watchtower.enable=true
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
@@ -278,7 +273,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
       - portainer-data:/data # volume to save settings of portainer
     labels:
-      - com.centurylinklabs.watchtower.enable=true
       - traefik.http.routers.service-portainer.rule=Host(`portainer.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-portainer.entrypoints=websecure
       - traefik.http.routers.service-portainer.tls.certResolver=le
@@ -367,7 +361,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --label-enable --include-stopped --revive-stopped
+    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *"
     restart: always
     
 volumes:
