@@ -1,5 +1,5 @@
 <?php
 
 // https://www.mediawiki.org/wiki/Extension:YouTube
-## EmbedVideo configuration
+## YouTube configuration
 wfLoadExtension( 'YouTube' );
