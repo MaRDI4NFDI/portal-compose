@@ -135,3 +135,7 @@ $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
+
+# Removing deprecation warnings higher than 1.34. 
+$wgDeprecationReleaseLimit = '1.34';
+
