@@ -11,4 +11,4 @@ class ExternalContentTest(MediawikiBase):
         version_url = "http://mardi-wikibase/wiki/Special:Version"
         self.loadURL(version_url)
         element = self.getElementById("bodyContent")
-        self.assertTrue('ExternalContent' in element.text, "Extension ExternalContent not installed.")
+        self.assertTrue('External Content' in element.text, "Extension ExternalContent not installed.")
