@@ -61,7 +61,7 @@ $wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$f
 # Enabling uploads for images.
 $wgEnableUploads = true; 
 # Explicitly mentioning the file-extensions for image-upload. 
-$wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp' ];
+$wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg' ];
 # Explicitly mentioning the upload-path for image-upload.
 $wgUploadPath = $wgScriptPath . '/images/';
 
