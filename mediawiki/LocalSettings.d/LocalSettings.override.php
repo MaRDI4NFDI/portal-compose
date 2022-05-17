@@ -27,7 +27,7 @@
 
 # Prevent new user registrations except by sysops
 $wgGroupPermissions['*']['createaccount'] = false;
-$wgGroupPermissions['user']['createaccount'] = false;
+$wgGroupPermissions['user']['createaccount'] = true;
 
 # Restrict anonymous editing
 $wgGroupPermissions['*']['edit'] = false;
