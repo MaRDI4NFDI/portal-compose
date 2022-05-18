@@ -21,7 +21,8 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: wikibase_test
     container_name: mardi-wikibase
     links:
       - mysql
@@ -53,7 +54,8 @@ services:
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
   wikibase_jobrunner:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: wikibase_test
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -88,7 +90,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     networks:
       default:
-        aliases:
+        aliases
          - mysql.svc
 
   backup:
@@ -361,6 +363,16 @@ services:
     volumes:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
+
+  mysqld_exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: mysqld_exporter
+    depends_on:
+      - mysql
+    command:
+      - '--web.listen-address=:9104'
+    environment:
+      DATA_SOURCE_NAME: "exporter:${MYSQLD_EXPORTER_PASS}@(mysql.svc:3306)/"
     
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
