@@ -31,4 +31,4 @@ scrape_configs:
       - targets: ['$HOST_NETWORK_IP:9101']
   - job_name: mysql
     static_configs:
-      - targets: ['mysqld-exporter:9104']
+      - targets: ['mysqld_exporter:9104']

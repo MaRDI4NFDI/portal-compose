@@ -21,8 +21,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
-    image: wikibase_test
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -54,8 +53,7 @@ services:
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
   wikibase_jobrunner:
-    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
-    image: wikibase_test
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -90,7 +88,7 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     networks:
       default:
-        aliases
+        aliases:
          - mysql.svc
 
   backup:
