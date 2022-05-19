@@ -293,6 +293,7 @@ services:
       TRAEFIK_USER: ${TRAEFIK_USER}
       TRAEFIK_PW: ${TRAEFIK_PW}
       HOST_NETWORK_IP: ${HOST_NETWORK_IP}
+      WATCHTOWER_API_TOKEN: ${WATCHTOWER_API_TOKEN}
 
   prometheus:
     image: prom/prometheus
@@ -362,7 +363,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *"
+    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
     
 volumes:
