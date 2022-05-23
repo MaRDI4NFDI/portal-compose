@@ -53,15 +53,15 @@ $wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$f
         [
             'href' => 'https://www.mardi4nfdi.de/imprint',
             'rel' => 'noreferrer noopener' // not required, but recommended for security reasons
-        ], 
+        ],
         'Imprint');
     };
     return true;
 };
 
 # Enabling uploads for images.
-$wgEnableUploads = true; 
-# Explicitly mentioning the file-extensions for image-upload. 
+$wgEnableUploads = true;
+# Explicitly mentioning the file-extensions for image-upload.
 $wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp' ];
 # Explicitly mentioning the upload-path for image-upload.
 $wgUploadPath = $wgScriptPath . '/images/';
@@ -127,10 +127,11 @@ define("NS_PRIVATE", 3000); // This MUST be even.
 $wgExtraNamespaces[NS_PRIVATE] = "Private";
 
 ## Adding new user group private which is blocking reading and editing pages in private namespace.
-$wgGroupPermissions['private'] = []; 
+$wgGroupPermissions['private'] = [];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
+$wgVisualEditorRebaserURL = 'http://localhost:8081';
 # Settings for MathSearch extension.
 $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 

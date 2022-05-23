@@ -24,7 +24,7 @@ entryPoints:
 metrics:
   prometheus:
     entryPoint: metrics
-    
+
 providers:
   docker: {}
 
