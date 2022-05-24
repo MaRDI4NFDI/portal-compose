@@ -179,10 +179,13 @@ services:
       # Port config 1985 is internal port and should not be changed currently.
       FS_SERVER_PORT: 1985
       ENABLE_REST_INSERTIONS: 'false'
+      CRON_UPDATE_FORMULAE: ${FS_CRON_UPDATE_FORMULAE}
+      CRON_ENABLED: ${FS_CRON_ENABLED:-false}
+      ALWAYS_EXPORT: 'false'
     ports:
       - 1985:1985
     volumes:
-      - formulasearch_harvests:/my_harvests/:ro
+      - formulasearch_harvests:/my_harvests/
       - ${BACKUP_DIR:-./backup}:/data
 
   wdqs-frontend:
