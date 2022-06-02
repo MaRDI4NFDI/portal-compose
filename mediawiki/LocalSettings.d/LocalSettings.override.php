@@ -36,8 +36,8 @@ $wgGroupPermissions['*']['edit'] = false;
 $wgSitename = 'MaRDI portal';
 
 # Set MaRDI logo and icon
-$wgLogo = $wgScriptPath . '/images/MaRDI_Logo.png';
-$wgFavicon = $wgScriptPath . "/images/favicon.png";
+$wgLogo = $wgScriptPath . '/images_repo/MaRDI_Logo.png';
+$wgFavicon = $wgScriptPath . '/images_repo/favicon.png';
 
 # Footer
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, &$tpl ) {
