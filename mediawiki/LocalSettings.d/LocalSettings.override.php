@@ -27,6 +27,7 @@
 
 # Prevent new user registrations except by sysops
 $wgGroupPermissions['*']['createaccount'] = false;
+$wgGroupPermissions['user']['createaccount'] = true;
 
 # Restrict anonymous editing
 $wgGroupPermissions['*']['edit'] = false;
@@ -35,8 +36,8 @@ $wgGroupPermissions['*']['edit'] = false;
 $wgSitename = 'MaRDI portal';
 
 # Set MaRDI logo and icon
-$wgLogo = $wgScriptPath . '/images/MaRDI_Logo.png';
-$wgFavicon = $wgScriptPath . "/images/favicon.png";
+$wgLogo = $wgScriptPath . '/images_repo/MaRDI_Logo.png';
+$wgFavicon = $wgScriptPath . '/images_repo/favicon.png';
 
 # Footer
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, &$tpl ) {
@@ -52,7 +53,7 @@ $wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$f
         [
             'href' => 'https://www.mardi4nfdi.de/imprint',
             'rel' => 'noreferrer noopener' // not required, but recommended for security reasons
-        ], 
+        ],
         'Imprint');
     };
     return true;
@@ -129,10 +130,11 @@ define("NS_PRIVATE", 3000); // This MUST be even.
 $wgExtraNamespaces[NS_PRIVATE] = "Private";
 
 ## Adding new user group private which is blocking reading and editing pages in private namespace.
-$wgGroupPermissions['private'] = []; 
+$wgGroupPermissions['private'] = [];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
+$wgVisualEditorRebaserURL = 'http://localhost:8081';
 # Settings for MathSearch extension.
 $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 

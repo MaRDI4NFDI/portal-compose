@@ -25,16 +25,21 @@ services:
     container_name: mardi-wikibase
     links:
       - mysql
+      - mongo
       - formulasearch
     depends_on:
       - mysql
+      - mongo
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
       - shared_mardi_wikibase:/shared/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki/images/:/var/www/html/images/
+      - shared_mediawiki_images:/var/www/html/images/:rw
+      - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images_repo/MaRDI_Logo.png
+      - ./mediawiki/images/MaRDI_Logo_S_5_rgba.png:/var/www/html/images_repo/MaRDI_Logo_S_5_rgba.png
+      - ./mediawiki/images/favicon.png:/var/www/html/images_repo/favicon.png
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
     networks:
@@ -58,8 +63,10 @@ services:
     command:  /jobrunner-entrypoint.sh
     links:
       - mysql
+      - mongo
     depends_on:
       - mysql
+      - mongo
     restart: always
     volumes:
       - shared_mardi_wikibase:/shared/
@@ -91,6 +98,19 @@ services:
         aliases:
          - mysql.svc
 
+  mongo:
+    image: mongo
+    container_name: mardi-mongo
+    restart: unless-stopped
+    volumes:
+      - mediawiki-mongo-data:/data/db
+    networks:
+      default:
+        aliases:
+          - mongodb
+
+
+
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
     container_name: mardi-backup
@@ -104,6 +124,7 @@ services:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
       - shared_mardi_wikibase:/shared/:ro
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
+      - shared_mediawiki_images:/var/www/html/images/
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
@@ -162,10 +183,13 @@ services:
       # Port config 1985 is internal port and should not be changed currently.
       FS_SERVER_PORT: 1985
       ENABLE_REST_INSERTIONS: 'false'
+      CRON_UPDATE_FORMULAE: ${FS_CRON_UPDATE_FORMULAE}
+      CRON_ENABLED: ${FS_CRON_ENABLED:-false}
+      ALWAYS_EXPORT: ${FS_ALWAYS_EXPORT:-false}
     ports:
       - 1985:1985
     volumes:
-      - formulasearch_harvests:/my_harvests/:ro
+      - formulasearch_harvests:/my_harvests/
       - ${BACKUP_DIR:-./backup}:/data
 
   wdqs-frontend:
@@ -290,9 +314,10 @@ services:
       - ./prometheus/:/etc/prometheus/:rw
     command: sh -c "envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
     environment:
-      TRAEFIK_USER: ${TRAEFIK_USER}
-      TRAEFIK_PW: ${TRAEFIK_PW}
-      HOST_NETWORK_IP: ${HOST_NETWORK_IP}
+      - TRAEFIK_USER
+      - TRAEFIK_PW
+      - HOST_NETWORK_IP
+      - WATCHTOWER_API_TOKEN
 
   prometheus:
     image: prom/prometheus
@@ -320,11 +345,11 @@ services:
       - ./grafana/:/etc/grafana/:rw
     command: sh -c "envsubst < /etc/grafana/grafana.template.ini > /etc/grafana/grafana.ini"
     environment:
-      GF_MAIL_HOST: ${GF_MAIL_HOST}
-      GF_MAIL_USER: ${GF_MAIL_USER}
-      GF_MAIL_PW: ${GF_MAIL_PW}
-      GF_MAIL_FROMADDRESS: ${GF_MAIL_FROMADDRESS}
-      GF_MAIL_FROMNAME: ${GF_MAIL_FROMNAME}
+      - GF_MAIL_HOST
+      - GF_MAIL_USER
+      - GF_MAIL_PW
+      - GF_MAIL_FROMADDRESS
+      - GF_MAIL_FROMNAME
 
   grafana:
     image: grafana/grafana
@@ -355,19 +380,20 @@ services:
     volumes:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
-    
+
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
   watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *"
+    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
-    
+
 volumes:
   shared_mardi_wikibase:
   mediawiki-mysql-data:
+  mediawiki-mongo-data:
   traefik-log:
   traefik-letsencrypt:
   LocalSettings:
@@ -378,3 +404,4 @@ volumes:
   prometheus_data:
   grafana_data:
   formulasearch_harvests:
+  shared_mediawiki_images:
