@@ -36,7 +36,10 @@ services:
       - shared_mardi_wikibase:/shared/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
-      - ./mediawiki/images/:/var/www/html/images/
+      - shared_mediawiki_images:/var/www/html/images/:rw
+      - ./mediawiki/images/MaRDI_Logo.png:/var/www/html/images_repo/MaRDI_Logo.png
+      - ./mediawiki/images/MaRDI_Logo_S_5_rgba.png:/var/www/html/images_repo/MaRDI_Logo_S_5_rgba.png
+      - ./mediawiki/images/favicon.png:/var/www/html/images_repo/favicon.png
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
     networks:
@@ -121,6 +124,7 @@ services:
       # shared from wikibase, to run dumpBackup.php and importBackup.php
       - shared_mardi_wikibase:/shared/:ro
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
+      - shared_mediawiki_images:/var/www/html/images/
       # dir on host where to store the backups
       - ${BACKUP_DIR:-./backup}:/data
     labels:
@@ -400,3 +404,4 @@ volumes:
   prometheus_data:
   grafana_data:
   formulasearch_harvests:
+  shared_mediawiki_images:
