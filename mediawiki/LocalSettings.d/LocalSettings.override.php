@@ -139,3 +139,6 @@ $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
+
+# increase memory limit
+ini_set('memory_limit', '2G');
