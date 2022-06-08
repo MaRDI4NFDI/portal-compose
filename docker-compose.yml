@@ -34,6 +34,7 @@ services:
     volumes:
       ## This shares the configuration with jobrunner
       - shared_mardi_wikibase:/shared/:rw
+     # - shared_mardi_wikibase:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - shared_mediawiki_images:/var/www/html/images/:rw
@@ -109,6 +110,27 @@ services:
         aliases:
           - mongodb
 
+
+  importer:
+    image: ghcr.io/mardi4nfdi/docker-importer:main
+    container_name: mardi-importer
+    links:
+      - wikibase
+      - mysql
+    depends_on:
+      - wikibase
+    restart: always
+    volumes:
+      - shared_mardi_wikibase:/shared/:ro
+      #- ./config/:/config
+    environment:
+      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      IMPORT_SCHEDULE: ${IMPORT_SCHEDULE}
+      IMPORTER_CRON_ENABLE: ${IMPORTER_CRON_ENABLE:-false}
+    entrypoint: "/app/start.sh"
 
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main

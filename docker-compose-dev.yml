@@ -42,6 +42,9 @@ services:
       # only for running tests
       - ./test:/test
 
+  importer:
+    restart: ${RESTART}
+
   reverse-proxy:
     restart: ${RESTART}
 
