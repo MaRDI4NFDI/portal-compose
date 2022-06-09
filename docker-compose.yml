@@ -155,7 +155,7 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-'15 4 * * *'}
+      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE:-"15 4 * * *"}
       KEEP_DAYS: ${KEEP_DAYS:-30}
       BACKUP_CRON_ENABLE: ${BACKUP_CRON_ENABLE:-true}
     entrypoint: "/app/start.sh"
