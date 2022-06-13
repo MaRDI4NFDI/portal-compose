@@ -408,7 +408,8 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
+    # FIX (13/06/22): --monitor-only will not pull new images, s.t. faulty wikibase image is not pulled
+    command: --monitor-only --revive-stopped --schedule "0 0 1 * * *" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
 
 volumes:
