@@ -16,7 +16,13 @@ set +e
 # Execute in the base path of portal-compose, where the .env file is located
 test_node_exporter() {
     printf "  - test_node_exporter:\n"
-    source .env
+    # source environment variables from .env file (ignore comments, quote strings)
+    #  
+    # 
+    set -o allexport
+    source <(printf '%s' "$(grep -v '^#' .env | sed 's/=\(.*\)$/="\1"/' | xargs -d '\n')")
+    set +o allexport
+    # printf '%s' "$BACKUP_SCHEDULE"
 
     if [[ -n "$HOST_NETWORK_IP" ]]; then
         printf '    OK: Found $HOST_NETWORK_IP=%s\n' "${HOST_NETWORK_IP}"
@@ -50,7 +56,6 @@ test_traefik() {
         printf "    OK: Found metrics at http://reverse-proxy:8082/metrics\n"
     fi
 }
-
 ################ main ################
 
 
