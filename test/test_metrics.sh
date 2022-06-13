@@ -17,8 +17,6 @@ set +e
 test_node_exporter() {
     printf "  - test_node_exporter:\n"
     # source environment variables from .env file (ignore comments, quote strings)
-    #  
-    # 
     set -o allexport
     source <(printf '%s' "$(grep -v '^#' .env | sed 's/=\(.*\)$/="\1"/' | xargs -d '\n')")
     set +o allexport
