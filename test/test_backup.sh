@@ -15,7 +15,7 @@ _count_backup_files() {
 
 # get the http response code for WIKI_URL
 _get_wiki_http_response_code() {
-    echo $(curl --write-out '%{http_code}' --head --silent --output /dev/null $WIKI_URL)
+    curl --write-out '%{http_code}' --head --silent --output /dev/null $WIKI_URL
 }
 
 # break the test wiki
@@ -35,9 +35,9 @@ test_1() {
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
     if [[ $(($file_count_before+3)) == $file_count_after ]]; then
-        printf " - Test backup OK: $((file_count_after - file_count_before))/3 backup files where created.\n"
+        printf ' - Test backup OK: %s/3 backup files where created.\n' "$((file_count_after - file_count_before))"
     else
-        printf " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup where files created.\n"
+        printf ' - Test backup FAILED: %s/3 backup where files created.\n' "$((file_count_after - file_count_before))"
         exit 1
     fi
 }
@@ -48,12 +48,12 @@ test_2() {
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf " - Test restore SQL FAILED: Could not locate wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore SQL FAILED: Could not locate wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi
 
     # Run backup script
-    /app/backup.sh
+    /app/backup.sh &>/dev/null
 
     # Break the wiki
     $(_break_wiki)
@@ -61,7 +61,7 @@ test_2() {
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '404' ]]; then
-        printf " - Test restore SQL FAILED: Something went wrong while erasing pages of wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore SQL FAILED: Something went wrong while erasing pages of wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi
     
@@ -71,7 +71,7 @@ test_2() {
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf " - Test restore SQL FAILED: Could not restore wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore SQL FAILED: Could not restore wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi    
     printf ' - Test restore SQL OK: Wiki was restored from SQL dump.\n'
@@ -83,12 +83,12 @@ test_3() {
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf " - Test restore XML FAILED: Could not locate wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore XML FAILED: Could not locate wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi
     
     # Run backup script
-    /app/backup.sh
+    /app/backup.sh &>/dev/null
     
     # Break the wiki
     $(_break_wiki)
@@ -96,7 +96,7 @@ test_3() {
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '404' ]]; then
-        printf " - Test restore XML FAILED: Something went wrong while erasing pages of wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore XML FAILED: Something went wrong while erasing pages of wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi
     
@@ -106,7 +106,7 @@ test_3() {
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf " - Test restore XML FAILED: Could not restore wiki at ${WIKI_MAIN_URL}.\n"
+        printf ' - Test restore XML FAILED: Could not restore wiki at %s.\n' "$WIKI_MAIN_URL"
         exit 1
     fi    
     printf " - Test restore XML OK: Wiki was restored from XML dump.\n"
@@ -114,24 +114,24 @@ test_3() {
 
 test_4() {
     metrics_file="/data/backup_full.prom"
-    printf "Test that a metrics file ${metrics_file} was written\n"
+    printf 'Test that a metrics file %s was written\n' "$metrics_file"
 
     TIME_MOD=$(stat --printf=%Y $metrics_file)
 
     if [ -s $metrics_file ]; then
         # file exists. check that file was modified after calling this script
-        if [ $TIME_MOD -ge $TIME_START ]; then
-            printf " - Test metrics file OK: ${metrics_file} exists, is non-empty and recent\n"
+        if [ "$TIME_MOD" -ge $TIME_START ]; then
+            printf ' - Test metrics file OK: %s exists, is non-empty and recent\n' "$metrics_file"
         else
-            printf " - Test metrics file FAILED: ${metrics_file} exists, is non-empty but old\n"
+            printf ' - Test metrics file FAILED: %s exists, is non-empty but old\n' "$metrics_file"
             exit 1
         fi
 
     elif [ -f $metrics_file ]; then
-        printf " - Test metrics file FAILED: ${metrics_file} exists and but is empty\n"
+        printf ' - Test metrics file FAILED: %s exists and but is empty\n' "$metrics_file"
         exit 1
     else
-        printf " - Test metrics file FAILED: ${metrics_file} does not exist\n"
+        printf ' - Test metrics file FAILED: %s does not exist\n' "$metrics_file"
         exit 1
     fi
 }

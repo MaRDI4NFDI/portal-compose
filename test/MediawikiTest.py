@@ -45,7 +45,7 @@ class MediawikiCoreTest(MediawikiBase):
     def test1(self):
         """Test that Mediawiki is running."""
         status = self.getUrlStatusCode("http://mardi-wikibase")
-        self.assertEquals(200, status, "Problem loading home page.")
+        self.assertEquals(200, status, f"Problem loading home page. Status = {status}")
 
     def test2(self):
         """Test that Mediawiki admin password has been changed."""
