@@ -12,6 +12,7 @@ x-common-variables: &wikibase_variables
   DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
   DB_NAME: ${DB_NAME:-my_wiki}
+  DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
   WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
   QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.de
   TRAEFIK_PW: ${TRAEFIK_PW}
