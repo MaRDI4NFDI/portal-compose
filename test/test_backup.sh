@@ -29,7 +29,7 @@ test_1() {
     printf "Test that backups are stored in the backup dir\n"
     # Run backup script, count backup files before and after
     file_count_before=$(_count_backup_files)
-    /app/backup.sh
+    /app/backup.sh &>/dev/null
     file_count_after=$(_count_backup_files)
     
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
@@ -56,7 +56,7 @@ test_2() {
     /app/backup.sh &>/dev/null
 
     # Break the wiki
-    $(_break_wiki)
+    _break_wiki
     
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
@@ -66,7 +66,7 @@ test_2() {
     fi
     
     # Run restore script with defaults
-    /app/restore.sh
+    /app/restore.sh &>/dev/null
     
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
@@ -91,7 +91,7 @@ test_3() {
     /app/backup.sh &>/dev/null
     
     # Break the wiki
-    $(_break_wiki)
+    _break_wiki
     
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
@@ -101,7 +101,7 @@ test_3() {
     fi
     
     # Run restore script from last XML backup
-    /app/restore.sh -t xml
+    /app/restore.sh -t xml &>/dev/null
     
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
