@@ -183,7 +183,7 @@ services:
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
 
   elasticsearch:
-    image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.5.4-wmde.2}"
+    image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.8.23-wmde.6}"
     restart: unless-stopped
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -193,7 +193,7 @@ services:
          - elasticsearch.svc
     environment:
       discovery.type: single-node
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
 
   formulasearch:
     image: ghcr.io/mardi4nfdi/formulasearch:main
@@ -214,7 +214,7 @@ services:
       - ${BACKUP_DIR:-./backup}:/data
 
   wdqs-frontend:
-    image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.2}"
+    image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.6}"
     container_name: mardi-wdqs-frontend
     restart: unless-stopped
     depends_on:
@@ -234,7 +234,7 @@ services:
       - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
   wdqs:
-    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
+    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.6}"
     restart: unless-stopped
     command: /runBlazegraph.sh
     volumes:
@@ -252,7 +252,7 @@ services:
       - 9999
 
   wdqs-proxy:
-    image: "${WDQS_PROXY_IMAGE_NAME:-wikibase/wdqs-proxy:wmde.2}"
+    image: "${WDQS_PROXY_IMAGE_NAME:-wikibase/wdqs-proxy:wmde.6}"
     restart: unless-stopped
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
@@ -264,7 +264,7 @@ services:
          - wdqs-proxy.svc
 
   wdqs-updater:
-    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.2}"
+    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.6}"
     restart: unless-stopped
     command: /runUpdate.sh
     depends_on:
