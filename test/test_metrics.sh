@@ -15,22 +15,30 @@ set +e
 # THIS MUST BE EXECUTED ON THE HOST, OUTSIDE OF THE DOCKER COMPOSE ECOSYSTEM
 # Execute in the base path of portal-compose, where the .env file is located
 test_node_exporter() {
-    printf "  - test_node_exporter:\n"
-    source .env
+    echo "  - test_node_exporter:"
+    # safely source environment variables from .env file
+    # NOTE: set -a; source ...; set +a loads the sourced variables as Env Vars, not required here
+    # quick explanation:
+    # - source executes a file
+    # - <(command) is a bash process substitution from which it is possible to read
+    #   (like from STDIN), in this case, source reads from the substitution (instead of
+    #   a file)
+    # - grep deletes commented lines
+    # - sed puts variable values inside double quotes
+    # - xargs creates a single line from the ensemble of lines
+    source <(grep -v '^#' .env | sed 's/=\(.*\)$/="\1"/' | xargs -d '\n')
 
     if [[ -n "$HOST_NETWORK_IP" ]]; then
-        printf '    OK: Found $HOST_NETWORK_IP=%s\n' "${HOST_NETWORK_IP}"
+        echo "    OK: Found \$HOST_NETWORK_IP=${HOST_NETWORK_IP}"
         metrics=$(curl --silent --show-error "${HOST_NETWORK_IP}:9101/metrics")
-        # printf "curl status ($?)\n"
-        # printf "\nmetrics=$metrics\n"
         if [[ -z "$metrics" ]]; then
-            printf '    ERROR: No metrics found at %s:9101/metrics\n' "${HOST_NETWORK_IP}"
+            echo "    ERROR: No metrics found at ${HOST_NETWORK_IP}:9101/metrics"
             return 1
         else
-            printf '    OK: Found metrics at %s:9101/metrics\n' "${HOST_NETWORK_IP}"
+            echo "    OK: Found metrics at ${HOST_NETWORK_IP}:9101/metrics"
         fi
     else
-        printf "    ERROR: Environment variable \$HOST_NETWORK_IP was not set\n"
+        echo "    ERROR: Environment variable \$HOST_NETWORK_IP was not set"
         return 1
     fi
 }
@@ -38,21 +46,20 @@ test_node_exporter() {
 # test if traefik metrics can be accessed within the internal docker network.
 # TEST MUST RUN WITHIN DOCKER
 test_traefik() {
-    printf "  - test_traefik:\n"
+    echo "  - test_traefik:"
     metrics=$(curl --silent --show-error  http://reverse-proxy:8082/metrics)
     if [[ $? == 6 ]]; then
-        printf "    ** Note: test_traefik must be executed within docker **\n"
+        echo "    ** Note: test_traefik must be executed within docker **"
     fi
     if [[ -z "$metrics" ]]; then
-        printf "    ERROR: No metrics found at http://reverse-proxy:8082/metrics\n"
+        echo "    ERROR: No metrics found at http://reverse-proxy:8082/metrics"
         return 1
     else
-        printf "    OK: Found metrics at http://reverse-proxy:8082/metrics\n"
+        echo "    OK: Found metrics at http://reverse-proxy:8082/metrics"
     fi
 }
 
 ################ main ################
-
 
 if [[ -z "$1" ]]; then
     # first run, without arguments
@@ -62,5 +69,5 @@ elif [[ "$1" == docker ]]; then
     # assume we're inside docker
     test_traefik
 else
-    printf 'ERROR: unknown command line argument "%s". Must be empty or "docker"\n' "$1"
+    echo "ERROR: unknown command line argument \"$1\". Must be empty or \"docker\""
 fi
