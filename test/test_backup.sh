@@ -21,12 +21,12 @@ _get_wiki_http_response_code() {
 # break the test wiki
 _break_wiki() {
     # Erase all pages (break the wiki)
-    mysql -u${DB_USER} -p${DB_PASS} -h${DB_HOST} --database ${DB_NAME} -Bse 'TRUNCATE TABLE page'
+    mysql -u"${DB_USER}" -p"${DB_PASS}" -h"${DB_HOST}" --database "${DB_NAME}" -Bse 'TRUNCATE TABLE page'
 }
 
 
 test_1() {
-    printf "Test that backups are stored in the backup dir\n"
+    echo "Test that backups are stored in the backup dir"
     # Run backup script, count backup files before and after
     file_count_before=$(_count_backup_files)
     /app/backup.sh &>/dev/null
@@ -34,21 +34,21 @@ test_1() {
     
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
-    if [[ $(($file_count_before+3)) == $file_count_after ]]; then
-        printf ' - Test backup OK: %s/3 backup files where created.\n' "$((file_count_after - file_count_before))"
+    if [[ $((file_count_before+3)) == "$file_count_after" ]]; then
+        echo " - Test backup OK: $((file_count_after - file_count_before))/3 backup files where created."
     else
-        printf ' - Test backup FAILED: %s/3 backup where files created.\n' "$((file_count_after - file_count_before))"
+        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup where files created."
         exit 1
     fi
 }
 
 test_2() {
-    printf "Test that the database can be restored from SQL backup\n"
+    echo "Test that the database can be restored from SQL backup"
 
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf ' - Test restore SQL FAILED: Could not locate wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore SQL FAILED: Could not locate wiki at $WIKI_MAIN_URL."
         exit 1
     fi
 
@@ -61,29 +61,29 @@ test_2() {
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '404' ]]; then
-        printf ' - Test restore SQL FAILED: Something went wrong while erasing pages of wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore SQL FAILED: Something went wrong while erasing pages of wiki at $WIKI_MAIN_URL."
         exit 1
     fi
     
     # Run restore script with defaults
-    /app/restore.sh &>/dev/null
+    /app/restore.sh -t sql &>/dev/null
     
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf ' - Test restore SQL FAILED: Could not restore wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore SQL FAILED: Could not restore wiki at $WIKI_MAIN_URL."
         exit 1
     fi    
-    printf ' - Test restore SQL OK: Wiki was restored from SQL dump.\n'
+    echo " - Test restore SQL OK: Wiki was restored from SQL dump."
 }
 
 test_3() {
-    printf "Test that the database can be restored from XML backup\n"
+    echo "Test that the database can be restored from XML backup"
     
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf ' - Test restore XML FAILED: Could not locate wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore XML FAILED: Could not locate wiki at $WIKI_MAIN_URL."
         exit 1
     fi
     
@@ -96,7 +96,7 @@ test_3() {
     # Check that wiki is broken
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '404' ]]; then
-        printf ' - Test restore XML FAILED: Something went wrong while erasing pages of wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore XML FAILED: Something went wrong while erasing pages of wiki at $WIKI_MAIN_URL."
         exit 1
     fi
     
@@ -106,35 +106,37 @@ test_3() {
     # Check that wiki is running and accessible
     response=$(_get_wiki_http_response_code)
     if [[ ! $response == '200' ]]; then
-        printf ' - Test restore XML FAILED: Could not restore wiki at %s.\n' "$WIKI_MAIN_URL"
+        echo " - Test restore XML FAILED: Could not restore wiki at $WIKI_MAIN_URL."
         exit 1
     fi    
-    printf " - Test restore XML OK: Wiki was restored from XML dump.\n"
+    echo " - Test restore XML OK: Wiki was restored from XML dump."
 }
 
 test_4() {
     metrics_file="/data/backup_full.prom"
-    printf 'Test that a metrics file %s was written\n' "$metrics_file"
+    echo "Test that a metrics file $metrics_file was written"
 
     TIME_MOD=$(stat --printf=%Y $metrics_file)
 
     if [ -s $metrics_file ]; then
         # file exists. check that file was modified after calling this script
-        if [ "$TIME_MOD" -ge $TIME_START ]; then
-            printf ' - Test metrics file OK: %s exists, is non-empty and recent\n' "$metrics_file"
+        if [ "$TIME_MOD" -ge "$TIME_START" ]; then
+            echo " - Test metrics file OK: $metrics_file exists, is non-empty and recent"
         else
-            printf ' - Test metrics file FAILED: %s exists, is non-empty but old\n' "$metrics_file"
+            echo " - Test metrics file FAILED: $metrics_file exists, is non-empty but old"
             exit 1
         fi
 
     elif [ -f $metrics_file ]; then
-        printf ' - Test metrics file FAILED: %s exists and but is empty\n' "$metrics_file"
+        echo " - Test metrics file FAILED: $metrics_file exists and but is empty"
         exit 1
     else
-        printf ' - Test metrics file FAILED: %s does not exist\n' "$metrics_file"
+        echo " - Test metrics file FAILED: $metrics_file does not exist"
         exit 1
     fi
 }
+
+################################################################################
 
 test_1
 test_2
