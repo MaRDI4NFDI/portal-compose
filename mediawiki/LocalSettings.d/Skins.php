@@ -4,5 +4,7 @@
 ## Medik Skin Configuration
 wfLoadSkin( 'Medik' );
 $wgDefaultSkin = 'medik';
-$wgMedikColor = '#00008B';
+$wgMedikColor = '#005eadff';
 $wgMedikShowLogo = 'sidebar';
+
+wfLoadSkin( 'Timeless' );
