@@ -19,7 +19,8 @@ Add the following lines at the end of your .env file, edit as required
 ```
 # Local settings
 WIKIBASE_HOST=localhost
-WIKIBASE_PORT=8080    
+WIKIBASE_PORT=8080
+WIKIBASE_SCHEME=http
 WDQS_FRONTEND_PORT=8834
 QUICKSTATEMENTS_HOST=localhost
 QUICKSTATEMENTS_PORT=8840

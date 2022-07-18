@@ -48,6 +48,7 @@ services:
         aliases:
          - wikibase-docker.svc
          - wikibase.svc
+         - portal.mardi4nfdi.de
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
@@ -217,6 +218,9 @@ services:
     image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.6}"
     container_name: mardi-wdqs-frontend
     restart: unless-stopped
+    volumes:
+      - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/usr/share/nginx/html/logo.svg
+      - ./mediawiki/images/favicon.ico:/usr/share/nginx/html/favicon.ico
     depends_on:
       - wdqs-proxy
       - wikibase
@@ -228,6 +232,7 @@ services:
     environment:
       - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
+      - BRAND_TITLE=MaRDIQueryService
     labels:
       - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.portal.mardi4nfdi.de`)
       - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
@@ -245,7 +250,7 @@ services:
          - wdqs.svc
     environment:
       - WIKIBASE_HOST=portal.mardi4nfdi.de
-      - WIKIBASE_SCHEME=https
+      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
     expose:
@@ -276,7 +281,7 @@ services:
          - wdqs-updater.svc
     environment:
      - WIKIBASE_HOST=portal.mardi4nfdi.de
-     - WIKIBASE_SCHEME=https
+     - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
     labels:
