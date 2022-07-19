@@ -230,7 +230,7 @@ services:
          - query.portal.mardi4nfdi.de
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=wikibase.svc
+      - WIKIBASE_HOST=portal.mardi4nfdi.de
       - WDQS_HOST=wdqs-proxy.svc
       - BRAND_TITLE=MaRDIQueryService
     labels:
