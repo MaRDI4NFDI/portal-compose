@@ -147,10 +147,6 @@ $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
 $wgMathWikibasePropertyIdHasPart = "P4";
-$wgMathWikibasePropertyIdInDefiningFormula = "P1";
-$wgMathWikibasePropertyIdQuantitySymbol = "P1";
-$wgMathWikibasePropertyIdSymbolRepresents = "P1";
-
 
 # increase memory limit
 ini_set('memory_limit', '2G');
