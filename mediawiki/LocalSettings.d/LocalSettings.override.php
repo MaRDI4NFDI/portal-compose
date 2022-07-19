@@ -143,5 +143,14 @@ $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 
+#popups for math
+
+$wgMathWikibasePropertyIdDefiningFormula = "P14";
+$wgMathWikibasePropertyIdHasPart = "P4";
+$wgMathWikibasePropertyIdInDefiningFormula = "P1";
+$wgMathWikibasePropertyIdQuantitySymbol = "P1";
+$wgMathWikibasePropertyIdSymbolRepresents = "P1";
+
+
 # increase memory limit
 ini_set('memory_limit', '2G');
