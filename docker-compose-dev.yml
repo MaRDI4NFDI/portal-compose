@@ -5,6 +5,8 @@ x-common-variables: &wikibase_variables
     # and by wikibase for redirecting back to quickstatements
     QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
     WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
+    BOTUSER_NAME: botuser_name
+    BOTUSER_PW: botuser_pw
     RESTART: 'no'
 
 services:
