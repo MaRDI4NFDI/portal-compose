@@ -145,7 +145,6 @@ $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 
 #popups for math
-
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
 $wgMathWikibasePropertyIdHasPart = "P4";
 
