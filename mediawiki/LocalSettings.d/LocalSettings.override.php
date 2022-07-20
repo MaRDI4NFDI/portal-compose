@@ -140,6 +140,7 @@ $wgVisualEditorRebaserURL = 'http://localhost:8081';
 # Settings for MathSearch extension.
 $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 
+# Settings for Math-Exension
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 
