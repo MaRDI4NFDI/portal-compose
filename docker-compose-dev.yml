@@ -6,6 +6,8 @@ x-common-variables: &wikibase_variables
     QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
     WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
     RESTART: 'no'
+    BOTUSER_NAME: botuser_name
+    BOTUSER_PW: botuser_pw
 
 services:
   wikibase:
