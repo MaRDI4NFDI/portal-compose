@@ -55,7 +55,7 @@ services:
       <<: *wikibase_extra_variables
     labels:
       # - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`)
-      - traefik.http.routers.service-wikibase.rule=Host(`localhost`)
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.local`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
@@ -441,15 +441,15 @@ services:
       - plausible_db
       - plausible_events_db
       # - mail
-    # ports:
-    #   - 8000:8000
+    ports:
+      - 8000:8000
     env_file:
       - ./plausible-analytics/plausible-conf.env
     labels:
-      traefik.enable: "true"
-      traefik.http.routers.plausible.rule: "Host(`plausible.local`)" # change to your domain name
-      traefik.http.routers.plausible.entrypoints: "websecure"
-      traefik.http.services.plausible.loadbalancer.server.port: "8000"
+      - traefik.http.routers.plausible.rule=Host(`plausible.local`)
+      - traefik.http.routers.plausible.entrypoints=websecure
+      - traefik.http.routers.plausible.tls.certResolver=le
+      - traefik.http.services.plausible.loadbalancer.server.port=8000
 
 volumes:
   shared_mardi_wikibase:
