@@ -24,7 +24,8 @@ class SearchTest(MediawikiBase):
             vue[0].click()
             time.sleep(10)
             print(self.driver.page_source)
-            search_field = self.getElementByXPath("//input[@class='wvui-input__input']")
+            #search_field = self.getElementByXPath("//input[@class='wvui-input__input']")
+            search_field = self.getElementByXPath("//input[@name='search']")
         else:
             search_field = self.getElementById('searchInput')
 
