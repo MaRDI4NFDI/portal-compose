@@ -19,12 +19,15 @@ class SearchTest(MediawikiBase):
         self.loadURL(home_url)
         current_url = self.driver.current_url
 
+        # Checks it vue elements are present (Vector Skin uses Wikimedia Vue UI components)
         vue = self.driver.find_elements(By.XPATH,"//div[@id='p-search']/a")
         if vue:
+            # Search field for Vector 2022 Skin
             vue[0].click()
             time.sleep(5)
             search_field = self.getElementByXPath("//input[@name='search']")
         else:
+            # Search field for other skins (e.g. Medik and Timeless)
             search_field = self.getElementById('searchInput')
 
         search_field.clear()
