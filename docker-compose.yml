@@ -55,7 +55,7 @@ services:
       MW_WG___UPLOADS:
       <<: *wikibase_extra_variables
     labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
