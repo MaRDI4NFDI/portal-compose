@@ -22,7 +22,8 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: wikibase_apachelogs
     container_name: mardi-wikibase
     links:
       - mysql
@@ -43,6 +44,7 @@ services:
       - ./mediawiki/images/favicon.png:/var/www/html/images_repo/favicon.png
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
+      - apache_logs:/var/log/apache2/
     networks:
       default:
         aliases:
@@ -407,6 +409,27 @@ services:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
 
+  goaccess:
+    image: allinurl/goaccess
+    depends_on:
+      - mardi-wikibase
+    command:
+      - '--log-format=COMBINED'
+      - '--log-file=/srv/log/access.log'
+      - '--output=/srv/reports/index.html'
+      - '--config-file=/etc/goaccess.conf'
+      - '--real-time-html'
+      - '--ws-url=wss://localhost:443/ws'
+      - '--port=7980'
+    volumes:
+      - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      - apache_logs:/srv/log:ro
+      - ./apache_reports:/srv/reports:rw
+    labels:
+      - traefik.http.routers.service-wikibase.rule="Host(`localhost`) && Path(`/ws`)"
+      - traefik.http.routers.service-wikibase.entrypoints=websecure
+      - traefik.http.routers.service-wikibase.tls.certResolver=le
+
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
   watchtower:
@@ -431,3 +454,5 @@ volumes:
   grafana_data:
   formulasearch_harvests:
   shared_mediawiki_images:
+  apache_logs:
+  apache_reports:
