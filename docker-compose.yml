@@ -418,8 +418,8 @@ services:
       - '--output=/srv/reports/index.html'
       - '--log-format=COMBINED'
       - '--real-time-html'
-      # - '--origin=http://localhost:9000'
-      # - '--ws-url=wss://localhost:7890'
+      - '--origin=https://goaccess.local'
+      - '--ws-url=wss://goacces.local:7890/ws'
       # - '--port=7890'
       # - '--no-global-config'
       - '--tz=Europe/Berlin'
@@ -441,11 +441,11 @@ services:
       - goaccess_db:/srv/data
       # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
-    # labels:
-    #   - traefik.http.routers.goacccess.rule=Host(`localhost`)
-    #   - traefik.http.routers.goacccess.entrypoints=analytics
-    #   - traefik.http.routers.goacccess.tls.certResolver=le
-    #   - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
+    labels:
+      - traefik.http.routers.goaccess.rule=Host(`goacces.local`) && Path(`/ws`)
+      - traefik.http.routers.goaccess.entrypoints=analytics
+      - traefik.http.routers.goaccess.tls.certResolver=le
+      - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
 
   nginx:
     image: nginx
@@ -462,7 +462,7 @@ services:
       - traefik.http.routers.nginx.rule=Host(`goaccess.local`)
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
-      - traefik.http.routers.nginx.middlewares=auth
+      # - traefik.http.routers.nginx.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
