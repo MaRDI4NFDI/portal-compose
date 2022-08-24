@@ -176,7 +176,7 @@ services:
       - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
       - traefik-log:/data/log # Persistent file for logging
     networks:
-     - default
+      - default
     labels:
       - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.de`)
       - traefik.http.routers.dashboard.entrypoints=websecure
@@ -414,30 +414,44 @@ services:
     container_name: goaccess
     restart: always
     command:
-      - '--log-format=COMBINED'
       - '--log-file=/srv/log/access.log'
       - '--output=/srv/reports/index.html'
-      - '--config-file=/etc/goaccess.conf'
+      - '--log-format=COMBINED'
+      # - '--origin=http://localhost:9000'
       - '--real-time-html'
-      - '--ws-url=wss://portal.local:7890'
-      - '--port=7890'
-    # ports:
-    #   - 7890:7890
+      # - '--ws-url=wss://localhost:7890'
+      # - '--port=7890'
+      # - '--no-global-config'
+      - '--tz=Europe/Berlin'
+      - '--anonymize-ip'
+      # - '--config-file=/etc/goaccess.conf'
+    ports:
+      - 7890:7890
+    networks:
+      default:
+        aliases:
+         - goaccess.svc
     volumes:
-      - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - apache_logs:/srv/log:ro
-      - apache_reports:/srv/reports:rw
-    labels:
-      - traefik.http.routers.goacccess.rule=Host(`portal.local`)
-      - traefik.http.routers.goacccess.entrypoints=analytics
-      - traefik.http.routers.goacccess.tls.certResolver=le
-      - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
+      - apache_reports:/srv/reports
+    # labels:
+    #   - traefik.http.routers.goacccess.rule=Host(`localhost`)
+    #   - traefik.http.routers.goacccess.entrypoints=analytics
+    #   - traefik.http.routers.goacccess.tls.certResolver=le
+    #   - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
 
   nginx:
     image: nginx
     container_name: nginx-goaccess
     volumes:
-      - apache_reports:/usr/share/nginx/html:ro
+      - apache_reports:/usr/share/nginx/html
+    ports:
+      - 8000:80
+    # networks:
+    #   default:
+    #     aliases:
+    #      - nginx.svc
     labels:
       - traefik.http.routers.nginx.rule=Host(`goaccess.local`)
       - traefik.http.routers.nginx.entrypoints=websecure
@@ -470,3 +484,4 @@ volumes:
   shared_mediawiki_images:
   apache_logs:
   apache_reports:
+  apache_reports_TEST:
