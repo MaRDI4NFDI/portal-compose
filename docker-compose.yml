@@ -417,14 +417,18 @@ services:
       - '--log-file=/srv/log/access.log'
       - '--output=/srv/reports/index.html'
       - '--log-format=COMBINED'
-      # - '--origin=http://localhost:9000'
       - '--real-time-html'
+      # - '--origin=http://localhost:9000'
       # - '--ws-url=wss://localhost:7890'
       # - '--port=7890'
       # - '--no-global-config'
       - '--tz=Europe/Berlin'
       - '--anonymize-ip'
       # - '--config-file=/etc/goaccess.conf'
+      - '--geoip-database=/srv/geoip/GeoLite2-City.mmdb'
+      - '--db-path=/srv/data'
+      # - '--restore'
+      # - '--persist'
     ports:
       - 7890:7890
     networks:
@@ -432,9 +436,11 @@ services:
         aliases:
          - goaccess.svc
     volumes:
-      # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - apache_logs:/srv/log:ro
       - apache_reports:/srv/reports
+      - goaccess_db:/srv/data
+      # - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
     # labels:
     #   - traefik.http.routers.goacccess.rule=Host(`localhost`)
     #   - traefik.http.routers.goacccess.entrypoints=analytics
@@ -484,4 +490,4 @@ volumes:
   shared_mediawiki_images:
   apache_logs:
   apache_reports:
-  apache_reports_TEST:
+  goaccess_db:
