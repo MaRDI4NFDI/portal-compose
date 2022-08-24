@@ -57,7 +57,7 @@ services:
       MW_WG___UPLOADS:
       <<: *wikibase_extra_variables
     labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.local`, `portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
@@ -411,24 +411,38 @@ services:
 
   goaccess:
     image: allinurl/goaccess
-    depends_on:
-      - mardi-wikibase
+    container_name: goaccess
+    restart: always
     command:
       - '--log-format=COMBINED'
       - '--log-file=/srv/log/access.log'
       - '--output=/srv/reports/index.html'
       - '--config-file=/etc/goaccess.conf'
       - '--real-time-html'
-      - '--ws-url=wss://localhost:443/ws'
-      - '--port=7980'
+      - '--ws-url=wss://portal.local:7890'
+      - '--port=7890'
+    # ports:
+    #   - 7890:7890
     volumes:
       - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - apache_logs:/srv/log:ro
-      - ./apache_reports:/srv/reports:rw
+      - apache_reports:/srv/reports:rw
     labels:
-      - traefik.http.routers.service-wikibase.rule="Host(`localhost`) && Path(`/ws`)"
-      - traefik.http.routers.service-wikibase.entrypoints=websecure
-      - traefik.http.routers.service-wikibase.tls.certResolver=le
+      - traefik.http.routers.goacccess.rule=Host(`portal.local`)
+      - traefik.http.routers.goacccess.entrypoints=analytics
+      - traefik.http.routers.goacccess.tls.certResolver=le
+      - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
+
+  nginx:
+    image: nginx
+    container_name: nginx-goaccess
+    volumes:
+      - apache_reports:/usr/share/nginx/html:ro
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`goaccess.local`)
+      - traefik.http.routers.nginx.entrypoints=websecure
+      - traefik.http.routers.nginx.tls.certResolver=le
+      - traefik.http.routers.nginx.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
