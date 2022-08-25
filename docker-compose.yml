@@ -169,6 +169,7 @@ services:
     ports:
       - 443:443 # HTTPS port
       - 80:80 # HTTP port
+      - 7890:7890 # goaccess websocket
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
@@ -418,8 +419,8 @@ services:
       - '--output=/srv/reports/index.html'
       - '--log-format=COMBINED'
       - '--real-time-html'
-      - '--origin=https://goaccess.local'
-      - '--ws-url=wss://goacces.local:7890/ws'
+      # - '--origin=https://goaccess.local'
+      # - '--ws-url=wss://goacces.local:7890'
       # - '--port=7890'
       # - '--no-global-config'
       - '--tz=Europe/Berlin'
@@ -429,8 +430,8 @@ services:
       - '--db-path=/srv/data'
       # - '--restore'
       # - '--persist'
-    ports:
-      - 7890:7890
+    # ports:
+    #   - 7890:7890
     networks:
       default:
         aliases:
@@ -442,9 +443,11 @@ services:
       # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
     labels:
-      - traefik.http.routers.goaccess.rule=Host(`goacces.local`) && Path(`/ws`)
-      - traefik.http.routers.goaccess.entrypoints=analytics
+      - traefik.http.routers.goaccess.rule=Host(`goacces.local`) # && PathPrefix(`/ws`)
+      - traefik.http.routers.goaccess.entrypoints=wss
       - traefik.http.routers.goaccess.tls.certResolver=le
+      - traefik.http.routers.goaccess.middlewares=sslheader
+      - traefik.http.middlewares.sslheader.headers.customRequestHeaders.X-Forwarded-Proto=https
       - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
 
   nginx:

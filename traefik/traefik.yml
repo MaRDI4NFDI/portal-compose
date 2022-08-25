@@ -20,7 +20,7 @@ entryPoints:
           scheme: https
   metrics:
     address: :8082
-  analytics:
+  wss:
     address: :7890
 
 metrics:
