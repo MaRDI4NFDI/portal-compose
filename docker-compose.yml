@@ -412,6 +412,8 @@ services:
   goaccess:
     image: allinurl/goaccess
     container_name: goaccess
+    depends_on:
+      - traefik-certs-dumper
     restart: always
     command:
       - '--log-file=/srv/log/access.log'
@@ -424,6 +426,8 @@ services:
       # - '--config-file=/etc/goaccess.conf'
       - '--geoip-database=/srv/geoip/GeoLite2-City.mmdb'
       - '--db-path=/srv/data'
+      - '--ssl-cert=/letsencrypt/certs/certs/stats.portal.mardi4nfdi.de.crt'
+      - '--ssl-key=/letsencrypt/certs/private/stats.portal.mardi4nfdi.de.key'
       # - '--restore'
       # - '--persist'
     expose:
@@ -440,6 +444,7 @@ services:
       - goaccess_db:/srv/data
       # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
+      - traefik-letsencrypt:/letsencrypt:ro
     labels:
       - traefik.http.routers.goaccess.rule=Host(`stats.portal.mardi4nfdi.de`) # && PathPrefix(`/ws`)
       - traefik.http.routers.goaccess.entrypoints=wss
@@ -451,6 +456,8 @@ services:
   nginx:
     image: nginx
     container_name: nginx-goaccess
+    depends_on:
+      - goaccess
     volumes:
       - apache_reports:/usr/share/nginx/html
     # ports:
@@ -464,6 +471,12 @@ services:
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
+
+  traefik-certs-dumper:
+    image: ldez/traefik-certs-dumper:v2.8.1
+    entrypoint: sh -c 'apk add jq ; while ! [ -e /data/acme.json ] || ! [ `jq ".[] | .Certificates | length" /data/acme.json` != 0 ]; do sleep 1 ; done && traefik-certs-dumper file --version v2 --watch --source /data/acme.json --dest /data/certs'
+    volumes:
+      - traefik-letsencrypt:/data
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
