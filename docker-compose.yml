@@ -43,6 +43,7 @@ services:
       - ./mediawiki/images/favicon.png:/var/www/html/images_repo/favicon.png
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
+      - apache_logs:/var/log/apache2/
     networks:
       default:
         aliases:
@@ -167,6 +168,7 @@ services:
     ports:
       - 443:443 # HTTPS port
       - 80:80 # HTTP port
+      - 7890:7890 # goaccess websocket
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
@@ -174,7 +176,7 @@ services:
       - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
       - traefik-log:/data/log # Persistent file for logging
     networks:
-     - default
+      - default
     labels:
       - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.de`)
       - traefik.http.routers.dashboard.entrypoints=websecure
@@ -407,6 +409,60 @@ services:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
 
+  goaccess:
+    image: allinurl/goaccess
+    container_name: goaccess
+    restart: always
+    command:
+      - '--log-file=/srv/log/access.log'
+      - '--output=/srv/reports/index.html'
+      - '--log-format=COMBINED'
+      - '--real-time-html'
+      # - '--no-global-config'
+      - '--tz=Europe/Berlin'
+      - '--anonymize-ip'
+      # - '--config-file=/etc/goaccess.conf'
+      - '--geoip-database=/srv/geoip/GeoLite2-City.mmdb'
+      - '--db-path=/srv/data'
+      # - '--restore'
+      # - '--persist'
+    # ports:
+    #   - 7890:7890
+    networks:
+      default:
+        aliases:
+         - goaccess.svc
+    volumes:
+      - apache_logs:/srv/log:ro
+      - apache_reports:/srv/reports
+      - goaccess_db:/srv/data
+      # - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
+    labels:
+      - traefik.http.routers.goaccess.rule=Host(`stats.portal.mardi4nfdi.de`) # && PathPrefix(`/ws`)
+      - traefik.http.routers.goaccess.entrypoints=wss
+      - traefik.http.routers.goaccess.tls.certResolver=le
+      - traefik.http.routers.goaccess.middlewares=sslheader
+      - traefik.http.middlewares.sslheader.headers.customRequestHeaders.X-Forwarded-Proto=https
+      - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
+
+  nginx:
+    image: nginx
+    container_name: nginx-goaccess
+    volumes:
+      - apache_reports:/usr/share/nginx/html
+    # ports:
+    #   - 8000:80
+    # networks:
+    #   default:
+    #     aliases:
+    #      - nginx.svc
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
+      - traefik.http.routers.nginx.entrypoints=websecure
+      - traefik.http.routers.nginx.tls.certResolver=le
+      - traefik.http.routers.nginx.middlewares=auth
+
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
   watchtower:
@@ -431,3 +487,6 @@ volumes:
   grafana_data:
   formulasearch_harvests:
   shared_mediawiki_images:
+  apache_logs:
+  apache_reports:
+  goaccess_db:
