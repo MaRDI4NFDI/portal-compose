@@ -22,8 +22,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
-    image: wikibase_apachelogs
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -419,9 +418,6 @@ services:
       - '--output=/srv/reports/index.html'
       - '--log-format=COMBINED'
       - '--real-time-html'
-      # - '--origin=https://goaccess.local'
-      # - '--ws-url=wss://goacces.local:7890'
-      # - '--port=7890'
       # - '--no-global-config'
       - '--tz=Europe/Berlin'
       - '--anonymize-ip'
@@ -443,7 +439,7 @@ services:
       # - ./goaccess/goaccess.conf:/etc/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
     labels:
-      - traefik.http.routers.goaccess.rule=Host(`goacces.local`) # && PathPrefix(`/ws`)
+      - traefik.http.routers.goaccess.rule=Host(`stats.portal.mardi4nfdi.de`) # && PathPrefix(`/ws`)
       - traefik.http.routers.goaccess.entrypoints=wss
       - traefik.http.routers.goaccess.tls.certResolver=le
       - traefik.http.routers.goaccess.middlewares=sslheader
@@ -455,17 +451,17 @@ services:
     container_name: nginx-goaccess
     volumes:
       - apache_reports:/usr/share/nginx/html
-    ports:
-      - 8000:80
+    # ports:
+    #   - 8000:80
     # networks:
     #   default:
     #     aliases:
     #      - nginx.svc
     labels:
-      - traefik.http.routers.nginx.rule=Host(`goaccess.local`)
+      - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
-      # - traefik.http.routers.nginx.middlewares=auth
+      - traefik.http.routers.nginx.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
