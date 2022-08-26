@@ -168,7 +168,6 @@ services:
     ports:
       - 443:443 # HTTPS port
       - 80:80 # HTTP port
-      # - 7890:7890 # goaccess websocket
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
@@ -410,48 +409,24 @@ services:
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
 
   goaccess:
-    image: allinurl/goaccess
+    image: "ghcr.io/mardi4nfdi/docker-goaccess-cron:main"
     container_name: goaccess
-    depends_on:
-      - traefik-certs-dumper
-    restart: always
+    restart: unless-stopped
     command:
-      - '--log-file=/srv/log/access.log'
-      - '--output=/srv/reports/index.html'
-      - '--log-format=COMBINED'
-      - '--real-time-html'
-      # - '--no-global-config'
-      - '--tz=Europe/Berlin'
-      - '--anonymize-ip'
-      # - '--config-file=/etc/goaccess.conf'
-      - '--geoip-database=/srv/geoip/GeoLite2-City.mmdb'
-      - '--db-path=/srv/data'
-      - '--ssl-cert=/letsencrypt/certs/certs/stats.portal.mardi4nfdi.de.crt'
-      - '--ssl-key=/letsencrypt/certs/private/stats.portal.mardi4nfdi.de.key'
-      # - '--restore'
-      # - '--persist'
-    # expose:
-    #   - 7890
-    ports:
-      - 7890:7890
-    networks:
-      default:
-        aliases:
-         - goaccess.svc
+      - --log-file=/srv/log/access.log
+      - --output=/srv/reports/index.html
+      - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
+      - --db-path=/srv/data
+    environment:
+      - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
     volumes:
       - apache_logs:/srv/log:ro
       - apache_reports:/srv/reports
       - goaccess_db:/srv/data
-      # - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
-      - traefik-letsencrypt:/letsencrypt:ro
-    # labels:
-    #   - traefik.http.routers.goaccess.rule=Host(`stats.portal.mardi4nfdi.de`) # && PathPrefix(`/ws`)
-    #   - traefik.http.routers.goaccess.entrypoints=wss
-    #   - traefik.http.routers.goaccess.tls.certResolver=le
-    #   - traefik.http.routers.goaccess.middlewares=sslheader
-    #   - traefik.http.middlewares.sslheader.headers.customRequestHeaders.X-Forwarded-Proto=https
-    #   - traefik.http.services.goaccess-portal-compose.loadbalancer.server.port=7890
+    labels:
+      - traefik.enable=false
 
   nginx:
     image: nginx
@@ -460,23 +435,13 @@ services:
       - goaccess
     volumes:
       - apache_reports:/usr/share/nginx/html
-    # ports:
-    #   - 8000:80
-    # networks:
-    #   default:
-    #     aliases:
-    #      - nginx.svc
+    ports:
+      - 8000:80
     labels:
       - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
-
-  traefik-certs-dumper:
-    image: ldez/traefik-certs-dumper:v2.8.1
-    entrypoint: sh -c 'apk add jq ; while ! [ -e /data/acme.json ] || ! [ `jq ".[] | .Certificates | length" /data/acme.json` != 0 ]; do sleep 1 ; done && traefik-certs-dumper file --version v2 --watch --source /data/acme.json --dest /data/certs'
-    volumes:
-      - traefik-letsencrypt:/data
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/

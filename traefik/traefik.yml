@@ -20,8 +20,6 @@ entryPoints:
           scheme: https
   metrics:
     address: :8082
-  wss:
-    address: :7890
 
 metrics:
   prometheus:
