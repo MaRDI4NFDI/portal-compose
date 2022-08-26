@@ -22,7 +22,8 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: wikibase_logrotate
+    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -413,7 +414,8 @@ services:
     container_name: goaccess
     restart: unless-stopped
     command:
-      - --log-file=/srv/log/access.log
+      - /srv/log/access.log
+      - /srv/log/access.log.1
       - --output=/srv/reports/index.html
       - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
       - --db-path=/srv/data
