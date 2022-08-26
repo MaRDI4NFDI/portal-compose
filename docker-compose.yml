@@ -421,13 +421,13 @@ services:
     restart: unless-stopped
     command:
       - /srv/log/access.log
-      - /srv/log/access.log.1.gz
+      - /srv/log/access.log.1
       - --output=/srv/reports/index.html
       - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
       - --db-path=/srv/data
-      # - --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %Lm'
-      # - --date-format=%d/%b/%Y
-      # - --time-format=%T
+      - --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %Lm'
+      - --date-format=%d/%b/%Y
+      - --time-format=%T
     environment:
       - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
     volumes:
@@ -446,8 +446,6 @@ services:
       - goaccess
     volumes:
       - apache_reports:/usr/share/nginx/html
-    ports:
-      - 8000:80
     labels:
       - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
       - traefik.http.routers.nginx.entrypoints=websecure
