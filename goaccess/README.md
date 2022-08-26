@@ -2,6 +2,7 @@
 
 [GoAccess](goaccess.io) is an opensource log analyzer, set up in `docker-compose.yml` to
 parse the mediawiki apache log `/var/log/apache2/access.log`.
+The resulting report can be served with a webserver, e.g. nginx.
 
 ## Requirements
 
@@ -24,9 +25,3 @@ The setup contained in `docker-compose.yml` and `goaccess/goaccess.conf` of
 In order to resolve IP geo locations, download the free database `GeoLite2 City` from https://www.maxmind.com/en/accounts/758058/geoip/downloads.
 An account was already registered with our MaRDI4NFDI groupware email account.
 Extract the file `GeoLite2-City.mmdb` to the directory `./goaccess/`.
-
-
-## TODO
-
-- logrotation for access.log
-
