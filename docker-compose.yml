@@ -423,7 +423,7 @@ services:
       - apache_logs:/srv/log:ro
       - apache_reports:/srv/reports
       - goaccess_db:/srv/data
-      - ./goaccess/goaccess.conf:/etc/goaccess.conf
+      - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
     labels:
       - traefik.enable=false
