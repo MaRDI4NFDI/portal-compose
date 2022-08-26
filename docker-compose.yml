@@ -22,8 +22,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: wikibase_logrotate
-    # image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -184,6 +183,13 @@ services:
       - traefik.http.routers.dashboard.service=api@internal
       - traefik.http.routers.dashboard.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
+
+  logrotate:
+    restart: always
+    image: ghcr.io/mardi4nfdi/docker-logrotate:main
+    container_name: logrotate
+    volumes:
+      - traefik-log:/var/log/traefik
 
   elasticsearch:
     image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.8.23-wmde.6}"
@@ -415,14 +421,17 @@ services:
     restart: unless-stopped
     command:
       - /srv/log/access.log
-      - /srv/log/access.log.1
+      - /srv/log/access.log.1.gz
       - --output=/srv/reports/index.html
       - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
       - --db-path=/srv/data
+      # - --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %Lm'
+      # - --date-format=%d/%b/%Y
+      # - --time-format=%T
     environment:
       - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
     volumes:
-      - apache_logs:/srv/log:ro
+      - traefik-log:/srv/log:ro
       - apache_reports:/srv/reports
       - goaccess_db:/srv/data
       - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
