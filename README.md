@@ -206,3 +206,7 @@ system via [node-exporter](https://github.com/prometheus/node_exporter). The Gra
 Currently, Grafana does not offer import/export of alerting rules. These have to
 be created manually, e.g., for the disk usage of the backup drive and failure of
 the backups.
+
+## GoAccess log analyzer
+
+[GoAccess](goaccess.io) creates statistics from the apache2 logs. These are served at https://stats.portal.mardi4nfdi.de. See https://github.com/MaRDI4NFDI/portal-compose/tree/main/goaccess for setup instructions. See https://github.com/MaRDI4NFDI/portal-compose/issues/301 for a short discussion of the implementation status.
