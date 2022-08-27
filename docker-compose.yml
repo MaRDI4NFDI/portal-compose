@@ -426,7 +426,7 @@ services:
       - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
     volumes:
       - ./traefik-log:/srv/log:ro
-      - apache_reports:/srv/reports
+      - goaccess_report:/srv/reports
       - goaccess_db:/srv/data
       - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
       - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
@@ -439,7 +439,7 @@ services:
     depends_on:
       - goaccess
     volumes:
-      - apache_reports:/usr/share/nginx/html
+      - goaccess_report:/usr/share/nginx/html
     labels:
       - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
       - traefik.http.routers.nginx.entrypoints=websecure
@@ -471,5 +471,5 @@ volumes:
   formulasearch_harvests:
   shared_mediawiki_images:
   apache_logs:
-  apache_reports:
+  goaccess_report:
   goaccess_db:
