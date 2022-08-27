@@ -165,6 +165,7 @@ services:
   reverse-proxy:
     restart: always
     image: traefik:v2.8
+    container_name: reverse-proxy
     ports:
       - 443:443 # HTTPS port
       - 80:80 # HTTP port
@@ -173,7 +174,7 @@ services:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - ./traefik/conf/:/traefik-conf/:ro
       - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
-      - traefik-log:/data/log # Persistent file for logging
+      - ./traefik-log:/data/log # Persistent file for logging
     networks:
       - default
     labels:
@@ -183,13 +184,6 @@ services:
       - traefik.http.routers.dashboard.service=api@internal
       - traefik.http.routers.dashboard.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
-
-  logrotate:
-    restart: always
-    image: ghcr.io/mardi4nfdi/docker-logrotate:main
-    container_name: logrotate
-    volumes:
-      - traefik-log:/var/log/traefik
 
   elasticsearch:
     image: "${ELASTICSEARCH_IMAGE_NAME:-wikibase/elasticsearch:6.8.23-wmde.6}"
@@ -431,7 +425,7 @@ services:
     environment:
       - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
     volumes:
-      - traefik-log:/srv/log:ro
+      - ./traefik-log:/srv/log:ro
       - apache_reports:/srv/reports
       - goaccess_db:/srv/data
       - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
@@ -465,7 +459,7 @@ volumes:
   shared_mardi_wikibase:
   mediawiki-mysql-data:
   mediawiki-mongo-data:
-  traefik-log:
+  # traefik-log:
   traefik-letsencrypt:
   LocalSettings:
   query-service-data:
