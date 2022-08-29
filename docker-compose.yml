@@ -458,6 +458,21 @@ services:
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
+      
+  mamoto:
+    image: matomo
+    restart: always
+    volumes:
+#     - ./config:/var/www/html/config
+#     - ./logs:/var/www/html/logs
+      - matomo:/var/www/html
+    environment:
+      - MATOMO_DATABASE_HOST=mysql
+    labels:
+      - traefik.http.routers.nginx.rule=Host(`matomo.portal.mardi4nfdi.de`)
+      - traefik.http.routers.nginx.entrypoints=websecure
+      - traefik.http.routers.nginx.tls.certResolver=le
+      - traefik.http.routers.nginx.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
@@ -486,3 +501,4 @@ volumes:
   apache_logs:
   goaccess_report:
   goaccess_db:
+  matomo:
