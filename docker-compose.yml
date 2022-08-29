@@ -22,7 +22,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "wikibase_shib"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
