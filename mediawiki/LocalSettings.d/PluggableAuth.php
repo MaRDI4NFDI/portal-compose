@@ -2,8 +2,8 @@
 # https://www.mediawiki.org/wiki/Extension:PluggableAuth
 wfLoadExtension( 'PluggableAuth' );
 
-$wgPluggableAuth_Config = array(
-    array(
+$wgPluggableAuth_Config = [
+    [
         'plugin' => 'Shibboleth',
-    ),
-);
+    ]
+];
