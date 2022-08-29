@@ -61,7 +61,7 @@ services:
       - traefik.http.routers.service-wikibase.tls.certResolver=le
 
   wikibase_jobrunner:
-    image: "wikibase_shib"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
