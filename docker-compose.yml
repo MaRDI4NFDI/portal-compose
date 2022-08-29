@@ -468,11 +468,14 @@ services:
       - matomo:/var/www/html
     environment:
       - MATOMO_DATABASE_HOST=mysql
+      - MATOMO_DATABASE_USERNAME=matomo
+      - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
+      - MATOMO_DATABASE_DBNAME=matomo
     labels:
-      - traefik.http.routers.nginx.rule=Host(`matomo.portal.mardi4nfdi.de`)
-      - traefik.http.routers.nginx.entrypoints=websecure
-      - traefik.http.routers.nginx.tls.certResolver=le
-      - traefik.http.routers.nginx.middlewares=auth
+      - traefik.http.routers.matomo.rule=Host(`matomo.portal.mardi4nfdi.de`)
+      - traefik.http.routers.matomo.entrypoints=websecure
+      - traefik.http.routers.matomo.tls.certResolver=le
+      - traefik.http.routers.matomo.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
