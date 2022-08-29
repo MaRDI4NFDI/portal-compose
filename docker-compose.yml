@@ -409,6 +409,26 @@ services:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
 
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    environment:
+      COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    labels:
+      - traefik.http.routers.jaeger.rule=Host(`jaeger.portal.mardi4nfdi.de`)
+      - traefik.http.routers.jaeger.entrypoints=websecure
+      - traefik.http.routers.jaeger.tls.certResolver=le
+      - traefik.http.routers.nginx.middlewares=auth
+      - traefik.http.routers.jaeger.service=jaeger
+      - traefik.http.services.jaeger.loadbalancer.server.port=16686
+
   goaccess:
     image: "ghcr.io/mardi4nfdi/docker-goaccess-cron:main"
     container_name: goaccess
