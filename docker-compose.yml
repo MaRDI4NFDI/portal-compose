@@ -411,6 +411,7 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
+    container_name: jaeger
     environment:
       COLLECTOR_ZIPKIN_HTTP_PORT: 9411
     ports:
@@ -425,7 +426,7 @@ services:
       - traefik.http.routers.jaeger.rule=Host(`jaeger.portal.mardi4nfdi.de`)
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.routers.jaeger.tls.certResolver=le
-      - traefik.http.routers.nginx.middlewares=auth
+      - traefik.http.routers.jaeger.middlewares=auth
       - traefik.http.routers.jaeger.service=jaeger
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
