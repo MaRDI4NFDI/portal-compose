@@ -43,7 +43,22 @@ test_1() {
     if [[ $((file_count_before+3)) == "$file_count_after" ]]; then
         echo " - Test backup OK: $((file_count_after - file_count_before))/3 backup files were created."
     else
-        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup files were created."
+        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup files were created:"
+        files_created=($(ls -tr /data/*.gz | tail -n $((file_count_after - file_count_before))))
+        for backup_file in "${files_created[@]}"; do
+            echo "      $backup_file"
+        done
+        echo "      MISSING: "
+        if [[ "${files_created[*]}" != *portal_db_backup_*.gz*  ]]; then
+            echo "          SQL backup"
+        fi
+        if [[ "${files_created[*]}" != *portal_xml_backup*.gz*  ]]; then
+            echo "          XML backup"
+        fi
+        if [[ "${files_created[*]}" != *images_*.gz*  ]]; then
+            echo "          Images backup"
+        fi
+
         exit 1
     fi
 }
