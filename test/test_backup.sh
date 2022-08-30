@@ -33,17 +33,45 @@ _break_wiki() {
 
 test_1() {
     echo "Test that backups are stored in the backup dir"
+    # count length of /data/backup.log before backup (will be empty on CI or clean
+    # system, but not on a running system)
+    if [[ -f /data/backup.log ]]; then
+        log_length=$(wc -l </data/backup.log)
+    else
+        log_length=0
+    fi
+
     # Run backup script, count backup files before and after
     file_count_before=$(_count_backup_files)
     /app/backup.sh &>/dev/null
     file_count_after=$(_count_backup_files)
+
     
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
     if [[ $((file_count_before+3)) == "$file_count_after" ]]; then
         echo " - Test backup OK: $((file_count_after - file_count_before))/3 backup files were created."
     else
-        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup files were created."
+        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup files were created:"
+        files_created=($(ls -tr /data/*.gz | tail -n $((file_count_after - file_count_before))))
+        for backup_file in "${files_created[@]}"; do
+            echo "      $backup_file"
+        done
+        echo "      MISSING: "
+        if [[ "${files_created[*]}" != *portal_db_backup_*.gz*  ]]; then
+            echo "          SQL backup"
+        fi
+        if [[ "${files_created[*]}" != *portal_xml_backup*.gz*  ]]; then
+            echo "          XML backup"
+        fi
+        if [[ "${files_created[*]}" != *images_*.gz*  ]]; then
+            echo "          Images backup"
+        fi
+        # dump last record of backup.log
+        echo ""
+        echo "/data/backup.log (last record):"
+        tail -n +"$log_length" /data/backup.log
+
         exit 1
     fi
 }
