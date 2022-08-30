@@ -209,4 +209,31 @@ the backups.
 
 ## GoAccess log analyzer
 
-[GoAccess](goaccess.io) creates statistics from the apache2 logs. These are served at https://stats.portal.mardi4nfdi.de. See https://github.com/MaRDI4NFDI/portal-compose/tree/main/goaccess for setup instructions. See https://github.com/MaRDI4NFDI/portal-compose/issues/301 for a short discussion of the implementation status.
+[GoAccess](goaccess.io) is an opensource log analyzer, set up in `docker-compose.yml` to
+parse the `access.log` of the reverse proxy traefik.
+The resulting report is served with a nginx webserver at
+https://stats.portal.mardi4nfdi.de.
+
+We use a custom docker image
+[docker-goaccess-cron](https://github.com/MaRDI4NFDI/docker-goaccess-cron), running
+goaccess via cron. The configuration contained in `docker-compose.yml` and
+`goaccess/goaccess.conf` of
+[portal-compose](https://github.com/MaRDI4NFDI/portal-compose) is complete with
+exception of the following requirements:
+
+### Logrotation
+
+The size of traefik logs can easily take gigabytes and should be rotated with the unix
+tool logrotate (already running on mardi01). A logrotate config for traefik is given by
+[traefik/logrotate.conf](https://github.com/MaRDI4NFDI/portal-compose/tree/main/traefik/logrotate.conf)
+(should be placed in `/etc/logrotate.d`, requires root; see also
+[man logrotate](https://www.man7.org/linux/man-pages/man8/logrotate.8.html)).
+Our goaccess image expects the two log files `access.log` and `access.log.1`, but can
+handle the case where the rotated file `log.1` does not exist.
+
+### GeoIP Database
+
+In order to resolve IP geo locations, download the free database `GeoLite2 City` from
+[here](https://www.maxmind.com/en/accounts/758058/geoip/downloads).
+An account was already registered with our MaRDI4NFDI groupware email account.
+Extract the file `GeoLite2-City.mmdb` to the directory `./goaccess/`.
