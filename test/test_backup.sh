@@ -41,9 +41,9 @@ test_1() {
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
     if [[ $((file_count_before+3)) == "$file_count_after" ]]; then
-        echo " - Test backup OK: $((file_count_after - file_count_before))/3 backup files where created."
+        echo " - Test backup OK: $((file_count_after - file_count_before))/3 backup files were created."
     else
-        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup where files created."
+        echo " - Test backup FAILED: $((file_count_after - file_count_before))/3 backup files were created."
         exit 1
     fi
 }
