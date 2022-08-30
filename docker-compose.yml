@@ -55,6 +55,7 @@ services:
       WIKIBASE_PINGBACK:
       MW_WG___UPLOADS:
       <<: *wikibase_extra_variables
+      MAMOTO_TOKEN: ${MAMOTO_TOKEN}
     labels:
       - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
