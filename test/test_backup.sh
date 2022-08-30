@@ -33,10 +33,19 @@ _break_wiki() {
 
 test_1() {
     echo "Test that backups are stored in the backup dir"
+    # count length of /data/backup.log before backup (will be empty on CI or clean
+    # system, but not on a running system)
+    if [[ -f /data/backup.log ]]; then
+        log_length=$(wc -l </data/backup.log)
+    else
+        log_length=0
+    fi
+
     # Run backup script, count backup files before and after
     file_count_before=$(_count_backup_files)
     /app/backup.sh &>/dev/null
     file_count_after=$(_count_backup_files)
+
     
     # Check that 3 backup files have been created (SQL-, XML-, uploaded-files- backups)
     # Please keep the spacing after [[ and around ==
@@ -58,13 +67,10 @@ test_1() {
         if [[ "${files_created[*]}" != *images_*.gz*  ]]; then
             echo "          Images backup"
         fi
-        ### DEBUGGING
-        echo " DEBUG:"
-        ls -ltr /data/*.gz
-        echo "###"
-        cat /data/backup.log
-        cat /data/restore.log
-        ###
+        # dump last record of backup.log
+        echo ""
+        echo "/data/backup.log (last record):"
+        tail -n +"$log_length" /data/backup.log
 
         exit 1
     fi
