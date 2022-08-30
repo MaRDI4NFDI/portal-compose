@@ -226,7 +226,8 @@ exception of the following requirements:
 The size of traefik logs can easily take gigabytes and should be rotated with the unix
 tool logrotate (already running on mardi01). A logrotate config for traefik is given by
 [traefik/logrotate.conf](https://github.com/MaRDI4NFDI/portal-compose/tree/main/traefik/logrotate.conf)
-(should be placed in `/etc/logrotate.d`, requires root; see also
+(should be placed in `/etc/logrotate.d`, requires root; see also the project's server
+setup notes and
 [man logrotate](https://www.man7.org/linux/man-pages/man8/logrotate.8.html)).
 Our goaccess image expects the two log files `access.log` and `access.log.1`, but can
 handle the case where the rotated file `log.1` does not exist.
