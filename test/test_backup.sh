@@ -58,6 +58,10 @@ test_1() {
         if [[ "${files_created[*]}" != *images_*.gz*  ]]; then
             echo "          Images backup"
         fi
+        ### DEBUGGIN
+        echo " DEBUG:"
+        ls -ltr /data/*.gz
+        ###
 
         exit 1
     fi
