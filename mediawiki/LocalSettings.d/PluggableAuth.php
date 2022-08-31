@@ -3,9 +3,3 @@
 
 $wgPluggableAuth_EnableLocalLogin=true;
 wfLoadExtension( 'PluggableAuth' );
-
-$wgPluggableAuth_Config = [
-    [
-        'plugin' => 'Shibboleth',
-    ]
-];
