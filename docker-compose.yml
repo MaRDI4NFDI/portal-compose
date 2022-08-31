@@ -476,7 +476,6 @@ services:
       - traefik.http.routers.matomo.rule=Host(`matomo.portal.mardi4nfdi.de`)
       - traefik.http.routers.matomo.entrypoints=websecure
       - traefik.http.routers.matomo.tls.certResolver=le
-      - traefik.http.routers.matomo.middlewares=auth
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
