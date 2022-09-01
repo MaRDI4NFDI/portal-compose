@@ -8,3 +8,4 @@ $wgPluggableAuth_Config[] = [
         'clientsecret' => $_ENV['GOOGLE_OPENID_SECRET'],
     ]
 ];
+$wgOpenIDConnect_MigrateUsersByEmail=true;
