@@ -162,6 +162,8 @@ services:
       BACKUP_SCHEDULE: ${BACKUP_SCHEDULE}
       KEEP_DAYS: ${KEEP_DAYS:-30}
       BACKUP_CRON_ENABLE: ${BACKUP_CRON_ENABLE:-true}
+      GF_API_KEY: ${GF_API_KEY}
+      WB_PUBLIC_HOST_AND_PORT: ${WB_PUBLIC_HOST_AND_PORT}
     entrypoint: "/app/start.sh"
 
   reverse-proxy:
