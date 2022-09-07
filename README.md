@@ -8,6 +8,9 @@ cd portal-compose
 cp ./mediawiki/template.env ./.env
 ```
 
+
+afdskpasndlkadsngokafng
+
 Change parameters for your local installation in .env as required, this file will not be committed.
 Change at least the passwords and secret to any password for local usage:
 ```
