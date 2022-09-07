@@ -150,3 +150,6 @@ $wgMathWikibasePropertyIdHasPart = "P4";
 
 # increase memory limit
 ini_set('memory_limit', '2G');
+
+# https://github.com/MaRDI4NFDI/portal-compose/issues/322
+$wgUseInstantCommons = true; 
