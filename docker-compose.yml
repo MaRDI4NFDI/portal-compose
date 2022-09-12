@@ -162,6 +162,9 @@ services:
       BACKUP_SCHEDULE: ${BACKUP_SCHEDULE}
       KEEP_DAYS: ${KEEP_DAYS:-30}
       BACKUP_CRON_ENABLE: ${BACKUP_CRON_ENABLE:-true}
+      GF_API_KEY: ${GF_API_KEY}
+      GF_PUBLIC_HOST_AND_PORT: ${GF_PUBLIC_HOST_AND_PORT}
+      WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
     entrypoint: "/app/start.sh"
 
   reverse-proxy:
