@@ -463,7 +463,12 @@ services:
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
-      
+  scholia:
+    image: ghcr.io/mardi4nfdi/scholia:nightly
+    labels:
+      - traefik.http.routers.scholia.rule=Host(`scholia.portal.mardi4nfdi.de`)
+      - traefik.http.routers.scholia.entrypoints=websecure
+      - traefik.http.routers.scholia.tls.certResolver=le      
   mamoto:
     image: matomo
     restart: always
