@@ -61,7 +61,11 @@ services:
       - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
-
+      - traefik.http.routers.service-wikimongo.rule=Host(`wikimongo.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wikimongo.entrypoints=websecure
+      - traefik.http.routers.service-wikimongo.tls.certResolver=le
+      - traefik.http.routers.service-wikimongo.service=wikimongo-service
+      - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
   wikibase_jobrunner:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
