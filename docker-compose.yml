@@ -35,11 +35,9 @@ services:
     volumes:
       ## This shares the configuration with jobrunner
       - shared_mardi_wikibase:/shared/:rw
-     # - shared_mardi_wikibase:/var/www/html/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - shared_mediawiki_images:/var/www/html/images/:rw
-      - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/var/www/html/images_repo/MaRDI_Logo_L_5_rgb_50p.svg
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
       - apache_logs:/var/log/apache2/
