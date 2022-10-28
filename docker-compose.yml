@@ -40,7 +40,6 @@ services:
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - shared_mediawiki_images:/var/www/html/images/:rw
       - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/var/www/html/images_repo/MaRDI_Logo_L_5_rgb_50p.svg
-      - ./mediawiki/images/favicon.png:/var/www/html/images_repo/favicon.png
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
       - apache_logs:/var/log/apache2/
