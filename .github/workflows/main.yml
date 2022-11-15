@@ -51,3 +51,8 @@ jobs:
       -
         name: Test backups
         run: docker exec mardi-backup bash /test/test_backup.sh
+      -
+        name: Test shibboleth
+        run: >
+          docker cp ./test/ mardi-wikibase:/test
+          docker exec mardi-wikibase bash /test/test_ship.sh
