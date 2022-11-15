@@ -54,5 +54,5 @@ jobs:
       -
         name: Test shibboleth
         run: >
-          docker cp ./test/ mardi-wikibase:/test
+          docker cp ./test/ mardi-wikibase:/test &&
           docker exec mardi-wikibase bash /test/test_shib.sh
