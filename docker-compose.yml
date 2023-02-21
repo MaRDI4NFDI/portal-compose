@@ -12,9 +12,10 @@ x-common-variables: &wikibase_variables
   DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
   DB_NAME: ${DB_NAME:-my_wiki}
+  TLD: ${TLD:-de}
   DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
-  WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
-  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.de
+  WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.${TLD}}
+  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.${TLD}
   TRAEFIK_PW: ${TRAEFIK_PW}
 x-extra-variables: &wikibase_extra_variables
   MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
@@ -47,7 +48,7 @@ services:
         aliases:
          - wikibase-docker.svc
          - wikibase.svc
-         - portal.mardi4nfdi.de
+         - portal.mardi4nfdi.${TLD}
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
@@ -56,12 +57,12 @@ services:
       MAMOTO_TOKEN: ${MAMOTO_TOKEN}
       GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
     labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.de`,`swmath.portal.mardi4nfdi.de`,`staging.swmath.org`)
+      - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.${TLD}`,`swmath.portal.mardi4nfdi.${TLD}`,`staging.swmath.org`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
       - traefik.http.routers.service-wikibase.service=wikibase-service
       - traefik.http.services.wikibase-service.loadbalancer.server.port=80
-      - traefik.http.routers.service-wikimongo.rule=Host(`wikimongo.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wikimongo.rule=Host(`wikimongo.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.service-wikimongo.entrypoints=websecure
       - traefik.http.routers.service-wikimongo.tls.certResolver=le
       - traefik.http.routers.service-wikimongo.service=wikimongo-service
@@ -193,7 +194,7 @@ services:
     networks:
       - default
     labels:
-      - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.de`)
+      - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.routers.dashboard.tls.certResolver=le
       - traefik.http.routers.dashboard.service=api@internal
@@ -244,14 +245,14 @@ services:
     networks:
       default:
         aliases:
-         - query.portal.mardi4nfdi.de
+         - query.portal.mardi4nfdi.${TLD}
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_HOST=portal.mardi4nfdi.${TLD}
       - WDQS_HOST=wdqs-proxy.svc
       - BRAND_TITLE=MaRDIQueryService
     labels:
-      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
       - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
@@ -266,7 +267,7 @@ services:
         aliases:
          - wdqs.svc
     environment:
-      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_HOST=portal.mardi4nfdi.${TLD}
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
@@ -297,7 +298,7 @@ services:
         aliases:
          - wdqs-updater.svc
     environment:
-     - WIKIBASE_HOST=portal.mardi4nfdi.de
+     - WIKIBASE_HOST=portal.mardi4nfdi.${TLD}
      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
@@ -315,16 +316,16 @@ services:
     networks:
       default:
         aliases:
-         - quickstatements.portal.mardi4nfdi.de
+         - quickstatements.portal.mardi4nfdi.${TLD}
     labels:
-      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.service-quickstatements.entrypoints=websecure
       - traefik.http.routers.service-quickstatements.tls.certResolver=le
     environment:
-      - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.de
+      - QUICKSTATEMENTS_HOST=https://quickstatements.portal.mardi4nfdi.${TLD}
       - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.de
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.de
+      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.portal.mardi4nfdi.${TLD}
+      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://portal.mardi4nfdi.${TLD}
       - WB_PROPERTY_NAMESPACE=122
       - "WB_PROPERTY_PREFIX=Property:"
       - WB_ITEM_NAMESPACE=120
@@ -341,7 +342,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
       - portainer-data:/data # volume to save settings of portainer
     labels:
-      - traefik.http.routers.service-portainer.rule=Host(`portainer.portal.mardi4nfdi.de`)
+      - traefik.http.routers.service-portainer.rule=Host(`portainer.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.service-portainer.entrypoints=websecure
       - traefik.http.routers.service-portainer.tls.certResolver=le
       - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
@@ -377,7 +378,7 @@ services:
       - --web.console.libraries=/usr/share/prometheus/console_libraries
       - --web.console.templates=/usr/share/prometheus/consoles
     labels:
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.portal.mardi4nfdi.de`)
+      - traefik.http.routers.prometheus.rule=Host(`prometheus.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.routers.prometheus.tls.certResolver=le
       - traefik.http.routers.prometheus.middlewares=auth
@@ -403,7 +404,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/:/etc/grafana/
     labels:
-      - traefik.http.routers.grafana.rule=Host(`grafana.portal.mardi4nfdi.de`)
+      - traefik.http.routers.grafana.rule=Host(`grafana.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.routers.grafana.tls.certResolver=le
 
@@ -430,7 +431,7 @@ services:
     environment:
       COLLECTOR_ZIPKIN_HTTP_PORT: 9411
     labels:
-      - traefik.http.routers.jaeger.rule=Host(`jaeger.portal.mardi4nfdi.de`)
+      - traefik.http.routers.jaeger.rule=Host(`jaeger.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.routers.jaeger.tls.certResolver=le
       - traefik.http.routers.jaeger.middlewares=auth
@@ -469,14 +470,14 @@ services:
     volumes:
       - goaccess_report:/usr/share/nginx/html
     labels:
-      - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.de`)
+      - traefik.http.routers.nginx.rule=Host(`stats.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
   scholia:
     image: ghcr.io/mardi4nfdi/scholia:nightly
     labels:
-      - traefik.http.routers.scholia.rule=Host(`scholia.portal.mardi4nfdi.de`)
+      - traefik.http.routers.scholia.rule=Host(`scholia.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.scholia.entrypoints=websecure
       - traefik.http.routers.scholia.tls.certResolver=le      
   mamoto:
@@ -492,7 +493,7 @@ services:
       - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
       - MATOMO_DATABASE_DBNAME=matomo
     labels:
-      - traefik.http.routers.matomo.rule=Host(`matomo.portal.mardi4nfdi.de`)
+      - traefik.http.routers.matomo.rule=Host(`matomo.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.matomo.entrypoints=websecure
       - traefik.http.routers.matomo.tls.certResolver=le
 
