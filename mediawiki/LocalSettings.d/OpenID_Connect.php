@@ -1,6 +1,6 @@
 <?php
 wfLoadExtension( 'OpenIDConnect' );
-$wgPluggableAuth_Config[] = [
+$wgPluggableAuth_Config['Login with your Google Account'] = [
     'plugin' => 'OpenIDConnect',
     'data' => [
         'providerURL' => 'https://accounts.google.com',
