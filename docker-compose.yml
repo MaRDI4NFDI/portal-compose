@@ -202,7 +202,7 @@ services:
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
 
   elasticsearch:
-    image: "${ELASTICSEARCH_IMAGE_NAME:-elasticsearch:7.11.2}"
+    image: "${ELASTICSEARCH_IMAGE_NAME:-elasticsearch:7.10.1}"
     restart: unless-stopped
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
