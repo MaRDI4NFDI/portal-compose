@@ -54,7 +54,7 @@ services:
       WIKIBASE_PINGBACK:
       MW_WG___UPLOADS:
       <<: *wikibase_extra_variables
-      MAMOTO_TOKEN: ${MAMOTO_TOKEN}
+      MATOMO_TOKEN: ${MATOMO_TOKEN}
       GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
     labels:
       - traefik.http.routers.service-wikibase.rule=Host(`portal.mardi4nfdi.${TLD}`,`swmath.portal.mardi4nfdi.${TLD}`,`staging.swmath.org`)
@@ -124,7 +124,6 @@ services:
       default:
         aliases:
           - mongodb
-
 
   importer:
     image: ghcr.io/mardi4nfdi/docker-importer:main
@@ -479,8 +478,9 @@ services:
     labels:
       - traefik.http.routers.scholia.rule=Host(`scholia.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.scholia.entrypoints=websecure
-      - traefik.http.routers.scholia.tls.certResolver=le      
-  mamoto:
+      - traefik.http.routers.scholia.tls.certResolver=le
+  
+  matomo:
     image: matomo
     restart: always
     volumes:
@@ -488,10 +488,10 @@ services:
 #     - ./logs:/var/www/html/logs
       - matomo:/var/www/html
     environment:
-      - MATOMO_DATABASE_HOST=mysql
-      - MATOMO_DATABASE_USERNAME=matomo
+      - MATOMO_DATABASE_HOST=${MATOMO_DATABASE_HOST}
+      - MATOMO_DATABASE_USERNAME=${MATOMO_DATABASE_USERNAME}
       - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
-      - MATOMO_DATABASE_DBNAME=matomo
+      - MATOMO_DATABASE_DBNAME=${MATOMO_DATABASE_DBNAME}
     labels:
       - traefik.http.routers.matomo.rule=Host(`matomo.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.matomo.entrypoints=websecure
