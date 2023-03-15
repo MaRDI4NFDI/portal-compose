@@ -67,6 +67,7 @@ services:
       - traefik.http.routers.service-wikimongo.tls.certResolver=le
       - traefik.http.routers.service-wikimongo.service=wikimongo-service
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
+  
   wikibase_jobrunner:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
@@ -138,12 +139,18 @@ services:
       - shared_mardi_wikibase:/shared/:ro
       #- ./config/:/config
     environment:
-      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      IMPORT_SCHEDULE: ${IMPORT_SCHEDULE}
-      IMPORTER_CRON_ENABLE: ${IMPORTER_CRON_ENABLE:-false}
+      - DB_HOST=mysql.svc # internal docker hostname (alias) of the database service
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - IMPORT_SCHEDULE=${IMPORT_SCHEDULE}
+      - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
+      - IMPORTER_AGENT=${IMPORTER_AGENT}
+      - MEDIAWIKI_API_URL=${WIKIBASE_SCHEME:-https}://mardi-wikibase/w/api.php
+      - SPARQL_ENDPOINT_URL=https://query.portal.mardi4nfdi.${TLD}/proxy/wdqs/bigdata/namespace/wdq/sparql
+      - WIKIBASE_URL=${WIKIBASE_SCHEME:-https}://mardi-wikibase
+      - IMPORTER_USER=${IMPORTER_USER}
+      - IMPORTER_PASS=${IMPORTER_PASS}
     entrypoint: "/app/start.sh"
 
   backup:
