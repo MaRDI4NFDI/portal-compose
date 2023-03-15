@@ -162,7 +162,7 @@ $wgWBRepoSettings['string-limits'] = [
         'length' => 4000,
     ],
     'multilang' => [
-        'length' => 1000, // length constraint
+        'length' => 1000,
     ],
     'VT:monolingualtext' => [
         'length' => 1000,
