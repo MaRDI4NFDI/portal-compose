@@ -32,6 +32,9 @@ $wgGroupPermissions['user']['createaccount'] = true;
 # Restrict anonymous editing
 $wgGroupPermissions['*']['edit'] = false;
 
+# Remove rate limits for bots
+$wgGroupPermissions['bot']['noratelimit'] = true;
+
 # Set name of the wiki
 $wgSitename = 'MaRDI portal';
 
@@ -152,3 +155,16 @@ ini_set('memory_limit', '2G');
 
 # https://github.com/MaRDI4NFDI/portal-compose/issues/322
 $wgUseInstantCommons = true; 
+
+# Increase string size limits
+$wgWBRepoSettings['string-limits'] = [
+    'VT:string' => [
+        'length' => 4000,
+    ],
+    'multilang' => [
+        'length' => 1000,
+    ],
+    'VT:monolingualtext' => [
+        'length' => 1000,
+    ],
+];
