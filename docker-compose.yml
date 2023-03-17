@@ -48,7 +48,7 @@ services:
         aliases:
          - wikibase-docker.svc
          - wikibase.svc
-         - portal.mardi4nfdi.${TLD}
+         #- portal.mardi4nfdi.${TLD}
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
@@ -146,9 +146,9 @@ services:
       - IMPORT_SCHEDULE=${IMPORT_SCHEDULE}
       - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
       - IMPORTER_AGENT=${IMPORTER_AGENT}
-      - MEDIAWIKI_API_URL=${WIKIBASE_SCHEME:-https}://mardi-wikibase/w/api.php
+      - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
       - SPARQL_ENDPOINT_URL=https://query.portal.mardi4nfdi.${TLD}/proxy/wdqs/bigdata/namespace/wdq/sparql
-      - WIKIBASE_URL=${WIKIBASE_SCHEME:-https}://mardi-wikibase
+      - WIKIBASE_URL=http://mardi-wikibase
       - IMPORTER_USER=${IMPORTER_USER}
       - IMPORTER_PASS=${IMPORTER_PASS}
     entrypoint: "/app/start.sh"
