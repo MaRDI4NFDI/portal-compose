@@ -48,7 +48,6 @@ services:
         aliases:
          - wikibase-docker.svc
          - wikibase.svc
-         #- portal.mardi4nfdi.${TLD}
     environment:
       <<: *wikibase_variables
       WIKIBASE_PINGBACK:
