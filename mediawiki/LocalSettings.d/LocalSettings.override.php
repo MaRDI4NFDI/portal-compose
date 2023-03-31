@@ -145,7 +145,6 @@ $wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
 # Settings for Math-Extension
 $wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
 $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
-$wgMathValidModes[] =  'native'; // enable math native rendering (experimental)
 
 #popups for math
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
