@@ -225,7 +225,7 @@ test_5() {
         exit 1
     else
         # delete all empty folders, too
-        find /var/www/html/images -name "*" -type d -empty -delete
+        find /var/www/html/images -name "*" -type d -delete
     fi
 
     response=$(_get_wiki_http_response_code "${IMG_URL}/${found_file}")
