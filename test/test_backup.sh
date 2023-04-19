@@ -219,13 +219,15 @@ test_5() {
     ## 3. delete files from storage
     found_file=$(cd /var/www/html/images && find . -name "*$test_image" -print -quit |\
         sed 's/^\.\///')
+        
+    umount /var/www/html/images 
+  
     if ! find /var/www/html/images -name "*${test_image}" -delete
     then
         echo " - Test restore images FAILED: uploaded file not found in /var/www/html/images! (status $?)"
         exit 1
     else
         # delete all empty folders, too
-        lsof +D /var/www/html/images
         find /var/www/html/images -name "*" -type d -empty -delete
     fi
 
