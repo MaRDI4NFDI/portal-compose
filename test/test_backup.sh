@@ -221,6 +221,7 @@ test_5() {
         sed 's/^\.\///')
         
     sudo umount /var/www/html/images 
+    sudo chmod ugo+r /var/www/html/images
   
     if ! find /var/www/html/images -name "*${test_image}" -delete
     then
