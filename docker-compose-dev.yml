@@ -29,7 +29,7 @@ services:
      - "${WDQS_FRONTEND_PORT}:80"
     restart: ${RESTART}
     environment:
-      - WIKIBASE_HOST=portal.mardi4nfdi.de
+      - WIKIBASE_HOST=wikibase.svc
 
   quickstatements:
     ports:
@@ -55,12 +55,16 @@ services:
 
   wdqs:
     restart: ${RESTART}
+    environment:
+     - WIKIBASE_HOST=wikibase.svc
 
   wdqs-proxy:
     restart: ${RESTART}
 
   wdqs-updater:
     restart: ${RESTART}
+    environment:
+     - WIKIBASE_HOST=wikibase.svc
 
   portainer:
     restart: ${RESTART}
