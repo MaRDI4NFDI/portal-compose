@@ -146,7 +146,7 @@ services:
       - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
       - IMPORTER_AGENT=${IMPORTER_AGENT}
       - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
-      - SPARQL_ENDPOINT_URL=https://query.portal.mardi4nfdi.${TLD}/proxy/wdqs/bigdata/namespace/wdq/sparql
+      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
       - WIKIBASE_URL=http://mardi-wikibase
       - IMPORTER_USER=${IMPORTER_USER}
       - IMPORTER_PASS=${IMPORTER_PASS}
