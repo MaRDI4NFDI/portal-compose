@@ -168,5 +168,3 @@ $wgWBRepoSettings['string-limits'] = [
         'length' => 1000,
     ],
 ];
-
-$wgReadOnly = ( PHP_SAPI === 'cli' ) ? false : 'This wiki is currently being moved to a more powerful server. Please check back in a couple of hours.';
