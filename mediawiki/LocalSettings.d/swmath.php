@@ -5,7 +5,6 @@ if ( str_contains($_SERVER['HTTP_HOST'],'swmath') ){
   $wgSitename = 'swMATH staging';
   # Set swMATH logo and icon (also SVG?)
   $wgLogos = [
-    'icon' => $wgScriptPath . '/images_repo/swMATH.svg',
     'svg' => $wgScriptPath . '/images_repo/swMATH.svg',
   ];
   # Load swMATH specific extensions
