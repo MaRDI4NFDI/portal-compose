@@ -5,12 +5,11 @@ if ( str_contains($_SERVER['HTTP_HOST'],'swmath') ){
   $wgSitename = 'swMATH staging';
   # Set swMATH logo
   $wgLogos = [
-    'svg' => 
-    	'wordmark' => [
+    'wordmark' => [
         'src' => $wgScriptPath . '/images_repo/swMATH.svg',	// path to wordmark version
         'width' => 135,
-        'height' => 30,
-	    ]
+        'height' => 30
+    	]
     ];
   # Load swMATH specific extensions
   # wfLoadExtension( 'ExternalData' );
