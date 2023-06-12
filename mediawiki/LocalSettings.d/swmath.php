@@ -7,8 +7,8 @@ if ( str_contains($_SERVER['HTTP_HOST'],'swmath') ){
   $wgLogos = [
     'wordmark' => [
         'src' => $wgScriptPath . '/images_repo/swMATH.svg',	// path to wordmark version
-        'width' => 135,
-        'height' => 30
+        'width' => 155,
+        'height' => 35
     	]
     ];
   # Load swMATH specific extensions
