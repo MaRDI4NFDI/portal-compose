@@ -159,7 +159,7 @@ $wgUseInstantCommons = true;
 # Increase string size limits
 $wgWBRepoSettings['string-limits'] = [
     'VT:string' => [
-        'length' => 4000,
+        'length' => 200000,
     ],
     'multilang' => [
         'length' => 2000,
