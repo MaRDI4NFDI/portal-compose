@@ -82,7 +82,6 @@ wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
 wfLoadExtension( 'MathSearch' );
 wfLoadExtension( 'Lockdown' );
-wfLoadExtension( 'TwitterWidget' );
 wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'ExternalContent' );
 
@@ -168,4 +167,5 @@ $wgWBRepoSettings['string-limits'] = [
         'length' => 1000,
     ],
 ];
-$wgDefaultSkin = 'vector-2022';
+
+$wgDefaultSkin = 'vector';
