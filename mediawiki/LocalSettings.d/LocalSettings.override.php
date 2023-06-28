@@ -168,4 +168,4 @@ $wgWBRepoSettings['string-limits'] = [
     ],
 ];
 
-$wgDefaultSkin = 'vector-2022';
+$wgDefaultSkin = 'vector';
