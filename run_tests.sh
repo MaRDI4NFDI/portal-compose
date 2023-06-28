@@ -13,7 +13,3 @@ printf "\n----------------------------------------\n"
 . test/test_metrics.sh
 printf "\n"
 
-printf "\nTest shibboleth (non voting)"
-printf "\n----------------------------------------\n"
-. test/test_shib.sh || true
-printf "\n"

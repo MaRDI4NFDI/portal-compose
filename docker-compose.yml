@@ -23,7 +23,7 @@ x-extra-variables: &wikibase_extra_variables
 
 services:
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:bd4312921f426dc5e299ff83f3f0277359359c0b8d2e80b586d437778a63b883"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -42,7 +42,6 @@ services:
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/my_harvests/
       - apache_logs:/var/log/apache2/
-      - shibboleth:/var/run/shibboleth
     networks:
       default:
         aliases:
@@ -68,7 +67,7 @@ services:
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
   
   wikibase_jobrunner:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:bd4312921f426dc5e299ff83f3f0277359359c0b8d2e80b586d437778a63b883"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -91,12 +90,6 @@ services:
       MAX_JOBS: ${MAX_JOBS}
       <<: *wikibase_extra_variables
       
-  wikibase_shibboleth:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:bd4312921f426dc5e299ff83f3f0277359359c0b8d2e80b586d437778a63b883"
-    entrypoint: /usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /var/run/shibboleth/shibd.pid -F -w 600
-    volumes:
-      - shibboleth:/var/run/shibboleth
-
   mysql:
     image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
     container_name: mardi-mysql
@@ -531,7 +524,6 @@ volumes:
   goaccess_report:
   goaccess_db:
   matomo:
-  shibboleth:
 
 networks:                                
   default:                               
