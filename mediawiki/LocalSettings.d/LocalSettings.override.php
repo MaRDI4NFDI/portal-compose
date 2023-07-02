@@ -149,6 +149,12 @@ $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
 $wgMathWikibasePropertyIdHasPart = "P4";
 
+# enable linking between wikibase and content pages
+$wgWBRepoSettings['siteLinkGroups'] = [ 'wikipedia' ]; //not sure if we need this, and if it must be wikipedia
+$wgWBClientSettings['siteGlobalID'] = 'mardi';
+// insert site with
+// php addSite.php --filepath=https://portal.mardi4nfdi.de/w/\$1 --pagepath=https://portal.mardi4nfdi.de/wiki/\$1 --language en --interwiki-id mardi mardi wikipedia
+
 # increase memory limit
 ini_set('memory_limit', '2G');
 
