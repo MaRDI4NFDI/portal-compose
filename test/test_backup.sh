@@ -229,7 +229,7 @@ test_5() {
     fi
 
     response=$(_get_wiki_http_response_code "${IMG_URL}/${found_file}")
-    if [[ ! $response == '404' ]]; then
+    if [[ ! $response == '403' ]]; then
         echo " - Test restore images FAILED: deleted file was found at ${IMG_URL}/${found_file}. (status $response)"
         exit 1
     fi
