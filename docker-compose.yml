@@ -502,7 +502,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --include-stopped --revive-stopped --schedule "0 0 1 * * *" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
+    command: --include-stopped --revive-stopped --schedule "0 0 1 * * 1" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
 
 volumes:
