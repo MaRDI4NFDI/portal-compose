@@ -283,6 +283,10 @@ services:
       default:
         aliases:
          - wdqs-proxy.svc
+    labels:
+      - traefik.http.routers.wdqs-proxy.rule=Host(`sparql.portal.mardi4nfdi.${TLD}`)
+      - traefik.http.routers.wdqs-proxy.entrypoints=websecure
+      - traefik.http.routers.wdqs-proxy.tls.certResolver=le
 
   wdqs-updater:
     image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.6}"
