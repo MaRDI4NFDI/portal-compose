@@ -150,10 +150,18 @@ $wgMathWikibasePropertyIdDefiningFormula = "P14";
 $wgMathWikibasePropertyIdHasPart = "P4";
 
 # enable linking between wikibase and content pages
-$wgWBRepoSettings['siteLinkGroups'] = [ 'wikipedia' ]; //not sure if we need this, and if it must be wikipedia
+$wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
+$wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteGlobalID'] = 'mardi';
+// my_wiki is the MaRDI database
+$wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
+$wgWBRepoSettings['localClientDatabases'] = [
+	'mardi' => 'my_wiki',
+	'swmath' => 'wiki_swmath'
+];
 // insert site with
-// php addSite.php --filepath=https://portal.mardi4nfdi.de/w/\$1 --pagepath=https://portal.mardi4nfdi.de/wiki/\$1 --language en --interwiki-id mardi mardi wikipedia
+// php addSite.php --filepath=https://portal.mardi4nfdi.de/w/\$1 --pagepath=https://portal.mardi4nfdi.de/wiki/\$1 --language en --interwiki-id mardi mardi mathematics
+// php addSite.php --filepath=https://staging.swmath.org/w/\$1 --pagepath=https://staging.swmath.org/wiki/\$1 --language en --interwiki-id swmath swmath mathematics
 
 # increase memory limit
 ini_set('memory_limit', '2G');
