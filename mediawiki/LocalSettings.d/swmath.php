@@ -11,6 +11,8 @@ if ( str_contains($_SERVER['HTTP_HOST'],'swmath') ){
         'height' => 35
     	]
     ];
+  $wgWBClientSettings['siteGlobalID'] = 'swmath';
+
   # Load swMATH specific extensions
   # wfLoadExtension( 'ExternalData' );
 }
