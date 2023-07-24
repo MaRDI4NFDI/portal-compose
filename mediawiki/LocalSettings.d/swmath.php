@@ -1,7 +1,5 @@
 <?php
-if ( str_contains($_SERVER['HTTP_HOST'],'swmath') ){
-  $wgDBname = 'wiki_swmath';
-  # Set name of the wiki
+if ( $wgDBname === 'wiki_swmath' ){
   $wgSitename = 'swMATH staging';
   # Set swMATH logo
   $wgLogos = [

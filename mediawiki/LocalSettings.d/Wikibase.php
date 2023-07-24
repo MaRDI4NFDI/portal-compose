@@ -1,9 +1,10 @@
+<?php
 ## Wikibase
 
 wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
- enable linking between wikibase and content pages
+# enable linking between wikibase and content pages
 $wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteGlobalID'] = 'mardi';
@@ -27,8 +28,7 @@ $wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
 // my_wiki is the MaRDI database
 $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
 
-
-if ( !str_contains($_SERVER['HTTP_HOST'],'swmath') ){
+if ( $wgDBname !== 'wiki_swmath' ){
 
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
