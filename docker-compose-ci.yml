@@ -18,6 +18,8 @@ services:
       - "${WIKIBASE_PORT}:80"
     environment:
       <<: *wikibase_variables
+    volumes:
+      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d:ro
       
   wdqs-frontend:
     ports:
