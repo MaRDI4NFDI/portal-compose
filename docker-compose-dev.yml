@@ -111,3 +111,23 @@ services:
 
   watchtower:
     restart: ${RESTART}
+
+  wikibase_updater:
+    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    entrypoint: /usr/local/bin/php
+    command:  /var/www/html/maintenance/update.php --conf /shared/LocalSettings.php
+    links:
+      - mysql
+      - mongo
+    depends_on:
+      - mysql
+      - mongo
+    restart: ${RESTART}
+    volumes:
+      - shared_mardi_wikibase:/shared/
+      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
+      - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
+    networks:
+      default:
+        aliases:
+          - wikibase-updater.svc
