@@ -3,7 +3,7 @@ docker-compose repository for MaRDI
 
 ## Local installation
 ```
-git clone --recurse-submodules git@github.com:MaRDI4NFDI/portal-compose.git
+git clone git@github.com:MaRDI4NFDI/portal-compose.git
 cd portal-compose
 cp ./mediawiki/template.env ./.env
 ```
