@@ -48,10 +48,9 @@ services:
          - wikibase-docker.svc
          - wikibase.svc
     environment:
-      <<: *wikibase_variables
+      <<: [ *wikibase_variables, *wikibase_extra_variables]
       WIKIBASE_PINGBACK:
       MW_WG___UPLOADS:
-      <<: *wikibase_extra_variables
       MATOMO_TOKEN: ${MATOMO_TOKEN}
       GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
     labels:
@@ -86,9 +85,8 @@ services:
         aliases:
           - wikibase-jobrunner.svc
     environment:
-      <<: *wikibase_variables
+      <<: [ *wikibase_variables, *wikibase_extra_variables]
       MAX_JOBS: ${MAX_JOBS}
-      <<: *wikibase_extra_variables
       
   mysql:
     image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"

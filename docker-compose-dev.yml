@@ -47,9 +47,6 @@ services:
   importer:
     restart: ${RESTART}
 
-  reverse-proxy:
-    restart: ${RESTART}
-
   elasticsearch:
     restart: ${RESTART}
 
