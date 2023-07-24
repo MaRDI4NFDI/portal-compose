@@ -60,6 +60,16 @@ etc, must be defined in the docker-compose files via docker labels for the
 services' containers. See the [docs](https://doc.traefik.io/traefik/).
 
 ### Optionally configure traefik locally
+
+By default, TLD points to localhost. That way one can access the portal at
+https://portal.mardi4nfdi.de 
+and for example quickstatements via
+https://quickstatements.portal.mardi4nfdi.localhost
+.
+Unfortunately SSL certificates are invalid as letsencrypt obviously cannot provide
+local SSL certificates.
+<!--
+
 Say we want to access quickstatements, wikibase and the traefik dashboard on our
 local installation, via the local domains `quickstatements.local`, `portal.local`
 and `traefik.local`. We need to tell traefik to route these addresses to the
@@ -104,7 +114,7 @@ services:
    you can login to the traefik dashboard to check for routing errors at
    https://traefik.local
 
-
+-->
 ## Start up the containers
 Start-up the containers from the docker-compose file for development:
 ```
