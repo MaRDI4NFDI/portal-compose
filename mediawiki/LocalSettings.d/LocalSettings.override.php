@@ -35,35 +35,7 @@ $wgGroupPermissions['*']['edit'] = false;
 # Remove rate limits for bots
 $wgGroupPermissions['bot']['noratelimit'] = true;
 
-# Set name of the wiki
-$wgSitename = 'MaRDI portal';
 
-# Set MaRDI logo and icon
-$wgLogos = [
-	'icon' => $wgScriptPath . '/images_repo/MaRDI_Logo_L_5_rgb_50p.svg',
-	'svg' => $wgScriptPath . '/images_repo/MaRDI_Logo_L_5_rgb_50p.svg',
-];
-$wgFavicon = $wgScriptPath . '/images_repo/favicon.png';
-
-# Footer
-$wgHooks['SkinTemplateOutputPageBeforeExec'][] = function( $sk, &$tpl ) {
-        # Remove existing entries
-        $tpl->set('about', FALSE);
-        $tpl->set('privacy', FALSE);
-        $tpl->set('disclaimer', FALSE);
-        return true;
-};
-$wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$footerlinks ) {
-    if ( $key === 'places' ) {
-        $footerlinks['Imprint'] = Html::element( 'a',
-        [
-            'href' => 'https://www.mardi4nfdi.de/imprint',
-            'rel' => 'noreferrer noopener' // not required, but recommended for security reasons
-        ],
-        'Imprint');
-    };
-    return true;
-};
 
 # Enabling uploads for images.
 $wgEnableUploads = true;
@@ -149,55 +121,10 @@ $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
 $wgMathWikibasePropertyIdHasPart = "P4";
 
-# enable linking between wikibase and content pages
-$wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
-$wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
-$wgWBClientSettings['siteGlobalID'] = 'mardi';
-$wgWBClientSettings['repoUrl'] = 'https://portal.mardi4nfdi.de';
-$wgWBClientSettings['repoScriptPath'] = '/w';
-$wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
-$wgWBClientSettings['entitySources'] = [
-        'mardi_source' => [
-                'repoDatabase' => 'my_wiki',
-                'baseUri' => 'https://portal.mardi4nfdi.de/entity',
-                'entityNamespaces' => [
-                        'item' => 120,
-                        'property' => 122,
-                ],
-                'rdfNodeNamespacePrefix' => 'wd',
-                'rdfPredicateNamespacePrefix' => '',
-                'interwikiPrefix' => 'mardi',
-        ],
-];
-$wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
-// my_wiki is the MaRDI database
-$wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
-$wgWBRepoSettings['localClientDatabases'] = [
-	'mardi' => 'my_wiki',
-	'swmath' => 'wiki_swmath'
-];
-
-// insert site with
-// php addSite.php --filepath=https://portal.mardi4nfdi.de/w/\$1 --pagepath=https://portal.mardi4nfdi.de/wiki/\$1 --language en --interwiki-id mardi mardi mathematics
-// php addSite.php --filepath=https://staging.swmath.org/w/\$1 --pagepath=https://staging.swmath.org/wiki/\$1 --language en --interwiki-id swmath swmath mathematics
-
+#
 # increase memory limit
 ini_set('memory_limit', '2G');
 
 # https://github.com/MaRDI4NFDI/portal-compose/issues/322
 $wgUseInstantCommons = true; 
 
-# Increase string size limits
-$wgWBRepoSettings['string-limits'] = [
-    'VT:string' => [
-        'length' => 200000,
-    ],
-    'multilang' => [
-        'length' => 2000,
-    ],
-    'VT:monolingualtext' => [
-        'length' => 1000,
-    ],
-];
-
-$wgDefaultSkin = 'vector-2022';
