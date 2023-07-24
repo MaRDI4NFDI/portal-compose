@@ -2,4 +2,4 @@
 
 // https://www.mediawiki.org/wiki/Extension:EntitySchema
 ## EntitySchema Configuration
-wfLoadExtension( 'EntitySchema' );
+$wgDBname !== 'wiki_swmath' ? wfLoadExtension( 'EntitySchema' ):NULL;

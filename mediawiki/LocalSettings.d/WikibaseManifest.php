@@ -3,4 +3,4 @@
 // https://www.mediawiki.org/wiki/Extension:WikibaseManifest
 
 ## WikibaseManifest Configuration
-wfLoadExtension( 'WikibaseManifest' );
+$wgDBname !== 'wiki_swmath' ? wfLoadExtension( 'WikibaseManifest' ) : NULL;
