@@ -14,3 +14,4 @@ images
 !images/MaRDI_Logo.png
 !images/MaRDI_Logo_S_5_rgba.png
 prometheus/traefik-pass
+traefik-log
