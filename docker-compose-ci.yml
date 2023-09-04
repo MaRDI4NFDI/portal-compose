@@ -20,6 +20,10 @@ services:
       <<: *wikibase_variables
     volumes:
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d:ro
+
+  elasticsearch:
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       
   wdqs-frontend:
     ports:
