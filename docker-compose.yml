@@ -14,7 +14,9 @@ x-common-variables: &wikibase_variables
   DB_NAME: ${DB_NAME:-my_wiki}
   TLD: ${TLD:-de}
   DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
-  WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.${TLD}}
+  WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
+  WIKIBASE_HOST: ${WIKIBASE_HOST:-localhost}
+  PORTAL_HOST: ${PORTAL_HOST}
   QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.${TLD}
   TRAEFIK_PW: ${TRAEFIK_PW}
 x-extra-variables: &wikibase_extra_variables
@@ -50,7 +52,7 @@ services:
     environment:
       <<: [ *wikibase_variables, *wikibase_extra_variables]
       WIKIBASE_PINGBACK:
-      MW_WG___UPLOADS:
+      MW_WG_ENABLE_UPLOADS:
       MATOMO_TOKEN: ${MATOMO_TOKEN}
       GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
     labels:

@@ -8,13 +8,13 @@ require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 $wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteGlobalID'] = 'mardi';
-$wgWBClientSettings['repoUrl'] = 'https://portal.mardi4nfdi.de';
+$wgWBClientSettings['repoUrl'] = $_ENV['WIKIBASE_SCHEME'] . '://' . $_ENV['PORTAL_HOST'];
 $wgWBClientSettings['repoScriptPath'] = '/w';
 $wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
 $wgWBClientSettings['entitySources'] = [
 		'mardi_source' => [
 				'repoDatabase' => 'my_wiki',
-				'baseUri' => 'https://portal.mardi4nfdi.de/entity',
+				'baseUri' => $_ENV['WIKIBASE_SCHEME'] . '://' . $_ENV['PORTAL_HOST'] . '/entity',
 				'entityNamespaces' => [
 						'item' => 120,
 						'property' => 122,
