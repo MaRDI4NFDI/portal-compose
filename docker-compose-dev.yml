@@ -49,6 +49,8 @@ services:
 
   elasticsearch:
     restart: ${RESTART}
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
 
   wdqs:
     restart: ${RESTART}
