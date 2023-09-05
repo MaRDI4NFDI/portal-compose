@@ -16,7 +16,7 @@ x-common-variables: &wikibase_variables
   DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
   WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
   WIKIBASE_HOST: ${WIKIBASE_HOST:-localhost}
-  PORTAL_HOST: ${PORTAL_HOST}
+  WIKIBASE_PORT: ${WIKIBASE_PORT:-80}
   QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.portal.mardi4nfdi.${TLD}
   TRAEFIK_PW: ${TRAEFIK_PW}
 x-extra-variables: &wikibase_extra_variables
