@@ -19,3 +19,5 @@ $wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
 $wgContentNamespaces[] = NS_FORMULA;
 $wgContentNamespaces[] = NS_PERSON;
 
+$wgNamespacesToBeSearchedDefault[NS_FORMULA] = true;
+$wgNamespacesToBeSearchedDefault[NS_PERSON] = true;
