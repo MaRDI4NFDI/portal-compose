@@ -87,6 +87,8 @@ services:
     environment:
       <<: [ *wikibase_variables, *wikibase_extra_variables]
       MAX_JOBS: ${MAX_JOBS}
+      MATOMO_TOKEN: ${MATOMO_TOKEN}
+      GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
       
   mysql:
     image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
