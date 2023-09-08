@@ -47,6 +47,11 @@ services:
   importer:
     restart: ${RESTART}
 
+  importer-api:
+    ports:
+     - "5000:80"
+    restart: ${RESTART}
+
   elasticsearch:
     restart: ${RESTART}
     environment:
