@@ -145,6 +145,29 @@ services:
       - IMPORTER_PASS=${IMPORTER_PASS}
     entrypoint: "/app/start.sh"
 
+  importer-api:
+    image: ghcr.io/mardi4nfdi/importer-api:main
+    container_name: importer-api
+    restart: unless-stopped
+    links:
+      - wikibase
+      - mysql
+    depends_on:
+      - wikibase
+    networks:
+      default:
+        aliases:
+         - importer-api.svc
+    environment:
+      DB_HOST: mardi-mysql
+      MYSQL_USER: ${DB_API_USER}
+      MYSQL_PASSWORD: ${DB_API_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+    labels:
+      - traefik.http.routers.importer-api.rule=Host(`importer.portal.mardi4nfdi.${TLD}`)
+      - traefik.http.routers.importer-api.entrypoints=websecure
+      - traefik.http.routers.importer-api.tls.certResolver=le
+
   backup:
     image: ghcr.io/mardi4nfdi/docker-backup:main
     container_name: mardi-backup
@@ -476,6 +499,7 @@ services:
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
+      
   scholia:
     image: ghcr.io/mardi4nfdi/scholia:nightly
     labels:
