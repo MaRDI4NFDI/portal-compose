@@ -39,8 +39,7 @@ $wgGroupPermissions['bot']['noratelimit'] = true;
 
 # Enabling uploads for images.
 $wgEnableUploads = true;
-# Explicitly mentioning the file-extensions for image-upload.
-$wgFileExtensions = [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg' ];
+$wgFileExtensions[] = 'svg';
 # Explicitly mentioning the upload-path for image-upload.
 $wgUploadPath = $wgScriptPath . '/images/';
 # Enable SVG converter
