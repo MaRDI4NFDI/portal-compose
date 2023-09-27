@@ -22,6 +22,9 @@ x-extra-variables: &wikibase_extra_variables
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
 
 services:
+  whoami:
+    image: containous/whoami # A container that exposes an API to show its IP address
+    restart: always
   wikibase:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
