@@ -1,4 +1,5 @@
 <?php
+# Needs to be loaded after NS_CODEMETA is defined
 wfLoadExtension( 'JsonConfig' );
 // $wgJsonConfigEnableLuaSupport = true; // required to use JsonConfig in Lua
 // Content model is 'JsonConfig.CodeMeta'
