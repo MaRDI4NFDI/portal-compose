@@ -1,4 +1,13 @@
 http:
+  routers:
+    home:
+      rule: Host(`mardi4nfdi.org`,`mardi4nfdi.org`)
+      service: whoami-docker@docker
+      entryPoints: [websecure]
+      tls:
+        certResolver: le
+      middlewares:
+        - org-redirectregex
   middlewares:
     org-redirectregex:
       redirectRegex:
