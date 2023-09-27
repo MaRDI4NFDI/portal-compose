@@ -12,8 +12,8 @@ $wgExtraNamespaces[NS_FORMULA] = "Formula";
 $wgExtraNamespaces[NS_FORMULA_TALK] = "Formula_talk";
 $wgExtraNamespaces[NS_PERSON] = "Person";
 $wgExtraNamespaces[NS_PERSON_TALK] = "Person_talk";
-$wgExtraNamespaces[NS_PERSON] = "CodeMeta";
-$wgExtraNamespaces[NS_PERSON_TALK] = "CodeMeta_talk";
+$wgExtraNamespaces[NS_CODEMETA] = "CodeMeta";
+$wgExtraNamespaces[NS_CODEMETA_TALK] = "CodeMeta_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
 $wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' ); 
