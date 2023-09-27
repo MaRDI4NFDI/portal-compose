@@ -35,6 +35,9 @@ tracing:
 
 providers:
   docker: {}
+  file:
+    directory: "/traefik-conf"
+    watch: true
 
 certificatesResolvers:
   le:
@@ -45,10 +48,3 @@ certificatesResolvers:
       httpChallenge:
         # used during the challenge
         entryPoint: web
-
-http:
-  middlewares:
-    org-redirectregex:
-      redirectRegex:
-        regex: "^https?://(www\\.)?mardi4nfdi\\.org/(.*)"
-        replacement: "https://www.mardi4nfdi.de/${3}"
