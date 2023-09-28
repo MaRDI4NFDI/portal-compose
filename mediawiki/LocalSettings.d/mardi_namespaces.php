@@ -4,12 +4,16 @@ define("NS_FORMULA", 4200); // This MUST be even.
 define("NS_FORMULA_TALK", 4201); // This MUST be the following odd integer.
 define("NS_PERSON", 4202);
 define("NS_PERSON_TALK", 4203);
+define("NS_CODEMETA", 4204);
+define("NS_CODEMETA_TALK", 4205);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
 $wgExtraNamespaces[NS_FORMULA_TALK] = "Formula_talk";
 $wgExtraNamespaces[NS_PERSON] = "Person";
 $wgExtraNamespaces[NS_PERSON_TALK] = "Person_talk";
+$wgExtraNamespaces[NS_CODEMETA] = "CodeMeta";
+$wgExtraNamespaces[NS_CODEMETA_TALK] = "CodeMeta_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
 $wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' ); 
