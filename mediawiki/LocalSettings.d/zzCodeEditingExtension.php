@@ -10,6 +10,7 @@ $wgJsonConfigs['JsonConfig.CodeMeta'] = [
         'nsName' => 'CodeMeta',
         'pattern' => '/.\.json/',
 ];
+wfLoadExtension( 'WikiEditor' );
 wfLoadExtension( 'CodeEditor' );
 $wgDefaultUserOptions['usebetatoolbar'] = 1; // user option provided by WikiEditor extension
 wfLoadExtension( 'CodeMirror' );
