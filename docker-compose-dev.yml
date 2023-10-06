@@ -46,6 +46,8 @@ services:
 
   importer:
     restart: ${RESTART}
+    environment:
+      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
 
   importer-api:
     ports:
