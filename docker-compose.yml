@@ -46,7 +46,7 @@ services:
     - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
   cassandra-backup:
     hostname: cassandra-backup
-    image: docker.dev.fiz-karlsruhe.de/cassandra-backup:1
+    image: docker.dev.fiz-karlsruhe.de/cassandra-backup:5.2
     environment:
       JAVA_OPTS: "-Dlog4j2.formatMsgNoLookups=true"
       LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
