@@ -1,0 +1,26 @@
+{
+  "mappings": {
+    "properties": {
+        "datestamp": {
+            "type": "date",
+            "format": "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        },
+        "deleteFlag": {
+            "type": "boolean"
+        },
+        "formats": {
+            "type": "keyword"
+        },
+        "sets": {
+            "type": "keyword"
+        },
+        "identifier": {
+            "type": "keyword",
+            "doc_values": true
+        },
+        "ingestFormat": {
+            "type": "keyword"
+        }
+    }
+  }
+}
