@@ -538,6 +538,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --include-stopped --revive-stopped --schedule "0 0 1 * * 1" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
+    
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+      - uptime-kuma:/app/data
+    restart: always
+    labels:
+      - traefik.http.routers.matomo.rule=Host(`uptime.portal.mardi4nfdi.${TLD}`)
+      - traefik.http.routers.matomo.entrypoints=websecure
+      - traefik.http.routers.matomo.tls.certResolver=le
 
 volumes:
   shared_mardi_wikibase:
@@ -558,6 +569,7 @@ volumes:
   goaccess_report:
   goaccess_db:
   matomo:
+  uptime-kuma:
 
 networks:                                
   default:                               
