@@ -24,6 +24,98 @@ x-extra-variables: &wikibase_extra_variables
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
 
 services:
+  cassandra-oai:
+    hostname: cassandra-oai
+    image: cassandra:3.11
+    environment:
+      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
+    volumes:
+    - cassandra-data:/var/lib/cassandra/
+    - ./oaipmh/cassandra.yaml:/etc/cassandra/cassandra.yaml
+    - ./oaipmh/cassandra-env.sh:/etc/cassandra/cassandra-env.sh
+    - ./oaipmh/jmxremote.access:/opt/java/openjdk/lib/management/jmxremote.access
+    - ./oaipmh/jmxremote.password:/etc/cassandra/jmxremote.password
+  cassandra-oai-setup:
+    hostname: cassandra-oai-setup
+    image: cassandra:3.11
+    depends_on:
+    - cassandra-oai
+    command: ["/wait-for-it.sh","cassandra-oai:9042","--", "sh", "/init-fizoai-database.sh"]
+    volumes:
+    - ./oaipmh/init-fizoai-database.sh:/init-fizoai-database.sh:ro
+    - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
+  cassandra-backup:
+    hostname: cassandra-backup
+    image: docker.dev.fiz-karlsruhe.de/cassandra-backup:5.2
+    environment:
+      JAVA_OPTS: "-Dlog4j2.formatMsgNoLookups=true"
+      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
+    env_file:
+    - ./oaipmh/.cassandra_dump_env
+    volumes:
+    - backup-logs:/logs
+    - cassandra-data:/source_data
+    - ./cassandra-backup:/backup
+    depends_on:
+    - cassandra-oai
+  elasticsearch-oai:
+    hostname: elasticsearch-oai
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+    environment:
+      # - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Xms2g -Xmx2g"
+      - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+    - es-logs:/usr/share/elasticsearch/logs
+    - es-data:/usr/share/elasticsearch/data
+    # - ./oaipmh/oai-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+
+
+  elasticsearch-oai-setup:
+    hostname: elasticsearch-oai-setup
+    image: centos
+    depends_on:
+    - elasticsearch-oai
+    command: ["/wait-for-it.sh","elasticsearch-oai:9200","--", "sh", "/init-fizoai-elasticsearch.sh"]
+    volumes:
+    - ./oaipmh/init-fizoai-elasticsearch.sh:/init-fizoai-elasticsearch.sh:ro
+    - ./oaipmh/item_mapping_es_v7:/item_mapping_es_v7:ro
+    - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
+
+  oai-backend:
+    hostname: oai-backend
+    image: docker.dev.fiz-karlsruhe.de/oai-backend:1.2.4
+    environment:
+    - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
+    - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
+    depends_on:
+    - cassandra-oai
+    - elasticsearch-oai
+    links: 
+    - "cassandra-oai"
+    - "elasticsearch-oai"
+    volumes:
+    - ./oaipmh/fiz-oai-backend.properties:/usr/local/tomcat/conf/fiz-oai-backend.properties:ro
+    - backend-logs:/usr/local/tomcat/logs
+  oai-provider:
+    hostname: oai-provider
+    image: docker.dev.fiz-karlsruhe.de/oai-provider:1.2.2
+    environment:
+    - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
+    - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
+    depends_on:
+    - oai-backend
+    links: 
+    - "oai-backend"
+    volumes:
+    - ./oaipmh/oaicat.properties:/usr/local/tomcat/conf/oaicat.properties:ro
+    - provider-logs:/usr/local/tomcat/logs
+
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
     restart: always
@@ -551,6 +643,13 @@ services:
       - traefik.http.routers.matomo.tls.certResolver=le
 
 volumes:
+  cassandra-data:
+  es-data:
+  #persist logs
+  provider-logs:
+  backend-logs:
+  es-logs:
+  backup-logs:
   shared_mardi_wikibase:
   mediawiki-mysql-data:
   mediawiki-mongo-data:
