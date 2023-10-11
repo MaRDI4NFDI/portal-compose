@@ -115,6 +115,11 @@ services:
     volumes:
     - ./oaipmh/oaicat.properties:/usr/local/tomcat/conf/oaicat.properties:ro
     - provider-logs:/usr/local/tomcat/logs
+    labels:
+    - traefik.http.routers.oai-provider.rule=Host(`oai.portal.mardi4nfdi.${TLD}`)
+    - traefik.http.routers.oai-provider.entrypoints=websecure
+    - traefik.http.routers.oai-provider.tls.certResolver=le
+    - traefik.http.middlewares.oai-provide.addprefix.prefix=/oai
 
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
