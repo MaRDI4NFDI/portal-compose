@@ -26,7 +26,7 @@ x-extra-variables: &wikibase_extra_variables
 services:
   cassandra-oai:
     hostname: cassandra-oai
-    image: cassandra:3.11
+    image: cassandra:4.1
     environment:
       LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
     volumes:
@@ -37,7 +37,7 @@ services:
     - ./oaipmh/jmxremote.password:/etc/cassandra/jmxremote.password
   cassandra-oai-setup:
     hostname: cassandra-oai-setup
-    image: cassandra:3.11
+    image: cassandra:4.1
     depends_on:
     - cassandra-oai
     command: ["/wait-for-it.sh","cassandra-oai:9042","--", "sh", "/init-fizoai-database.sh"]
@@ -60,7 +60,7 @@ services:
     - cassandra-oai
   elasticsearch-oai:
     hostname: elasticsearch-oai
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.13
     environment:
       # - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Xms2g -Xmx2g"
@@ -89,7 +89,7 @@ services:
 
   oai-backend:
     hostname: oai-backend
-    image: docker.dev.fiz-karlsruhe.de/oai-backend:1.2.4
+    image: docker.dev.fiz-karlsruhe.de/oai-backend:1.2.8
     environment:
     - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
     - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
@@ -104,7 +104,7 @@ services:
     - backend-logs:/usr/local/tomcat/logs
   oai-provider:
     hostname: oai-provider
-    image: docker.dev.fiz-karlsruhe.de/oai-provider:1.2.2
+    image: docker.dev.fiz-karlsruhe.de/oai-provider:1.2.6
     environment:
     - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
     - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
