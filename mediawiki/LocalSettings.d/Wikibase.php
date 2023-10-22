@@ -9,7 +9,7 @@ $wikibaseHost = getenv('WIKIBASE_HOST');
 if ($wikibaseHost === 'localhost') {
     $portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
 } else {
-    $portalHost = getenv('WIKIBASE_SCHEME') . $wikibaseHost;
+    $portalHost = getenv('WIKIBASE_SCHEME') . '://'. $wikibaseHost;
 }
 
 # enable linking between wikibase and content pages
