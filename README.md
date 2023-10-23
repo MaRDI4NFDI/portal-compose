@@ -116,6 +116,8 @@ services:
 
 -->
 ## Start up the containers
+Be careful, the containers need about 13GB of free memory.
+
 Start-up the containers from the docker-compose file for development:
 ```
 docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
