@@ -1,0 +1,3 @@
+[mariadb]
+server_id=1002
+log-basename=mardb 

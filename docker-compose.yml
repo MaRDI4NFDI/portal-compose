@@ -209,6 +209,22 @@ services:
         aliases:
          - mysql.svc
 
+  mysql-repl:
+    image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
+    container_name: mardi-mysql-repl
+    restart: unless-stopped
+    volumes:
+      - ./my-repl.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    networks:
+      default:
+        aliases:
+         - mysql-repl.svc
+
   mongo:
     image: mongo
     container_name: mardi-mongo
