@@ -192,7 +192,7 @@ services:
       GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
       
   mysql:
-    image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
+    image: "${MYSQL_IMAGE_NAME:-mariadb:10.6}"
     container_name: mardi-mysql
     restart: unless-stopped
     volumes:
@@ -210,7 +210,7 @@ services:
          - mysql.svc
 
   mysql-repl:
-    image: "${MYSQL_IMAGE_NAME:-mariadb:10.3}"
+    image: "${MYSQL_IMAGE_NAME:-mariadb:10.6}"
     container_name: mardi-mysql-repl
     restart: unless-stopped
     volumes:
