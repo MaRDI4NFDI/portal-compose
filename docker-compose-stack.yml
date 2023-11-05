@@ -1,9 +1,16 @@
-  services:
-    redis:
-      image: redis:7
-    redis-commander:
-      image: rediscommander/redis-commander:latest
-      environment:
-      - REDIS_HOSTS=redis:6379
-      ports:
-      - "8081:8081"
+services:
+  redis:
+    image: redis:7
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081:8081"
+    hostname: rediscommander
+    networks:
+    - test
+    - default
+networks:
+  test:
+    external: true
