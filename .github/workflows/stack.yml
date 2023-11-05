@@ -1,4 +1,4 @@
-name: wb docker-compose-actions-workflow
+name: wb docker-stack-actions-workflow
 on: 
   push:
     branches: 
@@ -29,5 +29,6 @@ jobs:
           QS_PUBLIC_HOST_AND_PORT: ${{ secrets.QS_PUBLIC_HOST_AND_PORT}}
         run: >
           MW_ADMIN_PASS=${{ secrets.MW_ADMIN_PASS }} 
-          DB_PASS=${{ secrets.DB_PASS }} 
+          DB_PASS=${{ secrets.DB_PASS }}
+          docker swarm init &&
           docker stack deploy --compose-file docker-compose-stack.yml mardistack 
