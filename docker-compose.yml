@@ -332,6 +332,7 @@ services:
       - ./traefik-log:/data/log # Persistent file for logging
     networks:
       - default
+      - test
     labels:
       - traefik.http.routers.dashboard.rule=Host(`traefik.portal.mardi4nfdi.${TLD}`)
       - traefik.http.routers.dashboard.entrypoints=websecure
@@ -695,3 +696,5 @@ networks:
     driver: bridge                       
     driver_opts:                         
       com.docker.network.driver.mtu: 1450
+  test:
+    external: true
