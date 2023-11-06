@@ -1,0 +1,15 @@
+http:
+  services:
+    rediscommander:
+      loadBalancer:
+        servers:
+        - url: "http://localhost:8081"
+  routers:
+    redis-router:
+      rule: Host(`redis.portal.mardi4nfdi.de`)
+      service: rediscommander
+      entryPoints: [websecure]
+      tls:
+        certResolver: le
+      middlewares:
+        - basicauth
