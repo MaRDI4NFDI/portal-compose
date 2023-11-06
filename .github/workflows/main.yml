@@ -42,15 +42,16 @@ jobs:
       #-
       #  name: Setup tmate session
       #  uses: mxschmitt/action-tmate@v3 
-           
-      - 
-        name: Give docker compose time to start
-        run: sleep 200
-        # actually, it would be better to have the selenium container wait for the other containers
+
+      # Disable tests temporarily, cf. https://github.com/MaRDI4NFDI/portal-compose/issues/429
+      # - 
+      #  name: Give docker compose time to start
+      #  run: sleep 200
+      # actually, it would be better to have the selenium container wait for the other containers
  
-      -
-        name: Test using Selenium
-        run: docker exec mardi-selenium bash ./start_test_runner.sh test
-      -
-        name: Test backups
-        run: docker exec mardi-backup bash /test/test_backup.sh
+      #-
+      #  name: Test using Selenium
+      #  run: docker exec mardi-selenium bash ./start_test_runner.sh test
+      #-
+      #  name: Test backups
+      #  run: docker exec mardi-backup bash /test/test_backup.sh
