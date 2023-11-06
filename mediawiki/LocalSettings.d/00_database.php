@@ -1,6 +1,6 @@
 <?php
 $wgDBname =  str_contains($_SERVER['HTTP_HOST']??'','swmath') ? 'wiki_swmath' : 'my_wiki';
-if ( getenv('CI') !== 'true' ) {
+if ( false && getenv('CI') !== 'true' ) {
     $wgLBFactoryConf = array(
     
     'class' => 'LBFactoryMulti',
