@@ -12,4 +12,4 @@ http:
       tls:
         certResolver: le
       middlewares:
-        - basicauth
+        - auth@docker
