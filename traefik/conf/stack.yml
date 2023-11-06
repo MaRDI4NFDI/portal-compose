@@ -3,7 +3,7 @@ http:
     rediscommander:
       loadBalancer:
         servers:
-        - url: "http://localhost:8081"
+        - url: "http://rediscommander:8081"
   routers:
     redis-router:
       rule: Host(`redis.portal.mardi4nfdi.de`)
