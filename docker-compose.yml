@@ -123,6 +123,7 @@ services:
   whoami:
     image: containous/whoami # A container that exposes an API to show its IP address
     restart: always
+
   wikibase:
     image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
     container_name: mardi-wikibase
@@ -145,9 +146,10 @@ services:
       - apache_logs:/var/log/apache2/
     networks:
       default:
-        aliases:
-         - wikibase-docker.svc
-         - wikibase.svc
+          aliases:
+           - wikibase-docker.svc
+           - wikibase.svc
+      test:
     environment:
       <<: [ *wikibase_variables, *wikibase_extra_variables]
       WIKIBASE_PINGBACK:
