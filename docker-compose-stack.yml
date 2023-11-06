@@ -13,6 +13,8 @@ services:
     - default
   whoami:
     image: traefik/whoami
+    networks:
+    - test
 networks:
   test:
     external: true
