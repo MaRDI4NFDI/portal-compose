@@ -4,6 +4,10 @@ http:
       loadBalancer:
         servers:
         - url: "http://rediscommander:8081"
+    whoisswarm:
+      loadBalancer:
+        servers:
+        - url: "http://10.0.2.17"
   routers:
     redis-router:
       rule: Host(`redis.portal.mardi4nfdi.de`)
@@ -13,3 +17,9 @@ http:
         certResolver: le
       middlewares:
         - auth@docker
+    whoami-router:
+      rule: Host(`who.portal.mardi4nfdi.de`)
+      service: whoisswarm
+      entryPoints: [websecure]
+      tls:
+        certResolver: le
