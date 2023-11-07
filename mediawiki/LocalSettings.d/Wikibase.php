@@ -37,7 +37,7 @@ $wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
 $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
 
 // https://github.com/MaRDI4NFDI/portal-compose/issues/224
-$wgNamespacesToBeSearchedDefault[WB_NS_PROPERTY] = true;
+$wgNamespacesToBeSearchedDefault[122] = true; // WB_PROPERTY_NAMESPACE===122
 
 if ( $wgDBname !== 'wiki_swmath' ){
 
