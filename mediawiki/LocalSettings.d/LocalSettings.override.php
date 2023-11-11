@@ -130,9 +130,6 @@ ini_set('memory_limit', '2G');
 # https://github.com/MaRDI4NFDI/portal-compose/issues/322
 $wgUseInstantCommons = true; 
 
-# Enable Changing the title for persons.
-$wgRestrictDisplayTitle=false;
-
 # https://github.com/MaRDI4NFDI/portal-compose/issues/419
 $wgJobTypeConf['default'] = [
     'class'          => 'JobQueueRedis',
