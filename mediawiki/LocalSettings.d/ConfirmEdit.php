@@ -3,5 +3,4 @@
 // https://www.mediawiki.org/wiki/Extension:ConfirmEdit
 
 ## ConfirmEdit Configuration
-# loaded automatically from DisplayTitle
-# wfLoadExtension( 'ConfirmEdit' );
+wfLoadExtension( 'ConfirmEdit' );
