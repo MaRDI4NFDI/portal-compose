@@ -1,3 +1,3 @@
 <?php
 
-$wgMathSearchContentTexMaxLength = 20000;
+$wgMathSearchContentTexMaxLength = 30000;
