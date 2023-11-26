@@ -1,4 +1,4 @@
 <?php
 
-$wgSPARQLEndpoint = 'https://query.portal.mardi4nfdi.de/proxy/wdqs/bigdata/namespace/wdq/sparql';
+$wgSPARQLEndpoint = 'http://wdqs.svc:9999/bigdata/namespace/wdq/sparql';
 wfLoadExtension( 'SPARQL' );
