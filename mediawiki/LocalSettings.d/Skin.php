@@ -32,6 +32,7 @@ $wgHooks['SkinAddFooterLinks'][] = function ( Skin $skin, string $key, array &$f
     };
     return true;
 };
+# https://github.com/ProfessionalWiki/MardiSkin
 wfLoadExtension( 'Bootstrap' );
 wfLoadskin( 'chameleon' );
 $egChameleonLayoutFile= __DIR__ . '/skins/MardiSkin/layout.xml';
@@ -39,3 +40,6 @@ $egChameleonExternalStyleModules = [
 	__DIR__ . '/skins/MardiSkin/variables.scss' => 'beforeVariables',
 	__DIR__ . '/skins/MardiSkin/styles.scss' => 'afterMain',
 ];
+if ( $wgDBname === 'my_wiki' ){
+	$wgDefaultSkin = 'chameleon';
+}
