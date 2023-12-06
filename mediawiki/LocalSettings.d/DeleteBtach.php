@@ -1,0 +1,1 @@
+wfLoadExtension( 'DeleteBatch' );
