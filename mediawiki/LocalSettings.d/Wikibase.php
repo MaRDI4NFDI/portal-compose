@@ -49,6 +49,20 @@ if ( $wgDBname !== 'wiki_swmath' ){
 	$wgExtraNamespaces[123] = 'Property_talk';
 	// do not declare namespaces if that would be done by default https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Wikibase/+/933906 https://phabricator.wikimedia.org/T291617
 	$wgWBRepoSettings['defaultEntityNamespaces'] = false;
+	$wgWBRepoSettings['entitySources'] = [
+			'mardi_source' => [
+				'repoDatabase' => 'my_wiki',
+				'baseUri' => $portalHost . '/entity',
+				'entityNamespaces' => [
+						'item' => 120,
+						'property' => 122,
+				],
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
+				'interwikiPrefix' => 'mardi',
+		],
+	];
+	$wgWBRepoSettings['localEntitySourceName'] => 'mardi_source',
 	$wgWBRepoSettings['localClientDatabases'] = [
 		'mardi' => 'my_wiki',
 		'swmath' => 'wiki_swmath'
