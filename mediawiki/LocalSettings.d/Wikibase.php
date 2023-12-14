@@ -35,7 +35,10 @@ $wgWBClientSettings['entitySources'] = [
 $wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
 // my_wiki is the MaRDI database
 $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
-$wgNamespacesToBeSearchedDefault[120] = false; // wikibase-item
+
+// https://github.com/MaRDI4NFDI/portal-compose/issues/224
+$wgNamespacesToBeSearchedDefault[122] = true; // WB_PROPERTY_NAMESPACE===122
+
 if ( $wgDBname !== 'wiki_swmath' ){
 
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
