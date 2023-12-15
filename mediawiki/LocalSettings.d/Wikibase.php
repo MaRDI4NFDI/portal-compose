@@ -62,7 +62,7 @@ if ( $wgDBname !== 'wiki_swmath' ){
 				'interwikiPrefix' => 'mardi',
 		],
 	];
-	$wgWBRepoSettings['localEntitySourceName'] => 'mardi_source',
+	$wgWBRepoSettings['localEntitySourceName'] = 'mardi_source',
 	$wgWBRepoSettings['localClientDatabases'] = [
 		'mardi' => 'my_wiki',
 		'swmath' => 'wiki_swmath'
