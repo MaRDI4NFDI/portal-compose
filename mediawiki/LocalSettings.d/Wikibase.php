@@ -4,35 +4,36 @@
 wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
-$wikibaseHost = getenv('WIKIBASE_HOST');
+#$wikibaseHost = getenv('WIKIBASE_HOST');
 
-if ($wikibaseHost === 'localhost') {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
-} else {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://'. $wikibaseHost;
-}
+#if ($wikibaseHost === 'localhost') {
+    #$portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
+	#$portalHost = getenv('WIKIBASE_SCHEME') . '://localhost';
+#} else {
+#    $portalHost = getenv('WIKIBASE_SCHEME') . '://'. $wikibaseHost;
+#}
 
 # enable linking between wikibase and content pages
-$wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
-$wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
-$wgWBClientSettings['siteGlobalID'] = 'mardi';
-$wgWBClientSettings['repoUrl'] = $portalHost;
-$wgWBClientSettings['repoScriptPath'] = '/w';
-$wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
-$wgWBClientSettings['entitySources'] = [
-		'mardi_source' => [
-				'repoDatabase' => 'my_wiki',
-				'baseUri' => $portalHost . '/entity',
-				'entityNamespaces' => [
-						'item' => 120,
-						'property' => 122,
-				],
-				'rdfNodeNamespacePrefix' => 'wd',
-				'rdfPredicateNamespacePrefix' => '',
-				'interwikiPrefix' => 'mardi',
-		],
-];
-$wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
+#$wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
+#$wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
+#$wgWBClientSettings['siteGlobalID'] = 'mardi';
+#$wgWBClientSettings['repoUrl'] = $portalHost;
+#$wgWBClientSettings['repoScriptPath'] = '/w';
+#$wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
+#$wgWBClientSettings['entitySources'] = [
+#		'mardi_source' => [
+#				'repoDatabase' => 'my_wiki',
+#				'baseUri' => $portalHost . '/entity',
+#				'entityNamespaces' => [
+#						'item' => 120,
+#						'property' => 122,
+#				],
+#				'rdfNodeNamespacePrefix' => 'wd',
+#				'rdfPredicateNamespacePrefix' => '',
+#				'interwikiPrefix' => 'mardi',
+#		],
+#];
+#$wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
 // my_wiki is the MaRDI database
 $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
 

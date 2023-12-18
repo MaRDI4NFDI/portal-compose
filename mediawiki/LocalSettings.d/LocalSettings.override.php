@@ -45,56 +45,10 @@ $wgUploadPath = $wgScriptPath . '/images/';
 # Enable SVG converter
 $wgSVGConverter = 'rsvg';
 
-# Extensions required by templates
-wfLoadExtension( 'TemplateStyles' );
-wfLoadExtension( 'JsonConfig' );
-wfLoadExtension( 'InputBox' );
-wfLoadExtension( 'ParserFunctions' );
-wfLoadExtension( 'Math' );
-wfLoadExtension( 'MathSearch' );
-wfLoadExtension( 'Lockdown' );
-wfLoadExtension( 'SyntaxHighlight_GeSHi' );
-wfLoadExtension( 'ExternalContent' );
-
 $wgWBRepoSettings['formatterUrlProperty']='P10';
-$wgMathDisableTexFilter = 'always';
-
-$wgMathLaTeXMLUrl = 'http://latexml:8080/convert/';
-#overwrite settings
-$wgMathDefaultLaTeXMLSetting = array(
-        'format' => 'xhtml',
-        'whatsin' => 'math',
-        'whatsout' => 'math',
-        'pmml',
-        'cmml',
-        'mathtex',
-        'nodefaultresources',
-        'preload' => array(
-                'LaTeX.pool',
-                'article.cls',
-                'amsmath.sty',
-                'amsthm.sty',
-                'amstext.sty',
-                'amssymb.sty',
-                'eucal.sty',
-                // '[dvipsnames]xcolor.sty',
-                'url.sty',
-                'hyperref.sty',
-                '[ids]latexml.sty',
-                'DLMFmath.sty',
-                'DRMFfcns.sty',
-                'DLMFsupport.sty.ltxml',
-        ),
-        'linelength' => 90,
-);
 
 $wgWBRepoSettings['allowEntityImport'] = true;
 $wgShowExceptionDetails = true;
-$wgVisualEditorAvailableNamespaces = [
-    'Project' => true,
-    'Private' => true,
-];
-
 
 # Settings for lockdown extension (private documentation)
 
@@ -109,31 +63,7 @@ $wgGroupPermissions['private'] = [];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['edit'] = [ 'private' ];
 $wgNamespacePermissionLockdown[NS_PRIVATE]['read'] = [ 'private' ];
 
-# Settings for MathSearch extension.
-$wgMathSearchBaseXBackendUrl="http://formulasearch:1985/basex/";
-
-# Settings for Math-Extension
-$wgMathFullRestbaseURL = 'https://wikimedia.org/api/rest_';
-$wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
-// enable math native rendering (experimental)
-$wgMathValidModes[] =  'native'; 
-
-
-#popups for math
-$wgMathWikibasePropertyIdDefiningFormula = "P14";
-$wgMathWikibasePropertyIdHasPart = "P4";
-
 #
 # increase memory limit
 ini_set('memory_limit', '2G');
 
-# https://github.com/MaRDI4NFDI/portal-compose/issues/322
-$wgUseInstantCommons = true; 
-
-# https://github.com/MaRDI4NFDI/portal-compose/issues/419
-$wgJobTypeConf['default'] = [
-    'class'          => 'JobQueueRedis',
-    'redisServer'    => '172.18.0.1:6379', // this is the host ip from the default network
-    'redisConfig'    => [],
-    'daemonized'     => true
- ];
