@@ -29,7 +29,7 @@ $wgWBClientSettings['entitySources'] = [
 				],
 				'rdfNodeNamespacePrefix' => 'wd',
 				'rdfPredicateNamespacePrefix' => '',
-				'interwikiPrefix' => 'mardi',
+				'interwikiPrefix' => '',
 		],
 ];
 $wgWBClientSettings['itemAndPropertySourceName'] = 'mardi_source';
