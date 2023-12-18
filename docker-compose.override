@@ -1,0 +1,70 @@
+version: '3.4'
+
+x-common-variables: &wikibase_variables
+    # required by quickstatements for creating OAuth consumers,
+    # and by wikibase for redirecting back to quickstatements
+    QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
+    WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
+    RESTART: 'no'
+    BOTUSER_NAME: ${IMPORTER_USER}
+    BOTUSER_PW: ${IMPORTER_PASS}
+
+services:
+  wikibase:
+    ports:
+      - "${WIKIBASE_PORT}:80"
+      - "${MONGO_DB_PORT}:8081"
+    #restart: ${RESTART}
+    environment:
+      <<: *wikibase_variables
+
+  wikibase_jobrunner:
+    restart: ${RESTART}
+
+  mysql:
+    restart: ${RESTART}
+
+  wdqs-frontend:
+    ports:
+     - "${WDQS_FRONTEND_PORT}:80"
+    restart: ${RESTART}
+    environment:
+      - WIKIBASE_HOST=wikibase.svc
+
+  reverse-proxy:
+    restart: ${RESTART}
+
+  elasticsearch:
+    restart: ${RESTART}
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+
+  wdqs:
+    restart: ${RESTART}
+    environment:
+     - WIKIBASE_HOST=wikibase.svc
+
+  wdqs-proxy:
+    restart: ${RESTART}
+
+  wdqs-updater:
+    restart: ${RESTART}
+    environment:
+     - WIKIBASE_HOST=wikibase.svc
+
+  reverse-proxy:
+    restart: ${RESTART}
+    labels:
+      - traefik.http.routers.dashboard-local.rule=Host(`localhost`)
+      - traefik.http.routers.dashboard-local.entrypoints=websecure
+      - traefik.http.routers.dashboard-local.tls.certResolver=le
+      - traefik.http.routers.dashboard-local.service=api@internal
+
+  watchtower:
+    restart: ${RESTART}
+
+networks:                                
+  default:                               
+    driver: bridge                       
+    driver_opts:                         
+      com.docker.network.driver.mtu: 1450
