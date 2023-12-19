@@ -125,7 +125,7 @@ services:
     restart: always
 
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724"
     container_name: mardi-wikibase
     links:
       - mysql
@@ -169,7 +169,7 @@ services:
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
   
   wikibase_jobrunner:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase:main"
+    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724"
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
