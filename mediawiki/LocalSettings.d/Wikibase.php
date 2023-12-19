@@ -52,14 +52,14 @@ if ( $wgDBname !== 'wiki_swmath' ){
 	$wgWBRepoSettings['entitySources'] = [
 			'mardi_source' => [
 				'repoDatabase' => 'my_wiki',
-				'baseUri' => $portalHost . '/entity',
+				'baseUri' => $portalHost . '/entity/',
 				'entityNamespaces' => [
 						'item' => 120,
 						'property' => 122,
 				],
 				'rdfNodeNamespacePrefix' => 'wd',
 				'rdfPredicateNamespacePrefix' => '',
-				'interwikiPrefix' => 'mardi',
+				'interwikiPrefix' => '',
 		],
 	];
 	$wgWBRepoSettings['localEntitySourceName'] = 'mardi_source';
