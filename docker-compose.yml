@@ -24,6 +24,9 @@ x-extra-variables: &wikibase_extra_variables
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
 
 services:
+  redis:
+    container_name: redis
+    image: redis:7
   cassandra-oai:
     hostname: cassandra-oai
     image: cassandra:4.1
