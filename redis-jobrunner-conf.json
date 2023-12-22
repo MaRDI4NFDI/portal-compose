@@ -1,0 +1,18 @@
+{
+        "groups": {
+                "basic": {
+                        "runners": 0
+                }
+        },
+        "limits": {
+        },
+        "redis": {
+                "aggregators": [
+                        "redis:6379"
+                ],
+                "queues": [
+                        "redis:6379"
+                ]
+        },
+        "dispatcher": "nothing"
+}
