@@ -421,12 +421,13 @@ services:
       - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
     expose:
       - 9999
-
+  # cf https://github.com/MaRDI4NFDI/wikibase-release-pipeline/blob/main/build/WDQS-proxy/README.md
   wdqs-proxy:
     image: "${WDQS_PROXY_IMAGE_NAME:-wikibase/wdqs-proxy:wmde.6}"
     restart: unless-stopped
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
+      - PROXY_MAX_QUERY_MILLIS=3600000
     depends_on:
       - wdqs
     networks:
