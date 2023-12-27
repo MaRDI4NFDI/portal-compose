@@ -5,7 +5,7 @@
                         "low-priority": [
 			        "DispatchChanges"
 		        ]
-                },
+                }
 
         },
         "limits": {
