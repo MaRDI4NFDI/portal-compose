@@ -2,9 +2,28 @@
         "groups": {
                 "basic": {
                         "runners": 10,
+			"include": [
+				"*"
+			],
+			"exclude": [
+				"DispatchChanges",
+				"CreateProfilePages",
+			],
                         "low-priority": [
-			        "DispatchChanges"
+			        "htmlCacheUpdate"
 		        ]
+                },
+		"dispChanges": {
+                        "runners": 100,
+			"include": [
+				"DispatchChanges"
+			],
+                },
+		"profiles": {
+                        "runners": 1,
+			"include": [
+				"CreateProfilePages"
+			],
                 }
 
         },
@@ -18,5 +37,5 @@
                         "redis:6379"
                 ]
         },
-        "dispatcher": "/var/www/html/maintenance/run runJobs --result=json --conf=/shared/LocalSettings.php"
+        "dispatcher": "/var/www/html/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/shared/LocalSettings.php"
 }
