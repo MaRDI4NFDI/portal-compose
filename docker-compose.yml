@@ -28,6 +28,18 @@ services:
     image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
     depends_on:
     - wikibase
+    entrypoint: 
+    - php
+    - /jobrunner/redisJobRunnerService
+    - "--config-file=/jobrunner/config.json"
+    volumes:
+    - ./redis-jobrunner-conf.json:/jobrunner/config.json:ro
+    - shared_mardi_wikibase:/shared/
+    - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
+  redis-rescheduler:
+    image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
+    depends_on:
+    - wikibase
     volumes:
     - ./redis-jobrunner-conf.json:/jobrunner/config.json:ro
     - shared_mardi_wikibase:/shared/
