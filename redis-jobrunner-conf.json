@@ -1,41 +1,39 @@
 {
-        "groups": {
-                "basic": {
-                        "runners": 10,
-			"include": [
-				"*"
-			],
-			"exclude": [
-				"DispatchChanges",
-				"CreateProfilePages",
-			],
-                        "low-priority": [
-			        "htmlCacheUpdate"
-		        ]
-                },
-		"dispChanges": {
-                        "runners": 100,
-			"include": [
-				"DispatchChanges"
-			]
-                },
-		"profiles": {
-                        "runners": 1,
-			"include": [
-				"CreateProfilePages"
-			]
-                }
-
+    "groups": {
+        "basic": {
+            "runners": 10,
+            "include": [
+                "*"
+            ],
+            "exclude": [
+                "DispatchChanges",
+                "CreateProfilePages"
+            ],
+            "low-priority": [
+                "htmlCacheUpdate"
+            ]
         },
-        "limits": {
+        "dispChanges": {
+            "runners": 100,
+            "include": [
+                "DispatchChanges"
+            ]
         },
-        "redis": {
-                "aggregators": [
-                        "redis:6379"
-                ],
-                "queues": [
-                        "redis:6379"
-                ]
-        },
-        "dispatcher": "/var/www/html/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/shared/LocalSettings.php"
+        "profiles": {
+            "runners": 1,
+            "include": [
+                "CreateProfilePages"
+            ]
+        }
+    },
+    "limits": {},
+    "redis": {
+        "aggregators": [
+            "redis:6379"
+        ],
+        "queues": [
+            "redis:6379"
+        ]
+    },
+    "dispatcher": "/var/www/html/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/shared/LocalSettings.php"
 }
