@@ -18,5 +18,5 @@
                         "redis:6379"
                 ]
         },
-        "dispatcher": "/var/www/html/maintenance/run runJobs --result=json"
+        "dispatcher": "/var/www/html/maintenance/run runJobs --result=json --conf=/shared/LocalSettings.php"
 }
