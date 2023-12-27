@@ -26,8 +26,12 @@ x-extra-variables: &wikibase_extra_variables
 services:
   redis-jobrunner:
     image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
+    depends_on:
+    - wikibase
     volumes:
     - ./redis-jobrunner-conf.json:/jobrunner/config.json:ro
+    - shared_mardi_wikibase:/shared/
+    - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
   redis:
     container_name: redis
     image: redis:7
