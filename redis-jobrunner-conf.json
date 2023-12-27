@@ -17,13 +17,13 @@
                         "runners": 100,
 			"include": [
 				"DispatchChanges"
-			],
+			]
                 },
 		"profiles": {
                         "runners": 1,
 			"include": [
 				"CreateProfilePages"
-			],
+			]
                 }
 
         },
