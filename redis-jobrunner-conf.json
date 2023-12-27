@@ -1,8 +1,12 @@
 {
         "groups": {
                 "basic": {
-                        "runners": 0
-                }
+                        "runners": 10,
+                        "low-priority": [
+			        "DispatchChanges"
+		        ]
+                },
+
         },
         "limits": {
         },
@@ -14,5 +18,5 @@
                         "redis:6379"
                 ]
         },
-        "dispatcher": "nothing"
+        "dispatcher": "var/www/html/maintenance/run runJobs --result=json"
 }
