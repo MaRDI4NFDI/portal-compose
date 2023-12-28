@@ -24,6 +24,8 @@ x-extra-variables: &wikibase_extra_variables
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
 
 services:
+  statsd:
+    image: ghcr.io/statsd/statsd
   redis-jobrunner:
     image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
     depends_on:
