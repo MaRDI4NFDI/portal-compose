@@ -139,6 +139,12 @@ services:
     volumes:
     - ./oaipmh/fiz-oai-backend.properties:/usr/local/tomcat/conf/fiz-oai-backend.properties:ro
     - backend-logs:/usr/local/tomcat/logs
+    labels:
+      - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${MARDI_HOST}`)
+      - traefik.http.routers.service-oai-backend.entrypoints=websecure
+      - traefik.http.routers.service-oai-backend.tls.certResolver=le
+      - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$jzJvBO4T50qphJ7Bne1lIeouZCbwtvGGPDZeNLMYCcOSObUp5m0T2
+      - traefik.http.routers.service-oai-backend.middlewares=oai-auth
 
   oai-provider:
     hostname: oai-provider
