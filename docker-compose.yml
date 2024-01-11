@@ -143,7 +143,7 @@ services:
       - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${MARDI_HOST}`)
       - traefik.http.routers.service-oai-backend.entrypoints=websecure
       - traefik.http.routers.service-oai-backend.tls.certResolver=le
-      - traefik.http.middlewares.oai-auth.basicauth.users=oai-auth:$apr1$aVVvopvJ$8D9.R8qJ0NgYEN/4ThGYR/
+      - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$jzJvBO4T50qphJ7Bne1lIeouZCbwtvGGPDZeNLMYCcOSObUp5m0T2
       - traefik.http.routers.service-oai-backend.middlewares=oai-auth
 
   oai-provider:
