@@ -8,6 +8,7 @@ data
 extensions-dev 
 docker-compose.override.yml
 grafana/grafana.ini
+oaipmh/cassandra.yaml
 prometheus/prometheus.yml
 images
 !images/favicon.png
