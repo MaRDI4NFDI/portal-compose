@@ -134,10 +134,10 @@ services:
     - ./oaipmh/fiz-oai-backend.properties:/usr/local/tomcat/conf/fiz-oai-backend.properties:ro
     - backend-logs:/usr/local/tomcat/logs
     labels:
-      - traefik.http.routers.oai-provider.rule=Host(`oai.portal.mardi4nfdi.${TLD}`)
-      - traefik.http.routers.oai-provider.entrypoints=websecure
-      - traefik.http.routers.oai-provider.tls.certResolver=le
-      - traefik.http.middlewares.test-auth.basicauth.users=bWFyZGktdGVzdC11c2VyOnRlc3Q=
+      - traefik.http.routers.oai-backend.rule=Host(`oai-input.portal.mardi4nfdi.${TLD}`)
+      - traefik.http.routers.oai-backend.entrypoints=websecure
+      - traefik.http.routers.oai-backend.tls.certResolver=le
+      - traefik.http.middlewares.oai-auth.basicauth.users=oai-auth:$apr1$aVVvopvJ$8D9.R8qJ0NgYEN/4ThGYR/
 
   oai-provider:
     hostname: oai-provider
