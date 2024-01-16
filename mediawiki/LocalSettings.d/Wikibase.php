@@ -4,19 +4,13 @@
 wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
-$wikibaseHost = getenv('WIKIBASE_HOST');
-
-if ($wikibaseHost === 'localhost') {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
-} else {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://'. $wikibaseHost;
-}
+$portalHost = getenv('WIKIBASE_SCHEME') . '://wikibase.svc';
 
 # enable linking between wikibase and content pages
 $wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteLinkGroups'] = [ 'mathematics' ];
 $wgWBClientSettings['siteGlobalID'] = 'mardi';
-$wgWBClientSettings['repoUrl'] = $portalHost;
+$wgWBClientSettings['repoUrl'] = 'http://localhost:8080';
 $wgWBClientSettings['repoScriptPath'] = '/w';
 $wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
 $wgWBClientSettings['entitySources'] = [

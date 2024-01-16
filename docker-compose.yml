@@ -1,5 +1,17 @@
-# Example Wikibase docker-compose setup
 version: '3.4'
+
+x-elasticsearch-image: &elasticsearch-image
+  docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
+x-mysql-image: &mysql-image
+  mariadb:10.6
+x-wdqs-image: &wdqs-image
+  wikibase/wdqs:0.3.40-wmde.6
+x-wdqs-frontend-image: &wdqs-frontend-image
+  wikibase/wdqs-frontend:wmde.6
+x-wdqs-proxy-image: &wdqs-proxy-image
+  wikibase/wdqs-proxy:wmde.6
+x-wikibase: &wikibase-image
+  ghcr.io/mardi4nfdi/docker-wikibase:1.41-wmf.27
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
@@ -7,221 +19,54 @@ x-common-variables: &wikibase_variables
   MW_ADMIN_PASS: ${MW_ADMIN_PASS}
   MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
   MW_WG_SECRET_KEY: ${MW_SECRET_KEY}
-  # Disable jobs running after requests when wikibase_jobrunner is defined
   MW_WG_JOB_RUN_RATE: 0
   DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
   DB_NAME: ${DB_NAME:-my_wiki}
-  MARDI_HOST: ${MARDI_HOST:-portal.mardi4nfdi.de}
-  DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
-  WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
-  WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
+  DEPLOYMENT_ENV: local
+  WIKIBASE_SCHEME: http
+  WIKIBASE_HOST: localhost
   WIKIBASE_PORT: ${WIKIBASE_PORT:-80}
-  QS_PUBLIC_SCHEME_HOST_AND_PORT: https://quickstatements.${MARDI_HOST}
-  TRAEFIK_PW: ${TRAEFIK_PW}
-x-extra-variables: &wikibase_extra_variables
-  MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
-  MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
+  MW_ELASTIC_HOST: elasticsearch.svc
+  MW_ELASTIC_PORT: 9200
+  WIKIBASE_PINGBACK: 'false'
+  MW_WG_ENABLE_UPLOADS: 'false'
 
 services:
-  statsd:
-    image: ghcr.io/statsd/statsd
-
-  redis-jobrunner:
-    image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
-    depends_on:
-    - wikibase
-    entrypoint: 
-    - php
-    - /jobrunner/redisJobRunnerService
-    - "--config-file=/jobrunner/config.json"
-    volumes:
-    - ./redis-jobrunner-conf.json:/jobrunner/config.json:ro
-    - shared_mardi_wikibase:/shared/
-    - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
-    environment:
-      <<: [ *wikibase_variables, *wikibase_extra_variables]
-      WIKIBASE_PINGBACK:
-      MW_WG_ENABLE_UPLOADS:
-      MATOMO_TOKEN: ${MATOMO_TOKEN}
-      GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
-
-  redis-rescheduler:
-    image: ghcr.io/mardi4nfdi/docker-redis-jobrunner
-    depends_on:
-    - wikibase
-    volumes:
-    - ./redis-jobrunner-conf.json:/jobrunner/config.json:ro
-    - shared_mardi_wikibase:/shared/
-    - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
-
-  redis:
-    container_name: redis
-    image: redis:7
-
-  cassandra-oai:
-    hostname: cassandra-oai
-    image: cassandra:4.1
-    environment:
-      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
-    volumes:
-    - cassandra-data:/var/lib/cassandra/
-    - ./oaipmh/cassandra.yaml:/etc/cassandra/cassandra.yaml
-    - ./oaipmh/cassandra-env.sh:/etc/cassandra/cassandra-env.sh
-    - ./oaipmh/jmxremote.access:/opt/java/openjdk/lib/management/jmxremote.access
-    - ./oaipmh/jmxremote.password:/etc/cassandra/jmxremote.password
-
-  cassandra-oai-setup:
-    hostname: cassandra-oai-setup
-    image: cassandra:4.1
-    depends_on:
-    - cassandra-oai
-    command: ["/wait-for-it.sh","cassandra-oai:9042","--", "sh", "/init-fizoai-database.sh"]
-    volumes:
-    - ./oaipmh/init-fizoai-database.sh:/init-fizoai-database.sh:ro
-    - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
-
-  cassandra-backup:
-    hostname: cassandra-backup
-    image: docker.dev.fiz-karlsruhe.de/cassandra-backup:5.2
-    environment:
-      JAVA_OPTS: "-Dlog4j2.formatMsgNoLookups=true"
-      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
-    env_file:
-    - ./oaipmh/.cassandra_dump_env
-    volumes:
-    - backup-logs:/logs
-    - cassandra-data:/source_data
-    - ./cassandra-backup:/backup
-    depends_on:
-    - cassandra-oai
-
-  elasticsearch-oai:
-    hostname: elasticsearch-oai
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.13
-    environment:
-      # - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Xms2g -Xmx2g"
-      - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
-      - discovery.type=single-node
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-    - es-logs:/usr/share/elasticsearch/logs
-    - es-data:/usr/share/elasticsearch/data
-    # - ./oaipmh/oai-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-
-  elasticsearch-oai-setup:
-    hostname: elasticsearch-oai-setup
-    image: centos
-    depends_on:
-    - elasticsearch-oai
-    command: ["/wait-for-it.sh","elasticsearch-oai:9200","--", "sh", "/init-fizoai-elasticsearch.sh"]
-    volumes:
-    - ./oaipmh/init-fizoai-elasticsearch.sh:/init-fizoai-elasticsearch.sh:ro
-    - ./oaipmh/item_mapping_es_v7:/item_mapping_es_v7:ro
-    - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
-
-  oai-backend:
-    hostname: oai-backend
-    image: docker.dev.fiz-karlsruhe.de/oai-backend:1.2.8
-    environment:
-    - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
-    - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
-    depends_on:
-    - cassandra-oai
-    - elasticsearch-oai
-    links: 
-    - "cassandra-oai"
-    - "elasticsearch-oai"
-    volumes:
-    - ./oaipmh/fiz-oai-backend.properties:/usr/local/tomcat/conf/fiz-oai-backend.properties:ro
-    - backend-logs:/usr/local/tomcat/logs
-    labels:
-      - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${MARDI_HOST}`)
-      - traefik.http.routers.service-oai-backend.entrypoints=websecure
-      - traefik.http.routers.service-oai-backend.tls.certResolver=le
-      - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$jzJvBO4T50qphJ7Bne1lIeouZCbwtvGGPDZeNLMYCcOSObUp5m0T2
-      - traefik.http.routers.service-oai-backend.middlewares=oai-auth
-
-  oai-provider:
-    hostname: oai-provider
-    image: docker.dev.fiz-karlsruhe.de/oai-provider:1.2.7
-    environment:
-    - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
-    - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
-    depends_on:
-    - oai-backend
-    links: 
-    - "oai-backend"
-    volumes:
-    - ./oaipmh/oaicat.properties:/usr/local/tomcat/conf/oaicat.properties:ro
-    - provider-logs:/usr/local/tomcat/logs
-    labels:
-    - traefik.http.routers.oai-provider.rule=Host(`oai.${MARDI_HOST}`)
-    - traefik.http.routers.oai-provider.entrypoints=websecure
-    - traefik.http.routers.oai-provider.tls.certResolver=le
-    
-  whoami:
-    image: containous/whoami # A container that exposes an API to show its IP address
-    restart: always
-
   wikibase:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724"
+    image: *wikibase-image
     container_name: mardi-wikibase
     links:
       - mysql
-      - mongo
-      - formulasearch
     depends_on:
       - mysql
-      - mongo
     restart: unless-stopped
     volumes:
-      ## This shares the configuration with jobrunner
       - shared_mardi_wikibase:/shared/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
       - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d
       - shared_mediawiki_images:/var/www/html/images/:rw
-      - quickstatements-data:/quickstatements/data
-      - formulasearch_harvests:/var/www/html/my_harvests/
       - apache_logs:/var/log/apache2/
     networks:
       default:
           aliases:
            - wikibase-docker.svc
            - wikibase.svc
+    ports:
+      - "${WIKIBASE_PORT}:80"
+      - "${MONGO_DB_PORT}:8081"
     environment:
-      <<: [ *wikibase_variables, *wikibase_extra_variables]
-      WIKIBASE_PINGBACK:
-      MW_WG_ENABLE_UPLOADS:
-      MATOMO_TOKEN: ${MATOMO_TOKEN}
-      GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
-    labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`${MARDI_HOST}`,`swmath.${MARDI_HOST}`,`staging.swmath.org`)
-      - traefik.http.routers.service-wikibase.entrypoints=websecure
-      - traefik.http.routers.service-wikibase.tls.certResolver=le
-      - traefik.http.routers.service-wikibase.service=wikibase-service
-      - traefik.http.services.wikibase-service.loadbalancer.server.port=80
-      - traefik.http.routers.service-wikimongo.rule=Host(`wikimongo.${MARDI_HOST}`)
-      - traefik.http.routers.service-wikimongo.entrypoints=websecure
-      - traefik.http.routers.service-wikimongo.tls.certResolver=le
-      - traefik.http.routers.service-wikimongo.service=wikimongo-service
-      - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
+      <<: *wikibase_variables
   
   wikibase_jobrunner:
-    image: "ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724"
+    image: *wikibase-image
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
       - mysql
-      - mongo
     depends_on:
       - mysql
-      - mongo
-    restart: always
+    restart: 'no'
     volumes:
       - shared_mardi_wikibase:/shared/
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
@@ -231,15 +76,13 @@ services:
         aliases:
           - wikibase-jobrunner.svc
     environment:
-      <<: [ *wikibase_variables, *wikibase_extra_variables]
+      <<: *wikibase_variables
       MAX_JOBS: ${MAX_JOBS}
-      MATOMO_TOKEN: ${MATOMO_TOKEN}
-      GOOGLE_OPENID_SECRET: ${GOOGLE_OPENID_SECRET}
       
   mysql:
-    image: "${MYSQL_IMAGE_NAME:-mariadb:10.6}"
+    image: *mysql-image
     container_name: mardi-mysql
-    restart: unless-stopped
+    restart: 'no'
     volumes:
       - mediawiki-mysql-data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
@@ -254,124 +97,9 @@ services:
         aliases:
          - mysql.svc
 
-  mongo:
-    image: mongo
-    container_name: mardi-mongo
-    restart: unless-stopped
-    volumes:
-      - mediawiki-mongo-data:/data/db
-    networks:
-      default:
-        aliases:
-          - mongodb
-
-  importer:
-    image: ghcr.io/mardi4nfdi/docker-importer:main
-    container_name: mardi-importer
-    links:
-      - wikibase
-      - mysql
-    depends_on:
-      - wikibase
-    restart: always
-    volumes:
-      - shared_mardi_wikibase:/shared/:ro
-      #- ./config/:/config
-    environment:
-      - DB_HOST=mysql.svc # internal docker hostname (alias) of the database service
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - IMPORT_SCHEDULE=${IMPORT_SCHEDULE}
-      - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
-      - IMPORTER_AGENT=${IMPORTER_AGENT}
-      - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
-      - SPARQL_ENDPOINT_URL=http://query.portal.mardi4nfdi.de/proxy/wdqs/bigdata/namespace/wdq/sparql
-      - WIKIBASE_URL=http://mardi-wikibase
-      - IMPORTER_USER=${IMPORTER_USER}
-      - IMPORTER_PASS=${IMPORTER_PASS}
-    entrypoint: "/app/start.sh"
-
-  importer-api:
-    image: ghcr.io/mardi4nfdi/importer-api:main
-    container_name: importer-api
-    restart: unless-stopped
-    links:
-      - wikibase
-      - mysql
-    depends_on:
-      - wikibase
-    networks:
-      default:
-        aliases:
-         - importer-api.svc
-    environment:
-      DB_HOST: mardi-mysql
-      MYSQL_USER: ${DB_API_USER}
-      MYSQL_PASSWORD: ${DB_API_PASS}
-      MYSQL_DATABASE: ${DB_NAME}
-    labels:
-      - traefik.http.routers.importer-api.rule=Host(`importer.${MARDI_HOST}`)
-      - traefik.http.routers.importer-api.entrypoints=websecure
-      - traefik.http.routers.importer-api.tls.certResolver=le
-
-  backup:
-    image: ghcr.io/mardi4nfdi/docker-backup:main
-    container_name: mardi-backup
-    links:
-      - mysql
-    depends_on:
-      - mysql
-      - wikibase
-    restart: always
-    volumes:
-      # shared from wikibase, to run dumpBackup.php and importBackup.php
-      - shared_mardi_wikibase:/shared/:ro
-      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
-      - shared_mediawiki_images:/var/www/html/images/
-      # dir on host where to store the backups
-      - ${BACKUP_DIR:-./backup}:/data
-    labels:
-      - traefik.enable=false
-    environment:
-      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      BACKUP_SCHEDULE: ${BACKUP_SCHEDULE}
-      KEEP_DAYS: ${KEEP_DAYS:-30}
-      BACKUP_CRON_ENABLE: ${BACKUP_CRON_ENABLE:-true}
-      GF_API_KEY: ${GF_API_KEY}
-      GF_PUBLIC_HOST_AND_PORT: ${GF_PUBLIC_HOST_AND_PORT}
-      WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
-    entrypoint: "/app/start.sh"
-
-  reverse-proxy:
-    restart: always
-    image: traefik:v2.8
-    container_name: reverse-proxy
-    ports:
-      - 443:443 # HTTPS port
-      - 80:80 # HTTP port
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./traefik/conf/:/traefik-conf/:ro
-      - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
-      - ./traefik-log:/data/log # Persistent file for logging
-    networks:
-      - default
-    labels:
-      - traefik.http.routers.dashboard.rule=Host(`traefik.${MARDI_HOST}`)
-      - traefik.http.routers.dashboard.entrypoints=websecure
-      - traefik.http.routers.dashboard.tls.certResolver=le
-      - traefik.http.routers.dashboard.service=api@internal
-      - traefik.http.routers.dashboard.middlewares=auth
-      - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
-
   elasticsearch:
-    image: "${ELASTICSEARCH_IMAGE_NAME:-docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0}"
-    restart: unless-stopped
+    image: *elasticsearch-image
+    restart: 'no'
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     networks:
@@ -382,26 +110,10 @@ services:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms8g -Xmx8g"
 
-  formulasearch:
-    image: ghcr.io/mardi4nfdi/formulasearch:main
-    container_name: formulasearch
-    restart: "no"
-    environment:
-      HARVESTS_PATH: '/my_harvests'
-      # Port config 1985 is internal port and should not be changed currently.
-      FS_SERVER_PORT: 1985
-      ENABLE_REST_INSERTIONS: 'false'
-      CRON_UPDATE_FORMULAE: ${FS_CRON_UPDATE_FORMULAE}
-      CRON_ENABLED: ${FS_CRON_ENABLED:-false}
-      ALWAYS_EXPORT: ${FS_ALWAYS_EXPORT:-false}
-    volumes:
-      - formulasearch_harvests:/my_harvests/
-      - ${BACKUP_DIR:-./backup}:/data
-
   wdqs-frontend:
-    image: "${WDQS_FRONTEND_IMAGE_NAME:-wikibase/wdqs-frontend:wmde.6}"
+    image: *wdqs-frontend-image
     container_name: mardi-wdqs-frontend
-    restart: unless-stopped
+    restart: 'no'
     volumes:
       - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/usr/share/nginx/html/logo.svg
       - ./mediawiki/images/favicon.ico:/usr/share/nginx/html/favicon.ico
@@ -411,20 +123,18 @@ services:
     networks:
       default:
         aliases:
-         - query.${MARDI_HOST}
          - wdqs-frontend.svc
+    ports:
+      - "${WDQS_FRONTEND_PORT}:80"
     environment:
-      - WIKIBASE_HOST=${MARDI_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
       - BRAND_TITLE=MaRDIQueryService
-    labels:
-      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.${MARDI_HOST}`)
-      - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
-      - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
   wdqs:
-    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.6}"
-    restart: unless-stopped
+    image: *wdqs-image
+    container_name: mardi-wdqs
+    restart: 'no'
     command: /runBlazegraph.sh
     volumes:
       - query-service-data:/wdqs/data
@@ -433,18 +143,18 @@ services:
         aliases:
          - wdqs.svc
     environment:
-      - WIKIBASE_HOST=${MARDI_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
       - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
     expose:
       - 9999
-  # cf https://github.com/MaRDI4NFDI/wikibase-release-pipeline/blob/main/build/WDQS-proxy/README.md
 
   wdqs-proxy:
-    image: "${WDQS_PROXY_IMAGE_NAME:-wikibase/wdqs-proxy:wmde.6}"
-    restart: unless-stopped
+    image: *wdqs-proxy-image
+    container_name: mardi-wdqs-proxy
+    restart: 'no'
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
       - PROXY_MAX_QUERY_MILLIS=3600000
@@ -454,14 +164,11 @@ services:
       default:
         aliases:
          - wdqs-proxy.svc
-    labels:
-      - traefik.http.routers.wdqs-proxy.rule=Host(`sparql.${MARDI_HOST}`)
-      - traefik.http.routers.wdqs-proxy.entrypoints=websecure
-      - traefik.http.routers.wdqs-proxy.tls.certResolver=le
 
   wdqs-updater:
-    image: "${WDQS_IMAGE_NAME:-wikibase/wdqs:0.3.40-wmde.6}"
-    restart: unless-stopped
+    image: *wdqs-image
+    container_name: mardi-wdqs-updater
+    restart: 'no'
     command: /runUpdate.sh
     depends_on:
     - wdqs
@@ -471,254 +178,19 @@ services:
         aliases:
          - wdqs-updater.svc
     environment:
-     - WIKIBASE_HOST=${MARDI_HOST}
+     - WIKIBASE_HOST=wikibase.svc
      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
      - WDQS_HOST=wdqs.svc
      - WDQS_PORT=9999
-    labels:
-      - traefik.enable=false
-
-  quickstatements:
-    image: "${QUICKSTATEMENTS_IMAGE_NAME:-ghcr.io/mardi4nfdi/docker-quickstatements:master}"
-    container_name: mardi-quickstatements
-    restart: unless-stopped
-    volumes:
-      - quickstatements-data:/quickstatements/data
-    depends_on:
-      - wikibase
-    networks:
-      default:
-        aliases:
-         - quickstatements.${MARDI_HOST}
-    labels:
-      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.${MARDI_HOST}`)
-      - traefik.http.routers.service-quickstatements.entrypoints=websecure
-      - traefik.http.routers.service-quickstatements.tls.certResolver=le
-    environment:
-      - QUICKSTATEMENTS_HOST=https://quickstatements.${MARDI_HOST}
-      - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.${MARDI_HOST}
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://${MARDI_HOST}
-      - WB_PROPERTY_NAMESPACE=122
-      - "WB_PROPERTY_PREFIX=Property:"
-      - WB_ITEM_NAMESPACE=120
-      - "WB_ITEM_PREFIX=Item:"
-      - OAUTH_CONSUMER_KEY=${OAUTH_CONSUMER_KEY}
-      - OAUTH_CONSUMER_SECRET=${OAUTH_CONSUMER_SECRET}
-
-  # Management console for docker
-  portainer:
-    container_name: mardi-portainer
-    image: portainer/portainer-ce
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
-      - portainer-data:/data # volume to save settings of portainer
-    labels:
-      - traefik.http.routers.service-portainer.rule=Host(`portainer.${MARDI_HOST}`)
-      - traefik.http.routers.service-portainer.entrypoints=websecure
-      - traefik.http.routers.service-portainer.tls.certResolver=le
-      - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
-
-  latexml:
-    container_name: latexml
-    image: physikerwelt/latexml
-    restart: always
-
-  setup_prometheus:
-    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
-    volumes:
-      - ./prometheus/:/etc/prometheus/:rw
-    command: sh -c "envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
-    environment:
-      - TRAEFIK_USER
-      - TRAEFIK_PW
-      - HOST_NETWORK_IP
-      - WATCHTOWER_API_TOKEN
-
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    depends_on:
-      - setup_prometheus
-    restart: unless-stopped
-    volumes:
-      - ./prometheus/:/etc/prometheus/:ro
-      - prometheus_data:/prometheus
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
-      - --storage.tsdb.path=/prometheus
-      - --web.console.libraries=/usr/share/prometheus/console_libraries
-      - --web.console.templates=/usr/share/prometheus/consoles
-    labels:
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.${MARDI_HOST}`)
-      - traefik.http.routers.prometheus.entrypoints=websecure
-      - traefik.http.routers.prometheus.tls.certResolver=le
-      - traefik.http.routers.prometheus.middlewares=auth
-
-  setup_grafana:
-    image: "ghcr.io/mardi4nfdi/docker-alpine-ext:main"
-    volumes:
-      - ./grafana/:/etc/grafana/:rw
-    command: sh -c "envsubst < /etc/grafana/grafana.template.ini > /etc/grafana/grafana.ini"
-    environment:
-      - GF_MAIL_HOST
-      - GF_MAIL_USER
-      - GF_MAIL_PW
-      - GF_MAIL_FROMADDRESS
-      - GF_MAIL_FROMNAME
-
-  grafana:
-    image: grafana/grafana
-    depends_on:
-      - setup_grafana
-      - prometheus
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./grafana/:/etc/grafana/
-    labels:
-      - traefik.http.routers.grafana.rule=Host(`grafana.${MARDI_HOST}`)
-      - traefik.http.routers.grafana.entrypoints=websecure
-      - traefik.http.routers.grafana.tls.certResolver=le
-
-  # recommended setup from
-  # https://github.com/prometheus/node_exporter/issues/671
-  # shared processes and network with host
-  node_exporter:
-    image: prom/node-exporter:latest
-    container_name: node_exporter
-    command:
-      - '--path.rootfs=/host'
-      - '--collector.textfile.directory=/backup_data'
-      - '--web.listen-address=:9101'
-    network_mode: host
-    pid: host
-    restart: unless-stopped
-    volumes:
-      - '/:/host:ro,rslave'
-      - '${BACKUP_DIR:-./backup}:/backup_data:ro'
-
-  jaeger:
-    image: jaegertracing/all-in-one:latest
-    container_name: jaeger
-    environment:
-      COLLECTOR_ZIPKIN_HTTP_PORT: 9411
-    labels:
-      - traefik.http.routers.jaeger.rule=Host(`jaeger.${MARDI_HOST}`)
-      - traefik.http.routers.jaeger.entrypoints=websecure
-      - traefik.http.routers.jaeger.tls.certResolver=le
-      - traefik.http.routers.jaeger.middlewares=auth
-      - traefik.http.routers.jaeger.service=jaeger
-      - traefik.http.services.jaeger.loadbalancer.server.port=16686
-
-  goaccess:
-    image: "ghcr.io/mardi4nfdi/docker-goaccess-cron:main"
-    container_name: goaccess
-    restart: unless-stopped
-    command:
-      - /srv/log/access.log
-      - /srv/log/access.log.1
-      - --output=/srv/reports/index.html
-      - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
-      - --db-path=/srv/data
-      - --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %Lm'
-      - --date-format=%d/%b/%Y
-      - --time-format=%T
-    environment:
-      - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
-    volumes:
-      - ./traefik-log:/srv/log:ro
-      - goaccess_report:/srv/reports
-      - goaccess_db:/srv/data
-      - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
-      - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
-    labels:
-      - traefik.enable=false
-
-  nginx:
-    image: nginx
-    container_name: nginx-goaccess
-    depends_on:
-      - goaccess
-    volumes:
-      - goaccess_report:/usr/share/nginx/html
-    labels:
-      - traefik.http.routers.nginx.rule=Host(`stats.${MARDI_HOST}`)
-      - traefik.http.routers.nginx.entrypoints=websecure
-      - traefik.http.routers.nginx.tls.certResolver=le
-      - traefik.http.routers.nginx.middlewares=auth
-      
-  scholia:
-    image: ghcr.io/mardi4nfdi/scholia:nightly
-    labels:
-      - traefik.http.routers.scholia.rule=Host(`scholia.${MARDI_HOST}`)
-      - traefik.http.routers.scholia.entrypoints=websecure
-      - traefik.http.routers.scholia.tls.certResolver=le
-  
-  matomo:
-    image: matomo
-    restart: always
-    volumes:
-#     - ./config:/var/www/html/config
-#     - ./logs:/var/www/html/logs
-      - matomo:/var/www/html
-    environment:
-      - MATOMO_DATABASE_HOST=${MATOMO_DATABASE_HOST}
-      - MATOMO_DATABASE_USERNAME=${MATOMO_DATABASE_USERNAME}
-      - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
-      - MATOMO_DATABASE_DBNAME=${MATOMO_DATABASE_DBNAME}
-    labels:
-      - traefik.http.routers.matomo.rule=Host(`matomo.${MARDI_HOST}`)
-      - traefik.http.routers.matomo.entrypoints=websecure
-      - traefik.http.routers.matomo.tls.certResolver=le
-
-  # Watchtower provides automatic updates for all containers
-  # see https://containrrr.github.io/watchtower/arguments/
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --include-stopped --revive-stopped --schedule "0 0 1 * * 1" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
-    restart: always
-    
-  uptime-kuma:
-    image: louislam/uptime-kuma:1
-    container_name: uptime-kuma
-    volumes:
-      - uptime-kuma:/app/data
-    restart: always
-    labels:
-      - traefik.http.routers.uptime.rule=Host(`uptime.${MARDI_HOST}`)
-      - traefik.http.routers.uptime.entrypoints=websecure
-      - traefik.http.routers.uptime.tls.certResolver=le
 
 volumes:
-  cassandra-data:
-  es-data:
-  #persist logs
-  provider-logs:
-  backend-logs:
-  es-logs:
-  backup-logs:
-  shared_mardi_wikibase:
-  mediawiki-mysql-data:
-  mediawiki-mongo-data:
-  # traefik-log:
-  traefik-letsencrypt:
-  LocalSettings:
-  query-service-data:
-  elasticsearch-data:
-  quickstatements-data:
-  portainer-data: # volume to save settings of portainer
-  prometheus_data:
-  grafana_data:
-  formulasearch_harvests:
-  shared_mediawiki_images:
   apache_logs:
-  goaccess_report:
-  goaccess_db:
-  matomo:
-  uptime-kuma:
+  elasticsearch-data:
+  LocalSettings:
+  mediawiki-mysql-data:  
+  query-service-data:
+  shared_mardi_wikibase:
+  shared_mediawiki_images:  
 
 networks:                                
   default:                               
