@@ -38,7 +38,7 @@ services:
     environment:
       <<: *wikibase_variables
 
-  backup:
+  mardi-backup:
     restart: ${RESTART}
     volumes:
       # only for running tests
@@ -100,7 +100,7 @@ services:
       - REFINE_MEMORY=1024M
       - REFINE_DATA_DIR=/data
 
-  reverse-proxy:
+  traefik:
     restart: ${RESTART}
     labels:
       - traefik.http.routers.dashboard-local.rule=Host(`localhost`)

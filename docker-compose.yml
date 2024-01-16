@@ -1,76 +1,76 @@
 version: '3.4'
 
-x-cassandra: &cassandra_image
+x-cassandra-oai: &cassandra-oai-image
   cassandra:4.1
-x-cassandra-backup-image: &cassandra_backup_image
+x-cassandra-backup-image: &cassandra-backup-image
   ghcr.io/mardi4nfdi/docker-redis-jobrunner
-x-centos-image: &centos_image
-  centos
-x-elasticsearch-image: &elasticsearch_image
+x-elasticsearch-image: &elasticsearch-image
   docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
-x-elasticsearch-oai-image: &elasticsearch_oai_image
+x-elasticsearch-oai-image: &elasticsearch-oai-image
   docker.elastic.co/elasticsearch/elasticsearch:7.17.13
-x-formulasearch-image: &formulasearch_image
+x-elasticsearch-oai-setup-image: &elasticsearch-oai-setup-image
+  centos
+x-formulasearch-image: &formulasearch-image
   ghcr.io/mardi4nfdi/formulasearch:main
-x-goaccess-image: &goaccess_image
+x-goaccess-image: &goaccess-image
   ghcr.io/mardi4nfdi/docker-goaccess-cron:main
-x-grafana-image: &grafana_image
+x-grafana-image: &grafana-image
   grafana/grafana
-x-jaegertracing-image: &jaegertracing_image
+x-jaegertracing-image: &jaegertracing-image
   jaegertracing/all-in-one:latest
-x-latexml-image: &latexml_image
+x-latexml-image: &latexml-image
   physikerwelt/latexml
-x-mardi-backup-image: &mardi_backup_image
+x-mardi-backup-image: &mardi-backup-image
   ghcr.io/mardi4nfdi/docker-backup:main
-x-mardi-docker-alpine: &mardi_docker_alpine
+x-setup-prometheus-grafana: &setup-prometheus-grafana
   ghcr.io/mardi4nfdi/docker-alpine-ext:main
-x-mardi-importer-image: &mardi_importer_image
+x-mardi-importer-image: &mardi-importer-image
   ghcr.io/mardi4nfdi/docker-importer:main
-x-mardi-importer-api-image: &mardi_importer_api_image
+x-mardi-importer-api-image: &mardi-importer-api-image
   ghcr.io/mardi4nfdi/importer-api:main
-x-matomo-image: &matomo_image
+x-matomo-image: &matomo-image
   matomo
-x-mongo-image: &mongo_image
+x-mongo-image: &mongo-image
   mongo
-x-mysql-image: &mysql_image
+x-mysql-image: &mysql-image
   mariadb:10.6
-x-nginx-image: &nginx_image
+x-nginx-image: &nginx-image
   nginx
-x-node-exporter-image: &node_exporter_image
+x-node-exporter-image: &node-exporter-image
   prom/node-exporter:latest
-x-oai-backend-image: &oai_backend_image
+x-oai-backend-image: &oai-backend-image
   docker.dev.fiz-karlsruhe.de/oai-backend:1.2.8
-x-oai-provider-image: &oai_provider_image
+x-oai-provider-image: &oai-provider-image
   docker.dev.fiz-karlsruhe.de/oai-provider:1.2.7
-x-portainer-image: &portainer_image
+x-portainer-image: &portainer-image
   portainer/portainer-ce
-x-prometheus-image: &prometheus_image
+x-prometheus-image: &prometheus-image
   prom/prometheus
-x-quickstatements-image: &quickstatements_image
+x-quickstatements-image: &quickstatements-image
   ghcr.io/mardi4nfdi/docker-quickstatements:master
-x-redis: &redis_image
+x-redis: &redis-image
   redis:7
-x-redis-jobrunner: &redis_jobrunner_image
+x-redis-jobrunner: &redis-jobrunner-image
   ghcr.io/mardi4nfdi/docker-redis-jobrunner
-x-scholia-image: &scholia_image
+x-scholia-image: &scholia-image
   ghcr.io/mardi4nfdi/scholia:nightly
-x-statsd: &statsd_image
+x-statsd: &statsd-image
   ghcr.io/statsd/statsd
-x-traefik-image: &traefik_image
+x-traefik-image: &traefik-image
   traefik:v2.8
-x-uptime-kuma-image: &uptime_kuma_image
+x-uptime-kuma-image: &uptime-kuma-image
   louislam/uptime-kuma:1
-x-watchtower-image: &watchtower_image
+x-watchtower-image: &watchtower-image
   containrrr/watchtower
-x-whoami: &whoami_image
+x-whoami: &whoami-image
   containous/whoami
-x-wikibase: &wikibase_image
+x-wikibase: &wikibase-image
   ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724
-x-wdqs-image: &wdqs_image
+x-wdqs-image: &wdqs-image
   wikibase/wdqs:0.3.40-wmde.6
-x-wdqs-frontend-image: &wdqs_frontend_image
+x-wdqs-frontend-image: &wdqs-frontend-image
   wikibase/wdqs-frontend:wmde.6
-x-wdqs-proxy-image: &wdqs_proxy_image
+x-wdqs-proxy-image: &wdqs-proxy-image
   wikibase/wdqs-proxy:wmde.6
 
 x-common-variables: &wikibase_variables
@@ -98,10 +98,10 @@ x-common-variables: &wikibase_variables
 
 services:
   statsd:
-    image: *statsd_image
+    image: *statsd-image
 
   redis-jobrunner:
-    image: *redis_jobrunner_image
+    image: *redis-jobrunner-image
     depends_on:
     - wikibase
     entrypoint: 
@@ -118,7 +118,7 @@ services:
       MW_WG_ENABLE_UPLOADS:
 
   redis-rescheduler:
-    image: *redis_jobrunner_image
+    image: *redis-jobrunner-image
     depends_on:
     - wikibase
     volumes:
@@ -128,11 +128,11 @@ services:
 
   redis:
     container_name: redis
-    image: *redis_image
+    image: *redis-image
 
   cassandra-oai:
     hostname: cassandra-oai
-    image: *cassandra_image
+    image: *cassandra-oai-image
     environment:
       LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
     volumes:
@@ -144,7 +144,7 @@ services:
 
   cassandra-oai-setup:
     hostname: cassandra-oai-setup
-    image: *cassandra_image
+    image: *cassandra-oai-image
     depends_on:
     - cassandra-oai
     command: ["/wait-for-it.sh","cassandra-oai:9042","--", "sh", "/init-fizoai-database.sh"]
@@ -154,7 +154,7 @@ services:
 
   cassandra-backup:
     hostname: cassandra-backup
-    image: *cassandra_backup_image
+    image: *cassandra-backup-image
     environment:
       JAVA_OPTS: "-Dlog4j2.formatMsgNoLookups=true"
       LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
@@ -169,7 +169,7 @@ services:
 
   elasticsearch-oai:
     hostname: elasticsearch-oai
-    image: *elasticsearch_oai_image
+    image: *elasticsearch-oai-image
     environment:
       # - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Xms2g -Xmx2g"
@@ -186,7 +186,7 @@ services:
 
   elasticsearch-oai-setup:
     hostname: elasticsearch-oai-setup
-    image: *centos_image
+    image: *elasticsearch-oai-setup-image
     depends_on:
     - elasticsearch-oai
     command: ["/wait-for-it.sh","elasticsearch-oai:9200","--", "sh", "/init-fizoai-elasticsearch.sh"]
@@ -197,7 +197,7 @@ services:
 
   oai-backend:
     hostname: oai-backend
-    image: *oai_backend_image
+    image: *oai-backend-image
     environment:
     - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
     - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
@@ -219,7 +219,7 @@ services:
 
   oai-provider:
     hostname: oai-provider
-    image: *oai_provider_image
+    image: *oai-provider-image
     environment:
     - "LOG4J_FORMAT_MSG_NO_LOOKUPS=true"
     - "CATALINA_OPTS=-Dlog4j2.formatMsgNoLookups=true -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true"
@@ -237,11 +237,11 @@ services:
     
   # A container that exposes an API to show its IP address
   whoami:
-    image: *whoami_image 
+    image: *whoami-image 
     restart: always
 
   wikibase:
-    image: *wikibase_image
+    image: *wikibase-image
     container_name: mardi-wikibase
     links:
       - mysql
@@ -282,7 +282,7 @@ services:
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
   
   wikibase_jobrunner:
-    image: *wikibase_image
+    image: *wikibase-image
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
@@ -305,7 +305,7 @@ services:
       MAX_JOBS: ${MAX_JOBS}
       
   mysql:
-    image: *mysql_image
+    image: *mysql-image
     container_name: mardi-mysql
     restart: unless-stopped
     volumes:
@@ -323,7 +323,7 @@ services:
          - mysql.svc
 
   mongo:
-    image: *mongo_image
+    image: *mongo-image
     container_name: mardi-mongo
     restart: unless-stopped
     volumes:
@@ -333,8 +333,8 @@ services:
         aliases:
           - mongodb
 
-  importer:
-    image: *mardi_importer_image
+  mardi-importer:
+    image: *mardi-importer-image
     container_name: mardi-importer
     links:
       - wikibase
@@ -360,8 +360,8 @@ services:
       - IMPORTER_PASS=${IMPORTER_PASS}
     entrypoint: "/app/start.sh"
 
-  importer-api:
-    image: *mardi_importer_api_image
+  mardi-importer-api:
+    image: *mardi-importer-api-image
     container_name: importer-api
     restart: unless-stopped
     links:
@@ -383,8 +383,8 @@ services:
       - traefik.http.routers.importer-api.entrypoints=websecure
       - traefik.http.routers.importer-api.tls.certResolver=le
 
-  backup:
-    image: *mardi_backup_image
+  mardi-backup:
+    image: *mardi-backup-image
     container_name: mardi-backup
     links:
       - mysql
@@ -414,9 +414,9 @@ services:
       WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
     entrypoint: "/app/start.sh"
 
-  reverse-proxy:
+  traefik:
     restart: always
-    image: *traefik_image
+    image: *traefik-image
     container_name: reverse-proxy
     ports:
       - 443:443 # HTTPS port
@@ -438,7 +438,7 @@ services:
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
 
   elasticsearch:
-    image: *elasticsearch_image
+    image: *elasticsearch-image
     restart: unless-stopped
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -451,7 +451,7 @@ services:
       ES_JAVA_OPTS: "-Xms8g -Xmx8g"
 
   formulasearch:
-    image: *formulasearch_image
+    image: *formulasearch-image
     container_name: formulasearch
     restart: "no"
     environment:
@@ -467,7 +467,7 @@ services:
       - ${BACKUP_DIR:-./backup}:/data
 
   wdqs-frontend:
-    image: *wdqs_frontend_image
+    image: *wdqs-frontend-image
     container_name: mardi-wdqs-frontend
     restart: unless-stopped
     volumes:
@@ -491,7 +491,7 @@ services:
       - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
 
   wdqs:
-    image: *wdqs_image
+    image: *wdqs-image
     restart: unless-stopped
     command: /runBlazegraph.sh
     volumes:
@@ -511,7 +511,7 @@ services:
   # cf https://github.com/MaRDI4NFDI/wikibase-release-pipeline/blob/main/build/WDQS-proxy/README.md
 
   wdqs-proxy:
-    image: *wdqs_proxy_image
+    image: *wdqs-proxy-image
     restart: unless-stopped
     environment:
       - PROXY_PASS_HOST=wdqs.svc:9999
@@ -528,7 +528,7 @@ services:
       - traefik.http.routers.wdqs-proxy.tls.certResolver=le
 
   wdqs-updater:
-    image: *wdqs_image
+    image: *wdqs-image
     restart: unless-stopped
     command: /runUpdate.sh
     depends_on:
@@ -547,7 +547,7 @@ services:
       - traefik.enable=false
 
   quickstatements:
-    image: *quickstatements_image
+    image: *quickstatements-image
     container_name: mardi-quickstatements
     restart: unless-stopped
     volumes:
@@ -576,7 +576,7 @@ services:
 
   portainer:
     container_name: mardi-portainer
-    image: *portainer_image
+    image: *portainer-image
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
@@ -589,11 +589,11 @@ services:
 
   latexml:
     container_name: latexml
-    image: *latexml_image
+    image: *latexml-image
     restart: always
 
-  setup_prometheus:
-    image: *mardi_docker_alpine
+  setup-prometheus:
+    image: *setup-prometheus-grafana
     volumes:
       - ./prometheus/:/etc/prometheus/:rw
     command: sh -c "envsubst < /etc/prometheus/prometheus.template.yml > /etc/prometheus/prometheus.yml"
@@ -604,10 +604,10 @@ services:
       - WATCHTOWER_API_TOKEN
 
   prometheus:
-    image: *prometheus_image
+    image: *prometheus-image
     container_name: prometheus
     depends_on:
-      - setup_prometheus
+      - setup-prometheus
     restart: unless-stopped
     volumes:
       - ./prometheus/:/etc/prometheus/:ro
@@ -623,8 +623,8 @@ services:
       - traefik.http.routers.prometheus.tls.certResolver=le
       - traefik.http.routers.prometheus.middlewares=auth
 
-  setup_grafana:
-    image: *mardi_docker_alpine
+  setup-grafana:
+    image: *setup-prometheus-grafana
     volumes:
       - ./grafana/:/etc/grafana/:rw
     command: sh -c "envsubst < /etc/grafana/grafana.template.ini > /etc/grafana/grafana.ini"
@@ -636,9 +636,9 @@ services:
       - GF_MAIL_FROMNAME
 
   grafana:
-    image: *grafana_image
+    image: *grafana-image
     depends_on:
-      - setup_grafana
+      - setup-grafana
       - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
@@ -652,7 +652,7 @@ services:
   # https://github.com/prometheus/node_exporter/issues/671
   # shared processes and network with host
   node_exporter:
-    image: *node_exporter_image
+    image: *node-exporter-image
     container_name: node_exporter
     command:
       - '--path.rootfs=/host'
@@ -666,7 +666,7 @@ services:
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
 
   jaeger:
-    image: *jaegertracing_image
+    image: *jaegertracing-image
     container_name: jaeger
     environment:
       COLLECTOR_ZIPKIN_HTTP_PORT: 9411
@@ -679,7 +679,7 @@ services:
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
   goaccess:
-    image: *goaccess_image
+    image: *goaccess-image
     container_name: goaccess
     restart: unless-stopped
     command:
@@ -703,7 +703,7 @@ services:
       - traefik.enable=false
 
   nginx:
-    image: *nginx_image
+    image: *nginx-image
     container_name: nginx-goaccess
     depends_on:
       - goaccess
@@ -716,14 +716,14 @@ services:
       - traefik.http.routers.nginx.middlewares=auth
       
   scholia:
-    image: *scholia_image
+    image: *scholia-image
     labels:
       - traefik.http.routers.scholia.rule=Host(`scholia.${MARDI_HOST}`)
       - traefik.http.routers.scholia.entrypoints=websecure
       - traefik.http.routers.scholia.tls.certResolver=le
   
   matomo:
-    image: *matomo_image
+    image: *matomo-image
     restart: always
     volumes:
 #     - ./config:/var/www/html/config
@@ -742,14 +742,14 @@ services:
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
   watchtower:
-    image: *watchtower_image
+    image: *watchtower-image
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --include-stopped --revive-stopped --schedule "0 0 1 * * 1" --http-api-metrics --http-api-token ${WATCHTOWER_API_TOKEN}
     restart: always
     
   uptime-kuma:
-    image: *uptime_kuma_image
+    image: *uptime-kuma-image
     container_name: uptime-kuma
     volumes:
       - uptime-kuma:/app/data
