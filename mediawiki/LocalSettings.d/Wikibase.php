@@ -4,12 +4,11 @@
 wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
-$wikibaseHost = getenv('WIKIBASE_HOST');
-
-if ($wikibaseHost === 'localhost') {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
-} else {
-    $portalHost = getenv('WIKIBASE_SCHEME') . '://'. $wikibaseHost;
+$wikibaseHost = getenv('WIKIBASE_SCHEME') . '://'. getenv('WIKIBASE_HOST');
+$portalHost = $wikibaseHost;
+if (getenv('WIKIBASE_HOST') === 'localhost') {
+		$wikibaseHost = getenv('WIKIBASE_SCHEME') . '://wikibase.svc';
+		$portalHost = getenv('WIKIBASE_SCHEME') . '://localhost:' . getenv('WIKIBASE_PORT');
 }
 
 # enable linking between wikibase and content pages
@@ -22,7 +21,7 @@ $wgWBClientSettings['repoArticlePath'] = '/wiki/$1';
 $wgWBClientSettings['entitySources'] = [
 		'mardi_source' => [
 				'repoDatabase' => 'my_wiki',
-				'baseUri' => $portalHost . '/entity/',
+				'baseUri' => $wikibaseHost . '/entity/',
 				'entityNamespaces' => [
 						'item' => 120,
 						'property' => 122,
@@ -52,7 +51,7 @@ if ( $wgDBname !== 'wiki_swmath' ){
 	$wgWBRepoSettings['entitySources'] = [
 			'mardi_source' => [
 				'repoDatabase' => 'my_wiki',
-				'baseUri' => $portalHost . '/entity/',
+				'baseUri' => $wikibaseHost . '/entity/',
 				'entityNamespaces' => [
 						'item' => 120,
 						'property' => 122,
