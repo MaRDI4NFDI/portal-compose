@@ -41,7 +41,7 @@ services:
     volumes:
       - ./test:/test
 
-  backup:
+  mardi-backup:
     volumes:
       # only for running tests
       - ./test:/test
