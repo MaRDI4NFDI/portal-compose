@@ -1,7 +1,7 @@
 version: '3.4'
 
 x-elasticsearch-image: &elasticsearch-image
-  ghcr.io/wmde/wikibase/elasticsearch:7443724965
+  docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
 x-formulasearch-image: &formulasearch-image
   ghcr.io/mardi4nfdi/formulasearch:main
 x-mongo-image: &mongo-image
