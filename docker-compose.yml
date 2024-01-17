@@ -271,11 +271,13 @@ services:
       default:
         aliases:
          - wdqs-updater.svc
+    volumes:
+      - ./wdqs/runUpdate.sh:/runUpdate.sh:ro
     environment:
-     - WIKIBASE_HOST=${MARDI_HOST}
-     - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
-     - WDQS_HOST=wdqs.svc
-     - WDQS_PORT=9999
+      - WIKIBASE_HOST=${MARDI_HOST}
+      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
+      - WDQS_HOST=wdqs.svc
+      - WDQS_PORT=9999
     labels:
       - traefik.enable=false
 
