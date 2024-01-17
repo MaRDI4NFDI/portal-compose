@@ -1,7 +1,7 @@
 version: '3.4'
 
 x-elasticsearch-image: &elasticsearch-image
-  docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
+  ghcr.io/wmde/wikibase/elasticsearch:7443724965
 x-formulasearch-image: &formulasearch-image
   ghcr.io/mardi4nfdi/formulasearch:main
 x-mongo-image: &mongo-image
@@ -19,13 +19,13 @@ x-redis-jobrunner: &redis-jobrunner-image
 x-traefik-image: &traefik-image
   traefik:v2.8
 x-wikibase: &wikibase-image
-  ghcr.io/mardi4nfdi/docker-wikibase@sha256:1505bfcf203fe0f4c6beb7ca1081cc8927342191e136ca4cd19667a7951c8724
+  ghcr.io/mardi4nfdi/docker-wikibase:main
 x-wdqs-image: &wdqs-image
-  wikibase/wdqs:0.3.40-wmde.6
+  ghcr.io/wmde/wikibase/wdqs:7443724965
 x-wdqs-frontend-image: &wdqs-frontend-image
-  wikibase/wdqs-frontend:wmde.6
+  ghcr.io/wmde/wikibase/wdqs-frontend:7443724965
 x-wdqs-proxy-image: &wdqs-proxy-image
-  wikibase/wdqs-proxy:wmde.6
+  ghcr.io/wmde/wikibase/wdqs-proxy:7443724965
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
