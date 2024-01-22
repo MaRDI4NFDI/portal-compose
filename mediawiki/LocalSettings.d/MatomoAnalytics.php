@@ -1,4 +1,4 @@
 <?php
 wfLoadExtension( 'MatomoAnalytics' );
-$wgMatomoAnalyticsServerURL='https://matomo.portal.mardi4nfdi.de/';
+$wgMatomoAnalyticsServerURL='https://matomo.' . getenv('MARDI_HOST') .'/';
 $wgMatomoAnalyticsTokenAuth=$_ENV['MATOMO_TOKEN'];

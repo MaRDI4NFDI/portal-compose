@@ -42,7 +42,7 @@ providers:
 certificatesResolvers:
   le:
     acme:
-      tlschallenge: true
+      tlsChallenge: true
       storage: /letsencrypt/acme.json
       email: ssl-mardi01@ckurs.de
       httpChallenge:

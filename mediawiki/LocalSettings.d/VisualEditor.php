@@ -4,4 +4,4 @@
 ## VisualEditor Extension
 wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'Parsoid', "{$IP}/vendor/wikimedia/parsoid/extension.json" );
-$wgVisualEditorRebaserURL='wikimongo.portal.mardi4nfdi.de';
+$wgVisualEditorRebaserURL='wikimongo.' . getenv('MARDI_HOST');
