@@ -109,11 +109,10 @@ services:
 
 > Be careful, the containers need about 13GB of free memory.
 
-A basic stack of containers (wikibase, mysql, elasticsearch, redis, wdqs, quickstatements, traefik, portainer) is defined in `docker-compose.yml`.
-
-The additional set up APIs and analytic tools (importer, matomo, goaccess, prometheus, grafana, etc.) is defined in `docker-compose-extra.yml`.
-
-Additional parameters for the development environment are defined in `docker-compose-dev.yml`.
+The services are defined in the following three files:
+* `docker-compose.yml`: basic stack of containers (wikibase, mysql, elasticsearch, redis, wdqs, quickstatements, traefik, portainer).
+* `docker-compose-extra.yml`: additional set of APIs and analytic tools (importer, matomo, goaccess, prometheus, grafana, etc.).
+* `docker-compose-dev.yml`: additional parameters for the development environment.
 
 Start up all containers for development:
 ```
@@ -124,15 +123,17 @@ Stop the containers:
 docker-compose -f docker-compose.yml -f docker-compose-extra.yml -f docker-compose-dev.yml down
 ```
 
-> Tip: Define the COMPOSE_FILE variable in your `.env` file with a value equal to
->  `docker-compose.yml:docker-compose-extra.yml:docker-compose-dev.yml`
-> With this configuration all three files will be automatically read when calling
-> ` docker-compose up -d | down | logs`
+### Tip 1: 
+Define the COMPOSE_FILE variable in your `.env` file with a value equal to
+`docker-compose.yml:docker-compose-extra.yml:docker-compose-dev.yml`
+With this configuration all three files will be automatically read when calling
+` docker-compose up -d | down | logs`
 
-> Tip 2: Alternatively, if you only want to start the basic containers defined in `docker-compose.yml` you can also
-> `cp docker-compose-dev.yml docker-compose.override.yml` and modify the new `docker-compose.override.yml` according
-> to your needs. The `docker-compose.override.yml` will also be automatically picked up when calling
-> `docker-compose up -d | down | logs` without the need to define COMPOSE_FILE in `.env`.
+### Tip 2: 
+Alternatively, if you only want to start the basic containers defined in `docker-compose.yml` you can also
+`cp docker-compose-dev.yml docker-compose.override.yml` and modify the new `docker-compose.override.yml` according
+to your needs. The `docker-compose.override.yml` will also be automatically picked up when calling
+`docker-compose up -d | down | logs` without the need to define COMPOSE_FILE in `.env`.
 
 See [here](https://docs.docker.com/compose/extends/) and [here](https://docs.docker.com/compose/extends/#adding-and-overriding-configuration) for further info.
 
@@ -152,9 +153,9 @@ To update a given image to a newer version only the url for the corresponding im
 
 ## Deploy on the MaRDI server
 
-After merging a PR the main branch can be deployed to mardi03 [(staging server)](staging.portal.mardi4nfdi.org) by automatically calling the deployment workflow in srv-mardi03. 
+After merging a PR the main branch can be deployed to mardi03 [(staging server)](https://staging.portal.mardi4nfdi.org) by manually calling the deployment workflow in srv-mardi03. 
 
-When the main branch is ready for release into mardi02 [(production server)](portal.mardi4nfdi.de) a tagged commit must be created.
+When the main branch is ready for release into mardi02 [(production server)](https://portal.mardi4nfdi.de) a tagged commit must be created.
 First run `git tag` to list the latest tags. 
 Create and push a new signed tag with the newer version.
 ```
