@@ -132,7 +132,7 @@ services:
     - ./oaipmh/fiz-oai-backend.properties:/usr/local/tomcat/conf/fiz-oai-backend.properties:ro
     - backend-logs:/usr/local/tomcat/logs
     labels:
-      - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${MARDI_HOST}`)
+      - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${WIKIBASE_HOST}`)
       - traefik.http.routers.service-oai-backend.entrypoints=websecure
       - traefik.http.routers.service-oai-backend.tls.certResolver=le
       - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$jzJvBO4T50qphJ7Bne1lIeouZCbwtvGGPDZeNLMYCcOSObUp5m0T2
@@ -152,7 +152,7 @@ services:
     - ./oaipmh/oaicat.properties:/usr/local/tomcat/conf/oaicat.properties:ro
     - provider-logs:/usr/local/tomcat/logs
     labels:
-    - traefik.http.routers.oai-provider.rule=Host(`oai.${MARDI_HOST}`)
+    - traefik.http.routers.oai-provider.rule=Host(`oai.${WIKIBASE_HOST}`)
     - traefik.http.routers.oai-provider.entrypoints=websecure
     - traefik.http.routers.oai-provider.tls.certResolver=le
     
@@ -182,7 +182,7 @@ services:
       - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
       - IMPORTER_AGENT=${IMPORTER_AGENT}
       - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
-      - SPARQL_ENDPOINT_URL=http://query.${MARDI_HOST}/proxy/wdqs/bigdata/namespace/wdq/sparql
+      - SPARQL_ENDPOINT_URL=http://query.${WIKIBASE_HOST}/proxy/wdqs/bigdata/namespace/wdq/sparql
       - WIKIBASE_URL=http://mardi-wikibase
       - IMPORTER_USER=${IMPORTER_USER}
       - IMPORTER_PASS=${IMPORTER_PASS}
@@ -207,7 +207,7 @@ services:
       MYSQL_PASSWORD: ${DB_API_PASS}
       MYSQL_DATABASE: ${DB_NAME}
     labels:
-      - traefik.http.routers.importer-api.rule=Host(`importer.${MARDI_HOST}`)
+      - traefik.http.routers.importer-api.rule=Host(`importer.${WIKIBASE_HOST}`)
       - traefik.http.routers.importer-api.entrypoints=websecure
       - traefik.http.routers.importer-api.tls.certResolver=le
 
@@ -273,7 +273,7 @@ services:
       - --web.console.libraries=/usr/share/prometheus/console_libraries
       - --web.console.templates=/usr/share/prometheus/consoles
     labels:
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.${MARDI_HOST}`)
+      - traefik.http.routers.prometheus.rule=Host(`prometheus.${WIKIBASE_HOST}`)
       - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.routers.prometheus.tls.certResolver=le
       - traefik.http.routers.prometheus.middlewares=auth
@@ -299,7 +299,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/:/etc/grafana/
     labels:
-      - traefik.http.routers.grafana.rule=Host(`grafana.${MARDI_HOST}`)
+      - traefik.http.routers.grafana.rule=Host(`grafana.${WIKIBASE_HOST}`)
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.routers.grafana.tls.certResolver=le
 
@@ -326,7 +326,7 @@ services:
     environment:
       COLLECTOR_ZIPKIN_HTTP_PORT: 9411
     labels:
-      - traefik.http.routers.jaeger.rule=Host(`jaeger.${MARDI_HOST}`)
+      - traefik.http.routers.jaeger.rule=Host(`jaeger.${WIKIBASE_HOST}`)
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.routers.jaeger.tls.certResolver=le
       - traefik.http.routers.jaeger.middlewares=auth
@@ -365,7 +365,7 @@ services:
     volumes:
       - goaccess_report:/usr/share/nginx/html
     labels:
-      - traefik.http.routers.nginx.rule=Host(`stats.${MARDI_HOST}`)
+      - traefik.http.routers.nginx.rule=Host(`stats.${WIKIBASE_HOST}`)
       - traefik.http.routers.nginx.entrypoints=websecure
       - traefik.http.routers.nginx.tls.certResolver=le
       - traefik.http.routers.nginx.middlewares=auth
@@ -373,7 +373,7 @@ services:
   scholia:
     image: *scholia-image
     labels:
-      - traefik.http.routers.scholia.rule=Host(`scholia.${MARDI_HOST}`)
+      - traefik.http.routers.scholia.rule=Host(`scholia.${WIKIBASE_HOST}`)
       - traefik.http.routers.scholia.entrypoints=websecure
       - traefik.http.routers.scholia.tls.certResolver=le
   
@@ -390,7 +390,7 @@ services:
       - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
       - MATOMO_DATABASE_DBNAME=${MATOMO_DATABASE_DBNAME}
     labels:
-      - traefik.http.routers.matomo.rule=Host(`matomo.${MARDI_HOST}`)
+      - traefik.http.routers.matomo.rule=Host(`matomo.${WIKIBASE_HOST}`)
       - traefik.http.routers.matomo.entrypoints=websecure
       - traefik.http.routers.matomo.tls.certResolver=le
 
@@ -410,7 +410,7 @@ services:
       - uptime-kuma:/app/data
     restart: always
     labels:
-      - traefik.http.routers.uptime.rule=Host(`uptime.${MARDI_HOST}`)
+      - traefik.http.routers.uptime.rule=Host(`uptime.${WIKIBASE_HOST}`)
       - traefik.http.routers.uptime.entrypoints=websecure
       - traefik.http.routers.uptime.tls.certResolver=le
 

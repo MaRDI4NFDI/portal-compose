@@ -1,4 +1,4 @@
 <?php
 wfLoadExtension( 'MatomoAnalytics' );
-$wgMatomoAnalyticsServerURL='https://matomo.' . getenv('MARDI_HOST') .'/';
+$wgMatomoAnalyticsServerURL='https://matomo.' . getenv('WIKIBASE_HOST') .'/';
 $wgMatomoAnalyticsTokenAuth=$_ENV['MATOMO_TOKEN'];
