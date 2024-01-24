@@ -271,8 +271,6 @@ services:
       default:
         aliases:
          - wdqs-updater.svc
-    volumes:
-      - ./wdqs/runUpdate.sh:/runUpdate.sh:ro
     environment:
       - WIKIBASE_HOST=${MARDI_HOST}
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
