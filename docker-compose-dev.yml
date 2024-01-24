@@ -76,6 +76,8 @@ services:
 
   wdqs-updater:
     restart: ${RESTART}
+    volumes:
+      - ./wdqs/runUpdate.sh:/runUpdate.sh:ro
     environment:
      - WIKIBASE_HOST=wikibase.svc
 
