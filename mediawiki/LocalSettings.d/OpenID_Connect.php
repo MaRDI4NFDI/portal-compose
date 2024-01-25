@@ -8,4 +8,12 @@ $wgPluggableAuth_Config['Login with your Google Account'] = [
         'clientsecret' => $_ENV['GOOGLE_OPENID_SECRET'],
     ]
 ];
+$wgPluggableAuth_Config['Login with your NFDI AAI Account'] = [
+    'plugin' => 'OpenIDConnect',
+    'data' => [
+        'providerURL' => 'https://auth.didmos.nfdi-aai.de',
+        'clientID' => 'u2pwxwERLrACYw3z',
+        'clientsecret' => $_ENV['NFDI_AAI_SECRET'],
+    ]
+];
 $wgOpenIDConnect_MigrateUsersByEmail=true;
