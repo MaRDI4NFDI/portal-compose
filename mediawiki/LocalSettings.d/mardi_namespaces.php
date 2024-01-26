@@ -6,20 +6,30 @@ define("NS_PERSON", 4202);
 define("NS_PERSON_TALK", 4203);
 define("NS_CODEMETA", 4204);
 define("NS_CODEMETA_TALK", 4205);
+define("NS_PUBLICATION", 4206);
+define("NS_PUBLICATION_TALK", 4207);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
 $wgExtraNamespaces[NS_FORMULA_TALK] = "Formula_talk";
 $wgExtraNamespaces[NS_PERSON] = "Person";
 $wgExtraNamespaces[NS_PERSON_TALK] = "Person_talk";
+$wgExtraNamespaces[NS_PUBLICATION] = "Publication";
+$wgExtraNamespaces[NS_PUBLICATION_TALK] = "Publication_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
-$wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' ); 
+$wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_PUBLICATION] = array( 'overwriteprofilepages' ); 
+
 
 $wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
 
 $wgContentNamespaces[] = NS_FORMULA;
 $wgContentNamespaces[] = NS_PERSON;
+$wgContentNamespaces[] = NS_PUBLICATION;
+
 
 $wgNamespacesToBeSearchedDefault[NS_FORMULA] = true;
 $wgNamespacesToBeSearchedDefault[NS_PERSON] = true;
+$wgNamespacesToBeSearchedDefault[NS_PUBLICATION] = true;
+
