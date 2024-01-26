@@ -11,7 +11,7 @@ x-mysql-image: &mysql-image
 x-portainer-image: &portainer-image
   portainer/portainer-ce
 x-quickstatements-image: &quickstatements-image
-  ghcr.io/mardi4nfdi/docker-quickstatements:master
+  ghcr.io/wmde/quickstatements:7098604877
 x-redis: &redis-image
   redis:7
 x-redis-jobrunner: &redis-jobrunner-image
