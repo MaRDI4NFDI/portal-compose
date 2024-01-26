@@ -16,12 +16,12 @@ x-wikibase: &wikibase-image
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
   MW_ADMIN_NAME: ${MW_ADMIN_NAME:-admin}
-  MW_ADMIN_PASS: ${MW_ADMIN_PASS}
+  MW_ADMIN_PASS: ${MW_ADMIN_PASS:-admin-password}
   MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
   MW_WG_SECRET_KEY: ${MW_SECRET_KEY}
   MW_WG_JOB_RUN_RATE: 0
   DB_USER: ${DB_USER:-sqluser}
-  DB_PASS: ${DB_PASS}
+  DB_PASS: ${DB_PASS:-change-this-sqlpassword}
   DB_NAME: ${DB_NAME:-my_wiki}
   DEPLOYMENT_ENV: local
   WIKIBASE_SCHEME: http
@@ -40,7 +40,8 @@ services:
       - mysql
     depends_on:
       - mysql
-    restart: unless-stopped
+      - elasticsearch
+    restart: 'no'
     volumes:
       - shared_mardi_wikibase:/shared/:rw
       - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d
@@ -59,12 +60,14 @@ services:
   
   wikibase_jobrunner:
     image: *wikibase-image
+    container_name: wikibase-jobrunner
     entrypoint: /bin/bash
     command:  /jobrunner-entrypoint.sh
     links:
       - mysql
     depends_on:
       - mysql
+      - elasticsearch
     restart: 'no'
     volumes:
       - shared_mardi_wikibase:/shared/
@@ -76,7 +79,7 @@ services:
           - wikibase-jobrunner.svc
     environment:
       <<: *wikibase_variables
-      MAX_JOBS: ${MAX_JOBS}
+      MAX_JOBS: ${MAX_JOBS:-1}
       
   mysql:
     image: *mysql-image
@@ -86,8 +89,7 @@ services:
       - mediawiki-mysql-data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      # CONFIG - Change the default values below (should match values passed to wikibase)
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_DATABASE: ${DB_NAME:-my_wiki}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
@@ -98,6 +100,7 @@ services:
 
   elasticsearch:
     image: *elasticsearch-image
+    container_name: mardi-elasticsearch
     restart: 'no'
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
@@ -107,7 +110,7 @@ services:
          - elasticsearch.svc
     environment:
       discovery.type: single-node
-      ES_JAVA_OPTS: "-Xms8g -Xmx8g"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
 
   wdqs-frontend:
     image: *wdqs-frontend-image
