@@ -298,7 +298,7 @@ services:
       - traefik.http.routers.service-quickstatements.tls.certResolver=le
     environment:
       - QUICKSTATEMENTS_HOST=https://quickstatements.${WIKIBASE_HOST}
-      - WIKIBASE_SCHEME_AND_HOST=http://wikibase-docker.svc
+      - WIKIBASE_SCHEME_AND_HOST=https://${WIKIBASE_HOST}
       - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.${WIKIBASE_HOST}
       - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://${WIKIBASE_HOST}
       - WB_PROPERTY_NAMESPACE=122
