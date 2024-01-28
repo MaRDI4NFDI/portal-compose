@@ -137,3 +137,5 @@ $wgJobTypeConf['default'] = [
     'redisConfig'    => [],
     'daemonized'     => true
  ];
+# Allow to display how many profie pages exist https://www.mediawiki.org/wiki/Help:Magic_words#Statistics
+$wgAllowSlowParserFunctions=true;
