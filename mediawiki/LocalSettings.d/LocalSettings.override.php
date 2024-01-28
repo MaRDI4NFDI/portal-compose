@@ -51,6 +51,11 @@ wfLoadExtension( 'JsonConfig' );
 wfLoadExtension( 'InputBox' );
 wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
+# collect information on errors during profile page creation
+$wgDebugLogGroups['MathSearch'] = array(
+	'destination' => '/var/log/mediawiki/MathSearch.log',
+	'level' => 'info',
+);
 wfLoadExtension( 'MathSearch' );
 wfLoadExtension( 'Lockdown' );
 wfLoadExtension( 'SyntaxHighlight_GeSHi' );
