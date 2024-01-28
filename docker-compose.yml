@@ -90,29 +90,6 @@ services:
       - traefik.http.routers.service-wikimongo.tls.certResolver=le
       - traefik.http.routers.service-wikimongo.service=wikimongo-service
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
-  
-  wikibase_jobrunner:
-    image: *wikibase-image
-    entrypoint: /bin/bash
-    command:  /jobrunner-entrypoint.sh
-    links:
-      - mysql
-      - mongo
-    depends_on:
-      - mysql
-      - mongo
-    restart: always
-    volumes:
-      - shared_mardi_wikibase:/shared/
-      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
-      - ./mediawiki/jobrunner-entrypoint.sh:/jobrunner-entrypoint.sh
-    networks:
-      default:
-        aliases:
-          - wikibase-jobrunner.svc
-    environment:
-      <<: *wikibase_variables
-      MAX_JOBS: ${MAX_JOBS}
       
   mysql:
     image: *mysql-image
