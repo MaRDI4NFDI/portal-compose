@@ -28,6 +28,9 @@
 # Prevent new user registrations except by sysops
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['user']['createaccount'] = true;
+# Allow account creation for people that have NFDI Accounts
+$wgGroupPermissions['*']['autocreateaccount'] = true;
+
 
 # Restrict anonymous editing
 $wgGroupPermissions['*']['edit'] = false;
