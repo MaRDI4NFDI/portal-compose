@@ -28,6 +28,10 @@
 # Prevent new user registrations except by sysops
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['user']['createaccount'] = true;
+# Allow account creation for people that have NFDI Accounts
+$wgGroupPermissions['*']['autocreateaccount'] = true;
+# Allow users to rename themselves https://www.mediawiki.org/wiki/Manual:Renameuser
+$wgGroupPermissions['user']['renameuser'] = true;
 
 # Restrict anonymous editing
 $wgGroupPermissions['*']['edit'] = false;
