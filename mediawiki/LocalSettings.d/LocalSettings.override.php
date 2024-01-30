@@ -57,7 +57,7 @@ wfLoadExtension( 'ParserFunctions' );
 wfLoadExtension( 'Math' );
 # collect information on errors during profile page creation
 $wgDebugLogGroups['MathSearch'] = array(
-	'destination' => '/var/log/mediawiki/MathSearch.log',
+	'destination' => '/dev/stdout',
 	'level' => 'info',
 );
 wfLoadExtension( 'MathSearch' );
