@@ -148,3 +148,6 @@ $wgJobTypeConf['default'] = [
  ];
 # Allow to display how many profie pages exist https://www.mediawiki.org/wiki/Help:Magic_words#Statistics
 $wgAllowSlowParserFunctions=true;
+# more than 50% of the active processes in the db are updates to the site_stat table 
+# see https://www.mediawiki.org/wiki/Manual:$wgMultiShardSiteStats/en
+$wgMultiShardSiteStats = true;
