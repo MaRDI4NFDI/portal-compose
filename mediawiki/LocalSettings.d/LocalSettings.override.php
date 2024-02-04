@@ -146,6 +146,8 @@ $wgJobTypeConf['default'] = [
     'redisConfig'    => [],
     'daemonized'     => true
  ];
+# The wdqs-updater would trigger a lot of jobs if the jun rate was not 0
+$wgJobRunRate=0;
 # Allow to display how many profie pages exist https://www.mediawiki.org/wiki/Help:Magic_words#Statistics
 $wgAllowSlowParserFunctions=true;
 # more than 50% of the active processes in the db are updates to the site_stat table 
