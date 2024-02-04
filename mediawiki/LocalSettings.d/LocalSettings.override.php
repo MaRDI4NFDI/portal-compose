@@ -153,3 +153,5 @@ $wgAllowSlowParserFunctions=true;
 # more than 50% of the active processes in the db are updates to the site_stat table 
 # see https://www.mediawiki.org/wiki/Manual:$wgMultiShardSiteStats/en
 $wgMultiShardSiteStats = true;
+# https://www.mediawiki.org/wiki/Manual:$wgMainCacheType maybe we need to increase the size of the APC cache at some point in time
+$wgMainCacheType = CACHE_ACCEL;
