@@ -107,6 +107,7 @@ services:
       default:
         aliases:
          - mysql.svc
+         - tools.labsdb
 
   mongo:
     image: *mongo-image
