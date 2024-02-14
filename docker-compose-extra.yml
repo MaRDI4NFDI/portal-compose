@@ -29,7 +29,7 @@ x-nginx-image: &nginx-image
 x-node-exporter-image: &node-exporter-image
   prom/node-exporter:latest
 x-oai-backend-image: &oai-backend-image
-  docker.dev.fiz-karlsruhe.de/oai-backend:1.2.8
+  docker.dev.fiz-karlsruhe.de/oai-backend:1.2.11
 x-oai-provider-image: &oai-provider-image
   docker.dev.fiz-karlsruhe.de/oai-provider:1.2.7
 x-prometheus-image: &prometheus-image
