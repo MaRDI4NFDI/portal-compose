@@ -155,3 +155,4 @@ $wgAllowSlowParserFunctions=true;
 $wgMultiShardSiteStats = true;
 # https://www.mediawiki.org/wiki/Manual:$wgMainCacheType maybe we need to increase the size of the APC cache at some point in time
 $wgMainCacheType = CACHE_ACCEL;
+$wgSessionCacheType = CACHE_DB;
