@@ -220,6 +220,11 @@ services:
       - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
     expose:
       - 9999
+    labels:
+      - traefik.http.routers.service-wdqs.rule=Host(`wdqs.${WIKIBASE_HOST}`)
+      - traefik.http.routers.service-wdqs.entrypoints=websecure
+      - traefik.http.routers.service-wdqs.tls.certResolver=le
+      - traefik.http.routers.service-wdqs.middlewares=auth
   # cf https://github.com/MaRDI4NFDI/wikibase-release-pipeline/blob/main/build/WDQS-proxy/README.md
 
   wdqs-proxy:
