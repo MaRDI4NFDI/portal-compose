@@ -151,6 +151,7 @@ services:
 
   redis:
     container_name: redis
+    restart: unless-stopped
     image: *redis-image
 
   redis-jobrunner:
