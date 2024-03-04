@@ -7,7 +7,9 @@
             ],
             "exclude": [
                 "DispatchChanges",
-                "CreateProfilePages"
+                "CreateProfilePages",
+                "cirrusSearchElasticaWrite",
+                "SetProfileType"
             ],
             "low-priority": [
                 "htmlCacheUpdate"
@@ -17,12 +19,16 @@
             "runners": 100,
             "include": [
                 "DispatchChanges"
+            ],
+            "low-priority": [
+                "cirrusSearchElasticaWrite"
             ]
         },
         "profiles": {
-            "runners": 1,
+            "runners": 100,
             "include": [
-                "CreateProfilePages"
+                "CreateProfilePages",
+                "SetProfileType"
             ]
         }
     },
