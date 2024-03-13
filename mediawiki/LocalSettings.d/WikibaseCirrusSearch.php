@@ -8,4 +8,5 @@ if ( getenv('MW_ELASTIC_HOST') !== false ) {
     $wgSearchType = 'CirrusSearch';
     $wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
     $wgWBCSUseCirrus = true;
+    $wgWBRepoSettings['searchIndexProperties'] = [ 'P1451' ];
 }
