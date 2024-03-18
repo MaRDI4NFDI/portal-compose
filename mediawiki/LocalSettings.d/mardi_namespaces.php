@@ -10,6 +10,8 @@ define("NS_PUBLICATION", 4206);
 define("NS_PUBLICATION_TALK", 4207);
 define("NS_SOFTWARE", 4208);
 define("NS_SOFTWARE_TALK", 4209);
+define("NS_DATASET", 4210);
+define("NS_DATASET", 4211);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
@@ -20,11 +22,14 @@ $wgExtraNamespaces[NS_PUBLICATION] = "Publication";
 $wgExtraNamespaces[NS_PUBLICATION_TALK] = "Publication_talk";
 $wgExtraNamespaces[NS_SOFTWARE] = "Software";
 $wgExtraNamespaces[NS_SOFTWARE_TALK] = "Software_talk";
+$wgExtraNamespaces[NS_DATASET] = "Dataset";
+$wgExtraNamespaces[NS_DATASET_TALK] = "Dataset_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
 $wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_PUBLICATION] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_SOFTWARE] = array( 'overwriteprofilepages' ); 
+$wgNamespaceProtection[NS_DATASET] = array( 'overwriteprofilepages' ); 
 
 
 $wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
@@ -33,6 +38,7 @@ $wgContentNamespaces[] = NS_FORMULA;
 $wgContentNamespaces[] = NS_PERSON;
 $wgContentNamespaces[] = NS_PUBLICATION;
 $wgContentNamespaces[] = NS_SOFTWARE;
+$wgContentNamespaces[] = NS_DATASET;
 
 
 
@@ -40,5 +46,6 @@ $wgNamespacesToBeSearchedDefault[NS_FORMULA] = true;
 $wgNamespacesToBeSearchedDefault[NS_PERSON] = true;
 $wgNamespacesToBeSearchedDefault[NS_PUBLICATION] = true;
 $wgNamespacesToBeSearchedDefault[NS_SOFTWARE] = true;
+$wgNamespacesToBeSearchedDefault[NS_DATASET] = true;
 
 
