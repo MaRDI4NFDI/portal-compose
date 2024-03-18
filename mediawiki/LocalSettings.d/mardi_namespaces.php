@@ -11,7 +11,7 @@ define("NS_PUBLICATION_TALK", 4207);
 define("NS_SOFTWARE", 4208);
 define("NS_SOFTWARE_TALK", 4209);
 define("NS_DATASET", 4210);
-define("NS_DATASET", 4211);
+define("NS_DATASET_TALK", 4211);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
