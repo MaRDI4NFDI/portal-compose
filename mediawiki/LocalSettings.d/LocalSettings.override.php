@@ -158,4 +158,5 @@ $wgMainCacheType = CACHE_ACCEL;
 $wgSessionCacheType = CACHE_DB;
 
 # MaRDI profile types items
+$wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
 $wgMathProfileQIdMap['dataset']='Q5984635';
