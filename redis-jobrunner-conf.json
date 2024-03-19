@@ -1,7 +1,7 @@
 {
     "groups": {
         "basic": {
-            "runners": 10,
+            "runners": 16,
             "include": [
                 "*"
             ],
@@ -16,7 +16,7 @@
             ]
         },
         "dispChanges": {
-            "runners": 100,
+            "runners": 64,
             "include": [
                 "DispatchChanges"
             ],
@@ -25,10 +25,11 @@
             ]
         },
         "profiles": {
-            "runners": 100,
+            "runners": 32,
             "include": [
                 "CreateProfilePages",
-                "SetProfileType"
+                "SetProfileType",
+                "OpenAlex"
             ]
         }
     },
