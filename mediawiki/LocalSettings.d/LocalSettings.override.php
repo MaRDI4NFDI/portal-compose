@@ -39,7 +39,8 @@ $wgGroupPermissions['*']['edit'] = false;
 # Remove rate limits for bots
 $wgGroupPermissions['bot']['noratelimit'] = true;
 
-
+# Deactivate captchas for URLs
+$wgCaptchaTriggers['addurl'] = false;
 
 # Enabling uploads for images.
 $wgEnableUploads = true;
