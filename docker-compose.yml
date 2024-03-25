@@ -37,6 +37,8 @@ x-common-variables: &wikibase_variables
   DB_USER: ${DB_USER:-sqluser}
   DB_PASS: ${DB_PASS}
   DB_NAME: ${DB_NAME:-my_wiki}
+  MSC_USER: ${MSC_USER}
+  MSC_PASS: ${MSC_PASS}
   DEPLOYMENT_ENV: ${DEPLOYMENT_ENV:-local}
   WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-https}
   WIKIBASE_HOST: ${WIKIBASE_HOST:-portal.mardi4nfdi.de}
