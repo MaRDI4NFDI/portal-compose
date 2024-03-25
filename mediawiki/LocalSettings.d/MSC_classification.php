@@ -10,5 +10,5 @@ SELECT msc_string
 FROM msc_id_mapping
 WHERE msc_id = ?
 SQL,
-	  'types' => 's'
+    'types' => 's'
 ];
