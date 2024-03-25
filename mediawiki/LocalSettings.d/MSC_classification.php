@@ -2,9 +2,9 @@
 $wgExternalDataSources['MSC'] = [
     'server' => getenv('DB_SERVER'),
     'type' => 'mysql',
-    'name' => 'my_wiki',
-    'user' => getenv('DB_USER'),
-    'password' => getenv('DB_PASS'),
+    'name' => 'msc_classification',
+    'user' => getenv('MSC_USER'),
+    'password' => getenv('MSC_PASS'),
     'prepared' => <<<'SQL'
 SELECT msc_string
 FROM msc_id_mapping
