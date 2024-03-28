@@ -219,7 +219,6 @@ services:
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
-      - ALLOWLIST=whitelist.txt
       - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
     expose:
       - 9999
