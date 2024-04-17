@@ -40,6 +40,6 @@ $egChameleonExternalStyleModules = [
 	'/var/www/html/skins/MardiSkin/variables.scss' => 'beforeVariables',
 	'/var/www/html/skins/MardiSkin/styles.scss' => 'afterMain',
 ];
-if ( $wgDBname === 'my_wiki' ){
-	$wgDefaultSkin = 'chameleon';
-}
+#if ( $wgDBname === 'my_wiki' ){
+#	$wgDefaultSkin = 'chameleon';
+#}
