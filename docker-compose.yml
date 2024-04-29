@@ -19,7 +19,7 @@ x-redis-jobrunner: &redis-jobrunner-image
 x-traefik-image: &traefik-image
   traefik:v2.8
 x-wikibase: &wikibase-image
-  ghcr.io/mardi4nfdi/docker-wikibase:wmf-1.43.0-wmf.1
+  ghcr.io/mardi4nfdi/docker-wikibase:main
 x-wdqs-image: &wdqs-image
   ghcr.io/wmde/wikibase/wdqs:7443724965
 x-wdqs-frontend-image: &wdqs-frontend-image
