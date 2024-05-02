@@ -135,7 +135,7 @@ services:
       - traefik.http.routers.service-oai-backend.rule=Host(`oai-input.${WIKIBASE_HOST}`)
       - traefik.http.routers.service-oai-backend.entrypoints=websecure
       - traefik.http.routers.service-oai-backend.tls.certResolver=le
-      - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$rhv7bwnJqp83doVMgin8deeFZmFs.Z8Q0nWSIe3cuJPY5.j7UGvhG
+      - traefik.http.middlewares.oai-auth.basicauth.users=swmath:$$2y$$05$$w37F7z0zZb0ytCvCrxRohOSlcl3lSx9OV9mGTOWOBuMsRRht7LLaO
       - traefik.http.routers.service-oai-backend.middlewares=oai-auth
 
   oai-provider:
