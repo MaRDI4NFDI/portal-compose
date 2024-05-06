@@ -44,7 +44,7 @@ $wgCaptchaTriggers['addurl'] = false;
 
 # Enabling uploads for images.
 $wgEnableUploads = true;
-$wgFileExtensions[] = 'svg';
+$wgFileExtensions[] = ['svg', 'pdf'];
 # Explicitly mentioning the upload-path for image-upload.
 $wgUploadPath = $wgScriptPath . '/images/';
 # Enable SVG converter
