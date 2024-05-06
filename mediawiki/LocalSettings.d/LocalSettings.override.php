@@ -44,11 +44,14 @@ $wgCaptchaTriggers['addurl'] = false;
 
 # Enabling uploads for images.
 $wgEnableUploads = true;
-$wgFileExtensions[] = ['svg', 'pdf'];
+$wgFileExtensions[] = 'svg';
 # Explicitly mentioning the upload-path for image-upload.
 $wgUploadPath = $wgScriptPath . '/images/';
 # Enable SVG converter
 $wgSVGConverter = 'rsvg';
+
+# Enable PDF upload
+$wgFileExtensions[] = 'pdf';
 
 # Extensions required by templates
 wfLoadExtension( 'TemplateStyles' );
