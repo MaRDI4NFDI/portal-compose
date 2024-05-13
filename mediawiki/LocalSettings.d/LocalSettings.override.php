@@ -55,6 +55,9 @@ $wgFileExtensions[] = 'pdf';
 
 # Enable Markdown upload
 $wgFileExtensions[] = 'md';
+$wgHooks['MimeMagicInit'][] = static function ( $mime ) {
+        $mime->addExtraTypes( 'text/plain md' );
+};
 
 # Extensions required by templates
 wfLoadExtension( 'TemplateStyles' );
