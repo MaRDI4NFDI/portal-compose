@@ -53,6 +53,9 @@ $wgSVGConverter = 'rsvg';
 # Enable PDF upload
 $wgFileExtensions[] = 'pdf';
 
+# Enable Markdown upload
+$wgFileExtensions[] = 'md';
+
 # Extensions required by templates
 wfLoadExtension( 'TemplateStyles' );
 wfLoadExtension( 'JsonConfig' );
