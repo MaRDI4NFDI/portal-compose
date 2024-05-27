@@ -21,11 +21,11 @@ x-traefik-image: &traefik-image
 x-wikibase: &wikibase-image
   ghcr.io/mardi4nfdi/docker-wikibase:1.43
 x-wdqs-image: &wdqs-image
-  ghcr.io/wmde/wikibase/wdqs:0.3.137-wmde.20
+  ghcr.io/wmde/wikibase/wdqs:dev-0.3.137-wmde.23-prerelease
 x-wdqs-frontend-image: &wdqs-frontend-image
-  ghcr.io/wmde/wikibase/wdqs-frontend:0.3.137-wmde.20
+  ghcr.io/wmde/wikibase/wdqs-frontend:dev-0.3.137-wmde.23-prerelease
 x-wdqs-proxy-image: &wdqs-proxy-image
-  ghcr.io/wmde/wikibase/wdqs-proxy:0.3.137-wmde.20
+  ghcr.io/wmde/wikibase/wdqs-proxy:dev-0.3.137-wmde.23-prerelease
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
