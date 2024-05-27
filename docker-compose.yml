@@ -21,11 +21,11 @@ x-traefik-image: &traefik-image
 x-wikibase: &wikibase-image
   ghcr.io/mardi4nfdi/docker-wikibase:1.43
 x-wdqs-image: &wdqs-image
-  ghcr.io/wmde/wikibase/wdqs:7443724965
+  ghcr.io/wmde/wikibase/wdqs:wmde.20
 x-wdqs-frontend-image: &wdqs-frontend-image
-  ghcr.io/wmde/wikibase/wdqs-frontend:7443724965
+  ghcr.io/wmde/wikibase/wdqs-frontend:wmde.20
 x-wdqs-proxy-image: &wdqs-proxy-image
-  ghcr.io/wmde/wikibase/wdqs-proxy:7443724965
+  ghcr.io/wmde/wikibase/wdqs-proxy:wmde.20
 
 x-common-variables: &wikibase_variables
   DB_SERVER: mysql.svc:3306
@@ -210,6 +210,8 @@ services:
     command: /runBlazegraph.sh
     volumes:
       - query-service-data:/wdqs/data
+      - ./wdqs/prefixes.conf:/wdqs/prefixes.conf:ro
+      - ./wdqs/allowlist.txt:/wdqs/allowlist.txt:ro
     networks:
       default:
         aliases:
