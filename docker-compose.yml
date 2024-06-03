@@ -196,7 +196,7 @@ services:
          - query.${WIKIBASE_HOST}
          - wdqs-frontend.svc
     environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
+      - WIKIBASE_HOST=wikibase.svc
       - WDQS_HOST=wdqs-proxy.svc
       - BRAND_TITLE=MaRDIQueryService
     labels:
