@@ -5,3 +5,4 @@ wfLoadExtension( 'Widgets' );
 
 $wgGroupPermissions['bureaucrat']['editwidgets'] = true;
    
+$wgWidgetsCompileDir = "/shared/compiled_widget_templates/";
