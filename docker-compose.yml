@@ -210,7 +210,6 @@ services:
     command: /runBlazegraph.sh
     volumes:
       - query-service-data:/wdqs/data
-      - ./wdqs/prefixes.conf:/wdqs/prefixes.conf:ro
       - ./wdqs/allowlist.txt:/wdqs/allowlist.txt:ro
     networks:
       default:
