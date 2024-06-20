@@ -175,5 +175,3 @@ $wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
 $wgMathProfileQIdMap['dataset']='Q5984635';
 $wgMathProfileQueries['community']='?item wdt:P1460 wd:Q6205095';
 $wgMathProfileQIdMap['community']='Q6205095';
-
-$wgMathEnableExperimentalInputFormats=true
