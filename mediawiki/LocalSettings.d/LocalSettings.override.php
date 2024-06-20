@@ -137,6 +137,9 @@ $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 // enable math native rendering (experimental)
 $wgMathValidModes[] =  'native'; 
 
+# enable experimental input formats
+$wgMathEnableExperimentalInputFormats=true
+
 
 #popups for math
 $wgMathWikibasePropertyIdDefiningFormula = "P14";
@@ -172,3 +175,5 @@ $wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
 $wgMathProfileQIdMap['dataset']='Q5984635';
 $wgMathProfileQueries['community']='?item wdt:P1460 wd:Q6205095';
 $wgMathProfileQIdMap['community']='Q6205095';
+
+$wgMathEnableExperimentalInputFormats=true
