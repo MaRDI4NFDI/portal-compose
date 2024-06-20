@@ -138,7 +138,7 @@ $wgMathMathMLUrl = 'https://mathoid-beta.wmflabs.org';
 $wgMathValidModes[] =  'native'; 
 
 # enable experimental input formats
-$wgMathEnableExperimentalInputFormats=true
+$wgMathEnableExperimentalInputFormats = true;
 
 
 #popups for math
