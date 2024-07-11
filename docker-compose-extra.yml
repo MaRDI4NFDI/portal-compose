@@ -186,6 +186,7 @@ services:
       - WIKIBASE_URL=http://mardi-wikibase
       - IMPORTER_USER=${IMPORTER_USER}
       - IMPORTER_PASS=${IMPORTER_PASS}
+      - ZENODO_API_KEY=${ZENODO_API_KEY}
     entrypoint: "/app/start.sh"
 
   mardi-importer-api:
