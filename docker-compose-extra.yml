@@ -51,7 +51,7 @@ services:
   statsd:
     image: *statsd-image
 
-  cassandra-oai:
+  cassandra-oai:l
     hostname: cassandra-oai
     image: *cassandra-oai-image
     environment:
@@ -247,6 +247,10 @@ services:
     container_name: latexml
     image: *latexml-image
     restart: always
+    labels:
+      - traefik.http.routers.grafana.rule=Host(`latexml.${WIKIBASE_HOST}`)
+      - traefik.http.routers.grafana.entrypoints=websecure
+      - traefik.http.routers.grafana.tls.certResolver=le
 
   setup-prometheus:
     image: *setup-prometheus-grafana
