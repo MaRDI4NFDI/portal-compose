@@ -51,7 +51,7 @@ services:
   statsd:
     image: *statsd-image
 
-  cassandra-oai:l
+  cassandra-oai:
     hostname: cassandra-oai
     image: *cassandra-oai-image
     environment:
