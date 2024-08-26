@@ -441,7 +441,14 @@ services:
       - traefik.http.routers.kubo-docker.rule=Host(`ipfs.${WIKIBASE_HOST}`)
       - traefik.http.routers.kubo-docker.entrypoints=websecure
       - traefik.http.routers.kubo-docker.tls.certResolver=le
-
+      
+      #internal management interface
+      - traefik.http.services.kubo-rpc-service.loadbalancer.server.port=5001
+      - traefik.http.routers.kubo-rpc-docker.service=kubo-rpc-service
+      - traefik.http.routers.kubo-rpc-docker.middlewares=auth
+      - traefik.http.routers.kubo-rpc-docker.rule=Host(`ipfs-admin.${WIKIBASE_HOST}`)
+      - traefik.http.routers.kubo-rpc-docker.entrypoints=websecure
+      - traefik.http.routers.kubo-rpc-docker.tls.certResolver=le
 
 volumes:
   backend-logs:
