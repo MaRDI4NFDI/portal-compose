@@ -248,9 +248,9 @@ services:
     image: *latexml-image
     restart: always
     labels:
-      - traefik.http.routers.grafana.rule=Host(`latexml.${WIKIBASE_HOST}`)
-      - traefik.http.routers.grafana.entrypoints=websecure
-      - traefik.http.routers.grafana.tls.certResolver=le
+      - traefik.http.routers.latexml.rule=Host(`latexml.${WIKIBASE_HOST}`)
+      - traefik.http.routers.latexml.entrypoints=websecure
+      - traefik.http.routers.latexml.tls.certResolver=le
 
   setup-prometheus:
     image: *setup-prometheus-grafana
