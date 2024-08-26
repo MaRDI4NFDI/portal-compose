@@ -419,6 +419,31 @@ services:
       - traefik.http.routers.uptime.entrypoints=websecure
       - traefik.http.routers.uptime.tls.certResolver=le
 
+  # see https://github.com/ipfs/kubo/blob/master/docker-compose.yaml
+  ipfs:
+    image: ipfs/kubo
+    restart: unless-stopped
+    ports:
+      - 4001:4001/tcp
+      - 4001:4001/udp
+    volumes:
+      - ipfs-staging:/export
+      - ipfs-data:/data/ipfs
+    environment:
+      - IPFS_PROFILE=server
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.http.routers.kubo-docker.rule=Host(`ipfs.${WIKIBASE_HOST}`)
+      - traefik.http.routers.kubo-docker.entrypoints=websecure
+      - traefik.http.routers.kubo-docker.tls.certResolver=le
+      - traefik.http.routers.kubo-rpc-docker.middlewares=auth
+      - traefik.http.routers.kubo-rpc-docker.rule=Host(`ipfs-admin.${WIKIBASE_HOST}`)
+      - traefik.http.routers.kubo-rpc-docker.entrypoints=websecure
+      - traefik.http.routers.kubo-rpc-docker.tls.certResolver=le
+      - traefik.http.services.kubo-docker.loadbalancer.server.port=8080
+      - traefik.http.services.kubo-rpc-docker.loadbalancer.server.port=5001
+
+
 volumes:
   backend-logs:
   backup-logs:
@@ -432,3 +457,5 @@ volumes:
   prometheus_data:
   provider-logs:
   uptime-kuma:
+  ipfs-staging: # IPFS data on /export cf https://docs.ipfs.tech/install/run-ipfs-inside-docker/#set-up
+  ipfs-data: # IPFS data on /data/ipfs
