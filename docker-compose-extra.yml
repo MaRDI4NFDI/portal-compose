@@ -426,7 +426,6 @@ services:
     ports:
       - 4001:4001/tcp
       - 4001:4001/udp
-      - 127.0.0.1:5001:5001 # admin interface only via ssh forwarding
     volumes:
       - ipfs-staging:/export
       - ipfs-data:/data/ipfs
