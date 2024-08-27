@@ -11,7 +11,10 @@ x-common-variables: &wikibase_variables
     # and by wikibase for redirecting back to quickstatements
     QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
     WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
-
+    
+x-whoami: &whoami-image
+  containous/whoami
+  
 services:
   wikibase:
     ports:
@@ -45,3 +48,6 @@ services:
     volumes:
       # only for running tests
       - ./test:/test
+      
+  mscexplainer:
+    image: *whoami-image 
