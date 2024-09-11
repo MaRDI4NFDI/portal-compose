@@ -1,7 +1,7 @@
 {
     "groups": {
         "basic": {
-            "runners": 16,
+            "runners": 8,
             "include": [
                 "*"
             ],
@@ -16,7 +16,7 @@
             ]
         },
         "dispChanges": {
-            "runners": 64,
+            "runners": 32,
             "include": [
                 "DispatchChanges"
             ],
@@ -25,7 +25,7 @@
             ]
         },
         "profiles": {
-            "runners": 32,
+            "runners": 16,
             "include": [
                 "CreateProfilePages",
                 "SetProfileType",
