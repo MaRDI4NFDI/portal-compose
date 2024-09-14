@@ -171,6 +171,8 @@ $wgMainCacheType = CACHE_ACCEL;
 $wgSessionCacheType = CACHE_DB;
 // Speed up "On high-traffic wikis, this should be set to false, to avoid the need to check the file modification time, and to avoid the performance impact of unnecessary cache invalidations. " see https://www.mediawiki.org/wiki/Manual:$wgInvalidateCacheOnLocalSettingsChange
 $wgInvalidateCacheOnLocalSettingsChange=false;
+// Store language cache on disk (should be faster) https://www.mediawiki.org/wiki/Manual:$wgLocalisationCacheConf
+$wgCacheDirectory = "$IP/cache/$wgDBname";
 
 # MaRDI profile types items
 $wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
