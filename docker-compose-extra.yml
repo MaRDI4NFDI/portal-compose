@@ -377,6 +377,7 @@ services:
       
   scholia:
     image: *scholia-image
+    restart: unless-stopped
     labels:
       - traefik.http.routers.scholia.rule=Host(`scholia.${WIKIBASE_HOST}`)
       - traefik.http.routers.scholia.entrypoints=websecure
