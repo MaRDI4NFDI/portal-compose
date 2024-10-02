@@ -182,3 +182,21 @@ $wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
 $wgMathProfileQIdMap['dataset']='Q5984635';
 $wgMathProfileQueries['community']='?item wdt:P1460 wd:Q6205095';
 $wgMathProfileQIdMap['community']='Q6205095';
+
+// Define statement sections for identifiers and constraints
+$wgWBRepoSettings['statementSections'] = [
+    'item' => [
+        'statements' => null,
+        'identifiers' => [
+            'type' => 'dataType',
+            'dataTypes' => [ 'external-id' ],
+        ],
+    ],
+    'property' => [
+        'statements' => null,
+        'constraints' => [
+            'type' => 'propertySet',
+            'propertyIds' => [ 'P1608' ],
+        ],
+    ],
+];
