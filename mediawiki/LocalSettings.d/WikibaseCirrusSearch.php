@@ -780,6 +780,7 @@ if ( getenv('MW_ELASTIC_HOST') !== false ) {
   "P1435", //archINFORM project ID 
   "P1436", //Trap Danmark ID 
   "P1437", //polyDB ID 
+  "P1450", //zbMATH Keywords 
   "P1451", //zbMATH DE Number 
   "P1452", //Wikidata LID 
   "P1453", //MathRepo page ID 
