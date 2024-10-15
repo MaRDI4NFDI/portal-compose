@@ -2,13 +2,13 @@
 wfLoadExtension( 'LinkedWiki' );
 
 # Linked-Wiki Configuration
-$wgLinkedWikiConfigSPARQLServices["http://wikibase.svc"] = array(
+$wgLinkedWikiConfigSPARQLServices["mardi"] = array(
     "debug" => false,
     "isReadOnly" => true,
-    "endpointRead" => "http://wdqs.svc:9999/bigdata/namespace/wdq/sparql",
+    "endpointRead" => "https://query.portal.mardi4nfdi.de/proxy/wdqs/bigdata/namespace/wdq/sparql",
     "typeRDFDatabase" => "blazegraph",
     "HTTPMethodForRead" => "GET",
     "lang" => "en"
 );
 
-$wgLinkedWikiSPARQLServiceByDefault= "http://wikibase.svc";
+$wgLinkedWikiSPARQLServiceByDefault= "mardi";
