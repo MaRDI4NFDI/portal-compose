@@ -69,3 +69,4 @@ http://de.dbpedia.org/sparql*
 http://lod.openaire.eu/sparql
 https://lod.openaire.eu/sparql
 https://database.factgrid.de/sparql
+https://sparql.mtsr2024.m1.mardi.ovh/mathalgodb/query
