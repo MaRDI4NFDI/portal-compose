@@ -177,6 +177,12 @@ $wgCacheDirectory = "$IP/cache/$wgDBname";
 // speed up speed for anonymous users https://www.mediawiki.org/wiki/Manual:$wgUseFileCache
 $wgUseFileCache=true;
 
+// speed up article count, by reducing the number of queries to the (giant) pagelink tables
+$wgArticleCountMethod='any';
+// some performance for large wikis optimization (used by WMF) https://www.mediawiki.org/wiki/Manual:$wgMiserMode
+$wgMiserMode=true;
+$wgCaptchaTriggers['addurl'] = false;
+
 # MaRDI profile types items
 $wgMathProfileQueries['dataset']='?item wdt:P1460 wd:Q5984635';
 $wgMathProfileQIdMap['dataset']='Q5984635';
