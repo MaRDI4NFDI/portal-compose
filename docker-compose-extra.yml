@@ -161,7 +161,7 @@ services:
   
   oai-importer:
     hostname: oai-importer
-    image: *python-zbmathrest2oai
+    image: *python-zbmathrest2oai-image
     environment:
     # start over on each run
     - OAI_STATE_PATH=/tmp/state.json
