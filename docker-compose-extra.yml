@@ -34,6 +34,8 @@ x-oai-provider-image: &oai-provider-image
   docker.dev.fiz-karlsruhe.de/oai-provider:1.3.0
 x-prometheus-image: &prometheus-image
   prom/prometheus
+x-python-zbmathrest2oai-image: &python-zbmathrest2oai-image
+  ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
 x-statsd: &statsd-image
   ghcr.io/statsd/statsd
 x-scholia-image: &scholia-image
@@ -156,6 +158,16 @@ services:
     - traefik.http.routers.oai-provider.rule=Host(`oai.${WIKIBASE_HOST}`)
     - traefik.http.routers.oai-provider.entrypoints=websecure
     - traefik.http.routers.oai-provider.tls.certResolver=le
+  
+  oai-importer:
+    hostname: oai-importer
+    image: *python-zbmathrest2oai-image
+    environment:
+    # start over on each run
+    - OAI_STATE_PATH=/tmp/state.json
+    depends_on:
+    - oai-backend
+    restart: always
     
   # A container that exposes an API to show its IP address
   whoami:
