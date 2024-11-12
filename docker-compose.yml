@@ -5,7 +5,7 @@ x-elasticsearch-image: &elasticsearch-image
 x-formulasearch-image: &formulasearch-image
   ghcr.io/mardi4nfdi/formulasearch:main
 x-mongo-image: &mongo-image
-  mongo
+  mongo:6.0
 x-mysql-image: &mysql-image
   mariadb:10.11
 x-portainer-image: &portainer-image
