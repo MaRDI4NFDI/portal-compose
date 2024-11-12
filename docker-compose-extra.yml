@@ -3,7 +3,7 @@ version: '3.4'
 x-cassandra-oai: &cassandra-oai-image
   cassandra:4.1
 x-cassandra-backup-image: &cassandra-backup-image
-  ghcr.io/mardi4nfdi/docker-redis-jobrunner
+  docker.dev.fiz-karlsruhe.de/cassandra-backup:5.2
 x-elasticsearch-oai-image: &elasticsearch-oai-image
   docker.elastic.co/elasticsearch/elasticsearch:7.17.13
 x-elasticsearch-oai-setup-image: &elasticsearch-oai-setup-image
