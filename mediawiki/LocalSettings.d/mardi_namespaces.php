@@ -16,6 +16,10 @@ define("NS_COMMUNITY", 4212);
 define("NS_COMMUNITY_TALK", 4213);
 define("NS_WORKFLOW", 4214);
 define("NS_WORKFLOW_TALK", 4215);
+define("NS_ALGORITHM", 4216);
+define("NS_ALGORITHM_TALK", 4217);
+define("NS_SERVICE", 4218);
+define("NS_SERVICE_TALK", 4219);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
@@ -32,6 +36,10 @@ $wgExtraNamespaces[NS_COMMUNITY] = "Community";
 $wgExtraNamespaces[NS_COMMUNITY_TALK] = "Community_talk";
 $wgExtraNamespaces[NS_WORKFLOW] = "Workflow";
 $wgExtraNamespaces[NS_WORKFLOW_TALK] = "Workflow_talk";
+$wgExtraNamespaces[NS_ALGORITHM] = "Algorithm";
+$wgExtraNamespaces[NS_ALGORITHM_TALK] = "Algorithm_talk";
+$wgExtraNamespaces[NS_SERVICE] = "Service";
+$wgExtraNamespaces[NS_SERVICE_TALK] = "Service_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
 $wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' );
@@ -40,6 +48,8 @@ $wgNamespaceProtection[NS_SOFTWARE] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_DATASET] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_COMMUNITY] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_WORKFLOW] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_ALGORITHM] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_SERVICE] = array( 'overwriteprofilepages' );
 
 
 $wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
@@ -51,6 +61,8 @@ $wgContentNamespaces[] = NS_SOFTWARE;
 $wgContentNamespaces[] = NS_DATASET;
 $wgContentNamespaces[] = NS_COMMUNITY;
 $wgContentNamespaces[] = NS_WORKFLOW;
+$wgContentNamespaces[] = NS_ALGORITHM;
+$wgContentNamespaces[] = NS_SERVICE;
 
 
 
