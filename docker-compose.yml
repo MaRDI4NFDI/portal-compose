@@ -193,7 +193,6 @@ services:
     networks:
       default:
         aliases:
-         - query.${WIKIBASE_HOST}
          - wdqs-frontend.svc
     environment:
       - WIKIBASE_HOST=wikibase.svc
