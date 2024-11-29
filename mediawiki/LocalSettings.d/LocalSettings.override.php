@@ -206,3 +206,5 @@ $wgWBRepoSettings['statementSections'] = [
         ],
     ],
 ];
+
+$wgExportFromNamespaces = true;
