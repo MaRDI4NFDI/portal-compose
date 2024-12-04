@@ -1,7 +1,8 @@
 http:
   routers:
     home:
-      rule: Host(`mardi4nfdi.org`,`www.mardi4nfdi.org`)
+      rule:  Host(`mardi4nfdi.org`) ||
+        Host(`www.mardi4nfdi.org`)
       service: whoami-docker@docker
       entryPoints: [websecure]
       tls:
