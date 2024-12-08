@@ -48,6 +48,8 @@ x-watchtower-image: &watchtower-image
   containrrr/watchtower
 x-whoami: &whoami-image
   containous/whoami
+x-flask: &flask-image
+  tiangolo/uwsgi-nginx-flask:latest-2024-12-02
 
 services:
   statsd:
@@ -488,6 +490,14 @@ services:
       - traefik.http.routers.msceval.rule=Host(`msceval.${WIKIBASE_HOST}`)
       - traefik.http.routers.msceval.entrypoints=websecure
       - traefik.http.routers.msceval.tls.certResolver=le
+
+  flask:
+    image: *flask-image
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - traefik.http.routers.flask.rule=Host(`flask.${WIKIBASE_HOST}`)
+      - traefik.http.routers.flask.entrypoints=websecure
+      - traefik.http.routers.flask.tls.certResolver=le  
       
 volumes:
   backend-logs:
