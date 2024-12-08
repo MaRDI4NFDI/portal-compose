@@ -9,7 +9,8 @@
                 "DispatchChanges",
                 "CreateProfilePages",
                 "cirrusSearchElasticaWrite",
-                "SetProfileType"
+                "SetProfileType",
+                "NormalizeDoi"
             ],
             "low-priority": [
                 "htmlCacheUpdate"
@@ -29,7 +30,8 @@
             "include": [
                 "CreateProfilePages",
                 "SetProfileType",
-                "OpenAlex"
+                "OpenAlex",
+                "NormalizeDoi"
             ]
         }
     },
