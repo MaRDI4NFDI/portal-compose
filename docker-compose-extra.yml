@@ -497,7 +497,9 @@ services:
       - com.centurylinklabs.watchtower.enable=true
       - traefik.http.routers.flask.rule=Host(`flask.${WIKIBASE_HOST}`)
       - traefik.http.routers.flask.entrypoints=websecure
-      - traefik.http.routers.flask.tls.certResolver=le  
+      - traefik.http.routers.flask.tls.certResolver=le
+      - traefik.http.services.flask.loadbalancer.server.port=80
+
       
 volumes:
   backend-logs:
