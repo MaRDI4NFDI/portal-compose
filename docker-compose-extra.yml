@@ -406,13 +406,24 @@ services:
       - matomo:/var/www/html
     environment:
       - MATOMO_DATABASE_HOST=${MATOMO_DATABASE_HOST}
-      - MATOMO_DATABASE_USERNAME=${MATOMO_DATABASE_USERNAME}
+      - MATOMO_DATABASE_USERNAME=${MATOMO_DATABASE_PASSWORD}
       - MATOMO_DATABASE_PASSWORD=${MATOMO_DATABASE_PASSWORD}
       - MATOMO_DATABASE_DBNAME=${MATOMO_DATABASE_DBNAME}
     labels:
       - traefik.http.routers.matomo.rule=Host(`matomo.${WIKIBASE_HOST}`)
       - traefik.http.routers.matomo.entrypoints=websecure
       - traefik.http.routers.matomo.tls.certResolver=le
+  matomo-database:
+    image: mariadb:11
+    restart: always
+    volumes:
+      - matomo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${MATOMO_DATABASE_DBNAME}
+      MYSQL_USER: ${MATOMO_DATABASE_PASSWORD}
+      MYSQL_PASSWORD: ${MATOMO_DATABASE_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    
 
   # Watchtower provides automatic updates for all containers
   # see https://containrrr.github.io/watchtower/arguments/
@@ -511,6 +522,7 @@ volumes:
   goaccess_report:
   goaccess_db:
   matomo:
+  matomo-mysql-data:
   prometheus_data:
   provider-logs:
   uptime-kuma:
