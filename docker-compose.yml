@@ -7,7 +7,7 @@ x-formulasearch-image: &formulasearch-image
 x-mongo-image: &mongo-image
   mongo:6.0
 x-mysql-image: &mysql-image
-  mariadb:10.11
+  mariadb:11.6
 x-portainer-image: &portainer-image
   portainer/portainer-ce
 x-quickstatements-image: &quickstatements-image
