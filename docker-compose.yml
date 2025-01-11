@@ -15,7 +15,7 @@ x-quickstatements-image: &quickstatements-image
 x-redis: &redis-image
   redis:7
 x-redis-jobrunner: &redis-jobrunner-image
-  ghcr.io/mardi4nfdi/docker-redis-jobrunner:rm-w-symlink
+  ghcr.io/mardi4nfdi/docker-redis-jobrunner
 x-traefik-image: &traefik-image
   traefik:v2.8
 x-wikibase: &wikibase-image
