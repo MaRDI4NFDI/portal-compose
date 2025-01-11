@@ -132,7 +132,7 @@ services:
   wikibase_updater:
     image: *wikibase-image
     entrypoint: /usr/local/bin/php
-    command:  /var/www/html/maintenance/update.php --conf /shared/LocalSettings.php
+    command:  /var/www/html/w/maintenance/update.php --conf /shared/LocalSettings.php
     links:
       - mysql
       - mongo

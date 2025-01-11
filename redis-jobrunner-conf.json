@@ -44,5 +44,5 @@
             "redis:6379"
         ]
     },
-    "dispatcher": "/var/www/html/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/shared/LocalSettings.php"
+    "dispatcher": "/var/www/html/w/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/shared/LocalSettings.php"
 }

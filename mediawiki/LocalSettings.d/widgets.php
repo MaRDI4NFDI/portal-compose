@@ -5,4 +5,4 @@ wfLoadExtension( 'Widgets' );
 
 $wgGroupPermissions['bureaucrat']['editwidgets'] = true;
    
-$wgWidgetsCompileDir = "/var/www/html/images";
+$wgWidgetsCompileDir = "/var/www/html/w/images";
