@@ -17,7 +17,7 @@ x-jaegertracing-image: &jaegertracing-image
 x-latexml-image: &latexml-image
   physikerwelt/latexml
 x-mardi-backup-image: &mardi-backup-image
-  ghcr.io/mardi4nfdi/docker-backup
+  ghcr.io/mardi4nfdi/docker-backup:1.44
 x-mardi-importer-image: &mardi-importer-image
   ghcr.io/mardi4nfdi/docker-importer:main
 x-mardi-importer-api-image: &mardi-importer-api-image
