@@ -174,7 +174,7 @@ test_4() {
 test_5() {
     # 1. upload a test image file via importImages.php
     # 2. create a backup
-    # 3. delete the file from /var/www/html/images
+    # 3. delete the file from /var/www/html/w/images
     # 4. restore the backup of the images directory
     # 5. check if the file is available
     # 6. cleanup: delete the file again with deleteBatch.php and from images
@@ -199,7 +199,7 @@ test_5() {
     test_image="Test_image_backup_${rand_str}.png"
     mkdir "$rand_dir" && cp /test/test_image_backup.png "${rand_dir}/${test_image}"
     if \
-        ! su -l www-data -s /bin/bash -c 'php /var/www/html/maintenance/importImages.php --conf /shared/LocalSettings.php --comment "TEST importing images backup" '"$rand_dir" >/dev/null
+        ! su -l www-data -s /bin/bash -c 'php /var/www/html/w/maintenance/importImages.php --conf /shared/LocalSettings.php --comment "TEST importing images backup" '"$rand_dir" >/dev/null
     then
         echo " - Test restore images FAILED: Error uploading image file with importImages.php! (status $?)"
         exit 1
@@ -217,15 +217,15 @@ test_5() {
     /app/backup.sh &>/dev/null
 
     ## 3. delete files from storage
-    found_file=$(cd /var/www/html/images && find . -name "*$test_image" -print -quit |\
+    found_file=$(cd /var/www/html/w/images && find . -name "*$test_image" -print -quit |\
         sed 's/^\.\///')
-    if ! find /var/www/html/images -name "*${test_image}" -delete
+    if ! find /var/www/html/w/images -name "*${test_image}" -delete
     then
-        echo " - Test restore images FAILED: uploaded file not found in /var/www/html/images! (status $?)"
+        echo " - Test restore images FAILED: uploaded file not found in /var/www/html/w/images! (status $?)"
         exit 1
     else
         # delete all empty folders, too
-        find /var/www/html/images -name "*" -type d -empty -delete
+        find /var/www/html/w/images -name "*" -type d -empty -delete
     fi
 
     response=$(_get_wiki_http_response_code "${IMG_URL}/${found_file}")
@@ -240,7 +240,7 @@ test_5() {
     ## 5. check if file was restored
     # NOTE: only checks for original file, not deleted or archived files!
     # find restored file on disk
-    found_restored=$(cd /var/www/html/images && find . -name "$test_image" -print -quit)
+    found_restored=$(cd /var/www/html/w/images && find . -name "$test_image" -print -quit)
     if  [[ -z  $found_restored ]]; then
         echo " - Test restore images FAILED: restored file not found on the disk!"
         exit 1
@@ -257,7 +257,7 @@ test_5() {
     tempfile="$rand_dir/tmp.$rand_str"
     echo "File:${test_image}" > "$tempfile"
     if \
-        ! php /var/www/html/maintenance/deleteBatch.php \
+        ! php /var/www/html/w/maintenance/deleteBatch.php \
             --conf /shared/LocalSettings.php \
             --r "delete temp test file" "$tempfile" >/dev/null
     then

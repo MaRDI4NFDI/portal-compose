@@ -22,7 +22,7 @@ services:
     environment:
       <<: *wikibase_variables
     volumes:
-      - ./mediawiki/LocalSettings.d:/var/www/html/LocalSettings.d:ro
+      - ./mediawiki/LocalSettings.d:/var/www/html/w/LocalSettings.d:ro
 
   elasticsearch:
     environment:

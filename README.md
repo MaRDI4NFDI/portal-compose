@@ -224,7 +224,7 @@ services:
     expose:
       - 9000
     volumes:
-      - ./extensions-dev/<extension_to_debug>:/var/www/html/extensions/<extension_to_debug>
+      - ./extensions-dev/<extension_to_debug>:/var/www/html/w/extensions/<extension_to_debug>
       - ./debugging/php.ini:/usr/local/etc/php/php.ini
 ```
 Here `./extensions-dev/<extension_to_debug>` is the path of your local development checkout of the extension, you modify.
