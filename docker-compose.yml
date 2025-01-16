@@ -58,11 +58,10 @@ services:
     image: *wikibase-image
     container_name: mardi-wikibase
     links:
-      - mysql
+      - mysql-primary
       - mongo
-      - formulasearch
     depends_on:
-      - mysql
+      - mysql-primary
       - mongo
     restart: unless-stopped
     volumes:
@@ -93,7 +92,7 @@ services:
       - traefik.http.routers.service-wikimongo.service=wikimongo-service
       - traefik.http.services.wikimongo-service.loadbalancer.server.port=8081
       
-  mysql:
+  mysql-primary:
     image: *mysql-image
     container_name: mardi-mysql
     restart: unless-stopped
@@ -101,15 +100,33 @@ services:
       - mediawiki-mysql-data:/var/lib/mysql
       - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
+      MARIADB_REPLICATION_USER: "repluser"
+      MARIADB_REPLICATION_PASSWORD: "replpassword"
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: 'root-password'
     networks:
       default:
         aliases:
          - mysql.svc
-         - tools.labsdb
+  
+  mysql-replica:
+    image: *mysql-image
+    container_name: mardi-mysql-replica
+    restart: unless-stopped
+    volumes:
+      - mediawiki-mysql-replica-data:/var/lib/mysql
+      - ./replica.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MARIADB_REPLICATION_USER: "repluser"
+      MARIADB_REPLICATION_PASSWORD: "replpassword"
+      MARIADB_MASTER_HOST: "mysql.svc"
+      MYSQL_ROOT_PASSWORD: 'root-password'
+    networks:
+      default:
+        aliases:
+         - mysql-replica.svc
 
   mongo:
     image: *mongo-image
@@ -134,22 +151,6 @@ services:
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms8g -Xmx8g"
-
-  formulasearch:
-    image: *formulasearch-image
-    container_name: formulasearch
-    restart: "no"
-    environment:
-      HARVESTS_PATH: '/my_harvests'
-      # Port config 1985 is internal port and should not be changed currently.
-      FS_SERVER_PORT: 1985
-      ENABLE_REST_INSERTIONS: 'false'
-      CRON_UPDATE_FORMULAE: ${FS_CRON_UPDATE_FORMULAE}
-      CRON_ENABLED: ${FS_CRON_ENABLED:-false}
-      ALWAYS_EXPORT: ${FS_ALWAYS_EXPORT:-false}
-    volumes:
-      - formulasearch_harvests:/my_harvests/
-      - ${BACKUP_DIR:-./backup}:/data
 
   redis:
     container_name: redis
@@ -180,118 +181,6 @@ services:
     - shared_mardi_wikibase:/shared/
     - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
 
-  wdqs-frontend:
-    image: *wdqs-frontend-image
-    container_name: mardi-wdqs-frontend
-    restart: unless-stopped
-    volumes:
-      - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/usr/share/nginx/html/logo.svg
-      - ./mediawiki/images/favicon.ico:/usr/share/nginx/html/favicon.ico
-    depends_on:
-      - wdqs-proxy
-      - wikibase
-    networks:
-      default:
-        aliases:
-         - wdqs-frontend.svc
-    environment:
-      - WIKIBASE_HOST=wikibase.svc
-      - WDQS_HOST=wdqs-proxy.svc
-      - BRAND_TITLE=MaRDIQueryService
-    labels:
-      - traefik.http.routers.service-wdqs-frontend.rule=Host(`query.${WIKIBASE_HOST}`)
-      - traefik.http.routers.service-wdqs-frontend.entrypoints=websecure
-      - traefik.http.routers.service-wdqs-frontend.tls.certResolver=le
-
-  wdqs:
-    image: *wdqs-image
-    restart: unless-stopped
-    command: /runBlazegraph.sh
-    volumes:
-      - query-service-data:/wdqs/data
-      - ./wdqs/prefixes.conf:/wdqs/prefixes.conf:ro
-      - ./wdqs/allowlist.txt:/wdqs/allowlist.txt:ro
-    networks:
-      default:
-        aliases:
-         - wdqs.svc
-    environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
-      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
-      - WDQS_HOST=wdqs.svc
-      - WDQS_PORT=9999
-      - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
-    expose:
-      - 9999
-    labels:
-      - traefik.http.routers.service-wdqs.rule=Host(`wdqs.${WIKIBASE_HOST}`)
-      - traefik.http.routers.service-wdqs.entrypoints=websecure
-      - traefik.http.routers.service-wdqs.tls.certResolver=le
-      - traefik.http.routers.service-wdqs.middlewares=auth
-  # cf https://github.com/MaRDI4NFDI/wikibase-release-pipeline/blob/main/build/WDQS-proxy/README.md
-
-  wdqs-proxy:
-    image: *wdqs-proxy-image
-    restart: unless-stopped
-    environment:
-      - PROXY_PASS_HOST=wdqs.svc:9999
-      - PROXY_MAX_QUERY_MILLIS=3600000
-    depends_on:
-      - wdqs
-    networks:
-      default:
-        aliases:
-         - wdqs-proxy.svc
-    labels:
-      - traefik.http.routers.wdqs-proxy.rule=Host(`sparql.${WIKIBASE_HOST}`)
-      - traefik.http.routers.wdqs-proxy.entrypoints=websecure
-      - traefik.http.routers.wdqs-proxy.tls.certResolver=le
-
-  wdqs-updater:
-    image: *wdqs-image
-    restart: unless-stopped
-    command: /runUpdate.sh
-    depends_on:
-    - wdqs
-    - wikibase
-    networks:
-      default:
-        aliases:
-         - wdqs-updater.svc
-    environment:
-      - WIKIBASE_HOST=${WIKIBASE_HOST}
-      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
-      - WDQS_HOST=wdqs.svc
-      - WDQS_PORT=9999
-    labels:
-      - traefik.enable=false
-
-  quickstatements:
-    image: *quickstatements-image
-    container_name: mardi-quickstatements
-    restart: unless-stopped
-    volumes:
-      - quickstatements-data:/quickstatements/data:ro
-    depends_on:
-      - wikibase
-    networks:
-      default:
-        aliases:
-         - quickstatements.${WIKIBASE_HOST}
-    labels:
-      - traefik.http.routers.service-quickstatements.rule=Host(`quickstatements.${WIKIBASE_HOST}`)
-      - traefik.http.routers.service-quickstatements.entrypoints=websecure
-      - traefik.http.routers.service-quickstatements.tls.certResolver=le
-    environment:
-      - QUICKSTATEMENTS_HOST=https://quickstatements.${WIKIBASE_HOST}
-      - WIKIBASE_SCHEME_AND_HOST=https://${WIKIBASE_HOST}
-      - QS_PUBLIC_SCHEME_HOST_AND_PORT=https://quickstatements.${WIKIBASE_HOST}
-      - WB_PUBLIC_SCHEME_HOST_AND_PORT=https://${WIKIBASE_HOST}
-      - WB_PROPERTY_NAMESPACE=122
-      - "WB_PROPERTY_PREFIX=Property:"
-      - WB_ITEM_NAMESPACE=120
-      - "WB_ITEM_PREFIX=Item:"
-
   traefik:
     restart: always
     image: *traefik-image
@@ -315,25 +204,13 @@ services:
       - traefik.http.routers.dashboard.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
 
-  portainer:
-    container_name: mardi-portainer
-    image: *portainer-image
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # needs access to docker process
-      - portainer-data:/data # volume to save settings of portainer
-    labels:
-      - traefik.http.routers.service-portainer.rule=Host(`portainer.${WIKIBASE_HOST}`)
-      - traefik.http.routers.service-portainer.entrypoints=websecure
-      - traefik.http.routers.service-portainer.tls.certResolver=le
-      - traefik.http.services.portainer-docker.loadbalancer.server.port=9000
-
 volumes:
   apache_logs:
   elasticsearch-data:
   formulasearch_harvests:
   LocalSettings:
   mediawiki-mysql-data:
+  mediawiki-mysql-replica-data:
   mediawiki-mongo-data:
   portainer-data:
   quickstatements-data:

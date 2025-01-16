@@ -208,3 +208,29 @@ $wgWBRepoSettings['statementSections'] = [
 ];
 
 $wgExportFromNamespaces = true;
+
+$wgLBFactoryConf = array(
+
+    'class' => 'LBFactoryMulti',
+
+    'sectionsByDB' => array(
+        'my_wiki' => 's1', 
+    ),
+
+    'sectionLoads' => array(
+        's1' => array(
+            'mysql.svc'  => 0,
+            'mysql-replica.svc'  => 1, 
+        ),
+    ),
+
+
+    'serverTemplate' => array(
+        'dbname'      => "my_wiki",
+        'user'          => "sqluser",
+        'password'      => "change-this-sqlpassword",
+        'type'          => 'mysql',
+        'flags'          => DBO_DEFAULT,
+        'max lag'      => 30,
+    ),
+);
