@@ -22,6 +22,16 @@ define("NS_SERVICE", 4218);
 define("NS_SERVICE_TALK", 4219);
 define("NS_THEOREM", 4220);
 define("NS_THEOREM_TALK", 4221);
+define("NS_RESEARCH_FIELD", 4222);
+define("NS_RESEARCH_FIELD_TALK", 4223);
+define("NS_RESEARCH_PROBLEM", 4224);
+define("NS_RESEARCH_PROBLEM_TALK", 4225);
+define("NS_MODEL", 4226);
+define("NS_MODEL_TALK", 4227);
+define("NS_QUANTITY", 4228);
+define("NS_QUANTITY_TALK", 4229);
+define("NS_TASK", 4230);
+define("NS_TASK_TALK", 4231);
 
 // Add namespaces.
 $wgExtraNamespaces[NS_FORMULA] = "Formula";
@@ -44,6 +54,16 @@ $wgExtraNamespaces[NS_SERVICE] = "Service";
 $wgExtraNamespaces[NS_SERVICE_TALK] = "Service_talk";
 $wgExtraNamespaces[NS_THEOREM] = "Theorem";
 $wgExtraNamespaces[NS_THEOREM_TALK] = "Theorem_talk";
+$wgExtraNamespaces[NS_RESEARCH_FIELD] = "Research_field";
+$wgExtraNamespaces[NS_RESEARCH_FIELD_TALK] = "Research_field_talk";
+$wgExtraNamespaces[NS_RESEARCH_PROBLEM] = "Research_problem";
+$wgExtraNamespaces[NS_RESEARCH_PROBLEM_TALK] = "Research_problem_talk";
+$wgExtraNamespaces[NS_MODEL] = "Model";
+$wgExtraNamespaces[NS_MODEL_TALK] = "Model_talk";
+$wgExtraNamespaces[NS_QUANTITY] = "Quantity";
+$wgExtraNamespaces[NS_QUANTITY_TALK] = "Quantity_talk";
+$wgExtraNamespaces[NS_TASK] = "Task";
+$wgExtraNamespaces[NS_TASK_TALK] = "Task_talk";
 
 $wgNamespaceProtection[NS_FORMULA] = array( 'overwriteprofilepages' ); 
 $wgNamespaceProtection[NS_PERSON] = array( 'overwriteprofilepages' );
@@ -55,6 +75,11 @@ $wgNamespaceProtection[NS_WORKFLOW] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_ALGORITHM] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_SERVICE] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_THEOREM] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_RESEARCH_FIELD] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_RESEARCH_PROBLEM] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_MODEL] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_QUANTITY] = array( 'overwriteprofilepages' );
+$wgNamespaceProtection[NS_TASK] = array( 'overwriteprofilepages' );
 
 
 $wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
@@ -69,6 +94,11 @@ $wgContentNamespaces[] = NS_WORKFLOW;
 $wgContentNamespaces[] = NS_ALGORITHM;
 $wgContentNamespaces[] = NS_SERVICE;
 $wgContentNamespaces[] = NS_THEOREM;
+$wgContentNamespaces[] = NS_RESEARCH_FIELD;
+$wgContentNamespaces[] = NS_RESEARCH_PROBLEM;
+$wgContentNamespaces[] = NS_MODEL;
+$wgContentNamespaces[] = NS_QUANTITY;
+$wgContentNamespaces[] = NS_TASK;
 
 
 
