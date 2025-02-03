@@ -46,6 +46,17 @@ rules to make services accessible on a domain, authentication, redirections,
 etc, must be defined in the docker-compose files via docker labels for the
 services' containers. See the [docs](https://doc.traefik.io/traefik/).
 
+In production be sure that the HTTPS certificates are renewed. To do so letsencrypt
+needs to connect to the host machine with one of the following protocols
+
+https://letsencrypt.org/docs/challenge-types/
+
+Currently, TLS-ALPN-01 does not work according to https://letsdebug.net and we use
+HTTP-01 challange. Before enableing TLS-ALPN-01 with traefik, make sure that the
+toy-example https://doc.traefik.io/traefik/user-guides/docker-compose/acme-tls/ works.
+To test this, you only need a public IP address with port 443 opened and DNS records
+configured accordingly.
+
 <!--
 ### Optionally configure traefik locally
 
