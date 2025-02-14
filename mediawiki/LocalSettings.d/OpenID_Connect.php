@@ -14,6 +14,7 @@ $wgPluggableAuth_Config['Login with your NFDI AAI Account'] = [
         'providerURL' => 'https://auth.didmos.nfdi-aai.de',
         'clientID' => 'u2pwxwERLrACYw3z',
         'clientsecret' => $_ENV['NFDI_AAI_SECRET'],
+        'scope' => [],
     ]
 ];
 $wgOpenIDConnect_MigrateUsersByEmail=true;
