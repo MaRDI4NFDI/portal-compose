@@ -50,8 +50,15 @@ x-whoami: &whoami-image
   containous/whoami
 x-flask: &flask-image
   tiangolo/uwsgi-nginx-flask:latest-2024-12-02
+x-ffmpeg: &ffmpeg-image
+  docker-registry.wikimedia.org/wikimedia/mediawiki-libs-shellbox:video
 
 services:
+  ffmpeg:
+    image: *ffmpeg-image
+    hostname: ffmpeg
+
+
   statsd:
     image: *statsd-image
 

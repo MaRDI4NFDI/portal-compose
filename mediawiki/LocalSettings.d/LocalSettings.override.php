@@ -227,3 +227,7 @@ $wgWBRepoSettings['statementSections'] = [
 ];
 
 $wgExportFromNamespaces = true;
+
+$wgShellboxUrls = [
+	'default' => 'http://ffmpeg/shellbox'
+];
