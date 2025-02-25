@@ -263,6 +263,7 @@ services:
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
+      - UPDATER_OPTS='-Dorg.wikidata.query.rdf.tool.wikibase.WikibaseRepository.timeout=15000'
     labels:
       - traefik.enable=false
 
