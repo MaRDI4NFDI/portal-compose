@@ -28,7 +28,7 @@ x-wdqs-proxy-image: &wdqs-proxy-image
   ghcr.io/wmde/wikibase/wdqs-proxy:dev-9186217118
 
 x-common-variables: &wikibase_variables
-  DB_SERVER: mysql.svc:3306
+  DB_SERVER: ${DB_SERVER:-mysql.svc:3306}
   MW_ADMIN_NAME: ${MW_ADMIN_NAME:-admin}
   MW_ADMIN_PASS: ${MW_ADMIN_PASS}
   MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
