@@ -196,7 +196,7 @@ services:
       - shared_mardi_wikibase:/shared/:ro
       #- ./config/:/config
     environment:
-      - DB_HOST=mysql.svc
+      - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
@@ -224,7 +224,7 @@ services:
         aliases:
          - importer-api.svc
     environment:
-      DB_HOST: mardi-mysql
+      DB_HOST: ${DB_HOST}
       MYSQL_USER: ${DB_API_USER}
       MYSQL_PASSWORD: ${DB_API_PASS}
       MYSQL_DATABASE: ${DB_NAME}
@@ -252,7 +252,7 @@ services:
     labels:
       - traefik.enable=false
     environment:
-      DB_HOST: mysql.svc # internal docker hostname (alias) of the database service
+      DB_HOST: ${DB_HOST} # internal docker hostname (alias) of the database service
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
