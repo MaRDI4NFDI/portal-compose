@@ -79,9 +79,6 @@ if ( $wgDBname !== 'wiki_swmath' ){
 		'VT:string' => [
 			'length' => 200000,
 		],
-		'PT:math' => [
-			'length' => 200000,
-		],
 		'multilang' => [
 			'length' => 2000,
 		],
