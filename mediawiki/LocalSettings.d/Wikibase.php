@@ -86,4 +86,7 @@ if ( $wgDBname !== 'wiki_swmath' ){
 			'length' => 1000,
 		],
 	];
+	# Math-specific string limits
+	$wgMathSearchContentTexMaxLength = 30000;
+	$wgMathTexMaxLength = 30000;
 }
