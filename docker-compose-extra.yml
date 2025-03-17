@@ -31,7 +31,7 @@ x-node-exporter-image: &node-exporter-image
 x-oai-backend-image: &oai-backend-image
   docker.dev.fiz-karlsruhe.de/oai-backend:1.5.1
 x-oai-provider-image: &oai-provider-image
-  docker.dev.fiz-karlsruhe.de/oai-provider:1.3.0
+  docker.dev.fiz-karlsruhe.de/oai-provider:1.5.0
 x-prometheus-image: &prometheus-image
   prom/prometheus
 x-python-zbmathrest2oai-image: &python-zbmathrest2oai-image
