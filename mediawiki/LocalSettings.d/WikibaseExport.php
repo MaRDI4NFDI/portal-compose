@@ -1,2 +1,2 @@
 <?php
-$wgDBname !== 'wiki_swmath' ? wfLoadExtension( 'WikibaseExport' ) : NULL;
+# $wgDBname !== 'wiki_swmath' ? wfLoadExtension( 'WikibaseExport' ) : NULL;
