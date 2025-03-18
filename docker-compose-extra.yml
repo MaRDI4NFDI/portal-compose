@@ -117,16 +117,16 @@ services:
     - es-data:/usr/share/elasticsearch/data
     # - ./oaipmh/oai-elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
 
-  elasticsearch-oai-setup:
-    hostname: elasticsearch-oai-setup
-    image: *elasticsearch-oai-setup-image
-    depends_on:
-    - elasticsearch-oai
-    command: ["/wait-for-it.sh","elasticsearch-oai:9200","--", "sh", "/init-fizoai-elasticsearch.sh"]
-    volumes:
-    - ./oaipmh/init-fizoai-elasticsearch.sh:/init-fizoai-elasticsearch.sh:ro
-    - ./oaipmh/item_mapping_es_v7:/item_mapping_es_v7:ro
-    - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
+  #elasticsearch-oai-setup:
+  #  hostname: elasticsearch-oai-setup
+  #  image: *elasticsearch-oai-setup-image
+  #  depends_on:
+  #  - elasticsearch-oai
+  #  command: ["/wait-for-it.sh","elasticsearch-oai:9200","--", "sh", "/init-fizoai-elasticsearch.sh"]
+  #  volumes:
+  #  - ./oaipmh/init-fizoai-elasticsearch.sh:/init-fizoai-elasticsearch.sh:ro
+  #  - ./oaipmh/item_mapping_es_v7:/item_mapping_es_v7:ro
+  #  - ./oaipmh/wait-for-it.sh:/wait-for-it.sh:ro
 
   oai-backend:
     hostname: oai-backend
