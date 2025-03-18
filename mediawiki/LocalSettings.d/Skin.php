@@ -1,4 +1,5 @@
 <?php
+use MediaWiki\Html\Html;
 
 wfLoadSkin( 'Vector' );
 $wgDefaultSkin = 'vector-2022';
