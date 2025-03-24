@@ -220,7 +220,7 @@ services:
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
-      - BLAZEGRAPH_OPTS='-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600'
+      - BLAZEGRAPH_OPTS=-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600
     expose:
       - 9999
     labels:
@@ -263,7 +263,7 @@ services:
       - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-https}
       - WDQS_HOST=wdqs.svc
       - WDQS_PORT=9999
-      - UPDATER_OPTS='-Dorg.wikidata.query.rdf.tool.wikibase.WikibaseRepository.timeout=30000'
+      - UPDATER_OPTS=-Dorg.wikidata.query.rdf.tool.wikibase.WikibaseRepository.timeout=30000
     labels:
       - traefik.enable=false
 
