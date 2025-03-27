@@ -52,8 +52,7 @@ x-common-variables: &wikibase_variables
   NFDI_AAI_SECRET: ${NFDI_AAI_SECRET}
   MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
-  TREFIK_PORT: ${TREFIK_PORT:-80}
-
+  TRAEFIK_PORT: ${TRAEFIK_PORT:-80}
 services:
   wikibase:
     image: *wikibase-image
