@@ -52,6 +52,7 @@ x-common-variables: &wikibase_variables
   NFDI_AAI_SECRET: ${NFDI_AAI_SECRET}
   MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
   MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
+  TREFIK_PORT: ${TREFIK_PORT:-80}
 
 services:
   wikibase:
@@ -299,7 +300,7 @@ services:
     container_name: reverse-proxy
     ports:
       - 443:443 # HTTPS port
-      - 80:80 # HTTP port
+      - ${TREFIK_PORT}:80 # HTTP port
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
