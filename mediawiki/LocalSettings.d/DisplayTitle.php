@@ -7,7 +7,7 @@ $wgRestrictDisplayTitle=false;
 wfLoadExtension( 'DisplayTitle' );
 // Replace display_title with title fields otherwise keep the defaults from https://gerrit.wikimedia.org/g/mediawiki/extensions/CirrusSearch/%2B/HEAD/docs/settings.txt
 $wgCirrusSearchWeights = [
-    'display_title' => 20,
+    'title' => 20,
     'redirect' => 15,
     'category' => 8,
     'heading' => 5,
