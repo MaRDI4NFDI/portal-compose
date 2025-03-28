@@ -1,5 +1,5 @@
 <?php
-# wfLoadExtension( 'LinkedWiki' );
+wfLoadExtension( 'LinkedWiki' );
 
 # Linked-Wiki Configuration
 $wgLinkedWikiConfigSPARQLServices["mardi"] = array(
