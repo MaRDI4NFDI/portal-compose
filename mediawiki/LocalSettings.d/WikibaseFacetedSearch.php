@@ -1,2 +1,4 @@
 <?php
-wfLoadExtension( 'WikibaseFacetedSearch' );
+if ( $wgDBname === 'my_wiki' ) {
+	wfLoadExtension( 'WikibaseFacetedSearch' );
+}
