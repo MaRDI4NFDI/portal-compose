@@ -82,7 +82,7 @@ services:
     environment:
       <<: *wikibase_variables
     labels:
-      - traefik.http.routers.service-wikibase.rule=Host(`${WIKIBASE_HOST}`,`swmath.${WIKIBASE_HOST}`)
+      - traefik.http.routers.service-wikibase.rule=Host(`${WIKIBASE_HOST}`,`swmath.${WIKIBASE_HOST}`,`en.wiki.${WIKIBASE_HOST}`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
       - traefik.http.routers.service-wikibase.tls.certResolver=le
       - traefik.http.routers.service-wikibase.service=wikibase-service
