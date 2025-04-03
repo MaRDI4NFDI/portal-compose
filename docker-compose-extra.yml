@@ -197,7 +197,7 @@ services:
       #- ./config/:/config
     environment:
       - DB_HOST=${DB_HOST:-mysql.svc}
-      - DB_NAME=${DB_NAME}
+      - DB_NAME=${DB_IMP_NAME:-wikidata_importer}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - IMPORT_SCHEDULE=${IMPORT_SCHEDULE}
@@ -227,7 +227,7 @@ services:
       DB_HOST: ${DB_HOST:-mysql.svc}
       MYSQL_USER: ${DB_API_USER}
       MYSQL_PASSWORD: ${DB_API_PASS}
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_DATABASE: ${DB_IMP_NAME:-wikidata_importer}
     labels:
       - traefik.http.routers.importer-api.rule=Host(`importer.${WIKIBASE_HOST}`)
       - traefik.http.routers.importer-api.entrypoints=websecure
