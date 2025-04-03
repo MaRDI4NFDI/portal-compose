@@ -29,7 +29,6 @@ if ( preg_match( '/^([a-z_]+)(wik.*?)$/', $wgDBname, $match ) === 1 ) {
 	}
 	// fall back to english otherwise
 }
-}
 
 if ( false && getenv( 'CI' ) !== 'true' ) {
 	$wgLBFactoryConf = [
