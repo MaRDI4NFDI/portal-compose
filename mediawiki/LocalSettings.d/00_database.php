@@ -18,7 +18,8 @@ if ( defined( 'MW_DB' ) ) {
 		die( "Server name $host does not match the patterns for wikis." );
 	}
 	$lang = str_replace( '-', '_', $match[1] );
-	$wgDBname = $lang . $match[2];
+	$suffix = str_replace( '.', '', $match[2] );
+	$wgDBname = $lang . $suffix;
 }
 
 /** Set language code */
