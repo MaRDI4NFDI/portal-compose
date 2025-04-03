@@ -14,7 +14,7 @@ http:
           ||
         {{- end -}}
       Host(`{{$lang}}.{{$siteId}}.{{ env "WIKIBASE_HOST" }}`) {{end}}
-      service: wikibase-docker@docker
+      service: wikibase-service@docker
       entryPoints:
         - websecure
       tls:
