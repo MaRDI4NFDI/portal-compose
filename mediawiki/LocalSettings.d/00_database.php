@@ -22,12 +22,13 @@ if ( defined( 'MW_DB' ) ) {
 }
 
 /** Set language code */
-if ( preg_match( '/^([a-z_]+)(wik.*?)$/', $wgDBname, $match ) !== 1 ) {
+if ( preg_match( '/^([a-z_]+)(wik.*?)$/', $wgDBname, $match ) === 1 ) {
 	$lang = str_replace( '_', '-', $match[1] );
 	if ( LanguageCode::isWellFormedLanguageTag( $lang ) ) {
 		$wgLanguageCode = $lang;
 	}
-	// fall back to english
+	// fall back to english otherwise
+}
 }
 
 if ( false && getenv( 'CI' ) !== 'true' ) {
