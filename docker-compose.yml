@@ -315,6 +315,8 @@ services:
       - traefik.http.routers.dashboard.service=api@internal
       - traefik.http.routers.dashboard.middlewares=auth
       - traefik.http.middlewares.auth.basicauth.users=mardi:$$2y$$05$$Ubl1B.74bDJkpGHXZ6Y4Xuq8lSx88bi51bmE85/VYf1nQizfKKuH.
+    environment:
+      - WIKIBASE_HOST=${WIKIBASE_HOST}
 
   portainer:
     container_name: mardi-portainer
