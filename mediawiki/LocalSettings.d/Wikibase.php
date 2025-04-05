@@ -60,6 +60,11 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 				'rdfPredicateNamespacePrefix' => '',
 				'interwikiPrefix' => '',
 			],
+
+	];
+	$wgWBRepoSettings['localEntitySourceName'] = 'mardi_source';
+	if ( $wgDBname !== 'my_wiki' ) {
+		$wgWBRepoSettings['entitySources'] = [
 			'wikidata' => [
 				'entityNamespaces' => [
 					'item' => 0,
@@ -73,9 +78,7 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 				'interwikiPrefix' => 'd',
 			],
 
-	];
-	$wgWBRepoSettings['localEntitySourceName'] = 'mardi_source';
-	if ( $wgDBname !== 'my_wiki' ) {
+		];
 		$wgWBRepoSettings['localEntitySourceName'] = 'wikidata';
 	}
 
