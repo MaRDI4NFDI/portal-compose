@@ -38,7 +38,7 @@ $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
 // https://github.com/MaRDI4NFDI/portal-compose/issues/224
 $wgNamespacesToBeSearchedDefault[122] = true; // WB_PROPERTY_NAMESPACE===122
 
-if ( $wgDBname === 'my_wiki' ) {
+if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' ) {
 
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	// from https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/f2bd35609b6bf3f8d38ef8c78d2f340497906706/repo/includes/RepoHooks.php#L170C1-L180C61
