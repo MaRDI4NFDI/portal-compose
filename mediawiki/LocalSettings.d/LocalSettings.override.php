@@ -150,8 +150,9 @@ $wgMathWikibasePropertyIdHasPart = "P4";
 ini_set('memory_limit', '2G');
 
 # https://github.com/MaRDI4NFDI/portal-compose/issues/322
-$wgUseInstantCommons = true; 
-
+if ( MW_ENTRY_POINT !== 'cli') {
+	$wgUseInstantCommons = true; 
+}
 # https://github.com/MaRDI4NFDI/portal-compose/issues/419
 $wgJobTypeConf['default'] = [
     'class'          => 'JobQueueRedis',
