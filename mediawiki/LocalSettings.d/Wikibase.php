@@ -926,7 +926,8 @@ if ( $wgDBname === 'my_wiki' ) {
 	## WikibaseManifest Configuration
 	wfLoadExtension( 'WikibaseManifest' );
 	wfLoadExtension( 'WikibaseFacetedSearch' );
-	wfLoadExtension( 'WikibaseExport' );
+	# Temporary disabled https://github.com/ProfessionalWiki/WikibaseExport/issues/190
+	# wfLoadExtension( 'WikibaseExport' );
 	wfLoadExtension( 'WikibaseQualityConstraints' );
 
 	$wgWBQualityConstraintsSparqlEndpoint = 'http://query.portal.mardi4nfdi.de/proxy/wdqs/bigdata/namespace/wdq/sparql';
