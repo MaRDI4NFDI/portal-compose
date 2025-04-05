@@ -38,7 +38,7 @@ $wgLocalDatabases = [ 'wiki_swmath', 'my_wiki' ];
 // https://github.com/MaRDI4NFDI/portal-compose/issues/224
 $wgNamespacesToBeSearchedDefault[122] = true; // WB_PROPERTY_NAMESPACE===122
 
-if ( $wgDBname === 'my_wiki' ) {
+if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'commonswiki' ) {
 
 	wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
 	// from https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/f2bd35609b6bf3f8d38ef8c78d2f340497906706/repo/includes/RepoHooks.php#L170C1-L180C61
@@ -60,8 +60,25 @@ if ( $wgDBname === 'my_wiki' ) {
 				'rdfPredicateNamespacePrefix' => '',
 				'interwikiPrefix' => '',
 			],
+			'wikidata' => [
+				'entityNamespaces' => [
+					'item' => 0,
+					'property' => 120,
+					'lexeme' => 146,
+				],
+				'repoDatabase' => 'wikidatawiki',
+				'baseUri' => 'http://www.wikidata.org/entity/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
+				'interwikiPrefix' => 'd',
+			],
+
 	];
 	$wgWBRepoSettings['localEntitySourceName'] = 'mardi_source';
+	if ( $wgDBname !== 'my_wiki' ) {
+		$wgWBRepoSettings['localEntitySourceName'] = 'wikidata';
+	}
+
 	$wgWBRepoSettings['localClientDatabases'] = [
 		'mardi' => 'my_wiki',
 		'swmath' => 'wiki_swmath'
@@ -97,7 +114,9 @@ if ( $wgDBname === 'my_wiki' ) {
 	wfLoadExtension( 'EntitySchema' );
 	// https://www.mediawiki.org/wiki/Extension:WikibaseCirrusSearch
 	wfLoadExtension( 'WikibaseCirrusSearch' );
-
+	if ( $wgDBname === 'commonswiki' ) {
+		wfLoadExtension( 'WikibaseMediaInfo' );
+	}
 	if ( getenv( 'MW_ELASTIC_HOST' ) !== false ) {
 		$wgCirrusSearchServers = [ $_ENV['MW_ELASTIC_HOST'] ];
 		$wgSearchType = 'CirrusSearch';
