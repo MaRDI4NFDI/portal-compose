@@ -77,7 +77,16 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 				'rdfPredicateNamespacePrefix' => '',
 				'interwikiPrefix' => 'd',
 			],
-
+			'commons' => [
+				'entityNamespaces' => [
+					'mediainfo' => '6/mediainfo',
+				],
+				'repoDatabase' => 'commonswiki',
+				'baseUri' => 'https://commons.wikimedia.org/entity/',
+				'rdfNodeNamespacePrefix' => 'sdc',
+				'rdfPredicateNamespacePrefix' => 'sdc',
+				'interwikiPrefix' => 'c',
+			],
 		];
 		$wgWBRepoSettings['localEntitySourceName'] = 'wikidata';
 	}
