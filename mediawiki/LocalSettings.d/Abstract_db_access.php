@@ -8,7 +8,7 @@ $wgExternalDataSources['AbstractDB'] = [
     'prepared' => <<<'SQL'
 SELECT abstract, abstract_source, summary, summary_source
 FROM paper_abstracts
-WHERE paper_id = ?
+WHERE paper_qid = ?
 SQL,
     'types' => 's'
 ];
