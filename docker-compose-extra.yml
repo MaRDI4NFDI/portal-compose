@@ -8,8 +8,6 @@ x-elasticsearch-oai-image: &elasticsearch-oai-image
   docker.elastic.co/elasticsearch/elasticsearch:7.17.13
 x-elasticsearch-oai-setup-image: &elasticsearch-oai-setup-image
   centos
-x-goaccess-image: &goaccess-image
-  ghcr.io/mardi4nfdi/docker-goaccess-cron:main
 x-grafana-image: &grafana-image
   grafana/grafana
 x-jaegertracing-image: &jaegertracing-image
@@ -358,51 +356,6 @@ services:
       - traefik.http.routers.jaeger.middlewares=auth
       - traefik.http.routers.jaeger.service=jaeger
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
-
-  goaccess:
-    image: *goaccess-image
-    container_name: goaccess
-    restart: unless-stopped
-    command:
-      - /srv/log/access.log
-      - /srv/log/access.log.1
-      - --output=/srv/reports/index.html
-      - --geoip-database=/srv/geoip/GeoLite2-City.mmdb
-      - --db-path=/srv/data
-      - --log-format='%h %^[%d:%t %^] "%r" %s %b "%R" "%u" %Lm'
-      - --date-format=%d/%b/%Y
-      - --time-format=%T
-    environment:
-      - GOACCESS_SCHEDULE=${GOACCESS_SCHEDULE:-0 0 * * *}
-    volumes:
-      - ./traefik-log:/srv/log:ro
-      - goaccess_report:/srv/reports
-      - goaccess_db:/srv/data
-      - ./goaccess/goaccess.conf:/etc/goaccess/goaccess.conf
-      - ./goaccess/GeoLite2-City.mmdb:/srv/geoip/GeoLite2-City.mmdb
-    labels:
-      - traefik.enable=false
-
-  nginx:
-    image: *nginx-image
-    container_name: nginx-goaccess
-    depends_on:
-      - goaccess
-    volumes:
-      - goaccess_report:/usr/share/nginx/html
-    labels:
-      - traefik.http.routers.nginx.rule=Host(`stats.${WIKIBASE_HOST}`)
-      - traefik.http.routers.nginx.entrypoints=websecure
-      - traefik.http.routers.nginx.tls.certResolver=le
-      - traefik.http.routers.nginx.middlewares=auth
-      
-  scholia:
-    image: *scholia-image
-    restart: unless-stopped
-    labels:
-      - traefik.http.routers.scholia.rule=Host(`scholia.${WIKIBASE_HOST}`)
-      - traefik.http.routers.scholia.entrypoints=websecure
-      - traefik.http.routers.scholia.tls.certResolver=le
   
   matomo:
     image: *matomo-image
@@ -526,8 +479,8 @@ volumes:
   es-data:
   es-logs:
   grafana_data:
-  goaccess_report:
-  goaccess_db:
+  goaccess_report: #keep if we want to restore goaccess 
+  goaccess_db: #keep if we want to restore goaccess 
   matomo:
   matomo-mysql-data:
   prometheus_data:

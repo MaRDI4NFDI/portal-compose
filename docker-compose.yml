@@ -305,7 +305,7 @@ services:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - ./traefik/conf/:/traefik-conf/:ro
       - traefik-letsencrypt:/letsencrypt # Persistent file for ACME Setup (Certificate Store)
-      - ./traefik-log:/data/log # Persistent file for logging
+      - ./traefik-log:/data/log # Persistent file for logging (currently not used)
     networks:
       - default
     labels:
