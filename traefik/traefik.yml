@@ -1,7 +1,4 @@
 
-accessLog:
-  filePath: "/data/log/access.log"
-
 api:
   dashboard: true
 
