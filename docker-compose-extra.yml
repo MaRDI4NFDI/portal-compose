@@ -10,8 +10,6 @@ x-elasticsearch-oai-setup-image: &elasticsearch-oai-setup-image
   centos
 x-grafana-image: &grafana-image
   grafana/grafana
-x-jaegertracing-image: &jaegertracing-image
-  jaegertracing/all-in-one:latest
 x-latexml-image: &latexml-image
   physikerwelt/latexml
 x-mardi-backup-image: &mardi-backup-image
@@ -343,19 +341,6 @@ services:
     volumes:
       - '/:/host:ro,rslave'
       - '${BACKUP_DIR:-./backup}:/backup_data:ro'
-
-  jaeger:
-    image: *jaegertracing-image
-    container_name: jaeger
-    environment:
-      COLLECTOR_ZIPKIN_HTTP_PORT: 9411
-    labels:
-      - traefik.http.routers.jaeger.rule=Host(`jaeger.${WIKIBASE_HOST}`)
-      - traefik.http.routers.jaeger.entrypoints=websecure
-      - traefik.http.routers.jaeger.tls.certResolver=le
-      - traefik.http.routers.jaeger.middlewares=auth
-      - traefik.http.routers.jaeger.service=jaeger
-      - traefik.http.services.jaeger.loadbalancer.server.port=16686
   
   matomo:
     image: *matomo-image
