@@ -1,0 +1,25 @@
+
+{
+        "api": {
+                "sparql": {
+                        "uri": "/proxy/wdqs/bigdata/namespace/wdq/sparql"
+                },
+                "wikibase": {
+                        "uri": "/proxy/wikibase/w/api.php"
+                },
+                  "examples": {
+                  "server": "https://portal.mardi4nfdi.de/",
+                  "apiPath": "w/api.php",
+                  "pageTitle": "Project:Sample_queries",
+                  "pagePathElement": "wiki/"
+                  },
+                "urlShortener": "tinyurl"
+        },
+        "brand": {
+                "title": "MaRDIQueryService",
+                "logo": "logo.svg",
+                "favicon": "favicon.ico",
+                "copyrightUrl": "undefined",
+                "index": "./index.html"
+        }
+}
