@@ -25,7 +25,7 @@ x-wdqs-image: &wdqs-image
 x-wdqs-frontend-image: &wdqs-frontend-image
   ghcr.io/wmde/wikibase/wdqs-frontend:dev-14997781576
 x-wdqs-proxy-image: &wdqs-proxy-image
-  ghcr.io/wmde/wikibase/wdqs-proxy:dev-13718057909 
+  ghcr.io/wmde/wikibase/wdqs-proxy:dev-13718057909
 
 x-common-variables: &wikibase_variables
   DB_SERVER: ${DB_SERVER:-mysql.svc:3306}
