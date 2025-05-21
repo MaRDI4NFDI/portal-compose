@@ -1,7 +1,7 @@
 http:
   routers:
     to-chat:
-      rule:  Host(`chat.portal.mardi4nfdi.de`)
+      rule:  Host(`ask.portal.mardi4nfdi.de`)
       service: chat
       entryPoints: [websecure]
       tls:
