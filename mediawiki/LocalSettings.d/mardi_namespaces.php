@@ -82,7 +82,7 @@ $wgNamespaceProtection[NS_QUANTITY] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_TASK] = array( 'overwriteprofilepages' );
 
 
-$wgGroupPermissions['sysop']['overwriteprofilepages'] = true;
+$wgGroupPermissions['*']['overwriteprofilepages'] = true;
 
 $wgContentNamespaces[] = NS_FORMULA;
 $wgContentNamespaces[] = NS_PERSON;
