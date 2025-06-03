@@ -78,7 +78,6 @@ $wgNamespaceProtection[NS_THEOREM] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_RESEARCH_FIELD] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_RESEARCH_PROBLEM] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_MODEL] = array( 'overwriteprofilepages' );
-$wgNamespaceProtection[NS_QUANTITY] = array( 'overwriteprofilepages' );
 $wgNamespaceProtection[NS_TASK] = array( 'overwriteprofilepages' );
 
 
