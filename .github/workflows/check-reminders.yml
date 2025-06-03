@@ -1,0 +1,20 @@
+name: Send due reminders
+
+on:
+  # Every 15 min for fast feedback; move to hourly or daily once happy.
+  schedule:
+    - cron: '*/15 * * * *'
+
+  # Optional: let maintainers trigger a run manually
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post reminders that are due
+        uses: agrc/reminder-action@v1.0.17
