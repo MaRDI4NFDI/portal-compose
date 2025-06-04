@@ -1,0 +1,18 @@
+name: Capture /remind commands
+
+on:
+  issue_comment:
+    types: [created, edited]
+  pull_request_review_comment:
+    types: [created, edited]
+
+permissions:
+  issues: write
+  pull-requests: write   # needed if you want reminders inside PRs
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect & store reminders
+        uses: agrc/create-reminder-action@v1.0.17   # pin the tag *or* SHA
