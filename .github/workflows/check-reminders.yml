@@ -17,4 +17,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Post reminders that are due
-        uses: agrc/reminder-action@v1.0.17
+        uses: agrc/reminder-action@v1

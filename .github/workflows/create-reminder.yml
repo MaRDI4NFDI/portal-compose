@@ -15,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Detect & store reminders
-        uses: agrc/create-reminder-action@v1.0.17   # pin the tag *or* SHA
+        uses: agrc/create-reminder-action@v1
