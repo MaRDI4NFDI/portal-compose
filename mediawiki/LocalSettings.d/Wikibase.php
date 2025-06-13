@@ -915,6 +915,7 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 			"P1469", // Rosetta Code page ID
 			"P1470", // ONIX codelist ID
 			"P1473", // OpenML dataset ID
+			"P1495", // community
 			"P1496", // DEPRECATED - Internal Project ID
 			"P1500", // GEPRIS project ID
 			"P1502", // NFDI4Culture ID
