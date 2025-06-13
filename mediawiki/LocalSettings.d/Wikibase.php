@@ -146,6 +146,7 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 			"P23", // ISBN-13
 			"P24", // ISSN
 			"P27", // DOI
+			"P31", // instance of
 			"P41", // FactGrid property ID
 			"P75", // ISBN-10
 			"P76", // ISBN publisher prefix
@@ -915,7 +916,7 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 			"P1469", // Rosetta Code page ID
 			"P1470", // ONIX codelist ID
 			"P1473", // OpenML dataset ID
-			"P1496", // DEPRECATED - Internal Project ID
+			"P1495", // community
 			"P1500", // GEPRIS project ID
 			"P1502", // NFDI4Culture ID
 			"P1503", // BRUZZ topic ID
