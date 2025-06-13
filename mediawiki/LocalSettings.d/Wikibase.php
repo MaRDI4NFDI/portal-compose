@@ -146,6 +146,7 @@ if ( $wgDBname === 'my_wiki' || $wgDBname === 'wikidatawiki' || $wgDBname === 'c
 			"P23", // ISBN-13
 			"P24", // ISSN
 			"P27", // DOI
+			"P31", // instance of
 			"P41", // FactGrid property ID
 			"P75", // ISBN-10
 			"P76", // ISBN publisher prefix
