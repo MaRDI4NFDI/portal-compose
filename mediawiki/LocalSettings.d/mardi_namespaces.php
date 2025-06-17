@@ -106,5 +106,10 @@ $wgNamespacesToBeSearchedDefault[NS_PERSON] = true;
 $wgNamespacesToBeSearchedDefault[NS_PUBLICATION] = true;
 $wgNamespacesToBeSearchedDefault[NS_SOFTWARE] = true;
 $wgNamespacesToBeSearchedDefault[NS_DATASET] = true;
+$wgNamespacesToBeSearchedDefault[NS_RESEARCH_FIELD] = true;
+$wgNamespacesToBeSearchedDefault[NS_RESEARCH_PROBLEM] = true;
+$wgNamespacesToBeSearchedDefault[NS_MODEL] = true;
+$wgNamespacesToBeSearchedDefault[NS_QUANTITY] = true;
+$wgNamespacesToBeSearchedDefault[NS_TASK] = true;
 
 
