@@ -196,15 +196,12 @@ services:
       - DB_NAME=${DB_IMP_NAME:-wikidata_importer}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
-      - IMPORT_SCHEDULE=${IMPORT_SCHEDULE}
-      - IMPORTER_CRON_ENABLE=${IMPORTER_CRON_ENABLE:-false}
       - IMPORTER_AGENT=${IMPORTER_AGENT}
       - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
       - SPARQL_ENDPOINT_URL=http://query.${WIKIBASE_HOST}/proxy/wdqs/bigdata/namespace/wdq/sparql
       - WIKIBASE_URL=http://mardi-wikibase
       - IMPORTER_USER=${IMPORTER_USER}
       - IMPORTER_PASS=${IMPORTER_PASS}
-    entrypoint: "/app/start.sh"
 
   mardi-importer-api:
     image: *mardi-importer-api-image
