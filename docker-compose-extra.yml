@@ -32,6 +32,8 @@ x-prometheus-image: &prometheus-image
   prom/prometheus
 x-python-zbmathrest2oai-image: &python-zbmathrest2oai-image
   ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
+x-swmath2swh-image: &swmath2swh-image
+  ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
 x-statsd: &statsd-image
   ghcr.io/statsd/statsd
 x-scholia-image: &scholia-image
@@ -174,6 +176,21 @@ services:
     - oai-backend
     restart: always
     
+  swmath-swh:
+    hostname: swmath-swh
+    image: *swmath2swh-image
+    environment:
+    # start over on each run
+    - OAI_STATE_PATH=/var/lib/swmath/state.json
+    - SWH_API_TOKEN
+    - SWMATH_USER_DEPOSIT_PRODUCTION
+    - SWMATH_PWD_DEPOSIT_PRODUCTION
+    depends_on:
+    - oai-backend
+    restart: always
+    volumes:
+    - swmath-state:/var/lib/swmath/
+
   # A container that exposes an API to show its IP address
   whoami:
     image: *whoami-image 
@@ -470,3 +487,4 @@ volumes:
   uptime-kuma:
   ipfs-staging: # IPFS data on /export cf https://docs.ipfs.tech/install/run-ipfs-inside-docker/#set-up
   ipfs-data: # IPFS data on /data/ipfs
+  swmath-state: # dedicated to the container swmath-swh
