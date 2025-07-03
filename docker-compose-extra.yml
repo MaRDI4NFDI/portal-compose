@@ -32,7 +32,7 @@ x-prometheus-image: &prometheus-image
   prom/prometheus
 x-python-zbmathrest2oai-image: &python-zbmathrest2oai-image
   ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
-x-swmath2swh-image: &-swmath2swh-image
+x-swmath2swh-image: &swmath2swh-image
   swmath2oai:latest
 x-statsd: &statsd-image
   ghcr.io/statsd/statsd
@@ -176,9 +176,9 @@ services:
     - oai-backend
     restart: always
     
-  oai-importer:
+  swmath-swh:
     hostname: swmath-swh
-    image: *swmath2swh
+    image: *swmath2swh-image
     environment:
     # start over on each run
     - OAI_STATE_PATH=/tmp/state.json
