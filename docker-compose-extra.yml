@@ -189,7 +189,7 @@ services:
     - oai-backend
     restart: always
     volumes:
-    - swmath-state:/tmp
+    - swmath-state:/var/log/
 
   # A container that exposes an API to show its IP address
   whoami:
