@@ -487,3 +487,4 @@ volumes:
   uptime-kuma:
   ipfs-staging: # IPFS data on /export cf https://docs.ipfs.tech/install/run-ipfs-inside-docker/#set-up
   ipfs-data: # IPFS data on /data/ipfs
+  swmath-state: # dedicated to the container swmath-swh
