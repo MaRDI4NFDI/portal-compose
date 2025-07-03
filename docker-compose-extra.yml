@@ -188,7 +188,9 @@ services:
     depends_on:
     - oai-backend
     restart: always
-    
+    volumes:
+    - swmath-state:/tmp
+
   # A container that exposes an API to show its IP address
   whoami:
     image: *whoami-image 
