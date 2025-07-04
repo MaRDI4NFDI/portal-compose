@@ -33,7 +33,7 @@ x-prometheus-image: &prometheus-image
 x-python-zbmathrest2oai-image: &python-zbmathrest2oai-image
   ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
 x-swmath2swh-image: &swmath2swh-image
-  ghcr.io/mardi4nfdi/python-zbmathrest2oai:main
+  ghcr.io/mardi4nfdi/swmath2swh:latest
 x-statsd: &statsd-image
   ghcr.io/statsd/statsd
 x-scholia-image: &scholia-image
