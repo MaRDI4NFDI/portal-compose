@@ -232,3 +232,8 @@ $wgExportFromNamespaces = true;
 $wgShellboxUrls = [
 	'default' => 'http://ffmpeg/shellbox'
 ];
+
+// hide legacy copy of the MaRDI portal except for registered users
+# Disable reading by anonymous users
+$wgGroupPermissions['*']['read'] = false;
+
