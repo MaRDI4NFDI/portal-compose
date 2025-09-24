@@ -234,6 +234,6 @@ $wgShellboxUrls = [
 ];
 
 // hide legacy copy of the MaRDI portal except for registered users
-# Disable reading by anonymous users
+// Disable reading by anonymous users
 $wgGroupPermissions['*']['read'] = false;
 
