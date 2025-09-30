@@ -1,149 +1,287 @@
-version: '3.4'
-
+x-elasticsearch-image: &elasticsearch-image
+  docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
+x-mysql-image: &mysql-image
+  mariadb:11.6
+x-redis: &redis-image
+  redis:7
+x-redis-jobrunner: &redis-jobrunner-image
+  ghcr.io/mardi4nfdi/redis-jobrunner-staging:latest
 x-wikibase: &wikibase-image
-  ghcr.io/mardi4nfdi/docker-wikibase:main
-x-selenium: &selenium-image
-  aot29/selenium
-x-openrefine: &openrefine-image
-  ghcr.io/aot29/docker-openrefine:master
+  ghcr.io/mardi4nfdi/wikibase-staging:latest
+x-wdqs-image: &wdqs-image
+  ghcr.io/wmde/wikibase/wdqs:dev-9186217118
+x-wdqs-frontend-image: &wdqs-frontend-image
+  ghcr.io/wmde/wikibase/wdqs-frontend:dev-9186217118
+x-wdqs-proxy-image: &wdqs-proxy-image
+  ghcr.io/wmde/wikibase/wdqs-proxy:dev-9186217118
+x-mardi-importer-image: &mardi-importer-image
+  ghcr.io/mardi4nfdi/docker-importer:main
+x-mardi-importer-api-image: &mardi-importer-api-image
+  ghcr.io/mardi4nfdi/importer-api:main
 
 x-common-variables: &wikibase_variables
-    # required by quickstatements for creating OAuth consumers,
-    # and by wikibase for redirecting back to quickstatements
-    QS_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${QUICKSTATEMENTS_HOST}:${QUICKSTATEMENTS_PORT}'
-    WB_PUBLIC_SCHEME_HOST_AND_PORT: 'http://${WIKIBASE_HOST}:${WIKIBASE_PORT}'
-    RESTART: 'no'
-    BOTUSER_NAME: ${IMPORTER_USER}
-    BOTUSER_PW: ${IMPORTER_PASS}
+  WIKIBASE_SCHEME: ${WIKIBASE_SCHEME:-http}
+  WIKIBASE_HOST: ${WIKIBASE_HOST:-mardi-wikibase}
+  WIKIBASE_PORT: ${WIKIBASE_PORT:-8080}
+  DB_SERVER: ${DB_SERVER:-mysql.svc:3306}
+  DB_NAME: ${DB_NAME:-my_wiki}
+  DB_USER: ${DB_USER:-sqluser}
+  DB_PASS: ${DB_PASS:-change-this-password}
+  INITIALIZE_DB: ${INITIALIZE_DB:-true}
+  MW_ELASTIC_HOST: ${MW_ELASTIC_HOST:-elasticsearch.svc}
+  MW_ELASTIC_PORT: ${MW_ELASTIC_PORT:-9200}
+  MW_REDIS_HOST: ${MW_REDIS_HOST:-redis}
+  MW_REDIS_PORT: ${MW_REDIS_PORT:-6379}
+  MW_WG_JOB_RUN_RATE: 0
+  DEPLOYMENT_ENV: prod
+  WIKIBASE_PINGBACK: false
+  MW_WG_ENABLE_UPLOADS: false
+  MW_ADMIN_NAME: ${MW_ADMIN_NAME:-admin}
+  MW_ADMIN_PASS: ${MW_ADMIN_PASS:-change-this-password}
+  MW_ADMIN_EMAIL: ${MW_ADMIN_EMAIL:-admin@example.com}
+  MW_WG_SECRET_KEY: ${MW_SECRET_KEY:-some-secret-key}
+
+volumes:
+  elasticsearch-data:
+  mysql-data:
+  wdqs-data:
 
 services:
   wikibase:
-    ports:
-      - "${WIKIBASE_PORT}:80"
-      - "${MONGO_DB_PORT}:8081"
-    restart: ${RESTART}
-    environment:
-      <<: *wikibase_variables
-
-  mysql:
-    restart: ${RESTART}
-
-  wdqs-frontend:
-    ports:
-     - "${WDQS_FRONTEND_PORT}:80"
-    restart: ${RESTART}
-    environment:
-      - WIKIBASE_HOST=wikibase.svc
-
-  quickstatements:
-    ports:
-      - "${QUICKSTATEMENTS_PORT}:80"
-    restart: ${RESTART}
-    environment:
-      <<: *wikibase_variables
-
-  mardi-backup:
-    restart: ${RESTART}
-    volumes:
-      # only for running tests
-      - ./test:/test
-
-  mardi-importer:
-    restart: ${RESTART}
-    environment:
-      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
-
-  mardi-importer-api:
-    ports:
-     - "5000:80"
-    restart: ${RESTART}
-
-  elasticsearch:
-    restart: ${RESTART}
-    environment:
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-
-  wdqs:
-    restart: ${RESTART}
-    environment:
-      - WIKIBASE_HOST=wikibase.svc
-    volumes:
-      - ./wdqs/prefixes-dev.conf:/wdqs/prefixes.conf:ro
-
-  wdqs-proxy:
-    restart: ${RESTART}
-
-  wdqs-updater:
-    restart: ${RESTART}
-    volumes:
-      - ./wdqs/runUpdate.sh:/runUpdate.sh:ro
-    environment:
-     - WIKIBASE_HOST=wikibase.svc
-
-  portainer:
-    restart: ${RESTART}
-
-  latexml:
-    restart: ${RESTART}
-
-  selenium:
-    image: *selenium-image
-    restart: ${RESTART}
-    container_name: mardi-selenium
-    volumes:
-      - ./test:/test
-    labels:
-      - traefik.enable=false
-
-  # openrefine:
-  #   image: *openrefine-image
-  #   restart: ${RESTART}
-  #   ports:
-  #     - "3333:3333"
-  #   volumes:
-  #     - ./data:/data
-  #   environment:
-  #     - REFINE_INTERFACE=0.0.0.0
-  #     - REFINE_PORT=3333
-  #     - REFINE_MEMORY=1024M
-  #     - REFINE_DATA_DIR=/data
-
-  traefik:
-    restart: ${RESTART}
-    labels:
-      - traefik.http.routers.dashboard-local.rule=Host(`localhost`)
-      - traefik.http.routers.dashboard-local.entrypoints=websecure
-      - traefik.http.routers.dashboard-local.tls.certResolver=le
-      - traefik.http.routers.dashboard-local.service=api@internal
-
-  prometheus:
-    restart: ${RESTART}
-    ports:
-      - "${PROMETHEUS_PORT}:9090"
-
-  grafana:
-    restart: ${RESTART}
-    ports:
-      - "${GRAFANA_PORT}:3000"
-
-  watchtower:
-    restart: ${RESTART}
-
-  wikibase_updater:
     image: *wikibase-image
-    entrypoint: /usr/local/bin/php
-    command:  /var/www/html/w/maintenance/update.php --conf /shared/LocalSettings.php
+    container_name: mardi-wikibase
     links:
       - mysql
-      - mongo
     depends_on:
       - mysql
-      - mongo
-    restart: ${RESTART}
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/w/api.php"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      default:
+          aliases:
+           - mardi-wikibase
+    environment:
+      <<: *wikibase_variables
+      
+  mysql:
+    image: *mysql-image
+    container_name: mardi-mysql
+    restart: unless-stopped
     volumes:
-      - shared_mardi_wikibase:/shared/
-      - ./mediawiki/LocalSettings.d:/shared/LocalSettings.d:ro
+      - mysql-data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS:-my-secret-pw}
+      
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "${DB_USER}", "-p${DB_PASS}"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 30s
     networks:
       default:
         aliases:
-          - wikibase-updater.svc
+         - mysql.svc
+
+  elasticsearch:
+    image: *elasticsearch-image
+    container_name: elasticsearch
+    restart: unless-stopped
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      default:
+        aliases:
+         - elasticsearch.svc
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+
+  redis:
+    container_name: redis
+    restart: unless-stopped
+    image: *redis-image
+
+  redis-jobrunner:
+    image: *redis-jobrunner-image
+    container_name: redis-jobrunner
+    depends_on:
+    - wikibase
+    entrypoint: 
+    - php
+    - /jobrunner/redisJobRunnerService
+    - "--config-file=/jobrunner/config.json"
+    environment:
+      <<: *wikibase_variables
+
+  redis-rescheduler:
+    image: *redis-jobrunner-image
+    container_name: redis-rescheduler
+    depends_on:
+    - wikibase
+    entrypoint: 
+    - php
+    - /jobrunner/redisJobChronService
+    - "--config-file=/jobrunner/config.json"
+    environment:
+      <<: *wikibase_variables
+
+  wdqs-frontend:
+    image: *wdqs-frontend-image
+    container_name: wdqs-frontend
+    restart: unless-stopped
+    volumes:
+      - ./mediawiki/images/MaRDI_Logo_L_5_rgb_50p.svg:/usr/share/nginx/html/logo.svg
+      - ./mediawiki/images/favicon.ico:/usr/share/nginx/html/favicon.ico
+    depends_on:
+      - wdqs-proxy
+      - wikibase
+    ports:
+      - "8834:80"
+    networks:
+      default:
+        aliases:
+         - wdqs-frontend.svc
+    environment:
+      - WIKIBASE_HOST=mardi-wikibase
+      - WDQS_HOST=wdqs-proxy.svc
+      - BRAND_TITLE=MaRDIQueryService
+
+  wdqs:
+    image: *wdqs-image
+    container_name: wdqs
+    restart: unless-stopped
+    command: /runBlazegraph.sh
+    volumes:
+      - wdqs-data:/wdqs/data
+      - ./wdqs/prefixes.conf:/wdqs/prefixes.conf:ro
+      - ./wdqs/allowlist.txt:/wdqs/allowlist.txt:ro
+    networks:
+      default:
+        aliases:
+         - wdqs.svc
+    environment:
+      - WIKIBASE_HOST=${WIKIBASE_HOST:-mardi-wikibase}
+      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-http}
+      - WDQS_HOST=wdqs.svc
+      - WDQS_PORT=9999
+      - BLAZEGRAPH_OPTS=-Dorg.wikidata.query.rdf.tool.rdf.RdfRepository.timeout=3600
+    expose:
+      - 9999
+
+  wdqs-proxy:
+    image: *wdqs-proxy-image
+    container_name: wdqs-proxy
+    restart: unless-stopped
+    environment:
+      - PROXY_PASS_HOST=wdqs.svc:9999
+      - PROXY_MAX_QUERY_MILLIS=3600000
+    depends_on:
+      - wdqs
+    networks:
+      default:
+        aliases:
+         - wdqs-proxy.svc
+
+  wdqs-updater:
+    image: *wdqs-image
+    container_name: wdqs-updater
+    restart: unless-stopped
+    command: /runUpdate.sh
+    depends_on:
+    - wdqs
+    - wikibase
+    networks:
+      default:
+        aliases:
+         - wdqs-updater.svc
+    environment:
+      - WIKIBASE_HOST=${WIKIBASE_HOST:-mardi-wikibase}
+      - WIKIBASE_SCHEME=${WIKIBASE_SCHEME:-http}
+      - WDQS_HOST=wdqs.svc
+      - WDQS_PORT=9999
+      - UPDATER_OPTS=-Dorg.wikidata.query.rdf.tool.wikibase.WikibaseRepository.timeout=30000
+
+  mardi-importer:
+    image: *mardi-importer-image
+    container_name: mardi-importer
+    depends_on:
+      - wikibase
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST:-mysql.svc}
+      - DB_NAME=${DB_IMP_NAME:-wikidata-importer}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - IMPORTER_AGENT="mardi-importer"
+      - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
+      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
+      - WIKIBASE_URL=http://mardi-wikibase
+    env_file:
+    - ./dev/.env
+
+  mardi-importer-api:
+    image: *mardi-importer-api-image
+    container_name: importer-api
+    restart: unless-stopped
+    depends_on:
+      - wikibase
+    networks:
+      default:
+        aliases:
+         - importer-api.svc
+    environment:
+      DB_HOST: ${DB_HOST:-mysql.svc}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_IMP_NAME:-wikidata-importer}
+
+  wikibase-setup:
+    image: *wikibase-image
+    container_name: wikibase-setup
+    restart: "no"
+    depends_on:
+      wikibase:
+        condition: service_healthy
+    volumes:
+      - ./dev:/setup-scripts
+    entrypoint: ["/setup-scripts/setup.sh"]
+    environment:
+      <<: *wikibase_variables
+  
+  mysql-setup:
+    image: *mysql-image
+    container_name: mysql-setup
+    restart: "no"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      wikibase:
+        condition: service_healthy
+    volumes:
+      - ./dev:/setup-scripts
+    command: >
+      bash -c "
+        echo 'Running MariaDB importer setup...'
+        mariadb -h mysql.svc -u$$DB_USER -p$$DB_PASS < /setup-scripts/setup.sql
+        echo 'Finished!'
+      "
+    environment:
+      DB_USER: root
+      DB_PASS: ${DB_ROOT_PASS:-my-secret-pw}
+
+networks:                                
+  default:                               
+    driver: bridge                       
+    driver_opts:                         
+      com.docker.network.driver.mtu: 1450
