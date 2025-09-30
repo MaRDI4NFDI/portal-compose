@@ -38,6 +38,18 @@ Some containers are pulled from special MaRDI images:
 
 ## Setup local development environment
 
+Follow these steps to spin up a development environment to test `docker-importer`:
+* Create `docker-compose.override.yml` and correct the `docker-importer` path to match your environment
+```
+services:
+  mardi-importer:
+    volumes:
+    - ../docker-importer/mardi_importer/mardi_importer:/mardi_importer/mardi_importer:ro
+```
+* Make a backup of your current `.env` file if necessary: `cp .env .env.bak`
+* Copy the `.env` variables for development: `cp ./dev/template.env /.env`
+* `docker compose up -d`
+
 ### Notes on the traefik reverse proxy
 
 [traefik](https://doc.traefik.io/traefik/) is an edge router (or reverse
