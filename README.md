@@ -36,6 +36,8 @@ Some containers are pulled from special MaRDI images:
 * backup is pulled from https://github.com/MaRDI4NFDI/docker-wikibase/tree/main/backup
 * quickstatements is pulled from https://github.com/MaRDI4NFDI/docker-quickstatements
 
+## Setup local development environment
+
 ### Notes on the traefik reverse proxy
 
 [traefik](https://doc.traefik.io/traefik/) is an edge router (or reverse
