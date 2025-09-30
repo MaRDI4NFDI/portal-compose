@@ -47,7 +47,7 @@ services:
     - ../docker-importer/mardi_importer/mardi_importer:/mardi_importer/mardi_importer:ro
 ```
 * Make a backup of your current `.env` file if necessary: `cp .env .env.bak`
-* Copy the `.env` variables for development: `cp ./dev/template.env /.env`
+* Copy the `.env` variables for development: `cp ./dev/template.env ./.env`
 * `docker compose up -d`
 
 ### Notes on the traefik reverse proxy
