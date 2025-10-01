@@ -1,5 +1,5 @@
 # portal-compose
-docker-compose repository for MaRDI
+docker-compose repository for MaRDI, which is was used for the primary mardi deployment until September 2025. For better scalability, we use [k8s](https://github.com/MaRDI4NFDI/portal-k8s) from October 2025.
 
 ## Local installation
 ```
