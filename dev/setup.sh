@@ -8,7 +8,7 @@ ENTRYPOINT_PID=$!
 
 sleep 5
 
-BOT_NAMES_ARRAY=(${BOT_NAMES:-cran zbmath wikidata openml zenodo polydb})
+BOT_NAMES_ARRAY=(${BOT_NAMES:-cran zbmath wikidata openml zenodo polydb crossref arxiv})
 
 echo "Creating importer users..."
 for bot_name in "${BOT_NAMES_ARRAY[@]}"; do
