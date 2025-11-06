@@ -227,6 +227,7 @@ services:
       - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
       - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
       - WIKIBASE_URL=http://mardi-wikibase
+      - IMPORTER_API_URL=http://importer-api
     env_file:
     - ./dev/.env
 
