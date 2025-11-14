@@ -212,41 +212,6 @@ services:
       - WDQS_PORT=9999
       - UPDATER_OPTS=-Dorg.wikidata.query.rdf.tool.wikibase.WikibaseRepository.timeout=30000
 
-  mardi-importer:
-    image: *mardi-importer-image
-    container_name: mardi-importer
-    depends_on:
-      - wikibase
-    restart: always
-    environment:
-      - DB_HOST=${DB_HOST:-mysql.svc}
-      - DB_NAME=${DB_IMP_NAME:-wikidata-importer}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - IMPORTER_AGENT="mardi-importer"
-      - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
-      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
-      - WIKIBASE_URL=http://mardi-wikibase
-      - IMPORTER_API_URL=http://importer-api
-    env_file:
-    - ./dev/.env
-
-  mardi-importer-api:
-    image: *mardi-importer-api-image
-    container_name: importer-api
-    restart: unless-stopped
-    depends_on:
-      - wikibase
-    networks:
-      default:
-        aliases:
-         - importer-api.svc
-    environment:
-      DB_HOST: ${DB_HOST:-mysql.svc}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_DATABASE: ${DB_IMP_NAME:-wikidata-importer}
-
   wikibase-setup:
     image: *wikibase-image
     container_name: wikibase-setup
@@ -280,6 +245,45 @@ services:
     environment:
       DB_USER: root
       DB_PASS: ${DB_ROOT_PASS:-my-secret-pw}
+
+  mardi-importer:
+    image: *mardi-importer-image
+    container_name: mardi-importer
+    depends_on:
+      - wikibase
+      - wikibase-setup
+      - mysql-setup
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST:-mysql.svc}
+      - DB_NAME=${DB_IMP_NAME:-wikidata-importer}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - IMPORTER_AGENT="mardi-importer"
+      - MEDIAWIKI_API_URL=http://mardi-wikibase/w/api.php
+      - SPARQL_ENDPOINT_URL=http://wdqs-proxy.svc/bigdata/namespace/wdq/sparql
+      - WIKIBASE_URL=http://mardi-wikibase
+      - IMPORTER_API_URL=http://importer-api
+    env_file:
+    - ./dev/.env
+
+  mardi-importer-api:
+    image: *mardi-importer-api-image
+    container_name: importer-api
+    restart: unless-stopped
+    depends_on:
+      - wikibase
+      - wikibase-setup
+      - mysql-setup
+    networks:
+      default:
+        aliases:
+         - importer-api.svc
+    environment:
+      DB_HOST: ${DB_HOST:-mysql.svc}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_IMP_NAME:-wikidata-importer}
 
 networks:                                
   default:                               
