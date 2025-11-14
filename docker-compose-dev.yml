@@ -1,5 +1,7 @@
 x-elasticsearch-image: &elasticsearch-image
   docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
+x-memcached: &memcached-image
+  memcached:1.6.39
 x-mysql-image: &mysql-image
   mariadb:11.6
 x-redis: &redis-image
@@ -106,6 +108,11 @@ services:
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+
+  memcached:
+    container_name: memcached
+    restart: unless-stopped
+    image: *memcached-image
 
   redis:
     container_name: redis
