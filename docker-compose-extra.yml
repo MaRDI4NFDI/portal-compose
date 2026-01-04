@@ -41,7 +41,7 @@ x-scholia-image: &scholia-image
 x-setup-prometheus-grafana: &setup-prometheus-grafana
   ghcr.io/mardi4nfdi/docker-alpine-ext:main
 x-uptime-kuma-image: &uptime-kuma-image
-  louislam/uptime-kuma:1
+  louislam/uptime-kuma:2
 x-watchtower-image: &watchtower-image
   containrrr/watchtower
 x-whoami: &whoami-image
