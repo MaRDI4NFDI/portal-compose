@@ -1,0 +1,47 @@
+{
+    "groups": {
+        "basic": {
+            "runners": 8,
+            "include": [
+                "*"
+            ],
+            "exclude": [
+                "DispatchChanges",
+                "CreateProfilePages",
+                "SetProfileType",
+                "NormalizeDoi"
+            ],
+            "low-priority": [
+                "htmlCacheUpdate"
+            ]
+        },
+        "dispChanges": {
+            "runners": 8,
+            "include": [
+                "DispatchChanges"
+            ],
+            "low-priority": [
+                "cirrusSearchElasticaWrite"
+            ]
+        },
+        "profiles": {
+            "runners": 4,
+            "include": [
+                "CreateProfilePages",
+                "SetProfileType",
+                "OpenAlex",
+                "NormalizeDoi"
+            ]
+        }
+    },
+    "limits": {},
+    "redis": {
+        "aggregators": [
+            "redis:6379"
+        ],
+        "queues": [
+            "redis:6379"
+        ]
+    },
+    "dispatcher": "/var/www/html/w/maintenance/run runJobs --type=%(type)x --maxtime=%(maxtime)x --memory-limit=%(maxmem)x --result=json --conf=/var/www/html/w/LocalSettings.php"
+}
