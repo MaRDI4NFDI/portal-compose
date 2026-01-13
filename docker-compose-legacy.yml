@@ -20,8 +20,6 @@ x-swmath2swh-image: &swmath2swh-image
   ghcr.io/mardi4nfdi/swmath2swh:latest
 x-uptime-kuma-image: &uptime-kuma-image
   louislam/uptime-kuma:2
-x-flask: &flask-image
-  tiangolo/uwsgi-nginx-flask:latest-2024-12-02
 
 services:
   traefik:
@@ -248,15 +246,6 @@ services:
       - traefik.http.routers.msceval.rule=Host(`msceval.${WIKIBASE_HOST}`)
       - traefik.http.routers.msceval.entrypoints=websecure
       - traefik.http.routers.msceval.tls.certResolver=le
-
-  flask:
-    image: *flask-image
-    labels:
-      - com.centurylinklabs.watchtower.enable=true
-      - traefik.http.routers.flask.rule=Host(`flask.${WIKIBASE_HOST}`)
-      - traefik.http.routers.flask.entrypoints=websecure
-      - traefik.http.routers.flask.tls.certResolver=le
-      - traefik.http.services.flask.loadbalancer.server.port=80
 
 volumes:
   portainer-data:
