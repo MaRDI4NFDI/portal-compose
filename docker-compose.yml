@@ -83,6 +83,7 @@ services:
            - wikibase.svc
     environment:
       <<: *wikibase_variables
+      WIKIBASE_HOST: php-fpm-mardi-wikibase
     labels:
       - traefik.http.routers.service-wikibase.rule=Host(`${WIKIBASE_HOST}`,`swmath.${WIKIBASE_HOST}`)
       - traefik.http.routers.service-wikibase.entrypoints=websecure
