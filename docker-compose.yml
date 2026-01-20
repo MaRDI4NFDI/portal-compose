@@ -76,6 +76,7 @@ services:
       - quickstatements-data:/quickstatements/data
       - formulasearch_harvests:/var/www/html/w/my_harvests/
       - apache_logs:/var/log/apache2/
+      - ./mediawiki/images:/var/www/html/w/images_repo:ro
     networks:
       default:
           aliases:
