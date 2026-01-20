@@ -98,7 +98,7 @@ services:
     image: *wikibase-image
     container_name: php-fpm-mardi-wikibase
     links:
-      - mardi-wikibase
+      - wikibase
     restart: unless-stopped
     volumes:
       ## This shares the configuration with jobrunner
