@@ -1,7 +1,7 @@
 version: '3.4'
 
 x-apache-image: &apache-image
-  ghcr.io/mardi4nfdi/apache:1.46
+  ghcr.io/mardi4nfdi/apache-assets-production:1.46
 x-elasticsearch-image: &elasticsearch-image
   docker-registry.wikimedia.org/releng/cirrus-elasticsearch:7.10.2-s0
 x-formulasearch-image: &formulasearch-image
