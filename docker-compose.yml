@@ -194,6 +194,10 @@ services:
 
   redis-rescheduler:
     image: *redis-jobrunner-image
+    entrypoint:
+      - php
+      - /jobrunner/redisJobChronService
+      - "--config-file=/jobrunner/config.json"
     depends_on:
     - wikibase
     volumes:
