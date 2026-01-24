@@ -1,5 +1,7 @@
 <?php
-if ( $wgDBname === 'wiki_swmath' ) {
+/**
+ * Disable swMATH wiki configuration (request will be redirected to production)
+ * if ( $wgDBname === 'wiki_swmath' ) {
 	$wgSitename = 'swMATH staging';
   # Set swMATH logo
 	$wgLogos = [
@@ -12,3 +14,4 @@ if ( $wgDBname === 'wiki_swmath' ) {
 	$wgWBClientSettings['siteGlobalID'] = 'swmath';
 
 }
+ **/
