@@ -10,6 +10,9 @@ if ( getenv( 'WIKIBASE_HOST' ) === 'localhost' ) {
 		$wikibaseHost = getenv( 'WIKIBASE_SCHEME' ) . '://wikibase.svc';
 		$portalHost = getenv( 'WIKIBASE_SCHEME' ) . '://localhost:' . getenv( 'WIKIBASE_PORT' );
 }
+// bypass traefik router and use internal sparql endpoint
+// see https://github.com/MaRDI4NFDI/portal-k8s/issues/43
+$wgWBRepoSettings['sparqlEndpoint']='http://wdqs:9999/bigdata/namespace/wdq/sparql';
 
 # enable linking between wikibase and content pages
 $wgWBRepoSettings['siteLinkGroups'] = [ 'mathematics' ];
