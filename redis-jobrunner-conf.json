@@ -10,7 +10,9 @@
                 "CreateProfilePages",
                 "cirrusSearchElasticaWrite",
                 "SetProfileType",
-                "NormalizeDoi"
+                "NormalizeDoi",
+                "QuickStatements",
+                "Recommendation"
             ],
             "low-priority": [
                 "htmlCacheUpdate"
@@ -31,7 +33,9 @@
                 "CreateProfilePages",
                 "SetProfileType",
                 "OpenAlex",
-                "NormalizeDoi"
+                "NormalizeDoi",
+                "QuickStatements",
+                "Recommendation"
             ]
         }
     },
