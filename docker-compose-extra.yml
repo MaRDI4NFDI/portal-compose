@@ -53,7 +53,7 @@ x-ffmpeg: &ffmpeg-image
 x-dlockss-node-image: &dlockss-node-image
   ghcr.io/gipplab/dlockss-single-node:latest
 x-dlockss-monitor-image: &dlockss-monitor-image
-  docker pull ghcr.io/gipplab/dlockss-monitor:latest
+  ghcr.io/gipplab/dlockss-monitor:latest
   
 services:
   ffmpeg:
