@@ -105,7 +105,7 @@ services:
     environment:
       DLOCKSS_IPFS_NODE_ADDRESS: "/ip4/ipfs/tcp/5001"
     volumes:
-    - dlockss-files:/data:ro
+    - ./dlockss-files:/data:ro
     depends_on:
     - ipfs
     
