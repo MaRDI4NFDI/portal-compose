@@ -52,7 +52,9 @@ x-ffmpeg: &ffmpeg-image
   docker-registry.wikimedia.org/wikimedia/mediawiki-libs-shellbox:video
 x-dlockss-node-image: &dlockss-node-image
   ghcr.io/gipplab/dlockss-single-node:latest
-
+x-dlockss-monitor-image: &dlockss-monitor-image
+  docker pull ghcr.io/gipplab/dlockss-monitor:latest
+  
 services:
   ffmpeg:
     image: *ffmpeg-image
@@ -108,6 +110,16 @@ services:
     - ./dlockss-files:/data:ro
     depends_on:
     - ipfs
+
+  dlockss-monitor:
+    hostname: dlockssmonitor
+    image: *dlockss-monitor-image
+    labels:
+    - traefik.http.services.dlockss-monitor-service.loadbalancer.server.port=8080
+    - traefik.http.routers.dlockss-monitor.rule=Host(`dlockss.${WIKIBASE_HOST}`)
+    - traefik.http.routers.dlockss-monitor.entrypoints=websecure
+    - traefik.http.routers.dlockss-monitor.tls.certResolver=le
+    
     
   elasticsearch-oai:
     hostname: elasticsearch-oai
