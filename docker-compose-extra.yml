@@ -50,6 +50,8 @@ x-flask: &flask-image
   tiangolo/uwsgi-nginx-flask:latest-2024-12-02
 x-ffmpeg: &ffmpeg-image
   docker-registry.wikimedia.org/wikimedia/mediawiki-libs-shellbox:video
+x-dlockss-node-image: &dlockss-node-image
+  ghcr.io/gipplab/dlockss-single-node:latest
 
 services:
   ffmpeg:
@@ -97,6 +99,16 @@ services:
     depends_on:
     - cassandra-oai
 
+  dlockss-node:
+    hostname: dlockssnode
+    image: *dlockss-node-image
+    environment:
+      DLOCKSS_IPFS_NODE_ADDRESS: "/ip4/ipfs/tcp/5001"
+    volumes:
+    - dlockss-files:/data:ro
+    depends_on:
+    - ipfs
+    
   elasticsearch-oai:
     hostname: elasticsearch-oai
     image: *elasticsearch-oai-image
