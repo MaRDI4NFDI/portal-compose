@@ -314,6 +314,69 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
       MYSQL_DATABASE: ${DB_IMP_NAME:-wikidata-importer}
 
+  kafka:
+    image: apache/kafka:3.7.0
+    profiles: ["events"]
+    container_name: kafka
+    restart: unless-stopped
+    environment:
+      - KAFKA_NODE_ID=0
+      - CLUSTER_ID=MkU3OEVBNTcwNTJENDM2Qk
+      - KAFKA_PROCESS_ROLES=controller,broker
+      - KAFKA_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      
+      - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka.svc:9092
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      
+      - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+    networks:
+      default:
+        aliases:
+          - kafka.svc
+
+  eventstreams:
+    image: docker-registry.wikimedia.org/repos/data-engineering/eventstreams:v0.9.0
+    profiles: ["events"]
+    container_name: eventstreams
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8092:8092"
+    volumes:
+      - ./eventstreams/config.yaml:/srv/service/config.yaml
+      - ./eventstreams/stream-config.yaml:/srv/service/stream-config.yaml
+    networks:
+      default:
+        aliases:
+          - eventstreams.svc
+
+  eventgate:
+    image: docker-registry.wikimedia.org/wikimedia/eventgate-wikimedia:ffd68c0de41e3395e2f8ba9422fbe8824c2a49ff
+    profiles: ["events"]
+    container_name: eventgate
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8192:8192"
+    environment:
+      # This points to the config file inside the container
+      - CONFIG_FILE=/srv/service/config.yaml
+      - NODE_PATH=/srv/service/node_modules/@wikimedia
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    volumes:
+      - ./eventgate/config.yaml:/srv/service/config.yaml
+      - ./eventgate/schemas:/srv/service/schemas
+    networks:
+      default:
+        aliases:
+          - eventgate.svc
+
 networks:                                
   default:                               
     driver: bridge                       

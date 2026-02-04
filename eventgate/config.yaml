@@ -1,0 +1,29 @@
+num_workers: 1
+logging:
+  level: info
+
+services:
+  - name: eventgate-wikimedia
+    module: eventgate/app.js
+    
+    conf:
+      port: 8192
+      eventgate_factory_module: eventgate-wikimedia.js
+      
+      stream_field: meta.stream
+
+      topic_prefix: ''
+      
+      schema_uri_field: $schema
+      schema_base_uris:
+        - file:///srv/service/schemas/primary/jsonschema
+        - file:///srv/service/schemas/secondary/jsonschema
+      
+      # Relax validation for local development
+      test_mode: true
+      
+      kafka:
+        conf:
+          metadata.broker.list: 'kafka.svc:9092'
+          compression.codec: snappy
+          api.version.request: true
