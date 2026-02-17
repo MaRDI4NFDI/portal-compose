@@ -110,6 +110,8 @@ services:
     - ./dlockss-files:/data:ro
     depends_on:
     - ipfs
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
 
   dlockss-monitor:
     hostname: dlockssmonitor
