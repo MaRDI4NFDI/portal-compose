@@ -106,6 +106,7 @@ services:
     image: *dlockss-node-image
     environment:
       DLOCKSS_IPFS_NODE: "/dns4/ipfs/tcp/5001"
+      DLOCKSS_NODE_NAME: MaRDI4NFDI
     volumes:
     - ./dlockss-files:/data:ro
     depends_on:
