@@ -108,7 +108,7 @@ services:
     environment:
       DLOCKSS_IPFS_NODE: "/dns4/ipfs/tcp/5001"
       DLOCKSS_NODE_NAME: MaRDI4NFDI
-      DLOCKSS_IDENTITY_PATH: "/ipfs/keystore"
+      DLOCKSS_IDENTITY_PATH: "/ipfs/keystore/key_inxxe3tfnruxk42tn5rwsylmifyha"
     volumes:
     - ./dlockss-files:/data:ro
     - ipfs-data:/ipfs/:ro
