@@ -1,0 +1,6 @@
+[submodule "eventgate/schemas/primary"]
+	path = eventgate/schemas/primary
+	url = https://gitlab.wikimedia.org/repos/data-engineering/schemas-event-primary.git
+[submodule "eventgate/schemas/secondary"]
+	path = eventgate/schemas/secondary
+	url = https://gitlab.wikimedia.org/repos/data-engineering/schemas-event-secondary.git

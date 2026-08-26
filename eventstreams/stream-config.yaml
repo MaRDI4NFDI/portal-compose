@@ -1,0 +1,4 @@
+recentchange:
+  description: "MediaWiki Recent Changes"
+  topics:
+    - mediawiki.recentchange

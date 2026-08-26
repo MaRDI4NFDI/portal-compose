@@ -50,6 +50,18 @@ services:
 * Copy the `.env` variables for development: `cp ./dev/template.env ./.env`
 * `docker compose up -d`
 
+### Run also kafka and eventstreamer locally
+
+After having set up the development environment as described above it is also necessary to run:
+```
+git submodule update --init --recursive
+```
+
+To start also kafka, eventgate and eventstreamer use:
+```
+docker compose --profile events up -d
+```
+
 ### Notes on the traefik reverse proxy
 
 [traefik](https://doc.traefik.io/traefik/) is an edge router (or reverse
