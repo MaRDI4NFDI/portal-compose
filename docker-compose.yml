@@ -3,7 +3,7 @@ version: '3.4'
 x-portainer-image: &portainer-image
   portainer/portainer-ce
 x-traefik-image: &traefik-image
-  traefik:v2.8
+  traefik:v3
 x-cassandra-oai: &cassandra-oai-image
   cassandra:4.1
 x-cassandra-backup-image: &cassandra-backup-image
